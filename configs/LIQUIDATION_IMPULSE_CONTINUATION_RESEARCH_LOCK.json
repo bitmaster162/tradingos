@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "family": "LIQUIDATION_IMPULSE_CONTINUATION_1H",
+  "enabled": false,
+  "status": "historically_rejected_validation_2026-06-23",
+  "candidate": {
+    "strategy_id": "liq_impulse_1h_continuation_long_acceptance_d1.5_oi2_vz1.5_sl1_tp2_h8",
+    "side": "LONG",
+    "displacement_atr": 1.5,
+    "oi_drop_pct": 2.0,
+    "volume_z": 1.5,
+    "stop_atr": 1.0,
+    "take_atr": 2.0,
+    "max_hold_bars": 8
+  },
+  "evidence": {
+    "source_report": "docs/LIQUIDATION_IMPULSE_CONTINUATION_NESTED_HOLDOUT_2026-06-23.json",
+    "tested_configs": 288,
+    "train_qualified": 5,
+    "train_trades": 85,
+    "train_expectancy_r": 0.207056,
+    "train_cost_stress_expectancy_r": 0.033493,
+    "validation_trades": 9,
+    "validation_expectancy_r": -0.058661,
+    "validation_cost_stress_expectancy_r": -0.214213,
+    "oos_opened": false
+  },
+  "boundaries": {
+    "allow_reselection_after_validation": false,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "can_trade": false
+  }
+}

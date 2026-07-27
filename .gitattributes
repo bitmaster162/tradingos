@@ -1,0 +1,12 @@
+# Reproducible source checkout regardless of the host core.autocrlf setting.
+* text=auto eol=lf
+
+# V3R4 binds these immutable receipts by raw SHA-256. Do not normalize EOL bytes.
+docs/BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json -text
+docs/BITUNIX_WO105_V3_RUNTIME_STOP_RECEIPT_2026-07-14.json -text
+docs/BITUNIX_WO105_V3R1_FIRST_CYCLE_GATE_2026-07-14.json -text
+docs/BITUNIX_WO105_V3R1_STATUS_2026-07-14.json -text
+docs/BITUNIX_WO105_V3R1_RUNTIME_STOP_RECEIPT_2026-07-14.json -text
+docs/BITUNIX_WO105_V3R2_RUNTIME_STOP_RECEIPT_2026-07-14.json -text
+data/forward/bitunix_wo105_v3r2_ws/run_20260714T180001_227487Z/PUBLIC_CAPTURE_MANIFEST.json -text
+docs/BITUNIX_WO105_V3R3_RUNTIME_STOP_RECEIPT_2026-07-15.json -text

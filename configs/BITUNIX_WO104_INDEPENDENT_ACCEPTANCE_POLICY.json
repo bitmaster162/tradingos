@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "policy_id": "bitunix_wo104_independent_acceptance_v1_2026_07_13",
+  "proposal": {
+    "source_archive_sha256": "6ba87f6f60c294605b1f4b9a5283876a5c65cb8c199928b26658e66b73f53884",
+    "source_archive_size": 39053,
+    "source_archive_entries": 20,
+    "prereg_sha256": "fb7b78878f889391d9cbe7378de1b7df6fcdfda24b737a890137aefdddb0d159",
+    "setup_gate_sha256": "dae7085f8a9a55c9ea0e7c1469191ae99dd59669c5702fc1c9e64849669d868b",
+    "capture_harness_sha256": "147175459e76d496da3aa8f7e7d4e2aeafd433fa8a4ffc53ab0aa9c2d066fd8b",
+    "parser_sha256": "85159345675fb89a636e8169d9fbc5756e4886e50a4ab6033cfff5bde0ec9a19",
+    "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_v3_20260713",
+    "parameter_cohort_sha256": "08725bf38291334c6127de1a06f6c13564664ac4a078bc78a0da332b4618dfc0",
+    "required_scope": {
+      "can_trade": false,
+      "credentials_allowed": false,
+      "private_api_allowed": false,
+      "order_calls_allowed": false,
+      "shadow_only": true,
+      "signals_externalized": false,
+      "remote_effect_permission": "PUBLIC_READ_ONLY_CAPTURE_ONLY",
+      "capital_permission": "DENY"
+    }
+  },
+  "source_receipts": {
+    "sha256_pattern": "^[0-9a-f]{64}$",
+    "maximum_future_skew_ms": 0
+  },
+  "capture": {
+    "required_schema": "bitunix-public-capture-v4",
+    "required_symbols": [
+      "BTCUSDT"
+    ],
+    "required_channels": [
+      "depth_book15",
+      "trade"
+    ],
+    "required_subscription_coverage": [
+      "BTCUSDT:depth",
+      "BTCUSDT:trade"
+    ],
+    "minimum_requested_duration_seconds": 1800,
+    "minimum_duration_fraction": 0.95,
+    "minimum_frames": 100,
+    "maximum_depth_gap_ms": 15000,
+    "maximum_receive_silence_ms": 15000,
+    "maximum_final_age_ms": 10000,
+    "maximum_reconnect_downtime_ms": 30000,
+    "maximum_reconnects_until_drop_epoch_fix": 0,
+    "required_output_files": [
+      "RAW_FRAME_INDEX.jsonl",
+      "RAW_FRAMES.jsonl",
+      "TRADES.jsonl"
+    ],
+    "require_zero_unknown_schema": true,
+    "require_zero_future_skew": true,
+    "require_zero_out_of_order": true,
+    "require_zero_stale_events": true,
+    "require_per_file_close_fsync_receipts": true,
+    "require_no_local_or_storage_errors": true
+  },
+  "edge_receipt": {
+    "minimum_forward_sample": 30,
+    "required_identity_fields": [
+      "cohort_binding_sha256",
+      "evaluator_id",
+      "evaluator_sha256",
+      "cost_model_id",
+      "cost_model_sha256",
+      "sample_size",
+      "data_start",
+      "data_end",
+      "source_manifest_sha256",
+      "net_edge_R"
+    ]
+  },
+  "runtime_boundary": {
+    "proposal_only": true,
+    "shadow_observation_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

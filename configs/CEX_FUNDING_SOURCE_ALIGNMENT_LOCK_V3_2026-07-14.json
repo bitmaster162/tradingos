@@ -1,0 +1,92 @@
+{
+  "schema_version": 3,
+  "lock_id": "cex_funding_source_semantic_alignment_2026_07_14_v3",
+  "status": "fixed_source_alignment_contract",
+  "sealed_at": "2026-07-14T06:34:44Z",
+  "forward_start_at": "2026-07-14T07:15:00Z",
+  "parameter_contract_sha256": "b1fb18998aa0ebbbfe500fd9378eb8629c9bfe6e156d4c742f574b79377ff75d",
+  "predecessor": {
+    "lock_id": "cex_funding_source_semantic_alignment_2026_07_13_v2",
+    "path": "configs/CEX_FUNDING_SOURCE_ALIGNMENT_LOCK_V2_2026-07-13.json",
+    "lock_sha256": "17eef6a8451b5fe15bfeb0f074570c122984b3ded6fcf1c296b11857630e3b50",
+    "terminal_decision": "cex_funding_source_alignment_terminal_data_quality_failure",
+    "terminal_reason": "maximum_consecutive_gap_minutes_exceeded",
+    "history_rewritten": false,
+    "parameters_changed": false,
+    "price_outcomes_read": false
+  },
+  "successor_review": {
+    "manual_review_required": true,
+    "manual_review_completed": true,
+    "reason": "V2 remained terminal after a historical 27-minute continuity gap. Both collectors are currently healthy, so a parameter-identical future-floor cohort is opened without rewriting history or weakening gates."
+  },
+  "inputs": {
+    "aggregate_journal": "data/forward/cex_dex_funding_lead_lag/funding_snapshots.jsonl",
+    "direct_journal": "data/forward/cex_dex_funding_lead_lag/direct_cex_funding_snapshots.jsonl",
+    "join_key": "minute_bucket_ms"
+  },
+  "mapping": [
+    {
+      "aggregate_venue": "BinPerp",
+      "direct_venue": "BinanceDirect",
+      "label": "binance"
+    },
+    {
+      "aggregate_venue": "BybitPerp",
+      "direct_venue": "BybitDirect",
+      "label": "bybit"
+    }
+  ],
+  "symbols": [
+    "BTC",
+    "ETH",
+    "SOL"
+  ],
+  "metrics": {
+    "field": "funding_rate_per_hour",
+    "delta_unit": "bps_per_hour",
+    "delta_formula": "(aggregate - direct) * 10000",
+    "same_minute_only": true,
+    "reported": [
+      "mean_signed_delta_bps_per_hour",
+      "median_absolute_delta_bps_per_hour",
+      "p95_absolute_delta_bps_per_hour",
+      "maximum_absolute_delta_bps_per_hour",
+      "same_minute_pearson_correlation"
+    ],
+    "lagged_comparisons_allowed": false,
+    "price_outcomes_allowed": false
+  },
+  "readiness_gate": {
+    "minimum_matching_minute_buckets": 1440,
+    "minimum_independent_utc_days": 2,
+    "minimum_comparison_coverage": 0.98,
+    "minimum_matching_time_coverage": 0.95,
+    "maximum_consecutive_gap_minutes": 5,
+    "maximum_bad_jsonl_lines": 0,
+    "automatic_source_equivalence_claim_allowed": false,
+    "manual_semantic_review_required": true
+  },
+  "lifecycle": {
+    "pre_floor_rows_excluded": true,
+    "pre_floor_bad_line_baseline": {
+      "aggregate": 0,
+      "direct": 0
+    },
+    "predecessor_rows_admitted": false,
+    "append_only": true,
+    "terminal_on_cumulative_max_gap_breach": true,
+    "automatic_successor_allowed": false,
+    "retune_allowed": false,
+    "historical_backfill_allowed": false
+  },
+  "runtime_boundary": {
+    "data_quality_only": true,
+    "edge_evaluator": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

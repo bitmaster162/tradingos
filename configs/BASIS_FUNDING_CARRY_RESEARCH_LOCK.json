@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "family": "BASIS_FUNDING_CARRY",
+  "enabled": false,
+  "status": "insufficient_validation_no_events_2026-06-23",
+  "candidate": {
+    "strategy_id": "carry_basis15_fund3x2_h336",
+    "position": "long_spot_short_equal_btc_perpetual",
+    "entry_basis_bps": 15.0,
+    "min_mean_last_3_funding_bps": 2.0,
+    "max_hold_hours": 336,
+    "exit_basis_bps": 0.0,
+    "exit_funding_mean_bps": 0.0
+  },
+  "evidence": {
+    "source_report": "docs/BASIS_FUNDING_CARRY_NESTED_HOLDOUT_2026-06-23.json",
+    "train_period": "2021-01-01/2024-12-31",
+    "train_trades": 22,
+    "train_positive_pct": 90.909,
+    "train_mean_net_bps_on_gross_capital": 59.327414,
+    "train_cost_stress_mean_net_bps": 53.291979,
+    "validation_period": "2025-01-01/2025-12-31",
+    "validation_trades": 0,
+    "final_oos_opened": false
+  },
+  "boundaries": {
+    "allow_parameter_reselection_after_validation": false,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "can_trade": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "sealed_at": "2026-07-16T12:16:25+00:00",
+  "contract_id": "DERIBIT_BTC_OPTIONS_SURFACE_FORWARD_COLLECTOR_V3",
+  "forward_floor_utc": "2026-07-16T13:00:00Z",
+  "script_sha256": "16fffc3a2659038c209c27cfac53392690c152bbd7d70a49304736ec58c8a9a0",
+  "config_sha256": "363632404216ffd44a88893a7fde126d99220de6fba05a3574bc7dc9a5ef1329",
+  "base_script_sha256": "866dfeecda1ca94cc0f26ac0ccab3c2869169a39671d5dc618f8f05a94d9eeb3",
+  "base_contract_sha256": "4c872bad31c835896566a5c5a9b5e97989a71789fa533257f301eb102909f272",
+  "base_lock_sha256": "4381c9e09dcd893c818595e0991d527af38e04c0954c231f9d09cf099a266da8",
+  "predecessor_rows_admitted": false,
+  "directional_hypothesis_registered": false,
+  "credentials_allowed": false,
+  "orders_allowed": false,
+  "can_trade": false
+}

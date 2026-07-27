@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BitEvo Alert",
+  "type": "object",
+  "required": [
+    "id",
+    "ts",
+    "symbol",
+    "tf",
+    "setup_id",
+    "score",
+    "trigger",
+    "risk"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bar_ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data_degraded": {
+      "type": "boolean"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "tf": {
+      "type": "string"
+    },
+    "setup_id": {
+      "type": "string"
+    },
+    "score": {
+      "type": "number"
+    },
+    "trigger": {
+      "type": "object",
+      "required": [
+        "type",
+        "price"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "entry",
+            "add",
+            "exit",
+            "cancel"
+          ]
+        },
+        "price": {
+          "type": "number"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "filters_passed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "risk": {
+      "type": "object",
+      "required": [
+        "side",
+        "entry",
+        "sl",
+        "tp",
+        "r_multiplies",
+        "size_hint_pct"
+      ],
+      "properties": {
+        "side": {
+          "type": "string",
+          "enum": [
+            "long",
+            "short"
+          ]
+        },
+        "entry": {
+          "type": "number"
+        },
+        "sl": {
+          "type": "number"
+        },
+        "tp": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "r_multiplies": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "size_hint_pct": {
+          "type": "number"
+        },
+        "invalidate_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "object"
+    },
+    "source": {
+      "type": "object"
+    },
+    "latency_ms": {
+      "type": "integer"
+    }
+  }
+}

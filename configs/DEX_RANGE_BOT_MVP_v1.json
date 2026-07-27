@@ -1,0 +1,63 @@
+{
+  "name": "DEX Range Bot MVP v1.0",
+  "purpose": "Buy dips and sell rebounds for spot tokens inside a confirmed range on DEX venues.",
+  "policy": {
+    "paper_first": true,
+    "verify_live_aggregator_endpoints_before_launch": true,
+    "do_not_use_for_honeypot_or_tax_like_tokens": true,
+    "do_not_use_in_strong_trend_mode": true
+  },
+  "environment": {
+    "mode": "paper",
+    "chain_family": "evm",
+    "aggregator": "paper",
+    "wallet_address": "",
+    "rpc_url": "",
+    "state_path": "ops/dex_range_bot/state.json",
+    "loop_interval_sec": 30
+  },
+  "market": {
+    "base_token": "TOKEN",
+    "quote_token": "USDC",
+    "price_decimals": 8
+  },
+  "range": {
+    "lower": 0.85,
+    "upper": 1.15,
+    "level_count": 5,
+    "take_profit_pct": 0.025,
+    "kill_switch_break_pct": 0.03,
+    "recenter_manual_only": true
+  },
+  "execution": {
+    "order_size_quote": 100,
+    "max_slippage_bps": 80,
+    "max_price_impact_bps": 120,
+    "max_gas_usd": 8,
+    "min_pool_liquidity_usd": 50000
+  },
+  "risk": {
+    "max_capital_at_work_pct": 20,
+    "max_open_lots": 5,
+    "pause_after_failed_exec_count": 3
+  },
+  "context_gate": {
+    "range_or_hl3_only": true,
+    "avoid_breakout_chase": true,
+    "avoid_high_news_volatility": true
+  },
+  "journal_fields": [
+    "ts",
+    "pair",
+    "price",
+    "range_status",
+    "lot_id",
+    "entry_price",
+    "take_profit_price",
+    "slippage_bps",
+    "price_impact_bps",
+    "gas_usd",
+    "action",
+    "status"
+  ]
+}

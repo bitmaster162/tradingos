@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "policy_id": "LIQUIDATION_BOOK_REPLENISHMENT_INDEPENDENCE_GATE_V1",
+  "status": "prospective_governance_gate_before_forward_outcomes",
+  "created_at": "2026-07-12T10:18:03Z",
+  "candidate_family": "LIQUIDATION_BOOK_REPLENISHMENT_FADE_1M",
+  "base_pass_decision": "liquidation_book_replenishment_passed_for_manual_review_only",
+  "independence_requirements": {
+    "independent_block_minutes": 30,
+    "minimum_independent_blocks": 20,
+    "minimum_unique_utc_days": 5,
+    "maximum_single_day_event_share": 0.4,
+    "generic_event_overlap_window_minutes": 2,
+    "maximum_generic_event_overlap_rate": 0.5,
+    "minimum_matched_outcomes_for_correlation": 10,
+    "maximum_absolute_matched_outcome_correlation": 0.8
+  },
+  "governance": {
+    "base_statistical_gate_required": true,
+    "event_clustering_cannot_increase_sample_size": true,
+    "high_overlap_means_same_portfolio_sleeve": true,
+    "retuning_allowed": false,
+    "automatic_promotion_allowed": false,
+    "manual_review_required": true
+  },
+  "runtime_boundary": {
+    "audit_only": true,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

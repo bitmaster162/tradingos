@@ -1,0 +1,105 @@
+{
+  "lock_id": "basis_dispersion_reversion_multi_symbol_2026_06_30",
+  "created_at": "2026-06-30T00:00:00Z",
+  "status": "pre_registered_research_only",
+  "can_trade": false,
+  "hypothesis": {
+    "name": "multi_symbol_basis_dispersion_reversion",
+    "description": "If one symbol's perp-vs-spot basis becomes unusually expensive relative to the cross-symbol peer basket, a long-spot/short-perp hedge should benefit from basis convergence and funding carry.",
+    "mechanism_type": "cross_sectional_relative_value",
+    "allowed_direction": "positive_relative_basis_only",
+    "execution_model": "signal_on_bar_close_enter_next_bar_open_exit_next_bar_open",
+    "not_a_live_signal": true
+  },
+  "data": {
+    "panel": "data/research/basis_multi_symbol/1h_basis_panel.csv",
+    "required_columns": [
+      "symbol",
+      "time",
+      "time_ms",
+      "spot_open",
+      "spot_close",
+      "perp_open",
+      "perp_close",
+      "basis_close_bps",
+      "funding_event_bps"
+    ],
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BCHUSDT"
+    ],
+    "timeframe": "1h"
+  },
+  "splits": {
+    "train_end": "2024-01-01T00:00:00+00:00",
+    "validation_end": "2025-01-01T00:00:00+00:00",
+    "oos_opens_only_after_validation_gate": true
+  },
+  "parameter_grid": {
+    "lookback_hours": [
+      168,
+      336,
+      720
+    ],
+    "entry_z": [
+      1.5,
+      2.0,
+      2.5
+    ],
+    "exit_z": [
+      0.25,
+      0.5,
+      1.0
+    ],
+    "min_abs_basis_bps": [
+      5.0,
+      10.0,
+      20.0
+    ],
+    "max_hold_hours": [
+      12,
+      24,
+      48,
+      72
+    ]
+  },
+  "cost_model": {
+    "fee_bps_per_leg_side": 5.0,
+    "slippage_bps_per_leg_side": 2.0,
+    "stress_extra_fee_bps_per_leg_side": 10.0
+  },
+  "gates": {
+    "train": {
+      "min_trades": 40,
+      "min_mean_net_bps": 5.0,
+      "min_positive_pct": 55.0,
+      "max_drawdown_bps": -200.0,
+      "min_positive_folds": 3,
+      "min_bootstrap_probability_mean_gt_0": 0.8,
+      "cost_stress_mean_must_be_positive": true
+    },
+    "validation": {
+      "min_trades": 15,
+      "min_mean_net_bps": 0.0,
+      "min_positive_pct": 50.0,
+      "max_drawdown_bps": -200.0,
+      "min_positive_folds": 2,
+      "cost_stress_mean_must_be_positive": true
+    },
+    "oos": {
+      "min_trades": 20,
+      "min_mean_net_bps": 0.0,
+      "min_positive_pct": 50.0,
+      "max_drawdown_bps": -200.0,
+      "min_positive_folds": 2
+    }
+  },
+  "decision_policy": {
+    "if_train_fails": "reject_without_validation_or_oos",
+    "if_validation_fails": "reject_without_oos",
+    "if_oos_passes": "research_candidate_only_shadow_required",
+    "never_promote_to_live_without_forward_shadow": true
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "locked_at": "2026-06-23",
+  "reason": "Preserve independent forward evidence; research diagnostics must not mutate the observed strategy.",
+  "enabled": false,
+  "status": "historically_rejected_2026-06-23",
+  "invalidation": {
+    "trades": 2502,
+    "winrate_pct": 37.49,
+    "expectancy_r": -0.112448,
+    "holdout_expectancy_r": -0.203513,
+    "stable_folds": 0,
+    "source_report": "docs/CROWD_FADE_POSITIONING_DIAGNOSTIC_2026-06-19.json"
+  },
+  "candidate": {
+    "strategy_id": "crowd_fade_1h_global_long_short_ratio_crowded_longs_fade_short_z1.25_w24_oi0_fund0_s1_t2_h8",
+    "interval": "1h",
+    "ratio_field": "global_long_short_ratio",
+    "side_mode": "crowded_longs_fade_short",
+    "z_window": 24,
+    "z_threshold": 1.25,
+    "require_oi_expansion": false,
+    "require_funding_alignment": false,
+    "stop_atr": 1.0,
+    "take_atr": 2.0,
+    "hold": 8,
+    "cost_bps_per_side": 5.0,
+    "classification": "forward_locked_from_2026-06-19_diagnostic"
+  },
+  "boundaries": {
+    "allow_automatic_reselection": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "can_trade": false
+  }
+}

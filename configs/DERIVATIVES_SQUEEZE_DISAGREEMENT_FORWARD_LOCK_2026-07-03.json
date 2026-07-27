@@ -1,0 +1,69 @@
+{
+  "lock_id": "derivatives_squeeze_disagreement_short_4h_forward_observer_2026_07_03",
+  "status": "accepted_forward_observer_only",
+  "accepted_at": "2026-07-03T11:08:30Z",
+  "forward_start_at": "2026-07-03T11:08:30Z",
+  "forward_start_rule": "start from the next complete strategy interval bar after forward_start_at; visible lock-time bars are excluded",
+  "can_trade": false,
+  "orders_allowed": false,
+  "source_research_report": "docs/DERIVATIVES_SQUEEZE_DISAGREEMENT_RESEARCH_2026-07-03_COMBINED.json",
+  "hypothesis": {
+    "plain_english": "After BTC volatility compression, watch for a short-side reversal/fade when OI builds and derivatives/crowd/spot-perp context shows disagreement.",
+    "family": "derivatives_squeeze_disagreement",
+    "direction": "contrarian_derivatives_disagreement",
+    "side": "short_watch_only",
+    "symbol": "BTCUSDT",
+    "market": "Binance futures plus spot context",
+    "interval": "4h"
+  },
+  "selected_config": {
+    "strategy_id": "deriv_squeeze_disagree_short_4h_sw12_p0.2_lb12_oi0.75_fund0.0001_spot0.15_crowd1.6_c2_s1.5_t3_h16",
+    "interval": "4h",
+    "side": "short",
+    "squeeze_window": 12,
+    "squeeze_pctile_max": 0.2,
+    "lookback": 12,
+    "oi_build_pct": 0.75,
+    "funding_min_abs": 0.0001,
+    "spot_lead_min_pct": 0.15,
+    "crowd_extreme": 1.6,
+    "min_confirmations": 2,
+    "stop_atr": 1.5,
+    "take_atr": 3.0,
+    "max_hold_bars": 16
+  },
+  "discovery_snapshot": {
+    "train": {
+      "trades": 65,
+      "expectancy_r": 0.113284
+    },
+    "validation": {
+      "trades": 21,
+      "expectancy_r": 0.064776
+    },
+    "oos": {
+      "trades": 30,
+      "expectancy_r": 0.313318,
+      "winrate_pct": 46.667,
+      "max_drawdown_r": -4.0
+    }
+  },
+  "forward_gate_required": {
+    "minimum_new_resolved_signals": 30,
+    "minimum_expectancy_r": 0.05,
+    "minimum_profit_factor": 1.08,
+    "maximum_drawdown_r": -12.0,
+    "no_parameter_changes": true,
+    "manual_review_before_any_paper": true
+  },
+  "boundary": {
+    "observer_only": true,
+    "discovery_sample_not_validation": true,
+    "emits_alerts": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

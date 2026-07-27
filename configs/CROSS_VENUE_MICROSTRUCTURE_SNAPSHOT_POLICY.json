@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "policy_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_SEAL_V1",
+  "status": "locked",
+  "source_cache_relative": "data/cross_venue_microstructure",
+  "snapshot_root_relative": "data/research_snapshots_cross_venue_microstructure",
+  "readiness_report": "docs/CROSS_VENUE_MICROSTRUCTURE_DATA_QUALITY_2026-06-24.json",
+  "health_report": "docs/CROSS_VENUE_MICROSTRUCTURE_HEALTH_2026-06-24.json",
+  "required_storage": "sqlite",
+  "required_minimum_hours": 168,
+  "required_dual_trade_coverage_pct": 95.0,
+  "required_dual_book_coverage_pct": 95.0,
+  "required_missing_trade_ids": 0,
+  "required_collector_sla_replay_decision": "collector_sla_replay_stable",
+  "seal_mode": "first_passing_readiness_epoch_once",
+  "runtime_boundary": {
+    "research_data_only": true,
+    "registers_hypothesis": false,
+    "opens_validation": false,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

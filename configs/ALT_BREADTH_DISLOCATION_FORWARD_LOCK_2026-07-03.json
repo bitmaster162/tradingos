@@ -1,0 +1,66 @@
+{
+  "lock_id": "alt_breadth_dislocation_btc_short_fade_forward_observer_2026_07_03",
+  "status": "accepted_forward_observer_only",
+  "accepted_at": "2026-07-03T11:23:26Z",
+  "forward_start_at": "2026-07-03T11:23:26Z",
+  "forward_start_rule": "start from the next complete 1h bar after forward_start_at; visible lock-time bars are excluded",
+  "can_trade": false,
+  "orders_allowed": false,
+  "source_research_report": "docs/ALT_BREADTH_DISLOCATION_RESEARCH_2026-07-03_BOUNDED60.json",
+  "hypothesis": {
+    "plain_english": "When ETH/SOL/BCH move up together while BTC stays muted, watch whether BTC fails the catch-up and mean-reverts down instead.",
+    "family": "alt_breadth_dislocation",
+    "direction": "alt_up_btc_lag_short_fade",
+    "side": "short_watch_only",
+    "target": "BTCUSDT",
+    "context_symbols": ["ETHUSDT", "SOLUSDT", "BCHUSDT"],
+    "interval": "1h"
+  },
+  "selected_config": {
+    "strategy_id": "alt_breadth_dislocation_alt_up_btc_lag_short_fade_lb12_alt3_mute1.25_gap1.5_cnt2_low_s1_t2_h24",
+    "mode": "alt_up_btc_lag_short_fade",
+    "lookback": 12,
+    "alt_move_pct": 3.0,
+    "btc_mute_pct": 1.25,
+    "gap_pct": 1.5,
+    "min_alt_count": 2,
+    "atr_filter": "low",
+    "stop_atr": 1.0,
+    "take_atr": 2.0,
+    "max_hold_bars": 24
+  },
+  "discovery_snapshot": {
+    "train": {
+      "trades": 78,
+      "expectancy_r": 0.153846
+    },
+    "validation": {
+      "trades": 16,
+      "expectancy_r": 0.548783
+    },
+    "oos": {
+      "trades": 22,
+      "expectancy_r": 0.636364,
+      "winrate_pct": 54.545,
+      "max_drawdown_r": -4.0
+    }
+  },
+  "forward_gate_required": {
+    "minimum_new_resolved_signals": 30,
+    "minimum_expectancy_r": 0.05,
+    "minimum_profit_factor": 1.08,
+    "maximum_drawdown_r": -12.0,
+    "no_parameter_changes": true,
+    "manual_review_before_any_paper": true
+  },
+  "boundary": {
+    "observer_only": true,
+    "discovery_sample_not_validation": true,
+    "emits_alerts": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

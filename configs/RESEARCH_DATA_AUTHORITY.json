@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "authority": "local_active_runtime_only",
+  "active_root_resolution": {
+    "environment_variable": "TRADING_OS_ACTIVE_ROOT",
+    "windows_default": "%USERPROFILE%\\TradingOS\\Active"
+  },
+  "source_cache_relative": "data/cache/binance_spot_perp_extended",
+  "snapshot_root_relative": "data/research_snapshots",
+  "reject_google_drive_source": true,
+  "profile": "BTC_CORE_RESEARCH_V1",
+  "required_files": [
+    "spot/BTCUSDT/15m_klines.csv",
+    "spot/BTCUSDT/1h_klines.csv",
+    "spot/BTCUSDT/4h_klines.csv",
+    "futures/BTCUSDT/15m_klines.csv",
+    "futures/BTCUSDT/1h_klines.csv",
+    "futures/BTCUSDT/4h_klines.csv",
+    "futures/BTCUSDT/15m_oi_aligned.csv",
+    "futures/BTCUSDT/1h_oi_aligned.csv",
+    "futures/BTCUSDT/4h_oi_aligned.csv",
+    "futures/BTCUSDT/funding_raw.csv",
+    "futures/BTCUSDT/1h_crowd_positioning.csv",
+    "futures/BTCUSDT/4h_crowd_positioning.csv"
+  ],
+  "excluded_from_snapshot": {
+    "raw_open_interest": "Collector/reindex input; aligned causal series is the research interface.",
+    "15m_crowd_positioning": "Large forward-observer corpus; not required by the current bounded research suite.",
+    "backup_directories": "Operational recovery artifacts are not research inputs."
+  },
+  "rules": {
+    "copy_then_hash_verify": true,
+    "snapshot_files_are_immutable": true,
+    "research_must_record_snapshot_id": true,
+    "fallback_to_drive_cache": false,
+    "live_runtime_mutation": false,
+    "can_trade": false
+  }
+}

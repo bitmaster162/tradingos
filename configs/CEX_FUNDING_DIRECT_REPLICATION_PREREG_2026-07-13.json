@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "lock_id": "cex_funding_direct_source_replication_forward_2026_07_13_v1",
+  "sealed_at": "2026-07-13T00:45:00Z",
+  "status": "fixed_forward_data_collection_contract",
+  "sources": {
+    "binance": {
+      "premium_index_url": "https://fapi.binance.com/fapi/v1/premiumIndex",
+      "funding_info_url": "https://fapi.binance.com/fapi/v1/fundingInfo",
+      "official_docs": "https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data#mark-price",
+      "rate_semantics": "latest funding rate reported by Binance"
+    },
+    "bybit": {
+      "tickers_url": "https://api.bybit.com/v5/market/tickers?category=linear",
+      "official_docs": "https://bybit-exchange.github.io/docs/v5/market/tickers",
+      "rate_semantics": "funding rate reported by Bybit ticker"
+    }
+  },
+  "collection": {
+    "symbols": [
+      "BTC",
+      "ETH",
+      "SOL"
+    ],
+    "quote_asset": "USDT",
+    "venue_ids": [
+      "BinanceDirect",
+      "BybitDirect"
+    ],
+    "polling_seconds": 60,
+    "request_timeout_seconds": 20,
+    "bucket_seconds": 60,
+    "default_binance_funding_interval_hours": 8,
+    "append_only": true,
+    "credentials_allowed": false
+  },
+  "quality_gate": {
+    "minimum_interval_hours_exclusive": 0,
+    "maximum_interval_hours": 24,
+    "maximum_source_age_seconds": 30,
+    "maximum_source_clock_lead_seconds": 5,
+    "maximum_next_funding_past_seconds": 300,
+    "maximum_next_funding_future_hours": 24
+  },
+  "replication_gate": {
+    "primary_lock_id": "cex_dex_predicted_funding_lead_lag_forward_2026_07_13_v1",
+    "minimum_forward_span_days": 14,
+    "minimum_unique_minute_snapshots": 10000,
+    "minimum_independent_utc_days": 10,
+    "minimum_required_point_coverage": 0.98,
+    "comparison_requires_matching_minute_bucket": true,
+    "raw_rate_semantics_are_not_assumed_equal": true,
+    "parameter_search_allowed": false,
+    "paper_review_allowed": false
+  },
+  "runtime_boundary": {
+    "collector_only": true,
+    "directional_signal": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

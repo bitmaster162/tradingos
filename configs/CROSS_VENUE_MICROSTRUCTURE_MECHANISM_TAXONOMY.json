@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "policy_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_MECHANISM_INDEPENDENCE_V1",
+  "status": "locked_before_first_sealed_snapshot",
+  "queue": "configs/CROSS_VENUE_MICROSTRUCTURE_PREREG_QUEUE.json",
+  "runner_contract": "configs/CROSS_VENUE_MICROSTRUCTURE_RUNNER_CONTRACT.json",
+  "independence_policy": {
+    "primary_mechanism_must_be_unique": true,
+    "event_archetype_must_be_unique": true,
+    "max_pairwise_input_domain_jaccard": 0.5,
+    "shared_context_features_allowed": true,
+    "shared_primary_trigger_forbidden": true,
+    "current_queue_mutation_allowed": false,
+    "fifth_hypothesis_allowed": false,
+    "reason": "The locked queue is already at its 4/4 hypothesis and 774-configuration portfolio budget."
+  },
+  "families": {
+    "BINANCE_AGGRESSOR_DELTA_COINBASE_CONFIRMATION": {
+      "primary_mechanism": "aggressor_flow_continuation",
+      "event_archetype": "signed_trade_imbalance_with_external_confirmation",
+      "response_class": "directional_continuation",
+      "input_domains": [
+        "aggressor_flow",
+        "cross_venue_returns",
+        "top_of_book_context"
+      ]
+    },
+    "BINANCE_COINBASE_RETURN_DISLOCATION_REVERSION": {
+      "primary_mechanism": "cross_venue_return_dislocation",
+      "event_archetype": "return_divergence_with_spread_normalization",
+      "response_class": "relative_reversion",
+      "input_domains": [
+        "cross_venue_returns",
+        "top_of_book_context",
+        "volatility_context"
+      ]
+    },
+    "TOP_OF_BOOK_THINNING_TRADE_BURST_EXPANSION": {
+      "primary_mechanism": "liquidity_void_expansion",
+      "event_archetype": "book_thinning_with_trade_burst",
+      "response_class": "volatility_expansion_with_directional_confirmation",
+      "input_domains": [
+        "aggressor_flow",
+        "trade_intensity",
+        "top_of_book_liquidity"
+      ]
+    },
+    "CROSS_VENUE_TOP_OF_BOOK_PRESSURE_ALIGNMENT": {
+      "primary_mechanism": "cross_venue_book_pressure",
+      "event_archetype": "book_pressure_agreement_or_divergence",
+      "response_class": "conditional_continuation_or_reversion",
+      "input_domains": [
+        "cross_venue_book_pressure",
+        "top_of_book_liquidity"
+      ]
+    }
+  },
+  "runtime_boundary": {
+    "taxonomy_only": true,
+    "changes_queue": false,
+    "opens_snapshot": false,
+    "opens_validation": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

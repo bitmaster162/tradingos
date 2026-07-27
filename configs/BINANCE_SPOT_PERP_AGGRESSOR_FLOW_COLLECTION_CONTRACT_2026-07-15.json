@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "contract_id": "BINANCE_SPOT_PERP_AGGRESSOR_FLOW_FORWARD_V1",
+  "created_at": "2026-07-15",
+  "status": "data_collection_only_no_strategy_claim",
+  "purpose": "Collect synchronized public Binance spot and USDT-margined perpetual aggregate trades with explicit aggressor-side semantics before deciding whether a new lead-lag hypothesis is testable.",
+  "source_contract": {
+    "symbol": "BTCUSDT",
+    "spot_endpoint": "https://data-api.binance.vision/api/v3/aggTrades",
+    "perpetual_endpoint": "https://fapi.binance.com/fapi/v1/aggTrades",
+    "public_data_only": true,
+    "credentials_allowed": false,
+    "side_semantics": "m=true means buyer was maker, therefore sell aggressor; m=false means buy aggressor",
+    "event_time_field": "T",
+    "dedup_key": [
+      "market",
+      "aggregate_trade_id"
+    ],
+    "feature_clock": "completed UTC minute only"
+  },
+  "independence_audit": {
+    "not_the_rejected_family": "SPOT_PERP_STANDALONE_DIVERGENCE",
+    "not_the_existing_cross_venue_family": "BINANCE_AGGRESSOR_DELTA_COINBASE_CONFIRMATION",
+    "not_the_liquidation_family": "POST_LIQUIDATION_ABSORPTION_SPOT_PERP",
+    "material_difference": "The candidate data measures signed taker flow lead-lag inside one venue across spot and perpetual markets, not candle-return divergence, cross-venue confirmation, or post-liquidation absorption.",
+    "references": [
+      "docs/SPOT_PERP_DIVERGENCE_RESEARCH_DECISION_2026-06-03.md",
+      "configs/CROSS_VENUE_MICROSTRUCTURE_PREREG_QUEUE.json",
+      "configs/POST_LIQUIDATION_ABSORPTION_SPOT_PERP_RESEARCH_LOCK_2026-07-03.json"
+    ]
+  },
+  "collection_gate": {
+    "minimum_forward_hours": 168,
+    "minimum_dual_market_minute_coverage_pct": 95.0,
+    "maximum_fresh_lag_seconds": 120,
+    "requires_zero_internal_aggregate_trade_id_gaps": true,
+    "requires_valid_aggressor_side_for_every_row": true,
+    "requires_sealed_snapshot_before_research": true
+  },
+  "forbidden_before_seal": [
+    "parameter_search",
+    "outcome_scan",
+    "candidate_selection",
+    "validation_opening",
+    "oos_opening",
+    "observer_registration",
+    "trade_signal_emission",
+    "paper_execution",
+    "live_execution"
+  ],
+  "future_research_boundary": {
+    "hypothesis_registered": false,
+    "new_preregistration_required": true,
+    "same_snapshot_must_not_be_used_for_unbounded_discovery_and_final_claim": true,
+    "candidate_shape_if_data_gate_passes": "predeclared spot-versus-perpetual signed-flow lead-lag using completed minutes and next-minute entry delay"
+  },
+  "runtime_boundary": {
+    "collector_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "telegram_send_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

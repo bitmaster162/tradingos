@@ -1,0 +1,39 @@
+{
+  "id": "2a74...",
+  "ts": "2025-10-19T07:12:04Z",
+  "symbol": "BTCUSDT",
+  "tf": "5m",
+  "setup_id": "liquidity_sweep_eq",
+  "score": 0.71,
+  "trigger": {
+    "type": "entry",
+    "price": 106900.5,
+    "reason": "post-sweep close under EQH"
+  },
+  "filters_passed": [
+    "funding_contra",
+    "oi_spike",
+    "liq_cluster"
+  ],
+  "metrics": {
+    "funding_ap_7dma": 0.067,
+    "oi_delta_pct_1h": 2.8,
+    "liq_cluster_usd": 12400000
+  },
+  "risk": {
+    "side": "short",
+    "entry": 106900.5,
+    "sl": 107520.0,
+    "tp": [
+      105800,
+      104400,
+      102900
+    ],
+    "r_multiplies": [
+      1.0,
+      2.0,
+      3.0
+    ],
+    "size_hint_pct": 0.5
+  }
+}

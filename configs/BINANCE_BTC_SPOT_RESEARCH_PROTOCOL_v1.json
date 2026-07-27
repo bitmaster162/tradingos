@@ -1,0 +1,126 @@
+{
+  "name": "BINANCE_BTC_SPOT_RESEARCH_PROTOCOL_v1",
+  "status": "design_of_record",
+  "scope": {
+    "venue": "binance_spot",
+    "symbol": "BTCUSDT",
+    "start_mode": "test_first",
+    "runtime_truth": "docs_protocol_only_until_repo_local_consumer_exists"
+  },
+  "architecture": {
+    "processes": [
+      "reader",
+      "researcher",
+      "executor"
+    ],
+    "reader_inputs": [
+      "klines",
+      "aggTrades",
+      "user_data_events"
+    ],
+    "executor_must_handle": [
+      "exchange_filters",
+      "signed_requests",
+      "partial_fills",
+      "order_rejects",
+      "reconciliation",
+      "kill_switches"
+    ]
+  },
+  "baseline_strategy": {
+    "class": "volatility_targeted_trend_follower",
+    "candidate_signals": [
+      "donchian_breakout",
+      "ema_slope_pullback_continuation",
+      "volatility_breakout_after_compression"
+    ],
+    "execution_preference": "maker_first_then_skip",
+    "required_controls": [
+      "atr_or_volatility_cap",
+      "trailing_stop",
+      "time_stop",
+      "signal_invalidation"
+    ]
+  },
+  "exchange_hardening": {
+    "verify_against_current_exchange_docs_before_live": true,
+    "symbol_filters_minimum": [
+      "PRICE_FILTER",
+      "LOT_SIZE",
+      "MIN_NOTIONAL"
+    ],
+    "private_request_controls": [
+      "timestamp",
+      "recvWindow",
+      "clock_skew_handling"
+    ],
+    "stream_controls": [
+      "reconnect_policy",
+      "heartbeat_handling",
+      "stale_stream_detection",
+      "inbound_rate_awareness",
+      "resync_after_disconnect"
+    ],
+    "recommended_key_separation": [
+      "trade_key",
+      "user_data_key"
+    ]
+  },
+  "backtest_minimum_standard": [
+    "walk_forward",
+    "out_of_sample",
+    "regime_split",
+    "fees",
+    "slippage",
+    "latency_model",
+    "partial_fills",
+    "order_rejects",
+    "exchange_filters"
+  ],
+  "risk_engine": {
+    "hard_limits": [
+      "max_position",
+      "max_daily_loss",
+      "max_order_reject_rate_before_pause",
+      "stale_data_kill_switch",
+      "exchange_state_divergence_kill_switch",
+      "cooldown_after_losses"
+    ],
+    "soft_limits": [
+      "size_reduction_after_live_degradation",
+      "volatility_based_derisk",
+      "fill_ratio_deterioration_adjustment"
+    ]
+  },
+  "monitoring": {
+    "metrics": [
+      "gross_pnl",
+      "net_pnl",
+      "fees",
+      "realized_slippage",
+      "fill_ratio",
+      "cancel_to_fill_ratio",
+      "order_reject_rate",
+      "strategy_uptime",
+      "data_latency",
+      "assumption_vs_live_drift",
+      "regime_drift"
+    ]
+  },
+  "research_prompt_pack": [
+    "regime_map",
+    "trend_baseline",
+    "range_only_mean_reversion",
+    "two_strategy_ensemble",
+    "execution_microstructure_review",
+    "backtest_red_team_audit",
+    "risk_engine",
+    "monitoring_and_degradation"
+  ],
+  "non_claims": [
+    "not_a_repo_local_live_runtime",
+    "not_a_proven_strategy_edge",
+    "not_a_binance_executor",
+    "not_a_runtime_backed_feature_until_consumer_exists"
+  ]
+}

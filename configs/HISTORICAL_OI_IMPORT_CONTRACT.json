@@ -1,0 +1,64 @@
+{
+  "name": "historical_oi_import_contract",
+  "version": "2026-06-15",
+  "purpose": "Validate external/vendor historical BTCUSDT open-interest CSV before importing it into the strategy cache.",
+  "runtime_boundary": {
+    "can_trade": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "cache_write_requires_explicit_import_input": true
+  },
+  "required_market": {
+    "symbol": "BTCUSDT",
+    "market": "Binance USD-M perpetual futures",
+    "preferred_interval": "4h",
+    "accepted_granularity": [
+      "15m",
+      "30m",
+      "1h",
+      "4h"
+    ],
+    "timezone": "UTC"
+  },
+  "accepted_time_columns": [
+    "timestamp",
+    "time_ms",
+    "open_time",
+    "openTime",
+    "date",
+    "datetime",
+    "time"
+  ],
+  "accepted_oi_columns": [
+    "open_interest",
+    "openInterest",
+    "sumOpenInterest",
+    "sum_open_interest",
+    "oi",
+    "open_interest_contracts",
+    "openInterestAmount"
+  ],
+  "minimum_useful_coverage": {
+    "target_start": "2021-01-01T00:00:00Z",
+    "target_end": "latest available closed 4h bar",
+    "min_replay_full_context_trades": 30,
+    "min_replay_full_context_pct": 50.0,
+    "preferred_replay_full_context_pct": 80.0,
+    "max_gap_bars_preferred": 2,
+    "yearly_coverage_required": true
+  },
+  "validation_commands": {
+    "scan": "python tools/historical_oi_importer.py scan --out-prefix docs/HISTORICAL_OI_IMPORT_SCAN_2026-06-15",
+    "dry_run": "python tools/historical_oi_importer.py import --input path/to/vendor_oi.csv --dry-run --out-prefix docs/HISTORICAL_OI_IMPORT_DRYRUN_2026-06-15",
+    "import_after_review": "python tools/historical_oi_importer.py import --input path/to/vendor_oi.csv --out-prefix docs/HISTORICAL_OI_IMPORT_2026-06-15"
+  },
+  "promotion_policy": {
+    "historical_import_does_not_unlock_trading": true,
+    "after_import_required_steps": [
+      "rerun OI_FUNDING_DATA_QUALITY report",
+      "rerun strategy_mix_oi_funding_replay_auditor",
+      "rerun strategy guard validation with OI features",
+      "keep live trading locked until forward paper outcomes prove lift"
+    ]
+  }
+}

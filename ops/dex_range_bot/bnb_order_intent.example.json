@@ -1,0 +1,21 @@
+{
+  "intent_id": "buy-0001",
+  "ts": "2026-03-30T12:00:00Z",
+  "action": "BUY_LOT_INTENT",
+  "network": "bsc-mainnet",
+  "venue": "aggregator_then_pancake_fallback",
+  "base_token": "TOKEN",
+  "quote_token": "USDT",
+  "route_token": "WBNB",
+  "trigger_price": 0.91,
+  "quoted_price": 0.9124,
+  "quote_amount": 100.0,
+  "base_amount": 109.60105217,
+  "max_slippage_bps": 120,
+  "max_price_impact_bps": 150,
+  "max_gas_usd": 1.5,
+  "deadline_sec": 90,
+  "lot_id": 2,
+  "reason": "range_dip_buy",
+  "status": "created"
+}

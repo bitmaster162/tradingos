@@ -1,0 +1,358 @@
+{
+  "schema": "bitunix-wo105-causal-shadow-prereg-v3",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R3_20260714",
+  "frozen_at_utc": "2026-07-14T18:40:58Z",
+  "forward_start_at": "2026-07-14T19:30:00Z",
+  "status": "FROZEN_CAUSAL_SHADOW_EVALUATOR_V3",
+  "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+  "strategy_parameters_mutated_from_v2": false,
+  "supersedes_for_evaluation_only": {
+    "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V2_20260714",
+    "v2_mutated": false,
+    "v2_events_observed": 0,
+    "v2_outcomes_observed": 0,
+    "interim_outcome_metrics_inspected": false,
+    "reason": "V2 was tombstoned before its floor because its bound latest-snapshot selection and current-setup-only orchestration could not satisfy the frozen causal lifecycle. V3 changes runtime delivery only and copies the V2 parameter object unchanged."
+  },
+  "runtime_contract": {
+    "receipt_selection": "earliest_received_record_per_close_ms",
+    "late_refetch_policy": "never_replace_an_earlier_valid_receipt",
+    "rest_schedule": {
+      "cadence_seconds": 300,
+      "post_close_offset_seconds": 2,
+      "maximum_frozen_action_latency_ms": 5000
+    },
+    "event_lifecycle": {
+      "event_packet_archive_required": true,
+      "archive_mutability": "immutable",
+      "open_event_continuation": "immutable_initial_packet_plus_dynamic_post_entry_series",
+      "active_states": [
+        "HOLD",
+        "SHADOW_OPEN"
+      ],
+      "continuation_identity": "original_event_id_and_source_manifest_sha256",
+      "manifest_drift": "CAPTURE_INVALID_NO_LEDGER_APPEND"
+    },
+    "historical_backfill_allowed": false,
+    "retuning_allowed": false,
+    "liquidation_timestamp_adapter": {
+      "version": "v3_interface_complete",
+      "max_clock_skew_ms": 5000,
+      "bound_derivation": "unchanged_v2_clock_contract_plus_reviewed_base_load_rows_interface",
+      "causal_availability_rule": "max(event_time_ms,raw_received_at_ms)",
+      "required_loader": "load_rows",
+      "lookahead_allowed": false
+    }
+  },
+  "bindings": {
+    "exact_replay_report": "docs/BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json",
+    "exact_replay_report_sha256": "2ee80e579f39c17437a23738070a7ac5592d8de3126e770029eedd0ca8f3965e",
+    "evaluator": "tools/bitunix_wo105_causal_shadow_evaluator_v3.py",
+    "evaluator_sha256": "dc764082ffc531a94d009bdbfdf68e7ab2a8216d297638f3ec111e70cafdeb72",
+    "base_evaluator": "tools/bitunix_wo105_causal_shadow_evaluator.py",
+    "base_evaluator_sha256": "48bdd6132af8649ca791f662ec70dce92aea12f5d9842e7cd18664cebdaadc45",
+    "v3_path": "HANDOFF/INCOMING/claude/20260713_bitunix_wo104_canonical/SETUP_A_PREREG_V3.json",
+    "v3_sha256": "fb7b78878f889391d9cbe7378de1b7df6fcdfda24b737a890137aefdddb0d159",
+    "v1_tombstone": "docs/BITUNIX_WO105_V1_PRE_FLOOR_UNIT_TOMBSTONE_2026-07-14.json",
+    "v1_tombstone_sha256": "6e835eb232435b9c35506f5abf6607012e7370c610fe0a6be842f4ef563fe647",
+    "rest_collector": "tools/bitunix_wo105_public_rest_collector.py",
+    "rest_collector_sha256": "77a8cd8592780aa97b3a4b8e77ea4fe721c568d2a98868cc4d3f6decba9b335f",
+    "ws_intake": "tools/bitunix_wo105_ws_intake.py",
+    "ws_intake_sha256": "402330df7d6bb586a9ea864c35bcee8b2eddcf4d27a7a3b064a2b8dd10b7e125",
+    "packet_assembler": "tools/bitunix_wo105_packet_assembler_v5.py",
+    "packet_assembler_sha256": "6f700f9b99585337d340bf3267a3d81814f05196045ca0af64deae532ba68e55",
+    "liquidation_context": "tools/bitunix_wo105_liquidation_context_v3.py",
+    "liquidation_context_sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177",
+    "liquidation_collector": "tools/binance_force_order_real_feed_collector.py",
+    "liquidation_collector_sha256": "4f30656ac379fe06b12c813eab32ca8d699dfff77838695942ab0c44fad6ff8d",
+    "liquidation_side_semantics": "tools/liquidation_side_semantics.py",
+    "liquidation_side_semantics_sha256": "8f5045d9d12f8feef256282493bc45e81af48f48189d50e498c18f79fbd72b50",
+    "liquidation_real_feed_contract": "configs/LIQUIDATION_REAL_FEED_CONTRACT.json",
+    "liquidation_real_feed_contract_sha256": "498ce65335b17b5e94e680cd71e4942e552a9c5224592fbc4b8bcc78ca4259a2",
+    "rest_commissioning_manifest": "data/forward/bitunix_wo105_rest/run_20260713T204036_144964Z/PUBLIC_REST_SNAPSHOT_MANIFEST.json",
+    "rest_commissioning_manifest_sha256": "24f0f9e977be8848419d3faa03ed99b9517162e71b1ca11aeaeba25638c98c17",
+    "v2_evaluator": "tools/bitunix_wo105_causal_shadow_evaluator_v2.py",
+    "v2_evaluator_sha256": "6f2689035e6f15d17470217abefd80e5ccc475731010b97cedd2e9adbe039c6f",
+    "v2_lock": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V2_2026-07-14.json",
+    "v2_lock_sha256": "ec4765f785ddf2ebff7c3c98dfb27aded6e5df439794918832e4a1f57a8b7f7a",
+    "v2_packet_assembler": "tools/bitunix_wo105_packet_assembler.py",
+    "v2_packet_assembler_sha256": "4ad9e2306dd63b669276313e6d0fe0f407eb74f3eb19db5133ae94f773e762eb",
+    "v2_tombstone": "docs/BITUNIX_WO105_V2_PRE_FLOOR_RUNTIME_TOMBSTONE_2026-07-14.json",
+    "v2_tombstone_sha256": "ed292b73c3d8dcfa72e401923e9b4d524597a1914baaeb55bfd08724f9713224",
+    "causal_lifecycle_audit": "docs/BITUNIX_WO105_V2_CAUSAL_LIFECYCLE_AUDIT_2026-07-14.json",
+    "causal_lifecycle_audit_sha256": "e771258c6d4702cb253d04915c3b7b45476a717ee13632663a70c22b9e96e592",
+    "predecessor_v3_lock": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3_2026-07-14.json",
+    "predecessor_v3_lock_sha256": "6f8f42ea8b0184850d713abb90ee4c5f85cfa439d1f2a16e80dba6993c58d24b",
+    "predecessor_v3_runtime_stop_receipt": "docs/BITUNIX_WO105_V3_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+    "predecessor_v3_runtime_stop_receipt_sha256": "74bc6349cdf1627a2da774749b3f168550ab8ad325d1ea65403a49d6a2b1166b",
+    "wo108_post_floor_snapshot": "docs/BITUNIX_WO108_POST_FLOOR_OBSERVATION_2026-07-14.json",
+    "wo108_post_floor_snapshot_sha256": "ef14e42b5dc025ac90a7eecb2e1b93786ba021591cf99a9b5b4a11b15d209bcf",
+    "predecessor_v3_tombstone": "docs/BITUNIX_WO105_V3_FIRST_CYCLE_OPERATIONAL_TOMBSTONE_2026-07-14.json",
+    "predecessor_v3_tombstone_sha256": "65b4e7d06aa05156867dd963dc928daf0ca8d5f932fdb696f71e8feeeb714369",
+    "predecessor_v3r1_lock": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R1_2026-07-14.json",
+    "predecessor_v3r1_lock_sha256": "e1a21fd85ce341bb4508ccee7876c57519c77d4706cad86c69c78021859075ce",
+    "predecessor_v3r1_first_cycle_gate": "docs/BITUNIX_WO105_V3R1_FIRST_CYCLE_GATE_2026-07-14.json",
+    "predecessor_v3r1_first_cycle_gate_sha256": "2c65379624e1d898e0792e0bab18b8c9cce9bbcd6a68526ed61fbd6dd14f6600",
+    "predecessor_v3r1_status": "docs/BITUNIX_WO105_V3R1_STATUS_2026-07-14.json",
+    "predecessor_v3r1_status_sha256": "9ebc8edccdbb76188616b41c04fc03fccae10dc2427495b2a2f1de67af579a4f",
+    "predecessor_v3r1_runtime_stop_receipt": "docs/BITUNIX_WO105_V3R1_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+    "predecessor_v3r1_runtime_stop_receipt_sha256": "26cff3af09ef9a9d6b2773d9e65fc19080890d6522c65412011960827f6f10cb",
+    "liquidation_context_v2": "tools/bitunix_wo105_liquidation_context_v2.py",
+    "liquidation_context_v2_sha256": "514913d8c2c21e928d599014ee9f221911c1fefd442b4712a7523b5ad80470b4",
+    "packet_assembler_v4": "tools/bitunix_wo105_packet_assembler_v4.py",
+    "packet_assembler_v4_sha256": "dbfbb1eaa001ab2f188500732dfc14135cc4c53fbdb7f4d1f2f67a359761c9ca",
+    "predecessor_v3r1_clock_contract_audit": "docs/BITUNIX_WO105_V3R1_LIQUIDATION_CLOCK_CONTRACT_AUDIT_2026-07-14.json",
+    "predecessor_v3r1_clock_contract_audit_sha256": "16cfe0c4efa6e412d1b569c1e41aa1171e0c6e708b77c319fdea2613290d5a88",
+    "predecessor_v3r1_tombstone": "docs/BITUNIX_WO105_V3R1_CLOCK_CONTRACT_TOMBSTONE_2026-07-14.json",
+    "predecessor_v3r1_tombstone_sha256": "b41fac67356e8fde6d35b28df32f4337f2c0d9969d2c7a2b2c4aab3abd6e96e7",
+    "predecessor_v3r2_lock": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R2_2026-07-14.json",
+    "predecessor_v3r2_lock_sha256": "45d758acdb1021d070d1b76424f4c4d7359dfa644abb9761a20a014d96dc539b",
+    "predecessor_v3r2_runtime_stop_receipt": "docs/BITUNIX_WO105_V3R2_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+    "predecessor_v3r2_runtime_stop_receipt_sha256": "41bc574171a1a28502f52e32c59d36f2591c3fb6828e5cd5d3cb2f808fa7fd7a",
+    "predecessor_v3r2_capture_manifest": "data/forward/bitunix_wo105_v3r2_ws/run_20260714T180001_227487Z/PUBLIC_CAPTURE_MANIFEST.json",
+    "predecessor_v3r2_capture_manifest_sha256": "caee9db423015caa431edd2677ce80d4d80ae533421b5def59dc6b3d901868e4",
+    "predecessor_v3r2_ws_intake": "_dl/bitunix_wo105_v3r2_ws_intake/WS_INTAKE_MANIFEST.json",
+    "predecessor_v3r2_ws_intake_sha256": "0502afea0ac36b8643b9c773a6f2349fc007935c1ca8ebf64f9b29accb05f317",
+    "predecessor_v3r2_interface_audit": "docs/BITUNIX_WO105_V3R2_ADAPTER_INTERFACE_AUDIT_2026-07-14.json",
+    "predecessor_v3r2_interface_audit_sha256": "48795a15d88ef1dd613a325b6d17baf07d6cc4a15cd062ed97314d31f18ff3ee",
+    "liquidation_context_v3": "tools/bitunix_wo105_liquidation_context_v3.py",
+    "liquidation_context_v3_sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177",
+    "packet_assembler_v5": "tools/bitunix_wo105_packet_assembler_v5.py",
+    "packet_assembler_v5_sha256": "6f700f9b99585337d340bf3267a3d81814f05196045ca0af64deae532ba68e55",
+    "predecessor_v3r2_tombstone": "docs/BITUNIX_WO105_V3R2_FIRST_CYCLE_OPERATIONAL_TOMBSTONE_2026-07-14.json",
+    "predecessor_v3r2_tombstone_sha256": "a3ef452bc5ba1fb6248049fad5128a6fe0266b292e4cf140ffabdc13bfac9e9f"
+  },
+  "scope": {
+    "public_data_only": true,
+    "credentials_allowed": false,
+    "private_api_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "params": {
+    "venue": "bitunix_usdt_perp",
+    "symbol": "BTCUSDT",
+    "timeframes": {
+      "signal": "1h",
+      "trigger": "5m",
+      "htf": "4h"
+    },
+    "source_contracts": {
+      "signal_bars": {
+        "source": "Bitunix GET /api/v1/futures/market/kline",
+        "closed_only": true,
+        "unit": "USDT_price_and_BTC_volume",
+        "maximum_action_latency_ms": 5000,
+        "causality_rule": "signal_and_outcome_bar_received_at_must_not_exceed_close_ms_plus_frozen_latency"
+      },
+      "public_books_trades": {
+        "source": "independently_accepted_Bitunix_public_WS_capture_only",
+        "causal_available_rule": "max(venue_ts_ms,local_receive_ms,previous_causal_ms+1)",
+        "pre_floor_capture_allowed": false
+      },
+      "funding_rate_8h": {
+        "source": "Bitunix GET /api/v1/futures/market/funding_rate",
+        "raw_unit": "percentage_points",
+        "evaluator_unit": "decimal_fraction",
+        "normalization_rule": "api_percentage_points_divide_by_100"
+      },
+      "cvd_norm": {
+        "source": "accepted_Bitunix_public_trade_prints",
+        "evaluator_unit": "signed_volume_share",
+        "method": "sum(buy_size-sell_size)/sum(size)",
+        "minimum_window_ms": 1200000,
+        "minimum_trade_prints": 50
+      },
+      "native_public_oi": {
+        "available": false,
+        "fallback_allowed": false
+      },
+      "liquidation_skew": {
+        "source": "Binance_public_USDM_forceOrder_websocket",
+        "evaluator_unit": "signed_notional_share",
+        "method": "(short_liquidated_notional-long_liquidated_notional)/total_liquidated_notional",
+        "side_semantics": {
+          "BUY": "liquidated_SHORT",
+          "SELL": "liquidated_LONG"
+        },
+        "window_ms": 3600000,
+        "minimum_events": 3,
+        "minimum_notional_usd": 1000.0,
+        "pre_floor_rows_allowed": false
+      },
+      "crowd_quorum": {
+        "required": 3,
+        "known_native_sources_at_freeze": [
+          "funding_rate_8h",
+          "cvd_norm",
+          "liquidation_skew"
+        ],
+        "third_source_status": "BOUND_REAL_BINANCE_FORCE_ORDER_CONTEXT",
+        "synthetic_or_config_only_source_allowed": false
+      }
+    },
+    "record_schemas": {
+      "signal_bars": "ohlcv-bar-v1",
+      "htf_bars": "ohlcv-bar-v1",
+      "crowd": "crowd-point-v1",
+      "books": "public-book-v1",
+      "trades": "public-trade-v1",
+      "outcome_bars": "ohlcv-bar-v1",
+      "funding_events": "funding-event-v1"
+    },
+    "pivot": {
+      "algorithm": "rolling_extreme_with_forward_confirmation",
+      "lookback_bars": 20,
+      "confirmation_delay_bars": 2,
+      "tie_handling": "earliest_bar_wins",
+      "causal": true
+    },
+    "sweep_threshold_ticks": 1,
+    "reclaim_window_bars": 3,
+    "reclaim_rule": "closed_signal_bar_back_inside_confirmed_pivot",
+    "invalidation_buffer_ticks": 1,
+    "htf": {
+      "source": "raw_closed_4h_bars_only",
+      "ema_fast": 50,
+      "ema_slow": 200,
+      "slope_lookback_bars": 3,
+      "minimum_bars": 203,
+      "latest_close_max_age_ms": 15300000,
+      "veto_short": "up_strong",
+      "veto_long": "down_strong"
+    },
+    "entry": {
+      "order_rule": "limit_maker_at_tick_rounded_reclaim_close",
+      "latency_ms": 5000,
+      "book_age_max_ms": 3000,
+      "maker_order_ttl_ms": 900000,
+      "taker_fallback": false
+    },
+    "exit": {
+      "risk_or_time_trigger": "first_closed_5m_stop_then_target_else_time",
+      "same_bar_stop_and_target": "stop_first",
+      "latency_ms": 5000,
+      "book_age_max_ms": 3000,
+      "execution": "walk_first_causal_public_book_depth",
+      "protective_taker_exit_preregistered": true
+    },
+    "crowd_funding": {
+      "quorum_fresh_inputs_required": 3,
+      "sources": {
+        "funding_rate_8h": {
+          "abs_max": 0.0005,
+          "expected_unit": "decimal_fraction",
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 28800000
+        },
+        "oi_delta_pct": {
+          "abs_max": 5.0,
+          "expected_unit": "percent_change",
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 3600000
+        },
+        "cvd_norm": {
+          "abs_max": 0.75,
+          "expected_unit": "signed_volume_share",
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 3600000
+        },
+        "liquidation_skew": {
+          "abs_max": 0.75,
+          "expected_unit": "signed_notional_share",
+          "sign_positive_means": "SHORT",
+          "freshness_max_age_ms": 3600000
+        },
+        "btc_ls_composite": {
+          "abs_max": 2.0,
+          "expected_unit": "z_score",
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 86400000
+        }
+      },
+      "veto_rule": "fresh_3_of_n_quorum_required_and_no_extreme_on_intended_side"
+    },
+    "contract": {
+      "tick_size": 0.1,
+      "lot_step": 0.0001,
+      "min_qty": 0.0001,
+      "metadata_label": "INFERRED_NOT_EXPLICIT_ORDER_RULE"
+    },
+    "execution_model": {
+      "entry_fill": "trade_through_by_at_least_one_tick_after_eligible_book",
+      "queue_penalty_multiplier": 1.25,
+      "partial_fill_allowed": true,
+      "no_fill_is_terminal_after_ttl": true,
+      "immediate_top_level_fill_assumed": false,
+      "taker_entry_fallback": false
+    },
+    "fees": {
+      "tier": "VIP0",
+      "maker_bps": 2.0,
+      "taker_bps": 6.0,
+      "as_of": "2026-07-13"
+    },
+    "funding_treatment": {
+      "interval_h": 8,
+      "expected_unit": "decimal_fraction",
+      "raw_unit": "percentage_points",
+      "normalization_rule": "api_percentage_points_divide_by_100",
+      "rule": "apply_each_causal_funding_event_crossed_by_shadow_position",
+      "positive_rate_long_pays": true
+    },
+    "shadow_sizing": {
+      "notional_usdt": 100.0,
+      "compounding": false
+    },
+    "outcome": {
+      "target_r": 2.0,
+      "max_holding_ms": 14400000,
+      "outcome_bars": "closed_5m_only",
+      "metrics_hidden_until_shadow_closed": true
+    },
+    "event_identity": {
+      "fields": [
+        "cohort_id",
+        "symbol",
+        "signal_close_ms",
+        "pivot_price",
+        "direction",
+        "source_manifest_sha256"
+      ],
+      "duplicate_terminal_event": "CAPTURE_INVALID",
+      "opened_event_parameter_change": "CAPTURE_INVALID"
+    },
+    "lifecycle_states": [
+      "CAPTURE_INVALID",
+      "NO_SETUP",
+      "NO_FILL",
+      "SHADOW_OPEN",
+      "SHADOW_CLOSED",
+      "COHORT_TOMBSTONED"
+    ],
+    "evaluation": {
+      "minimum_new_post_freeze_events": 30,
+      "historical_backfill_allowed": false,
+      "retuning_allowed": false,
+      "edge_evaluated_before_terminal_gate": false,
+      "minimum_expected_net_edge_r_for_independent_review": 0.25
+    }
+  },
+  "can_trade": false,
+  "strategy_parameters_mutated_from_v3": false,
+  "operational_rollover": {
+    "predecessor_cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R2_20260714",
+    "reason": "zero-event rollover after bound adapter omitted assembler-required load_rows interface",
+    "events_observed": 0,
+    "outcomes_observed": 0,
+    "outcome_metrics_inspected": false,
+    "strategy_parameters_mutated": false,
+    "historical_rows_admitted": 0,
+    "predecessor_resume_allowed": false
+  },
+  "strategy_parameters_mutated_from_v3r1": false,
+  "strategy_parameters_mutated_from_v3r2": false
+}

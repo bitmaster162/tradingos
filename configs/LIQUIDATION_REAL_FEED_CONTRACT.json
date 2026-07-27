@@ -1,0 +1,40 @@
+{
+  "contract_id": "liquidation_real_feed_contract_2026_06_30",
+  "status": "research_data_contract_only",
+  "can_trade": false,
+  "purpose": "Separate true liquidation/forced-order feed ingestion from previous liquidation-like proxy research.",
+  "approved_sources": [
+    "Binance public futures forced-order or liquidation archive if discoverable and schema-verified",
+    "Exchange websocket forceOrder/liquidation stream captured forward with event timestamps",
+    "Paid liquidation feed only after provenance and schema audit"
+  ],
+  "explicitly_not_approved_sources": [
+    "OHLCV impulse proxy",
+    "OI-drop proxy",
+    "Volume spike proxy",
+    "Liquidation heatmap screenshots without event-level rows"
+  ],
+  "required_fields": [
+    "event_time_ms",
+    "event_time",
+    "symbol",
+    "side",
+    "price",
+    "quantity",
+    "notional_usd",
+    "source",
+    "is_real_liquidation_feed"
+  ],
+  "quality_gates": {
+    "event_level_rows_required": true,
+    "source_provenance_required": true,
+    "timestamp_utc_required": true,
+    "notional_recomputable_from_price_quantity": true,
+    "proxy_rows_must_be_rejected": true
+  },
+  "runtime_policy": {
+    "no_strategy_consumer_until_contract_passes": true,
+    "no_live_trading_permission": true,
+    "forward_shadow_required_after_historical_ingest": true
+  }
+}

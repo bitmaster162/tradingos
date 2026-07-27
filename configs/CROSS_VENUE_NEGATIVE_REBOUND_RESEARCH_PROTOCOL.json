@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-CROSS-VENUE-REBOUND-002",
+  "family": "COINBASE_NEGATIVE_DISLOCATION_REBOUND_1M",
+  "status": "adaptive_followup_preregistered_before_code",
+  "evidence_status": "adaptive_after_observing_rejection_of_HYP-CROSS-VENUE-CATCHUP-001; not independent confirmation",
+  "claim": "An extreme negative Coinbase BTC-USD return relative to Binance BTCUSDT predicts a tradeable long-only Binance spot rebound after next-minute entry.",
+  "data": {
+    "train_snapshot_profile": "BTC_CROSS_VENUE_1M_V1",
+    "train_snapshot_id": "20260624T072240Z-d26a7c55961d",
+    "train_dataset_sha256": "d26a7c55961d2780bfbe593e4a9b5c92fb38ba76b9b64bb7c148856cd9a26f6f",
+    "train_last_bar": "2026-06-24T02:36:00+00:00",
+    "interval": "1m",
+    "quote_policy": "USD/USDT price-level spread is forbidden; signal uses synchronized returns only"
+  },
+  "signal_timing": {
+    "features": "completed 1m bars only; rolling divergence z-score excludes the signal bar",
+    "dislocation": "Coinbase return is negative and Coinbase-minus-Binance return divergence is sufficiently negative",
+    "entry": "next Binance minute open",
+    "exit": "fixed Binance minute close after the configured hold",
+    "overlap": "one position at a time",
+    "lookahead": false
+  },
+  "grid": {
+    "return_lookback_minutes": [1, 2, 5],
+    "divergence_z_window_minutes": [360, 1440],
+    "entry_abs_z": [2.0, 2.5, 3.0],
+    "min_abs_coinbase_negative_return_bps": [5.0, 10.0],
+    "hold_minutes": [1, 2, 5],
+    "fixed_min_rolling_window_coverage": 0.95,
+    "exact_timestamp_lookback_required": true,
+    "side": "LONG_ONLY",
+    "total_configurations": 108
+  },
+  "costs": {
+    "fee_and_slippage_bps_per_side": 10.0,
+    "stress_extra_bps_per_side": 5.0,
+    "borrow": "not_applicable_long_only",
+    "funding": "not_applicable_spot"
+  },
+  "train_gate": {
+    "min_trades": 50,
+    "min_mean_net_bps": 2.0,
+    "min_positive_folds": 3,
+    "max_drawdown_bps": -500.0,
+    "screening_bootstrap_probability": 0.95,
+    "cost_stress_positive": true
+  },
+  "future_validation_policy": {
+    "validation_start_inclusive": "2026-06-24T02:37:00+00:00",
+    "minimum_calendar_days": 14,
+    "earliest_eligible_end": "2026-07-08T02:37:00+00:00",
+    "new_verified_snapshot_required": true,
+    "train_snapshot_cannot_supply_validation_or_oos": true,
+    "parameter_changes_after_train_are_forbidden": true,
+    "min_trades": 20,
+    "min_mean_net_bps_exclusive": 0.0,
+    "min_positive_folds": 2,
+    "max_drawdown_bps": -300.0,
+    "cost_stress_positive": true
+  },
+  "multiple_testing": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "required_bootstrap_probability_if_candidate": 0.999537037037037
+  },
+  "allowed_current_decisions": [
+    "reject_no_train_qualified_negative_rebound_candidate",
+    "adaptive_rebound_candidate_frozen_waiting_future_validation"
+  ],
+  "runtime_boundary": {
+    "research_only": true,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

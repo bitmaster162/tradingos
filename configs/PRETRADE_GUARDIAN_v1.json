@@ -1,0 +1,43 @@
+{
+  "version": "1.1",
+  "runtime_boundary": {
+    "classification": "pretrade_policy_gate",
+    "can_trade": false,
+    "sends_orders": false,
+    "uses_private_credentials": false
+  },
+  "thresholds": {
+    "min_confirmations": 2,
+    "min_rr": 1.5,
+    "strict_rr": 2.0,
+    "max_risk_pct": 1.0,
+    "max_leverage": 5.0,
+    "min_liquidation_buffer_pct": 3.0,
+    "hot_funding_abs": 0.08,
+    "extreme_funding_abs": 0.10,
+    "conflict_size_multiplier": 0.5
+  },
+  "allowed_stop_methods": [
+    "swing",
+    "structure",
+    "atr"
+  ],
+  "hard_prohibitions": [
+    "no_chasing",
+    "no_averaging_down",
+    "no_trade_in_restricted_window",
+    "no_trade_without_stop",
+    "no_trade_without_rr",
+    "no_trade_without_confirmations",
+    "no_futures_without_liquidation_buffer",
+    "no_futures_leverage_above_limit"
+  ],
+  "notes": [
+    "Winrate is not an entry reason.",
+    "Divergence is an attention trigger, not an entry by itself.",
+    "Funding > 0.08 blocks chasing in the crowded direction.",
+    "BTC futures leverage is capped at 5x for this research/playbook layer.",
+    "Futures cards must include liquidation buffer when liquidation price is known.",
+    "If M15 and BitMasterAI conflict, size is reduced to 0.5x instead of full block."
+  ]
+}

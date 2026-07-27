@@ -1,0 +1,8 @@
+{
+  "id": "2a74...",
+  "trigger": {
+    "type": "cancel",
+    "price": 105950.0,
+    "reason": "AO flipped 3 bars; CHOCH against"
+  }
+}

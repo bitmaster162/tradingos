@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "family": "TREND_MIX_4H",
+  "enabled": true,
+  "status": "paper_shadow_collecting_2026-06-29",
+  "candidate": {
+    "strategy_id": "mix_4h_short_breakout_down_20_expansion_atr_body_accept_rr1x3_h8__guard_oi_up_funding_compressed",
+    "source_report": "docs/STRATEGY_MIX_FORWARD_LOCKED_CANDIDATE_2026-06-29_4H_GUARDED_SHORT.json",
+    "interval": "4h",
+    "side": "SHORT",
+    "conditions": [
+      "breakout_down_20",
+      "expansion_atr",
+      "body_accept",
+      "oi_up",
+      "funding_compressed"
+    ],
+    "rr": "1:3",
+    "max_hold_bars": 8
+  },
+  "boundaries": {
+    "allow_automatic_reselection": false,
+    "observer_allowed": true,
+    "forward_paper_shadow_allowed": true,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

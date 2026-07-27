@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "registry_id": "BTC_RESEARCH_2026Q2",
+  "status": "locked_governance",
+  "created_at": "2026-06-24",
+  "registration_note": "Existing entries are retroactive records reconstructed from already locked protocols and reports; they are not claimed as prospective preregistrations.",
+  "portfolio_budget": {
+    "max_hypotheses": 5,
+    "registered_hypotheses": 5,
+    "max_total_configurations": 1000,
+    "used_configurations": 918,
+    "max_oos_openings": 3,
+    "used_oos_openings": 0
+  },
+  "multiple_testing_policy": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "selection_bootstrap_is_screening_only": true,
+    "candidate_requires_adjusted_p_value": true,
+    "missing_candidate_probability_fails": true
+  },
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-BASIS-SHOCK-001",
+      "experiment": "basis_shock_reversion",
+      "family": "BASIS_SHOCK_REVERSION_1H",
+      "claim": "A positive spot-perpetual basis z-score shock converges fast enough to cover both-leg costs and funding.",
+      "registration_type": "retroactive_locked_record",
+      "status": "rejected_train_gate",
+      "protocol": "configs/BASIS_SHOCK_REVERSION_RESEARCH_PROTOCOL.json",
+      "report": "docs/BASIS_SHOCK_REVERSION_NESTED_HOLDOUT_2026-06-23.json",
+      "trial_budget": {
+        "max_configurations": 324,
+        "used_configurations": 324,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+        "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+        "validation_opened": false,
+        "oos_opened": false,
+        "max_oos_openings": 1
+      },
+      "result": {
+        "decision": "reject_no_train_qualified_basis_shock_candidate",
+        "train_qualified": 0
+      }
+    },
+    {
+      "hypothesis_id": "HYP-BASIS-CARRY-001",
+      "experiment": "basis_funding_carry",
+      "family": "BASIS_FUNDING_CARRY",
+      "claim": "Positive perpetual basis plus positive funding supports a durable market-neutral carry after both-leg costs.",
+      "registration_type": "retroactive_locked_record",
+      "status": "rejected_validation_gate",
+      "protocol": "configs/BASIS_FUNDING_CARRY_RESEARCH_LOCK.json",
+      "report": "docs/BASIS_FUNDING_CARRY_NESTED_HOLDOUT_2026-06-23.json",
+      "trial_budget": {
+        "max_configurations": 18,
+        "used_configurations": 18,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2025-01-01T00:00:00+00:00",
+        "validation_end_exclusive": "2026-01-01T00:00:00+00:00",
+        "validation_opened": true,
+        "oos_opened": false,
+        "max_oos_openings": 1
+      },
+      "result": {
+        "decision": "insufficient_validation_no_events_research_only",
+        "train_qualified": 12
+      }
+    },
+    {
+      "hypothesis_id": "HYP-SESSION-ORB-001",
+      "experiment": "session_opening_range",
+      "family": "SESSION_OPENING_RANGE_BREAKOUT_1H",
+      "claim": "The first accepted UTC opening-range breakout has positive net expectancy across trend and volume contexts.",
+      "registration_type": "retroactive_locked_record",
+      "status": "rejected_train_gate",
+      "protocol": "configs/SESSION_OPENING_RANGE_RESEARCH_LOCK.json",
+      "report": "docs/SESSION_OPENING_RANGE_NESTED_HOLDOUT_2026-06-23.json",
+      "trial_budget": {
+        "max_configurations": 384,
+        "used_configurations": 384,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+        "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+        "validation_opened": false,
+        "oos_opened": false,
+        "max_oos_openings": 1
+      },
+      "result": {
+        "decision": "reject_no_train_qualified_session_candidate",
+        "train_qualified": 0
+      }
+    },
+    {
+      "hypothesis_id": "HYP-FUNDING-EVENT-001",
+      "experiment": "funding_settlement_reversion",
+      "family": "FUNDING_SETTLEMENT_REVERSION_1H",
+      "claim": "After an extreme realized funding settlement, the crowded perpetual move mean-reverts over the next eight hours when spot does not confirm and OI context is aligned.",
+      "registration_type": "prospective_preregistration",
+      "status": "rejected_train_gate",
+      "protocol": "configs/FUNDING_SETTLEMENT_EVENT_RESEARCH_PROTOCOL.json",
+      "report": "docs/FUNDING_SETTLEMENT_REVERSION_NESTED_HOLDOUT_2026-06-24.json",
+      "trial_budget": {
+        "max_configurations": 96,
+        "used_configurations": 96,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+        "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+        "validation_opened": false,
+        "oos_opened": false,
+        "max_oos_openings": 1
+      },
+      "result": {
+        "decision": "reject_no_train_qualified_funding_event_candidate",
+        "train_qualified": 0
+      }
+    },
+    {
+      "hypothesis_id": "HYP-SPOT-LEAD-001",
+      "experiment": "spot_led_continuation",
+      "family": "SPOT_LED_CONTINUATION_1H",
+      "claim": "An extreme spot-led BTC return divergence predicts same-direction perpetual continuation over the next eight hours because derivatives have not yet fully incorporated spot demand or supply.",
+      "registration_type": "prospective_preregistration",
+      "status": "rejected_train_gate",
+      "protocol": "configs/SPOT_LED_CONTINUATION_RESEARCH_PROTOCOL.json",
+      "report": "docs/SPOT_LED_CONTINUATION_NESTED_HOLDOUT_2026-06-24.json",
+      "trial_budget": {
+        "max_configurations": 96,
+        "used_configurations": 96,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+        "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+        "validation_opened": false,
+        "oos_opened": false,
+        "max_oos_openings": 1
+      },
+      "result": {
+        "decision": "reject_no_train_qualified_spot_lead_candidate",
+        "train_qualified": 0
+      }
+    }
+  ],
+  "runtime_boundary": {
+    "research_only": true,
+    "automatic_registry_mutation": false,
+    "automatic_parameter_expansion": false,
+    "observer_registration_allowed": false,
+    "paper_or_live_promotion_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

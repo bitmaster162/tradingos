@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "locked_allowlist",
+  "snapshot_policy": "configs/RESEARCH_DATA_AUTHORITY.json",
+  "hypothesis_registry": "configs/HYPOTHESIS_REGISTRY.json",
+  "run_root_relative_to_active": "_dl/research_runs",
+  "experiments": {
+    "basis_shock_reversion": {
+      "hypothesis_id": "HYP-BASIS-SHOCK-001",
+      "script": "tools/basis_shock_reversion_nested_holdout.py",
+      "family": "BASIS_SHOCK_REVERSION_1H",
+      "supports_lock_path": true
+    },
+    "basis_funding_carry": {
+      "hypothesis_id": "HYP-BASIS-CARRY-001",
+      "script": "tools/basis_funding_carry_nested_holdout.py",
+      "family": "BASIS_FUNDING_CARRY",
+      "supports_lock_path": false
+    },
+    "funding_settlement_reversion": {
+      "hypothesis_id": "HYP-FUNDING-EVENT-001",
+      "script": "tools/funding_settlement_reversion_nested_holdout.py",
+      "family": "FUNDING_SETTLEMENT_REVERSION_1H",
+      "supports_lock_path": true
+    },
+    "session_opening_range": {
+      "hypothesis_id": "HYP-SESSION-ORB-001",
+      "script": "tools/session_opening_range_nested_holdout.py",
+      "family": "SESSION_OPENING_RANGE_BREAKOUT_1H",
+      "supports_lock_path": true
+    },
+    "spot_led_continuation": {
+      "hypothesis_id": "HYP-SPOT-LEAD-001",
+      "script": "tools/spot_led_continuation_nested_holdout.py",
+      "family": "SPOT_LED_CONTINUATION_1H",
+      "supports_lock_path": true
+    }
+  },
+  "execution_contract": {
+    "shell": false,
+    "arbitrary_extra_args": false,
+    "exact_snapshot_id_required": true,
+    "snapshot_verification_required": true,
+    "hypothesis_authorization_required": true,
+    "multiple_testing_assessment_required": true,
+    "output_must_set_can_trade_false": true,
+    "credentials_allowed": false,
+    "network_required": false,
+    "orders_allowed": false,
+    "observer_registration_allowed": false,
+    "paper_or_live_promotion_allowed": false
+  }
+}

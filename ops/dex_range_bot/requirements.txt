@@ -1,0 +1,3 @@
+# Keep this empty until a concrete live adapter is chosen.
+# EVM examples usually need web3.py or an aggregator SDK wrapper.
+# Solana examples usually need solders/solana or a Jupiter-specific client.

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "prereg_id": "bybit_canonical_long_liquidation_flush_reversal_h8_2026_07_13_v2",
+  "status": "prospective_preregistration_before_forward_floor",
+  "created_at": "2026-07-13T07:25:00Z",
+  "forward_floor_at": "2026-07-13T09:00:00Z",
+  "can_trade": false,
+  "orders_allowed": false,
+  "purpose": "Test one corrected-label Bybit liquidation discovery candidate on untouched forward event bars without interim outcome review.",
+  "discovery_provenance": {
+    "report": "docs/BYBIT_LIQUIDATION_CANONICAL_DISCOVERY_AUDIT_2026-07-13.json",
+    "outcome_reviewed_discovery": true,
+    "untouched_validation": false,
+    "automatic_promotion_allowed": false
+  },
+  "sources": {
+    "liquidations": "data/live/liquidations/bybit_all_liquidation",
+    "bars_root": "data/cache/binance_spot_perp_extended/futures"
+  },
+  "candidate": {
+    "candidate_id": "long_liquidation_flush__reversal__h8",
+    "context": "long_liquidation_flush",
+    "direction": "reversal",
+    "side": "LONG",
+    "interval": "1h",
+    "horizon_bars": 8,
+    "entry_model": "next_bar_open_after_event_bar_close",
+    "exit_model": "event_bar_plus_8_close",
+    "dominance_threshold": 0.65,
+    "base_cost_bps": 7.0,
+    "stress_cost_bps": 12.0,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "DOGEUSDT",
+      "ADAUSDT",
+      "AVAXUSDT",
+      "LINKUSDT",
+      "LTCUSDT"
+    ]
+  },
+  "sample_gate": {
+    "minimum_resolved_events": 100,
+    "minimum_utc_days": 5,
+    "minimum_symbols": 5,
+    "minimum_independent_4h_blocks": 20,
+    "maximum_single_symbol_share": 0.5,
+    "interim_outcomes_visible": false
+  },
+  "terminal_outcome_gate": {
+    "minimum_mean_net_bps": 15.0,
+    "minimum_winrate_net_positive_pct": 55.0,
+    "minimum_stress_mean_net_bps": 0.0,
+    "minimum_positive_symbols": 4,
+    "single_terminal_evaluation": true,
+    "terminal_failure_policy": "tombstone_without_reverse_or_retune",
+    "terminal_pass_policy": "manual_shadow_design_review_only"
+  },
+  "side_contract": {
+    "schema_version": 1,
+    "source": "bybit_all_liquidation",
+    "raw_side_mapping": {
+      "BUY": "LONG",
+      "SELL": "SHORT"
+    },
+    "old_v1_context_rows_allowed": false,
+    "reference": "https://bybit-exchange.github.io/docs/v5/websocket/public/all-liquidation"
+  },
+  "research_boundary": {
+    "forward_only": true,
+    "pre_floor_events_allowed": false,
+    "interim_outcome_review_allowed": false,
+    "reverse_hypothesis_on_failure_forbidden": true,
+    "retuning_forbidden": true,
+    "old_v1_outcomes_admitted": false
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "policy_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_COST_AUDIT_V1",
+  "status": "audit_only_locked_baseline",
+  "created_at": "2026-07-11",
+  "scope": {
+    "queue": "configs/CROSS_VENUE_MICROSTRUCTURE_PREREG_QUEUE.json",
+    "runner_contract": "configs/CROSS_VENUE_MICROSTRUCTURE_RUNNER_CONTRACT.json",
+    "portable_synthetic_evidence": "tests/fixtures/microstructure_cost_model_synthetic_reports.json",
+    "experiments": [
+      "microstructure_imbalance_continuation",
+      "microstructure_cross_venue_dislocation_reversion",
+      "microstructure_liquidity_void_expansion",
+      "microstructure_book_pressure_alignment"
+    ]
+  },
+  "canonical_research_cost_model": {
+    "fee_and_slippage_bps_per_side": 10.0,
+    "stress_extra_bps_per_side": 5.0,
+    "round_trip_bps": 20.0,
+    "stress_round_trip_bps": 30.0,
+    "accounting": "subtract exactly one round-trip cost from each gross trade return",
+    "side_treatment": "symmetric research accounting only"
+  },
+  "execution_proxy": {
+    "signal_data": "completed minutes only",
+    "entry_delay": "next completed Binance minute after signal",
+    "entry_price": "first observed Binance trade price in the next minute",
+    "exit_price": "last observed Binance trade price in the final hold minute",
+    "minimum_entry_delay_minutes": 1,
+    "overlapping_positions": false
+  },
+  "required_research_checks": {
+    "same_costs_across_all_experiments": true,
+    "stress_cost_strictly_above_base_cost": true,
+    "train_gate_requires_positive_stress_net": true,
+    "same_bar_entry_forbidden": true,
+    "validation_must_remain_closed": true,
+    "oos_must_remain_closed": true,
+    "report_must_keep_can_trade_false": true
+  },
+  "known_execution_gaps": [
+    "maker/taker fee tiers are not decomposed",
+    "time-varying bid/ask spread is not charged separately",
+    "order size and market-impact slippage are not modeled",
+    "partial fills and missed fills are not modeled",
+    "exchange rejects and rate limits are not modeled",
+    "sub-minute network and queue latency are not modeled",
+    "short borrow, funding and locate constraints are not modeled"
+  ],
+  "governance": {
+    "changes_preregistration": false,
+    "changes_strategy_parameters": false,
+    "opens_snapshot": false,
+    "opens_validation": false,
+    "opens_oos": false,
+    "candidate_specific_execution_overlay_required_before_paper_review": true,
+    "cost_policy_may_not_be_retuned_after_results": true
+  },
+  "runtime_boundary": {
+    "audit_only": true,
+    "network_required": false,
+    "credentials_allowed": false,
+    "alerts_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

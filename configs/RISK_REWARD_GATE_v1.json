@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "runtime_boundary": {
+    "classification": "research_gate_only",
+    "can_trade": false,
+    "sends_orders": false,
+    "uses_private_credentials": false
+  },
+  "thresholds": {
+    "min_trades": 100,
+    "min_expectancy_r": 0.05,
+    "min_edge_margin_pct": 2.0,
+    "min_payoff_ratio": 1.05,
+    "min_stable_folds": 3,
+    "max_drawdown_r": -25.0,
+    "max_losing_streak": 8,
+    "min_holdout_trades": 10,
+    "min_holdout_expectancy_r": 0.0,
+    "min_holdout_winrate_pct": 50.0
+  },
+  "policy": {
+    "winrate_alone_is_never_enough": true,
+    "holdout_fail_blocks_paper": true,
+    "missing_avg_win_or_avg_loss_blocks_pass": true,
+    "passed_research_gate_still_requires_fresh_oos": true,
+    "paper_or_live_permission": "blocked_by_default"
+  }
+}

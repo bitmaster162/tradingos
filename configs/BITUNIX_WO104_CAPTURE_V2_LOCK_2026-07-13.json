@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "lock_id": "bitunix_wo104_public_capture_v2_lf_stable_2026_07_13",
+  "created_at": "2026-07-13T10:26:39Z",
+  "status": "immutable_bounded_public_capture_lock",
+  "change_class": "transport_evidence_fix_only",
+  "single_change": "open JSONL writers with newline='\\n' so streaming SHA hashes the exact bytes written on Windows",
+  "predecessor": {
+    "run_dir": "data/forward/bitunix_wo104/run_20260713T095342_338948Z",
+    "decision": "bitunix_wo104_capture_invalid_hold",
+    "accepted": false,
+    "resume_allowed": false,
+    "data_admitted_to_v2_acceptance": false,
+    "failure": "all three streaming SHA values hashed LF while Windows text mode wrote CRLF"
+  },
+  "source_identity": {
+    "runner": {
+      "path": "tools/bitunix_wo104_public_capture_runner.py",
+      "sha256": "11acb7e712571c9c2665b80e7a3fef0615daa82ab3239c8815f6c5e3516093f3",
+      "version": "bitunix_wo104_capture_runner_v2_lf_stable"
+    },
+    "acceptance": {
+      "path": "tools/bitunix_wo104_acceptance.py",
+      "sha256": "374a4882d5617a912a996d7b982e6399da5c40941c9d357bc93eb3dd8f15e858"
+    },
+    "policy": {
+      "path": "configs/BITUNIX_WO104_INDEPENDENT_ACCEPTANCE_POLICY.json",
+      "sha256": "af87bff3c9859d2574a6a1eeee16cd1563040fb076ddac07ef61d87908e39664"
+    },
+    "canonical_proposal_archive_sha256": "6ba87f6f60c294605b1f4b9a5283876a5c65cb8c199928b26658e66b73f53884",
+    "cohort_binding_sha256": "e901e548cdb70a0a9ef26e1f40146d27a5e4f744c2fe5ad1c52e4f869220e4a7"
+  },
+  "run_contract": {
+    "venue": "Bitunix public websocket",
+    "symbol": "BTCUSDT",
+    "channels": [
+      "depth_book15",
+      "trade"
+    ],
+    "requested_minutes": 30,
+    "maximum_attempts": 1,
+    "automatic_restart_allowed": false,
+    "threshold_changes_allowed": false,
+    "post_run_normalization_allowed": false,
+    "independent_acceptance_required": true
+  },
+  "runtime_boundary": {
+    "public_only": true,
+    "credentials_allowed": false,
+    "private_api_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "edge_evaluated": false,
+    "promotion": "HOLD",
+    "can_trade": false
+  },
+  "can_trade": false
+}

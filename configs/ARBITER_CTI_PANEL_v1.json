@@ -1,0 +1,131 @@
+{
+  "overlay_id": "arbiter_cti_panel_v1",
+  "status": "bundled_rotation_overlay",
+  "purpose": "Higher-timeframe composite trigger for BTC <-> ETH <-> ALTS rotation management.",
+  "timeframes": {
+    "primary_confirmation": [
+      "4h",
+      "1d"
+    ],
+    "early_warning": [
+      "1h"
+    ],
+    "require_h4_and_d1_confirmation": true,
+    "hold_threshold_bars_on_primary_tf": 2
+  },
+  "normalization": {
+    "signal_range": [
+      -1.0,
+      1.0
+    ],
+    "cti_formula": "CTI = clip(round(50 + 50 * CTI_raw), 0, 100)"
+  },
+  "components": {
+    "ethbtc_trend": {
+      "weight": 0.35,
+      "inputs": [
+        "ema50_slope_h4",
+        "ema50_slope_d1",
+        "structure_hh_hl_or_lh_ll"
+      ],
+      "positive_for": "alt_mode"
+    },
+    "btcd": {
+      "weight": 0.25,
+      "invert_sign": true,
+      "inputs": [
+        "ema50_slope",
+        "break_or_retest_ema50"
+      ],
+      "positive_for": "alt_mode_when_dominance_falls"
+    },
+    "oi_mix": {
+      "weight": 0.2,
+      "inputs": [
+        "delta_oi_btc",
+        "delta_oi_eth",
+        "delta_oi_top_alts"
+      ],
+      "filter_spikes": true
+    },
+    "funding_compression": {
+      "weight": 0.1,
+      "inputs": [
+        "compression_to_zero_after_skew",
+        "recharge_confirmation"
+      ]
+    },
+    "stablecoin_inflow": {
+      "weight": 0.1,
+      "inputs": [
+        "netflow_usdt",
+        "netflow_usdc",
+        "zscore"
+      ],
+      "positive_threshold_z": 0.5
+    }
+  },
+  "confirmation": {
+    "core_blocks": [
+      "ethbtc_trend",
+      "btcd",
+      "stablecoin_inflow"
+    ],
+    "minimum_core_blocks_agreeing": 2
+  },
+  "cti_modes": {
+    "alt_mode": {
+      "cti_min": 65,
+      "action": "Rotate toward ETH and strong ALTS in tiers.",
+      "btc_role": "hold_or_hedge"
+    },
+    "neutral_mode": {
+      "cti_gt": 35,
+      "cti_lt": 65,
+      "action": "Neutral exposure, level-to-level tactics, minimal rotation."
+    },
+    "btc_defensive_mode": {
+      "cti_max": 35,
+      "action": "Reduce ALTS, prefer BTC, cash or stables, optional hedge overlay."
+    }
+  },
+  "risk_contour": {
+    "base_rotation_risk_pct": 1.0,
+    "hard_max_rotation_risk_pct": 2.0,
+    "staged_entries": true,
+    "suggested_max_steps": 3,
+    "hedge_overlay_required_near_thresholds": true,
+    "threshold_buffer_points": 5,
+    "invalidators": [
+      "ethbtc_slope_reversal",
+      "btcd_ema_break_against_position",
+      "negative_stable_inflow_shock",
+      "oi_mix_deterioration",
+      "funding_recrowding"
+    ]
+  },
+  "execution_policy": {
+    "cti_is_not_direct_entry_trigger": true,
+    "use_cti_as_rotation_regime_overlay": true,
+    "local_execution_engine_required": true,
+    "reduce_size_on_conflict_with_local_setup": true
+  },
+  "journal": {
+    "fields": [
+      "date",
+      "cti_value",
+      "cti_mode",
+      "ethbtc_signal",
+      "btcd_signal",
+      "oi_mix_signal",
+      "funding_compression_signal",
+      "stable_inflow_signal",
+      "confirm_h4",
+      "confirm_d1",
+      "rotation_action",
+      "hedge_overlay",
+      "invalidator_state",
+      "notes"
+    ]
+  }
+}

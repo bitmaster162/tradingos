@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "lock_id": "binance_usdm_demo_post_fill_markout_forward_2026_07_14_v1",
+  "status": "forward_execution_quality_preregistered",
+  "created_at": "2026-07-14T10:33:38Z",
+  "forward_start_at": "2026-07-14T10:34:00Z",
+  "forward_start_ms": 1784025240000,
+  "purpose": "Measure causal execution markout on authoritative Binance Futures demo fills without feeding outcomes into signal generation, sizing, or order permission.",
+  "data_contract": {
+    "venue": "binance_usdm_demo",
+    "symbol": "BTCUSDT",
+    "authoritative_fill_source": "fapi_userTrades_archive",
+    "archive_root": "data/post_fill_markout_forward",
+    "market_source": "individual_symbol_bookTicker_websocket",
+    "market_root": "data/post_fill_markout_forward",
+    "reference_source": "book_mid",
+    "time_basis": "exchange_event_time",
+    "common_cohort_rule": "All horizons use the same fill window closed against the longest registered horizon."
+  },
+  "timing": {
+    "primary_horizon_seconds": 30,
+    "secondary_horizons_seconds": [5, 300],
+    "max_pre_fill_age_ms": 5000,
+    "max_post_horizon_delay_ms": 5000,
+    "max_capture_event_age_ms": 120000
+  },
+  "prelock_capture_diagnostic": {
+    "source": "data/post_fill_markout_forward/public/2026-07-14/btcusdt_bookTicker.jsonl",
+    "records": 679,
+    "span_ms": 155869,
+    "event_gap_p50_ms": 67,
+    "event_gap_p95_ms": 1123,
+    "event_gap_p99_ms": 1853,
+    "event_gap_max_ms": 2328,
+    "policy": "Diagnostic only. Rows before forward_start_ms cannot satisfy the forward evidence floor or influence future threshold selection."
+  },
+  "evidence_floor": {
+    "minimum_evaluated_fills_per_horizon": 100,
+    "minimum_distinct_utc_days": 3,
+    "minimum_evaluation_coverage_ratio": 1.0,
+    "meaning": "Readiness for manual distribution review only; not statistical proof, strategy promotion, or trading permission."
+  },
+  "evaluation_policy": {
+    "registered_configurations": 1,
+    "horizon_selection_after_opening_forward_data_allowed": false,
+    "retuning_allowed": false,
+    "economic_drift_thresholds_locked": false,
+    "reason_thresholds_not_locked": "No synchronized authoritative forward fills exist yet. Thresholds may only be proposed after the registered evidence floor and a manual distribution review.",
+    "automatic_guard_creation_allowed": false,
+    "historical_rows_before_forward_start_allowed": false,
+    "partial_authoritative_coverage_allowed": false,
+    "partial_reference_coverage_allowed": false
+  },
+  "runtime_boundary": {
+    "forward_execution_quality_observer_only": true,
+    "public_book_capture_allowed": true,
+    "read_only_private_history_allowed": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "automatic_promotion_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

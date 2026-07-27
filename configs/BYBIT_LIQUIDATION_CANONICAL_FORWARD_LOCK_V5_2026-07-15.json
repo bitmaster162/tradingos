@@ -1,0 +1,222 @@
+{
+  "schema_version": 4,
+  "lock_id": "bybit_canonical_long_liquidation_flush_reversal_h8_2026_07_15_v5_packet_ordinals",
+  "status": "prospective_forward_lock_before_outcome_review",
+  "created_at": "2026-07-15T02:16:14Z",
+  "forward_start_at": "2026-07-15T02:45:00Z",
+  "preregistration": {
+    "path": "configs/BYBIT_LIQUIDATION_CANONICAL_FORWARD_PREREG_V5_2026-07-15.json",
+    "sha256": "efd74ac66845c0617d6e2a549e456f8d8c3f5fffe1163a293486c1ca4d8e5560"
+  },
+  "observer": {
+    "path": "tools/bybit_liquidation_canonical_forward_observer_v5.py",
+    "sha256": "a42a19d2cfdb66083734d7801ab3e710852a739eab799663ca2535754dfbcb26"
+  },
+  "dependencies": [
+    {
+      "path": "tools/bybit_liquidation_canonical_forward_observer.py",
+      "sha256": "5facfe057503d02543df9d8bf0133e73a56adee378e605dab29d73818d5a32f8"
+    },
+    {
+      "path": "tools/bybit_all_liquidation_context_intake_v2.py",
+      "sha256": "f81290ba1bddd5c09a7cc4fb7df4014b1781c7d4c54a3f942cbb7401439edeb5"
+    },
+    {
+      "path": "tools/bybit_all_liquidation_context_intake.py",
+      "sha256": "8493a8b48e7f4033d15a861a5dceae3744b6061f472a0ee201b50b4bc6e57abb"
+    },
+    {
+      "path": "tools/force_order_liquidation_event_study.py",
+      "sha256": "057be4ae0091ee999407089b8355c22d0121f49d288d6c2608a21b5e1440078d"
+    },
+    {
+      "path": "tools/liquidation_side_semantics.py",
+      "sha256": "8f5045d9d12f8feef256282493bc45e81af48f48189d50e498c18f79fbd72b50"
+    },
+    {
+      "path": "tools/bybit_liquidation_canonical_input_quality_v5.py",
+      "sha256": "aed49f256c64b7e954f4eabd91e316bf0e1ff7732c57a78fd3d660a05a83703c"
+    },
+    {
+      "path": "tools/bybit_liquidation_canonical_input_quality_v4.py",
+      "sha256": "5033c203275c930baf4c6559d4c3ffd6fb62c7c125d21e7d47066ca9bbd66b49"
+    },
+    {
+      "path": "tools/bybit_liquidation_canonical_input_quality.py",
+      "sha256": "bb216343c5738cee85acbaeb65299322b93a9b24fcfa73a03de2171849cf876b"
+    },
+    {
+      "path": "tools/bybit_all_liquidation_real_feed_collector_v2.py",
+      "sha256": "b31ebd660ec37142cdc84f912690a91b7d82a638dbaa3de2424c5e7e38a13a2f"
+    },
+    {
+      "path": "tools/bybit_all_liquidation_real_feed_collector.py",
+      "sha256": "bb1aa28ca9f08d0bf42caf7d35f1515c9d499bada44585dde17ea827b628019c"
+    },
+    {
+      "path": "tools/liquidity_sweep_detector.py",
+      "sha256": "58a74b690f15247274c1e1098263b29f7be715918fb106136a3d068486758f4c"
+    },
+    {
+      "path": "tools/binance_rest_kline_tail_gap_filler.py",
+      "sha256": "08e7cc2d5ab6fed651cc6b081de92b38994b5630f71497b8852f90890fbcaa90"
+    }
+  ],
+  "discovery_evidence": {
+    "path": "docs/BYBIT_LIQUIDATION_CANONICAL_DISCOVERY_AUDIT_2026-07-13.json",
+    "sha256": "acf6aab9fc09ed2ba55d749faf50e8c78049d561a9229066e3eb8ae6f31aa0f1"
+  },
+  "data_quality_tombstone": {
+    "path": "docs/BYBIT_LIQUIDATION_CANONICAL_V4_PACKET_IDENTITY_TOMBSTONE_2026-07-15.json",
+    "sha256": "fa785571c03f30565844b1445693604082f5718aa1daee7843592e3236ca6259"
+  },
+  "supersedes": {
+    "prereg_id": "bybit_canonical_long_liquidation_flush_reversal_h8_2026_07_14_v4_calibrated_receipts",
+    "reason": "V4 assumed market-tuple uniqueness even though Bybit may publish identical items in one packet without a venue event id; V4 is terminal before outcome review.",
+    "v1_observations_admitted": false,
+    "v2_observations_admitted": false,
+    "v2_terminal_metrics_admitted": false,
+    "v3_observations_admitted": false,
+    "v3_terminal_metrics_admitted": false,
+    "v4_observations_admitted": false,
+    "v4_terminal_metrics_admitted": false,
+    "strategy_parameters_changed": false
+  },
+  "sources": {
+    "liquidations": "data/live/liquidations/bybit_all_liquidation",
+    "bars_root": "data/cache/binance_spot_perp_extended/futures"
+  },
+  "candidate": {
+    "candidate_id": "long_liquidation_flush__reversal__h8",
+    "context": "long_liquidation_flush",
+    "direction": "reversal",
+    "side": "LONG",
+    "interval": "1h",
+    "horizon_bars": 8,
+    "entry_model": "next_bar_open_after_event_bar_close",
+    "exit_model": "event_bar_plus_8_fully_closed_close",
+    "dominance_threshold": 0.65,
+    "base_cost_bps": 7.0,
+    "stress_cost_bps": 12.0,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "DOGEUSDT",
+      "ADAUSDT",
+      "AVAXUSDT",
+      "LINKUSDT",
+      "LTCUSDT"
+    ]
+  },
+  "bar_contract": {
+    "fully_closed_bars_only": true,
+    "current_interval_bar_allowed": false,
+    "bar_closed_when": "bar_open_time_plus_interval_lte_observer_now",
+    "public_tail_refresh_required": true,
+    "public_tail_refresh_market": "binance_futures",
+    "maximum_closed_bar_lag_intervals": 1
+  },
+  "receipt_contract": {
+    "required_ingest_schema_version": 4,
+    "raw_wall_clock_is_arrival_order_evidence": false,
+    "causal_packet_order": "collector_session_id+packet_sequence+received_monotonic_ns",
+    "packet_item_identity": "collector_session_id+packet_sequence+packet_item_index",
+    "packet_atomic_write_required": true,
+    "market_tuple_uniqueness_required": false,
+    "exchange_clock_alignment": "Bybit public server-time midpoint calibration",
+    "correction_equation": "corrected_received_at_ns=received_at_ns+clock_offset_ns",
+    "collector": "tools/bybit_all_liquidation_real_feed_collector_v2.py",
+    "quality_consumer": "tools/bybit_liquidation_canonical_input_quality_v5.py"
+  },
+  "input_quality_gate": {
+    "required_ingest_schema_version": 4,
+    "maximum_json_parse_errors": 0,
+    "maximum_schema_errors": 0,
+    "maximum_partition_mismatches": 0,
+    "maximum_nonmonotonic_files": 0,
+    "maximum_receipt_parse_errors": 0,
+    "maximum_correction_equation_failures": 0,
+    "maximum_calibration_age_failures": 0,
+    "maximum_calibration_rtt_failures": 0,
+    "maximum_calibration_uncertainty_failures": 0,
+    "maximum_clock_offset_failures": 0,
+    "maximum_calibration_sample_failures": 0,
+    "maximum_calibration_source_failures": 0,
+    "maximum_exchange_event_lag_failures": 0,
+    "maximum_corrected_before_event_failures": 0,
+    "maximum_corrected_receipt_lag_failures": 0,
+    "maximum_packet_receipt_conflicts": 0,
+    "maximum_packet_sequence_failures": 0,
+    "maximum_monotonic_receipt_failures": 0,
+    "maximum_packet_item_contract_errors": 0,
+    "maximum_duplicate_packet_item_identities": 0,
+    "maximum_packet_item_bounds_failures": 0,
+    "maximum_packet_item_count_conflicts": 0,
+    "maximum_packet_item_coverage_failures": 0,
+    "maximum_packet_item_payload_mismatches": 0,
+    "minimum_clock_calibration_samples": 3,
+    "maximum_clock_calibration_rtt_ms": 2000.0,
+    "maximum_clock_calibration_age_s": 600.0,
+    "maximum_absolute_clock_offset_ms": 10000.0,
+    "maximum_exchange_event_lag_ms": 2000.0,
+    "maximum_corrected_receipt_lag_ms": 10000.0,
+    "corrected_receipt_uncertainty_grace_ms": 50.0,
+    "required_bar_symbols": 10,
+    "maximum_closed_bar_lag_intervals": 1
+  },
+  "sample_gate": {
+    "minimum_resolved_events": 100,
+    "minimum_utc_days": 5,
+    "minimum_symbols": 5,
+    "minimum_independent_4h_blocks": 20,
+    "maximum_single_symbol_share": 0.5,
+    "interim_outcomes_visible": false
+  },
+  "terminal_outcome_gate": {
+    "minimum_mean_net_bps": 15.0,
+    "minimum_winrate_net_positive_pct": 55.0,
+    "minimum_stress_mean_net_bps": 0.0,
+    "minimum_positive_symbols": 4,
+    "single_terminal_evaluation": true,
+    "terminal_failure_policy": "tombstone_without_reverse_or_retune",
+    "terminal_pass_policy": "manual_shadow_design_review_only"
+  },
+  "side_contract": {
+    "schema_version": 1,
+    "source": "bybit_all_liquidation",
+    "raw_side_mapping": {
+      "BUY": "LONG",
+      "SELL": "SHORT"
+    },
+    "old_v1_context_rows_allowed": false,
+    "reference": "https://bybit-exchange.github.io/docs/v5/websocket/public/all-liquidation"
+  },
+  "research_boundary": {
+    "forward_only": true,
+    "pre_floor_events_allowed": false,
+    "interim_outcome_review_allowed": false,
+    "reverse_hypothesis_on_failure_forbidden": true,
+    "retuning_forbidden": true,
+    "old_v1_outcomes_admitted": false,
+    "v2_observations_admitted": false,
+    "v2_terminal_metrics_admitted": false,
+    "v3_observations_admitted": false,
+    "v3_terminal_metrics_admitted": false,
+    "v4_observations_admitted": false,
+    "v4_terminal_metrics_admitted": false
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  },
+  "orders_allowed": false,
+  "can_trade": false
+}

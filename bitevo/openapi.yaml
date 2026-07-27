@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info:
+  title: BitEvo Composite Alerts API
+  version: '1.0.0'
+servers:
+  - url: https://api.bitevo.local
+paths:
+  /v1/alerts/latest:
+    get:
+      summary: Latest alerts
+      parameters:
+        - in: query
+          name: symbol
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 50, minimum: 1, maximum: 500 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alert'
+  /v1/alerts/{id}:
+    get:
+      summary: Alert by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+  /v1/setups:
+    get:
+      summary: List setups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { type: object }
+  /v1/webhooks:
+    post:
+      summary: Register webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: { type: string, format: uri }
+                events: { type: array, items: { type: string, enum: [entry, exit, cancel, add] } }
+      responses:
+        '202':
+          description: Accepted
+  /v1/kpi:
+    get:
+      summary: KPI aggregates
+      parameters:
+        - in: query
+          name: from
+          schema: { type: string, format: date }
+        - in: query
+          name: to
+          schema: { type: string, format: date }
+        - in: query
+          name: group_by
+          schema: { type: string, enum: [setup_id, symbol, tf] }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/KPI' }
+  /v1/metrics/derivatives:
+    get:
+      summary: Derivatives snapshot
+      parameters:
+        - in: query
+          name: symbol
+          schema: { type: string }
+        - in: query
+          name: window
+          schema: { type: string, example: '24h' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /v1/health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Alert:
+      type: object
+      properties:
+        id: { type: string }
+        ts: { type: string, format: date-time }
+        symbol: { type: string }
+        tf: { type: string }
+        setup_id: { type: string }
+        score: { type: number }
+        trigger:
+          type: object
+          properties:
+            type: { type: string, enum: [entry, add, exit, cancel] }
+            price: { type: number }
+            reason: { type: string }
+        filters_passed: { type: array, items: { type: string } }
+        metrics: { type: object, additionalProperties: true }
+        risk:
+          type: object
+          properties:
+            side: { type: string, enum: [long, short] }
+            entry: { type: number }
+            sl: { type: number }
+            tp: { type: array, items: { type: number } }
+            r_multiplies: { type: array, items: { type: number } }
+            size_hint_pct: { type: number }
+            invalidate_on: { type: array, items: { type: string } }
+        links: { type: object, additionalProperties: true }
+        latency_ms: { type: integer }
+    KPI:
+      type: object
+      properties:
+        precision: { type: number }
+        recall: { type: number }
+        winrate: { type: number }
+        avg_rr: { type: number }
+        expectancy_r: { type: number }
+        max_drawdown_pct: { type: number }
+        sharpe_like: { type: number }
+        avg_latency_ms: { type: number }
+        median_hold_time_min: { type: number }
+security:
+  - bearerAuth: []

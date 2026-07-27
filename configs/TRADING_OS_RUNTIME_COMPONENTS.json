@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "runtime_root_policy": "local_outside_google_drive",
+  "live_trading_locked": true,
+  "components": [
+    {
+      "id": "forward_paper",
+      "script": "ops/autostart/Run-ForwardPaperLoop.ps1",
+      "lock_path": "logs/forward_paper_feed/forward_scheduler_loop.lock.json",
+      "status_path": "logs/forward_paper_feed/forward_scheduler_loop_status.json",
+      "default_sleep_seconds": 14400,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "forward_runtime_watchdog",
+      "script": "ops/autostart/Run-ForwardRuntimeWatchdogLoop.ps1",
+      "lock_path": "logs/forward_paper_feed/forward_runtime_watchdog_loop.lock.json",
+      "status_path": "logs/forward_paper_feed/forward_runtime_watchdog_loop_status.json",
+      "default_sleep_seconds": 900,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "crowd_fade_observer",
+      "script": "ops/autostart/Run-CrowdFadeObserverLoop.ps1",
+      "lock_path": "logs/forward_paper_feed/crowd_fade_observer_loop.lock.json",
+      "status_path": "logs/forward_paper_feed/crowd_fade_observer_loop_status.json",
+      "default_sleep_seconds": 3600,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "daily_runtime_backup",
+      "script": "ops/local_runtime/Run-DailyRuntimeBackupLoop.ps1",
+      "lock_path": "logs/runtime_backup/daily_drive_backup_loop.lock.json",
+      "status_path": "logs/runtime_backup/daily_drive_backup_loop_status.json",
+      "default_sleep_seconds": 86400,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "cross_venue_data",
+      "script": "ops/autostart/Run-CrossVenueDataLoop.ps1",
+      "lock_path": "logs/cross_venue_data/cross_venue_data_loop.lock.json",
+      "status_path": "logs/cross_venue_data/cross_venue_data_loop_status.json",
+      "default_sleep_seconds": 86400,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "cross_venue_microstructure",
+      "script": "ops/autostart/Run-CrossVenueMicrostructureLoop.ps1",
+      "lock_path": "logs/cross_venue_microstructure/microstructure_loop.lock.json",
+      "status_path": "logs/cross_venue_microstructure/microstructure_loop_status.json",
+      "default_sleep_seconds": 15,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "cross_venue_microstructure_book",
+      "script": "ops/autostart/Run-CrossVenueMicrostructureBookLoop.ps1",
+      "lock_path": "logs/cross_venue_microstructure/microstructure_book_loop.lock.json",
+      "status_path": "logs/cross_venue_microstructure/microstructure_book_loop_status.json",
+      "default_sleep_seconds": 20,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "cross_venue_microstructure_watchdog",
+      "script": "ops/autostart/Run-CrossVenueMicrostructureWatchdogLoop.ps1",
+      "lock_path": "logs/cross_venue_microstructure/microstructure_watchdog_loop.lock.json",
+      "status_path": "logs/cross_venue_microstructure/microstructure_watchdog_loop_status.json",
+      "default_sleep_seconds": 60,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "binance_spot_perp_aggressor_flow",
+      "script": "ops/autostart/Run-BinanceSpotPerpAggressorFlowLoop.ps1",
+      "lock_path": "logs/binance_spot_perp_aggressor_flow/binance_spot_perp_aggressor_flow_loop.lock.json",
+      "status_path": "logs/binance_spot_perp_aggressor_flow/binance_spot_perp_aggressor_flow_loop_status.json",
+      "default_sleep_seconds": 10,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "microstructure_unblock_status",
+      "script": "ops/autostart/Run-MicrostructureUnblockStatusLoop.ps1",
+      "lock_path": "logs/cross_venue_microstructure/microstructure_unblock_status_loop.lock.json",
+      "status_path": "logs/cross_venue_microstructure/microstructure_unblock_status_loop_status.json",
+      "default_sleep_seconds": 900,
+      "start_owner": "runtime_wrapper",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "bybit_all_liquidation_watchdog",
+      "script": "ops/autostart/Run-BybitAllLiquidationWatchdogLoop.ps1",
+      "lock_path": "logs/liquidation_bybit/bybit_all_liquidation_watchdog_loop.lock.json",
+      "status_path": "logs/liquidation_bybit/bybit_all_liquidation_watchdog_loop_status.json",
+      "default_sleep_seconds": 300,
+      "start_owner": "runtime_wrapper",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "bybit_all_liquidation_collector",
+      "script": "ops/autostart/Run-BybitAllLiquidationCollectorLoop.ps1",
+      "lock_path": "logs/liquidation_bybit/bybit_all_liquidation_loop.lock.json",
+      "status_path": "logs/liquidation_bybit/bybit_all_liquidation_loop_status.json",
+      "default_sleep_seconds": 5,
+      "start_owner": "bybit_watchdog",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "liquidation_force_order_collector",
+      "script": "ops/autostart/Run-LiquidationForceOrderCollectorLoop.ps1",
+      "lock_path": "logs/liquidation_force_order/liquidation_force_order_loop.lock.json",
+      "status_path": "logs/liquidation_force_order/liquidation_force_order_loop_status.json",
+      "default_sleep_seconds": 5,
+      "start_owner": "runtime_wrapper",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "liquidation_force_order_watchdog",
+      "script": "ops/autostart/Run-LiquidationForceOrderWatchdogLoop.ps1",
+      "lock_path": "logs/liquidation_force_order/liquidation_force_order_watchdog_loop.lock.json",
+      "status_path": "logs/liquidation_force_order/liquidation_force_order_watchdog_loop_status.json",
+      "default_sleep_seconds": 600,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "liquidation_force_order_transport_continuity",
+      "script": "ops/autostart/Run-LiquidationForceOrderTransportContinuityLoop.ps1",
+      "lock_path": "logs/liquidation_force_order/liquidation_force_order_transport_continuity_loop.lock.json",
+      "status_path": "logs/liquidation_force_order/liquidation_force_order_transport_continuity_loop_status.json",
+      "default_sleep_seconds": 30,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "cross_stack_replication_transition",
+      "script": "ops/autostart/Run-CrossStackReplicationTransitionMonitorLoop.ps1",
+      "lock_path": "logs/cross_stack_replication/cross_stack_replication_transition_loop.lock.json",
+      "status_path": "logs/cross_stack_replication/cross_stack_replication_transition_loop_status.json",
+      "default_sleep_seconds": 900,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "real_edge_observer",
+      "script": "ops/autostart/Run-RealEdgeObserverPulseLoop.ps1",
+      "lock_path": "logs/real_edge_observer/real_edge_observer_pulse_loop.lock.json",
+      "status_path": "logs/real_edge_observer/real_edge_observer_pulse_loop_status.json",
+      "default_sleep_seconds": 900,
+      "start_owner": "runtime",
+      "trim_working_set": true,
+      "required": true
+    },
+    {
+      "id": "cex_dex_funding_collector",
+      "script": "ops/autostart/Run-CexDexFundingCollectorLoop.ps1",
+      "lock_path": "logs/cex_dex_funding/cex_dex_funding_collector_loop.lock.json",
+      "status_path": "logs/cex_dex_funding/cex_dex_funding_collector_loop_status.json",
+      "default_sleep_seconds": 60,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "cex_funding_freshness_watchdog",
+      "script": "ops/autostart/Run-CexFundingFreshnessWatchdogLoop.ps1",
+      "lock_path": "logs/cex_dex_funding/cex_dex_funding_freshness_watchdog_loop.lock.json",
+      "status_path": "logs/cex_dex_funding/cex_dex_funding_freshness_watchdog_loop_status.json",
+      "default_sleep_seconds": 60,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "bitunix_wo105_v3r4_forward",
+      "script": "ops/autostart/Run-BitunixWO105V3R4ForwardLoop.ps1",
+      "lock_path": "logs/bitunix_wo105_v3r4/bitunix_wo105_v3r4_forward_loop.lock.json",
+      "status_path": "logs/bitunix_wo105_v3r4/bitunix_wo105_v3r4_forward_loop_status.json",
+      "default_sleep_seconds": 1,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    },
+    {
+      "id": "post_fill_markout_forward",
+      "script": "ops/autostart/Run-PostFillMarkoutForwardLoop.ps1",
+      "lock_path": "logs/post_fill_markout_forward/post_fill_markout_forward_loop.lock.json",
+      "status_path": "logs/post_fill_markout_forward/post_fill_markout_forward_loop_status.json",
+      "default_sleep_seconds": 300,
+      "start_owner": "runtime",
+      "trim_working_set": false,
+      "required": true
+    }
+  ],
+  "shutdown_only_components": [
+    {
+      "id": "bitunix_wo105_v3r3_forward",
+      "script": "ops/autostart/Run-BitunixWO105V3R3ForwardLoop.ps1",
+      "lock_path": "logs/bitunix_wo105_v3r3/bitunix_wo105_v3r3_forward_loop.lock.json",
+      "status_path": "logs/bitunix_wo105_v3r3/bitunix_wo105_v3r3_forward_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "bitunix_wo105_v3r2_forward",
+      "script": "ops/autostart/Run-BitunixWO105V3R2ForwardLoop.ps1",
+      "lock_path": "logs/bitunix_wo105_v3r2/bitunix_wo105_v3r2_forward_loop.lock.json",
+      "status_path": "logs/bitunix_wo105_v3r2/bitunix_wo105_v3r2_forward_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "bitunix_wo105_v3r1_forward",
+      "script": "ops/autostart/Run-BitunixWO105V3R1ForwardLoop.ps1",
+      "lock_path": "logs/bitunix_wo105_v3r1/bitunix_wo105_v3r1_forward_loop.lock.json",
+      "status_path": "logs/bitunix_wo105_v3r1/bitunix_wo105_v3r1_forward_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "bitunix_wo105_v3_forward",
+      "script": "ops/autostart/Run-BitunixWO105V3ForwardLoop.ps1",
+      "lock_path": "logs/bitunix_wo105_v3/bitunix_wo105_v3_forward_loop.lock.json",
+      "status_path": "logs/bitunix_wo105_v3/bitunix_wo105_v3_forward_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "bybit_forward_gate_pulse",
+      "script": "ops/autostart/Run-BybitForwardGatePulseLoop.ps1",
+      "lock_path": "logs/liquidation_bybit/bybit_forward_gate_pulse_loop.lock.json",
+      "status_path": "logs/liquidation_bybit/bybit_forward_gate_pulse_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "liquidation_real_feed_status_refresh",
+      "script": "ops/autostart/Run-LiquidationRealFeedStatusRefreshLoop.ps1",
+      "lock_path": "logs/liquidation_real_feed/liquidation_real_feed_status_refresh_loop.lock.json",
+      "status_path": "logs/liquidation_real_feed/liquidation_real_feed_status_refresh_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "real_edge_autopilot_guard",
+      "script": "ops/autostart/Run-RealEdgeAutopilotGuardLoop.ps1",
+      "lock_path": "logs/real_edge/real_edge_autopilot_guard_loop.lock.json",
+      "status_path": "logs/real_edge/real_edge_autopilot_guard_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    },
+    {
+      "id": "strategy_mix_guarded_1h_forward_observer",
+      "script": "ops/autostart/Run-StrategyMixGuarded1HForwardObserverLoop.ps1",
+      "lock_path": "logs/forward_paper_feed/strategy_mix_guarded_1h_forward_observer_loop.lock.json",
+      "status_path": "logs/forward_paper_feed/strategy_mix_guarded_1h_forward_observer_loop_status.json",
+      "start_owner": "control_panel",
+      "required": false
+    }
+  ]
+}

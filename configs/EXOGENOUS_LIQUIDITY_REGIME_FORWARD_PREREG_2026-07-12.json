@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-EXOGENOUS-LIQUIDITY-REGIME-001",
+  "family": "EXOGENOUS_STABLECOIN_MACRO_LIQUIDITY_REGIME",
+  "status": "prospective_forward_preregistration_before_outcomes",
+  "registered_at": "2026-07-12T10:30:16Z",
+  "forward_floor_at": "2026-07-12T10:30:16Z",
+  "baseline_macro_proxy_date": "2026-07-08",
+  "claim": "BTC has positive signed seven-day expectancy after costs when forward-observed global stablecoin supply and the heuristic USD liquidity proxy agree in direction; disagreement should abstain.",
+  "source_contracts": {
+    "stablecoin": "HANDOFF/INCOMING/codex/20260711_stablecoin_supply_pulse_collector/CONTRACT.json",
+    "stablecoin_readiness": "HANDOFF/INCOMING/codex/20260712_stablecoin_supply_readiness_guard/CONTRACT.json",
+    "macro": "HANDOFF/INCOMING/codex/20260712_macro_usd_liquidity_collector/CONTRACT.json",
+    "macro_readiness": "HANDOFF/INCOMING/codex/20260712_macro_usd_liquidity_readiness_guard/CONTRACT.json"
+  },
+  "causal_alignment": {
+    "decision_unit": "first collector record for each new macro proxy date after the forward floor",
+    "stablecoin_pairing": "latest healthy stablecoin record collected no later than the macro record and no earlier than the forward floor",
+    "entry": "first BTCUSDT futures hourly open strictly after the macro collected_at timestamp",
+    "historical_rows_for_strategy_selection_allowed": false,
+    "pre_floor_records_allowed": false,
+    "lookahead_allowed": false
+  },
+  "fixed_rules": {
+    "stablecoin_metric": "aggregate_change_7d.change_bps",
+    "macro_metric": "changes.4w.change_bps",
+    "positive_threshold_bps": 0.0,
+    "negative_threshold_bps": 0.0,
+    "risk_on_side": "LONG",
+    "risk_off_side": "SHORT_RESEARCH_ONLY",
+    "disagreement_action": "ABSTAIN",
+    "maximum_weighted_depeg_deviation_bps": 20.0,
+    "maximum_assets_over_50bps": 0,
+    "primary_horizon_hours": 168,
+    "fee_and_slippage_bps_per_side": 10.0,
+    "registered_configurations": 1
+  },
+  "forward_gate": {
+    "minimum_resolved_aligned_events": 26,
+    "minimum_long_events": 8,
+    "minimum_short_events": 8,
+    "minimum_unique_macro_dates": 26,
+    "minimum_span_days": 182,
+    "minimum_mean_net_bps": 20.0,
+    "minimum_winrate_pct": 52.0,
+    "minimum_profit_factor": 1.1,
+    "minimum_side_mean_net_bps": 0.0,
+    "manual_review_before_any_paper_design": true,
+    "retuning_allowed": false
+  },
+  "source_freshness": {
+    "maximum_readiness_report_age_hours": 30.0,
+    "stablecoin_forward_dates_required_by_source_guard": 30,
+    "macro_forward_dates_required_by_source_guard": 13
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "research_only": true,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

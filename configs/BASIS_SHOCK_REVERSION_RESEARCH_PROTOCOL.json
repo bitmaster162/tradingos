@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "family": "BASIS_SHOCK_REVERSION_1H",
+  "status": "precommitted_before_results",
+  "hypothesis": {
+    "position": "long BTC spot and short equal BTC perpetual quantity",
+    "signal": "positive spot-perpetual basis crosses a prior-window z-score threshold",
+    "entry": "next hourly open",
+    "exit": "next hourly open after z-score convergence or bounded max hold",
+    "funding": "included as realized PnL; not used as an entry filter",
+    "distinct_from": "BASIS_FUNDING_CARRY"
+  },
+  "splits": {
+    "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+    "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+    "oos_start": "2025-01-01T00:00:00+00:00",
+    "oos_open_condition": "train and validation gates both pass"
+  },
+  "grid": {
+    "z_window_hours": [168, 336, 720],
+    "entry_z": [1.5, 2.0, 2.5],
+    "exit_z": [0.0, 0.5, 1.0],
+    "min_basis_bps": [5.0, 10.0, 20.0],
+    "max_hold_hours": [12, 24, 48, 72],
+    "total_configs": 324
+  },
+  "costs": {
+    "fee_bps_per_leg_side": 5.0,
+    "slippage_bps_per_leg_side": 2.0,
+    "stress_extra_fee_bps_per_leg_side": 3.0,
+    "capital_denominator": "spot notional plus perpetual notional"
+  },
+  "train_gate": {
+    "min_trades": 40,
+    "min_mean_net_bps": 5.0,
+    "min_positive_pct": 55.0,
+    "max_drawdown_bps": -200.0,
+    "min_positive_folds": 3,
+    "bootstrap_probability_mean_gt_zero": 0.95,
+    "cost_stress_positive": true
+  },
+  "validation_gate": {
+    "min_trades": 15,
+    "min_mean_net_bps": 0.0,
+    "min_positive_pct": 50.0,
+    "max_drawdown_bps": -100.0,
+    "min_positive_folds": 2,
+    "cost_stress_positive": true
+  },
+  "runtime_boundary": {
+    "research_only": true,
+    "changes_active_families": false,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "allow_orders": false,
+    "can_trade": false
+  }
+}

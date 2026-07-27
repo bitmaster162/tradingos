@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "name": "BTCUSDT Futures Trade Card Schema",
+  "runtime_boundary": {
+    "classification": "input_contract_and_pretrade_gate",
+    "can_trade": false,
+    "sends_orders": false,
+    "uses_private_credentials": false
+  },
+  "instrument": {
+    "symbol": "BTCUSDT",
+    "allowed_markets": [
+      "futures",
+      "perp",
+      "perpetual",
+      "usdm"
+    ],
+    "allowed_sides": [
+      "LONG",
+      "SHORT"
+    ],
+    "allowed_margin_modes": [
+      "isolated",
+      "cross"
+    ]
+  },
+  "required_fields": [
+    "symbol",
+    "market",
+    "tf",
+    "side",
+    "entry",
+    "stop",
+    "tp",
+    "risk_pct",
+    "leverage",
+    "margin_mode",
+    "mark_price",
+    "liquidation_price",
+    "fees_slippage_included",
+    "confirmations",
+    "stop_method"
+  ],
+  "optional_but_recommended_fields": [
+    "setup_id",
+    "scenario",
+    "invalidation",
+    "funding",
+    "m15_bias",
+    "bitmaster_bias",
+    "oi_context",
+    "spot_confirmation",
+    "liquidity_context",
+    "notes"
+  ],
+  "policy_links": {
+    "pretrade_guardian_config": "configs/PRETRADE_GUARDIAN_v1.json",
+    "max_leverage": 5.0,
+    "min_liquidation_buffer_pct": 3.0,
+    "min_rr": 1.5,
+    "strict_rr": 2.0,
+    "max_risk_pct": 1.0
+  },
+  "notes": [
+    "This schema is a pre-trade input contract, not an execution engine.",
+    "A valid schema does not grant trade permission.",
+    "The card must still pass Pretrade Guardian and manual review.",
+    "Live trading remains locked in the local control panel."
+  ]
+}

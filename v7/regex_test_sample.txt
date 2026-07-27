@@ -1,0 +1,6 @@
+Вход: stop-limit buy 110200, стоп 109200, цели 112000 / 114500 / 116000.
+Не входить за 5 минут до CPI и FOMC, особенно если funding уже перегрет.
+ICT: FVG + OB + BOS + CHOCH после SFP, ждать подтверждение, а не фантазию.
+Orderflow: CVD diverges, Delta flips, Footprint и DOM показывают absorption.
+Volume profile держит POC, а VAH/VAL дают контекст аукциона.
+VWAP reclaim подтверждён, но SMT bearish divergence BTC vs ETH не даёт догонять long.

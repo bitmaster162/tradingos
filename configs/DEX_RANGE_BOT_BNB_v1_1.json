@@ -1,0 +1,102 @@
+{
+  "name": "DEX Range Bot BNB v1.1",
+  "purpose": "BNB Chain spot range bot with intent-driven execution and BNB-specific routing assumptions.",
+  "environment": {
+    "mode": "paper",
+    "network": "bsc-mainnet",
+    "chain_family": "evm",
+    "aggregator": "paper",
+    "router_mode": "aggregator_then_pancake_fallback",
+    "wallet_address": "",
+    "rpc_url": "",
+    "state_path": "ops/dex_range_bot/state.bnb.json",
+    "journal_path": "ops/dex_range_bot/journal.bnb.jsonl",
+    "loop_interval_sec": 20
+  },
+  "market": {
+    "base_token": "TOKEN",
+    "quote_token": "USDT",
+    "route_token": "WBNB",
+    "prefer_direct_pool": false
+  },
+  "range": {
+    "lower": 0.85,
+    "upper": 1.15,
+    "level_count": 5,
+    "take_profit_pct": 0.025,
+    "kill_switch_break_pct": 0.03,
+    "recenter_manual_only": true
+  },
+  "execution": {
+    "trigger_model": "simulated_limit_via_quote_polling",
+    "approval_required": true,
+    "order_size_quote": 100,
+    "max_slippage_bps": 120,
+    "max_price_impact_bps": 150,
+    "max_gas_usd": 1.5,
+    "min_pool_liquidity_usd": 100000,
+    "deadline_sec": 90,
+    "sell_retry_bars": 2
+  },
+  "risk": {
+    "max_capital_at_work_pct": 20,
+    "max_open_lots": 5,
+    "pause_after_failed_exec_count": 3
+  },
+  "live_adapter_plan": {
+    "buy_flow": [
+      "read price",
+      "check range trigger",
+      "request quote",
+      "check execution filters",
+      "check quote-token allowance",
+      "approve if needed",
+      "send buy intent",
+      "persist tx result"
+    ],
+    "sell_flow": [
+      "check lot tp",
+      "request quote",
+      "check execution filters",
+      "check base-token allowance",
+      "approve if needed",
+      "send sell intent",
+      "close lot on success"
+    ],
+    "halt_conditions": [
+      "range break beyond kill switch",
+      "pool liquidity below minimum",
+      "repeated execution failures"
+    ]
+  },
+  "order_intent_model": {
+    "actions": [
+      "APPROVE_INTENT",
+      "BUY_LOT_INTENT",
+      "SELL_LOT_INTENT",
+      "PAUSE_RANGE",
+      "RECENTER_REQUIRED"
+    ],
+    "required_fields": [
+      "intent_id",
+      "ts",
+      "action",
+      "network",
+      "venue",
+      "base_token",
+      "quote_token",
+      "route_token",
+      "trigger_price",
+      "quoted_price",
+      "quote_amount",
+      "base_amount",
+      "max_slippage_bps",
+      "max_price_impact_bps",
+      "max_gas_usd",
+      "deadline_sec",
+      "lot_id",
+      "reason",
+      "status"
+    ]
+  }
+}

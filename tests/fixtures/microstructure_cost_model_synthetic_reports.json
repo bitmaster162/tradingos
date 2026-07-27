@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "evidence_id": "MICROSTRUCTURE_COST_MODEL_SYNTHETIC_REPORTS_2026-07-10",
+  "generated_at": "2026-07-10T16:14:23Z",
+  "source_drill": "docs/CROSS_VENUE_MICROSTRUCTURE_SEAL_PIPELINE_DRILL_2026-07-10.json",
+  "snapshot_id": "synthetic-sealed-20260710T161414Z",
+  "purpose": "Portable contract evidence only; synthetic results do not establish trading expectancy.",
+  "common": {
+    "splits": {
+      "method": "chronological_train_only_selection",
+      "train_fraction": 0.7,
+      "train_minutes": 364,
+      "validation_opened": false,
+      "oos_opened": false
+    },
+    "costs": {
+      "fee_and_slippage_bps_per_side": 10.0,
+      "stress_extra_bps_per_side": 5.0,
+      "round_trip_bps": 20.0,
+      "stress_round_trip_bps": 30.0,
+      "short_side": "research_symmetric_only_not_spot_execution_permission"
+    },
+    "runtime_boundary": {
+      "research_only": true,
+      "network_required": false,
+      "credentials_allowed": false,
+      "signals_allowed": false,
+      "observer_registration_allowed": false,
+      "orders_allowed": false,
+      "can_trade": false
+    },
+    "can_trade": false
+  },
+  "reports": [
+    {
+      "experiment": "microstructure_book_pressure_alignment",
+      "hypothesis_id": "HYP-MICROSTRUCTURE-BOOK-PRESSURE-004",
+      "family": "CROSS_VENUE_TOP_OF_BOOK_PRESSURE_ALIGNMENT",
+      "decision": "reject_no_train_qualified_microstructure_book_pressure_candidate",
+      "search": {"tested": 324, "train_qualified": 0},
+      "source_report_sha256": "b317f1d771055614943bce765b0da8b5bfb12af2c2c0098a711a7ee4dac103db"
+    },
+    {
+      "experiment": "microstructure_cross_venue_dislocation_reversion",
+      "hypothesis_id": "HYP-MICROSTRUCTURE-DISLOCATION-002",
+      "family": "BINANCE_COINBASE_RETURN_DISLOCATION_REVERSION",
+      "decision": "reject_no_train_qualified_microstructure_dislocation_candidate",
+      "search": {"tested": 162, "train_qualified": 0},
+      "source_report_sha256": "77da1d2004a20df20ce417246ce3030a1ac52870b23f992a9798d4f37ab12d4e"
+    },
+    {
+      "experiment": "microstructure_imbalance_continuation",
+      "hypothesis_id": "HYP-MICROSTRUCTURE-IMBALANCE-001",
+      "family": "BINANCE_AGGRESSOR_DELTA_COINBASE_CONFIRMATION",
+      "decision": "reject_no_train_qualified_microstructure_imbalance_candidate",
+      "search": {"tested": 216, "train_qualified": 0},
+      "source_report_sha256": "cd9291f7c91b72c45f5982deec13c114e3b2fd3aaefa1e7a69cdb24899bda5a4"
+    },
+    {
+      "experiment": "microstructure_liquidity_void_expansion",
+      "hypothesis_id": "HYP-MICROSTRUCTURE-LIQUIDITY-VOID-003",
+      "family": "TOP_OF_BOOK_THINNING_TRADE_BURST_EXPANSION",
+      "decision": "reject_no_train_qualified_microstructure_liquidity_void_candidate",
+      "search": {"tested": 72, "train_qualified": 0},
+      "source_report_sha256": "3432b5451a0df60c3aea92ac84dae0115d056660a7d14153c646bfbd5ec0eaa7"
+    }
+  ]
+}

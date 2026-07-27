@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "family": "SESSION_OPENING_RANGE_BREAKOUT_1H",
+  "enabled": false,
+  "status": "reject_no_train_qualified_session_candidate",
+  "selected_on_train": null,
+  "validation_gate": null,
+  "oos_opened": false,
+  "source_report": "docs/SESSION_OPENING_RANGE_NESTED_HOLDOUT_2026-07-02_NEXT.json",
+  "boundaries": {
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "allow_orders": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-SPOT-LEAD-001",
+  "family": "SPOT_LED_CONTINUATION_1H",
+  "status": "prospective_preregistration_before_code",
+  "source_note": {
+    "sources": [
+      "docs/STRATEGY_HYPOTHESIS_QUEUE_2026-06-09.json:H2_SPOT_PERP_CONFIRMATION",
+      "docs/FUSION_EDGE_SOURCE_AUDIT_2026-06-24.md"
+    ],
+    "use": "causal mechanism proposal only; not evidence of profitability"
+  },
+  "claim": "An extreme spot-led BTC return divergence predicts same-direction perpetual continuation over the next eight hours because derivatives have not yet fully incorporated spot demand or supply.",
+  "mechanism": {
+    "long": "positive spot return and extreme positive spot-minus-perpetual return z-score",
+    "short": "negative spot return and extreme negative spot-minus-perpetual return z-score",
+    "volume_filter": "optional confirmation requires spot relative-volume z-score to exceed perpetual relative-volume z-score",
+    "abstention": "no signal when spot return direction and divergence direction disagree"
+  },
+  "data": {
+    "snapshot_profile": "BTC_CORE_RESEARCH_V1",
+    "interval": "1h",
+    "symbol": "BTCUSDT",
+    "required": [
+      "spot 1h OHLCV",
+      "futures 1h OHLCV",
+      "actual funding settlements for position cashflow"
+    ]
+  },
+  "signal_timing": {
+    "features": "completed hourly bars only; rolling z-scores use prior observations and exclude the signal bar",
+    "signal_bar": "completed hour with directional spot return and extreme spot-minus-perpetual return divergence",
+    "entry": "next hourly perpetual open",
+    "max_hold_hours": 8,
+    "lookahead": false
+  },
+  "grid": {
+    "return_lookback_hours": [1, 3],
+    "divergence_z_window_hours": [168, 336],
+    "entry_abs_z": [1.5, 2.0, 2.5],
+    "side": ["LONG_SPOT_LEADS", "SHORT_SPOT_LEADS"],
+    "volume_filter": ["none", "spot_relative_volume_leads"],
+    "fixed_volume_z_window_hours": 168,
+    "stop_atr": [1.0, 1.5],
+    "fixed_take_atr": 2.0,
+    "fixed_max_hold_hours": 8,
+    "total_configurations": 96
+  },
+  "costs": {
+    "fee_and_slippage_bps_per_side": 7.0,
+    "stress_extra_bps_per_side": 10.0,
+    "actual_funding_during_position": true
+  },
+  "splits": {
+    "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+    "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+    "oos_start": "2025-01-01T00:00:00+00:00",
+    "oos_open_condition": "train and validation gates pass"
+  },
+  "train_gate": {
+    "min_trades": 80,
+    "min_expectancy_r": 0.08,
+    "min_positive_folds": 3,
+    "max_drawdown_r": -15.0,
+    "screening_bootstrap_probability": 0.95,
+    "cost_stress_positive": true
+  },
+  "validation_gate": {
+    "min_trades": 20,
+    "min_expectancy_r": 0.05,
+    "min_positive_folds": 2,
+    "max_drawdown_r": -8.0,
+    "cost_stress_positive": true
+  },
+  "multiple_testing": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "required_bootstrap_probability_if_candidate": 0.9994791666666667
+  },
+  "runtime_boundary": {
+    "research_only": true,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

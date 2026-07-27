@@ -1,0 +1,46 @@
+{
+  "contract_id": "liquidation_cross_venue_arrival_time_readiness_2026_07_13_v1",
+  "created_at": "2026-07-13T03:00:00Z",
+  "forward_floor_utc": "2026-07-13T03:00:00Z",
+  "status": "data_readiness_only",
+  "can_trade": false,
+  "purpose": "Establish whether Binance forceOrder and Bybit allLiquidation rows can be compared by local packet-reception time on one collector host before any cross-venue lead-lag hypothesis is preregistered.",
+  "sources": {
+    "binance": "data/live/liquidations/binance_force_order",
+    "bybit": "data/live/liquidations/bybit_all_liquidation"
+  },
+  "required_arrival_fields": [
+    "received_at_ns",
+    "received_at",
+    "collector_host",
+    "collector_pid",
+    "collector_clock_source",
+    "ingest_schema_version"
+  ],
+  "gates": {
+    "minimum_events_per_venue": 50,
+    "minimum_shared_symbols": 1,
+    "minimum_overlapping_receipt_span_seconds": 3600,
+    "required_schema_version": 2,
+    "required_clock_source": "time.time_ns",
+    "same_collector_host_required": true,
+    "minimum_arrival_field_ratio": 1.0,
+    "maximum_large_negative_delay_ratio": 0.0,
+    "large_negative_delay_ms": -2000.0,
+    "maximum_p99_delivery_delay_ms": 5000.0
+  },
+  "research_boundary": {
+    "candidate_only": "Bybit liquidation packet arrivals may precede Binance forceOrder arrivals during stressed conditions.",
+    "not_imported_from_source": [
+      "0.25 percent divergence threshold",
+      "claims that Binance hides 99 percent of liquidation events",
+      "claims of proved causal predictability",
+      "any entry, exit, sizing or execution rule"
+    ],
+    "no_hypothesis_test_before_readiness": true,
+    "no_retuning": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

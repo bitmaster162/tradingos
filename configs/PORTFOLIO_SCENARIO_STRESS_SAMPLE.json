@@ -1,0 +1,50 @@
+{
+  "as_of": "synthetic_example_only",
+  "snapshot_id": "synthetic_portfolio_stress_smoke_v1",
+  "snapshot_kind": "synthetic_example",
+  "generated_at": "2026-07-12T09:00:00Z",
+  "source_mode": "synthetic_example",
+  "synthetic": true,
+  "can_trade": false,
+  "starting_equity_usd": 100000.0,
+  "collateral": [
+    {
+      "asset": "BTC",
+      "market_value_usd": 25000.0,
+      "haircut_pct": 5.0
+    },
+    {
+      "asset": "ETH",
+      "market_value_usd": 15000.0,
+      "haircut_pct": 10.0
+    },
+    {
+      "asset": "USDT",
+      "market_value_usd": 40000.0,
+      "haircut_pct": 0.0
+    }
+  ],
+  "derivative_positions": [
+    {
+      "symbol": "BTCUSDT_LINEAR",
+      "underlying": "BTC",
+      "quantity": 0.5,
+      "mark_price_usd": 60000.0,
+      "contract_multiplier": 1.0,
+      "maintenance_rate_pct": 0.5
+    },
+    {
+      "symbol": "ETHUSDT_LINEAR",
+      "underlying": "ETH",
+      "quantity": -5.0,
+      "mark_price_usd": 3000.0,
+      "contract_multiplier": 1.0,
+      "maintenance_rate_pct": 0.6
+    }
+  ],
+  "runtime_boundary": {
+    "synthetic_example": true,
+    "private_account_snapshot": false,
+    "can_trade": false
+  }
+}

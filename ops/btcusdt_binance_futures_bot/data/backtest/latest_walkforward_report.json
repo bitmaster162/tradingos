@@ -1,0 +1,365 @@
+{
+  "source": "walkforward_report",
+  "symbol": "BTCUSDT",
+  "strategy_kind": "breakout",
+  "mode": "mark_only",
+  "data_dir": "data",
+  "filters_loaded": true,
+  "train_days": 2,
+  "test_days": 1,
+  "step_days": 1,
+  "anchored_train": false,
+  "candidate_grid": {
+    "strategy_kinds": [
+      "breakout"
+    ],
+    "lookbacks": [
+      3,
+      5
+    ],
+    "hold_seconds": [
+      60,
+      300
+    ],
+    "min_flow_imbalances": [
+      "0"
+    ],
+    "min_crowding_scores": [
+      null
+    ],
+    "min_depth_imbalances": [
+      null
+    ],
+    "max_book_spread_bps_values": [
+      null
+    ],
+    "min_expected_fill_ratios": [
+      "0.35"
+    ],
+    "reversion_entry_atr_multiples": [
+      "1.25"
+    ],
+    "reversion_max_atr_fractions": [
+      "0.0040"
+    ],
+    "reversion_min_flow_flips": [
+      "0"
+    ]
+  },
+  "summary": {
+    "available_day_count": 7,
+    "fold_count": 2,
+    "skipped_fold_count": 2,
+    "candidate_count": 4,
+    "total_test_net_pnl": "0",
+    "total_test_gross_pnl": "0",
+    "total_test_fee_pnl": "0",
+    "total_test_funding_pnl": "0",
+    "total_test_trade_count": 0,
+    "average_test_win_rate": null,
+    "average_test_entry_timeout_rate": null,
+    "average_test_exit_depth_sweep_bps": null,
+    "average_test_entry_fill_latency_seconds": null,
+    "selection_turnover_ratio": null,
+    "selected_candidate_counts": {},
+    "selected_parameter_value_counts": {}
+  },
+  "score_config": {
+    "max_drawdown_penalty": "0.50",
+    "entry_timeout_rate_penalty": "25",
+    "exit_depth_sweep_bps_penalty": "2",
+    "min_trade_count": 1
+  },
+  "walkforward": {
+    "symbol": "BTCUSDT",
+    "mode": "mark_only",
+    "available_dates": [
+      "2026-04-01",
+      "2026-04-02",
+      "2026-04-03",
+      "2026-04-04",
+      "2026-04-05",
+      "2026-04-06",
+      "2026-04-07"
+    ],
+    "fold_count": 2,
+    "candidate_count": 4,
+    "score_config": {
+      "max_drawdown_penalty": "0.50",
+      "entry_timeout_rate_penalty": "25",
+      "exit_depth_sweep_bps_penalty": "2",
+      "min_trade_count": 1
+    },
+    "folds": [
+      {
+        "window": {
+          "fold_index": 1,
+          "train_dates": [
+            "2026-04-01",
+            "2026-04-02"
+          ],
+          "test_dates": [
+            "2026-04-03"
+          ]
+        },
+        "selected_candidate": null,
+        "selected_candidate_label": "",
+        "train_candidate_scores": [
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 3,
+              "max_hold_seconds": 60,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=3|hold=60|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          },
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 3,
+              "max_hold_seconds": 300,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=3|hold=300|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          },
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 5,
+              "max_hold_seconds": 60,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=5|hold=60|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          },
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 5,
+              "max_hold_seconds": 300,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=5|hold=300|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          }
+        ],
+        "train_summary": null,
+        "test_summary": null,
+        "skipped": true,
+        "skip_reason": "no_eligible_candidates"
+      },
+      {
+        "window": {
+          "fold_index": 2,
+          "train_dates": [
+            "2026-04-02",
+            "2026-04-03"
+          ],
+          "test_dates": [
+            "2026-04-04"
+          ]
+        },
+        "selected_candidate": null,
+        "selected_candidate_label": "",
+        "train_candidate_scores": [
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 3,
+              "max_hold_seconds": 60,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=3|hold=60|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          },
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 3,
+              "max_hold_seconds": 300,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=3|hold=300|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          },
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 5,
+              "max_hold_seconds": 60,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=5|hold=60|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          },
+          {
+            "candidate": {
+              "breakout_lookback_ticks": 5,
+              "max_hold_seconds": 300,
+              "strategy_kind": "breakout",
+              "min_flow_imbalance": "0",
+              "min_crowding_score": null,
+              "min_depth_imbalance": null,
+              "max_book_spread_bps": null,
+              "min_expected_fill_ratio": "0.35",
+              "reversion_entry_atr_multiple": null,
+              "reversion_max_atr_fraction": null,
+              "reversion_min_flow_flip": null
+            },
+            "candidate_label": "strategy=breakout|lb=5|hold=300|flow=0|crowd=none|depth=none|spread=none|fill=0.35",
+            "score": "-1E+18",
+            "eligible": false,
+            "reason": "insufficient_trade_count",
+            "trade_count": 0,
+            "net_pnl": "0",
+            "max_drawdown": "0",
+            "entry_timeout_rate": null,
+            "average_exit_depth_sweep_bps": null,
+            "score_components": {
+              "trade_count": "0"
+            }
+          }
+        ],
+        "train_summary": null,
+        "test_summary": null,
+        "skipped": true,
+        "skip_reason": "no_eligible_candidates"
+      }
+    ],
+    "total_test_net_pnl": "0",
+    "total_test_gross_pnl": "0",
+    "total_test_fee_pnl": "0",
+    "total_test_funding_pnl": "0",
+    "total_test_trade_count": 0,
+    "average_test_win_rate": null,
+    "average_test_entry_timeout_rate": null,
+    "average_test_exit_depth_sweep_bps": null,
+    "average_test_entry_fill_latency_seconds": null,
+    "selection_turnover_ratio": null,
+    "selected_candidate_counts": {},
+    "selected_parameter_value_counts": {},
+    "skipped_fold_count": 2
+  }
+}

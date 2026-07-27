@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-FUNDING-EVENT-001",
+  "family": "FUNDING_SETTLEMENT_REVERSION_1H",
+  "status": "prospective_preregistration_before_code",
+  "source_note": {
+    "source": "C:/Users/coins/Downloads/Fusion - как найти торговый эдж- а на крипте  на - Jun 24 12.17am.md",
+    "source_sha256": "5F901D2B4E9477E8BF99EB339021989FAEA42DEE5455397926C886D4F18B85F8",
+    "use": "methodological prompt and structural-mechanism idea only; not evidence of profitability"
+  },
+  "claim": "After an extreme realized funding settlement, the crowded perpetual move mean-reverts over the next eight hours when spot does not confirm and OI context is aligned.",
+  "mechanism": {
+    "positive_funding": "crowded longs pay shorts; test short mean-reversion after settlement",
+    "negative_funding": "crowded shorts pay longs; test long mean-reversion after settlement",
+    "spot_filter": "perpetual displacement without equal spot confirmation is treated as weaker",
+    "oi_filter": "all signals require absolute one-hour OI change of at least 0.5% to confirm active leveraged positioning"
+  },
+  "data": {
+    "snapshot_profile": "BTC_CORE_RESEARCH_V1",
+    "interval": "1h",
+    "symbol": "BTCUSDT",
+    "required": [
+      "futures 1h OHLCV",
+      "spot 1h OHLCV",
+      "aligned 1h OI",
+      "actual funding settlements"
+    ]
+  },
+  "signal_timing": {
+    "funding_value": "actual settlement known at event timestamp",
+    "signal_bar": "hour containing the settlement",
+    "entry": "next hourly open",
+    "max_hold_hours": 8,
+    "lookahead": false
+  },
+  "grid": {
+    "funding_z_window_events": [90, 180],
+    "entry_abs_z": [1.5, 2.0, 2.5],
+    "side": ["LONG_AFTER_NEGATIVE", "SHORT_AFTER_POSITIVE"],
+    "spot_filter": ["none", "perp_excess_move"],
+    "perp_excess_move_rule": "SHORT requires spot_return_minus_perp_return < 0; LONG requires > 0",
+    "fixed_min_abs_oi_change_pct": 0.5,
+    "stop_atr": [1.0, 1.5],
+    "take_atr": [1.5, 2.5],
+    "fixed_max_hold_hours": 8,
+    "total_configurations": 96
+  },
+  "costs": {
+    "fee_and_slippage_bps_per_side": 7.0,
+    "stress_extra_bps_per_side": 10.0,
+    "actual_funding_during_position": true
+  },
+  "splits": {
+    "train_end_exclusive": "2024-01-01T00:00:00+00:00",
+    "validation_end_exclusive": "2025-01-01T00:00:00+00:00",
+    "oos_start": "2025-01-01T00:00:00+00:00",
+    "oos_open_condition": "train and validation gates pass"
+  },
+  "train_gate": {
+    "min_trades": 80,
+    "min_expectancy_r": 0.08,
+    "min_positive_folds": 3,
+    "max_drawdown_r": -15.0,
+    "screening_bootstrap_probability": 0.95,
+    "cost_stress_positive": true
+  },
+  "validation_gate": {
+    "min_trades": 20,
+    "min_expectancy_r": 0.05,
+    "min_positive_folds": 2,
+    "max_drawdown_r": -8.0,
+    "cost_stress_positive": true
+  },
+  "multiple_testing": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "required_bootstrap_probability_if_candidate": 0.9994791666666667
+  },
+  "runtime_boundary": {
+    "research_only": true,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

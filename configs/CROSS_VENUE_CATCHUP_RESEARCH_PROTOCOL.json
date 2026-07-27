@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-CROSS-VENUE-CATCHUP-001",
+  "family": "COINBASE_TO_BINANCE_CATCHUP_1M",
+  "status": "prospective_preregistration_before_code",
+  "claim": "A sufficiently large positive Coinbase BTC-USD return that leads Binance BTCUSDT predicts a tradeable long-only Binance spot catch-up after next-minute entry.",
+  "data": {
+    "snapshot_profile": "BTC_CROSS_VENUE_1M_V1",
+    "snapshot_id": "20260624T072240Z-d26a7c55961d",
+    "dataset_sha256": "d26a7c55961d2780bfbe593e4a9b5c92fb38ba76b9b64bb7c148856cd9a26f6f",
+    "interval": "1m",
+    "required": [
+      "Binance BTCUSDT spot OHLCV",
+      "Coinbase BTC-USD spot OHLCV",
+      "timestamp-aligned cross-venue returns"
+    ],
+    "quote_policy": "USD/USDT price-level spread is forbidden; signal uses returns only"
+  },
+  "signal_timing": {
+    "features": "completed 1m bars only; rolling divergence z-score excludes the signal bar",
+    "leader": "Coinbase positive return",
+    "follower": "Binance spot",
+    "entry": "next Binance minute open",
+    "exit": "fixed Binance minute close after the configured hold",
+    "overlap": "one position at a time",
+    "lookahead": false
+  },
+  "grid": {
+    "return_lookback_minutes": [1, 2, 5],
+    "divergence_z_window_minutes": [360, 1440],
+    "entry_z": [2.0, 2.5, 3.0],
+    "min_coinbase_return_bps": [5.0, 10.0],
+    "hold_minutes": [1, 2, 5],
+    "fixed_min_rolling_window_coverage": 0.95,
+    "exact_timestamp_lookback_required": true,
+    "side": "LONG_ONLY",
+    "total_configurations": 108
+  },
+  "costs": {
+    "fee_and_slippage_bps_per_side": 10.0,
+    "stress_extra_bps_per_side": 5.0,
+    "borrow": "not_applicable_long_only",
+    "funding": "not_applicable_spot"
+  },
+  "splits": {
+    "train_end_exclusive": "2026-06-08T00:00:00+00:00",
+    "validation_end_exclusive": "2026-06-15T00:00:00+00:00",
+    "oos_start": "2026-06-15T00:00:00+00:00",
+    "oos_open_condition": "train and validation gates pass"
+  },
+  "train_gate": {
+    "min_trades": 50,
+    "min_mean_net_bps": 2.0,
+    "min_positive_folds": 3,
+    "max_drawdown_bps": -500.0,
+    "screening_bootstrap_probability": 0.95,
+    "cost_stress_positive": true
+  },
+  "validation_gate": {
+    "min_trades": 20,
+    "min_mean_net_bps": 0.0,
+    "min_positive_folds": 2,
+    "max_drawdown_bps": -300.0,
+    "cost_stress_positive": true
+  },
+  "multiple_testing": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "required_bootstrap_probability_if_candidate": 0.999537037037037
+  },
+  "runtime_boundary": {
+    "research_only": true,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

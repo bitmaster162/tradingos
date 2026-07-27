@@ -1,0 +1,154 @@
+{
+  "schema_version": 2,
+  "lock_id": "bybit_canonical_long_liquidation_flush_reversal_h8_2026_07_13_v3_closed_bars",
+  "status": "prospective_forward_lock_before_outcome_review",
+  "created_at": "2026-07-13T08:12:14Z",
+  "forward_start_at": "2026-07-13T11:00:00Z",
+  "preregistration": {
+    "path": "configs/BYBIT_LIQUIDATION_CANONICAL_FORWARD_PREREG_V3_2026-07-13.json",
+    "sha256": "b9af0bc6ad0c60a0cff70afd5605e0fa17bd6eeb2cb4d79061324ad917abfc0b"
+  },
+  "observer": {
+    "path": "tools/bybit_liquidation_canonical_forward_observer_v3.py",
+    "sha256": "b516fe3bae3c2f9c460b586cdbf6775b259c6f54a71d984bddde16d8a61d866f"
+  },
+  "dependencies": [
+    {
+      "path": "tools/bybit_liquidation_canonical_forward_observer.py",
+      "sha256": "5facfe057503d02543df9d8bf0133e73a56adee378e605dab29d73818d5a32f8"
+    },
+    {
+      "path": "tools/bybit_all_liquidation_context_intake_v2.py",
+      "sha256": "f81290ba1bddd5c09a7cc4fb7df4014b1781c7d4c54a3f942cbb7401439edeb5"
+    },
+    {
+      "path": "tools/bybit_all_liquidation_context_intake.py",
+      "sha256": "8493a8b48e7f4033d15a861a5dceae3744b6061f472a0ee201b50b4bc6e57abb"
+    },
+    {
+      "path": "tools/force_order_liquidation_event_study.py",
+      "sha256": "057be4ae0091ee999407089b8355c22d0121f49d288d6c2608a21b5e1440078d"
+    },
+    {
+      "path": "tools/liquidation_side_semantics.py",
+      "sha256": "8f5045d9d12f8feef256282493bc45e81af48f48189d50e498c18f79fbd72b50"
+    },
+    {
+      "path": "tools/bybit_liquidation_canonical_input_quality.py",
+      "sha256": "bb216343c5738cee85acbaeb65299322b93a9b24fcfa73a03de2171849cf876b"
+    },
+    {
+      "path": "tools/liquidity_sweep_detector.py",
+      "sha256": "58a74b690f15247274c1e1098263b29f7be715918fb106136a3d068486758f4c"
+    },
+    {
+      "path": "tools/binance_rest_kline_tail_gap_filler.py",
+      "sha256": "08e7cc2d5ab6fed651cc6b081de92b38994b5630f71497b8852f90890fbcaa90"
+    }
+  ],
+  "discovery_evidence": {
+    "path": "docs/BYBIT_LIQUIDATION_CANONICAL_DISCOVERY_AUDIT_2026-07-13.json",
+    "sha256": "acf6aab9fc09ed2ba55d749faf50e8c78049d561a9229066e3eb8ae6f31aa0f1"
+  },
+  "supersedes": {
+    "prereg_id": "bybit_canonical_long_liquidation_flush_reversal_h8_2026_07_13_v2",
+    "reason": "V2 did not filter the shared OHLCV cache to fully closed exit candles.",
+    "v2_forward_observations_admitted": false,
+    "v2_terminal_metrics_admitted": false
+  },
+  "sources": {
+    "liquidations": "data/live/liquidations/bybit_all_liquidation",
+    "bars_root": "data/cache/binance_spot_perp_extended/futures"
+  },
+  "candidate": {
+    "candidate_id": "long_liquidation_flush__reversal__h8",
+    "context": "long_liquidation_flush",
+    "direction": "reversal",
+    "side": "LONG",
+    "interval": "1h",
+    "horizon_bars": 8,
+    "entry_model": "next_bar_open_after_event_bar_close",
+    "exit_model": "event_bar_plus_8_fully_closed_close",
+    "dominance_threshold": 0.65,
+    "base_cost_bps": 7.0,
+    "stress_cost_bps": 12.0,
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "DOGEUSDT",
+      "ADAUSDT",
+      "AVAXUSDT",
+      "LINKUSDT",
+      "LTCUSDT"
+    ]
+  },
+  "bar_contract": {
+    "fully_closed_bars_only": true,
+    "current_interval_bar_allowed": false,
+    "bar_closed_when": "bar_open_time_plus_interval_lte_observer_now",
+    "public_tail_refresh_required": true,
+    "public_tail_refresh_market": "binance_futures",
+    "maximum_closed_bar_lag_intervals": 1
+  },
+  "input_quality_gate": {
+    "maximum_json_parse_errors": 0,
+    "maximum_schema_errors": 0,
+    "maximum_duplicate_event_identities": 0,
+    "maximum_partition_mismatches": 0,
+    "maximum_nonmonotonic_files": 0,
+    "maximum_negative_receipt_lags": 0,
+    "required_bar_symbols": 10,
+    "maximum_closed_bar_lag_intervals": 1
+  },
+  "sample_gate": {
+    "minimum_resolved_events": 100,
+    "minimum_utc_days": 5,
+    "minimum_symbols": 5,
+    "minimum_independent_4h_blocks": 20,
+    "maximum_single_symbol_share": 0.5,
+    "interim_outcomes_visible": false
+  },
+  "terminal_outcome_gate": {
+    "minimum_mean_net_bps": 15.0,
+    "minimum_winrate_net_positive_pct": 55.0,
+    "minimum_stress_mean_net_bps": 0.0,
+    "minimum_positive_symbols": 4,
+    "single_terminal_evaluation": true,
+    "terminal_failure_policy": "tombstone_without_reverse_or_retune",
+    "terminal_pass_policy": "manual_shadow_design_review_only"
+  },
+  "side_contract": {
+    "schema_version": 1,
+    "source": "bybit_all_liquidation",
+    "raw_side_mapping": {
+      "BUY": "LONG",
+      "SELL": "SHORT"
+    },
+    "old_v1_context_rows_allowed": false,
+    "reference": "https://bybit-exchange.github.io/docs/v5/websocket/public/all-liquidation"
+  },
+  "research_boundary": {
+    "forward_only": true,
+    "pre_floor_events_allowed": false,
+    "interim_outcome_review_allowed": false,
+    "reverse_hypothesis_on_failure_forbidden": true,
+    "retuning_forbidden": true,
+    "old_v1_outcomes_admitted": false,
+    "v2_observations_admitted": false,
+    "v2_terminal_metrics_admitted": false
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  },
+  "can_trade": false,
+  "orders_allowed": false
+}

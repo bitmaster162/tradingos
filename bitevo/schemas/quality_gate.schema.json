@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Quality Gate",
+  "type": "object",
+  "properties": {
+    "q_min": {
+      "type": "number"
+    },
+    "drift_max_pct": {
+      "type": "number"
+    },
+    "dupes_max_pct": {
+      "type": "number"
+    },
+    "sandbox": {
+      "type": "boolean"
+    },
+    "idempotency": {
+      "type": "boolean"
+    }
+  }
+}

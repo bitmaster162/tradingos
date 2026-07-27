@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "family": "SHORT_CONTINUATION_1H",
+  "status": "historically_rejected_2026-06-23",
+  "enabled": false,
+  "observer_allowed": false,
+  "paper_allowed": false,
+  "live_allowed": false,
+  "can_trade": false,
+  "selection_policy": {
+    "reuse_opened_oos_for_retuning": false,
+    "auto_select_replacement_from_same_search": false,
+    "required_next_research": "new_independent_hypothesis_and_new_unopened_holdout"
+  },
+  "evidence": {
+    "source_report": "docs/SHORT_CONTINUATION_NESTED_HOLDOUT_2026-06-23.json",
+    "method": "train_only_selection_then_untouched_calendar_oos",
+    "tested_configs": 96,
+    "train_qualified": 0,
+    "oos_opened": false,
+    "decision": "reject_no_train_candidate",
+    "best_train_strategy": "short_cont_1h_near_low_trend-1_oi0.1_sl1_tp2_h12",
+    "best_train_trades": 464,
+    "best_train_winrate_pct": 31.25,
+    "best_train_expectancy_r": -0.254802,
+    "best_train_cost_stress_expectancy_r": -0.479373
+  },
+  "reason": "The family failed on a large pre-2025 train sample. Its negative expectancy is structural, not a small-sample ambiguity."
+}

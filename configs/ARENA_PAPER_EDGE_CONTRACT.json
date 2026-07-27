@@ -1,0 +1,231 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-06-30T00:00:00Z",
+  "purpose": "Local contract for Claude/Arena handoff intake. This is a paper-only integration boundary, not a live trading permission.",
+  "paper_only": true,
+  "can_trade": false,
+  "source_handoffs": [
+    {
+      "name": "CODEX_EDGE_TASKS_FROM_US.md",
+      "kind": "edge_task_brief",
+      "provenance": "external_handoff_redacted"
+    },
+    {
+      "name": "CODEX_ARENA_ONBOARDING.md",
+      "kind": "paper_arena_contract",
+      "provenance": "external_handoff_redacted"
+    }
+  ],
+  "execution_boundary": {
+    "real_orders_allowed": false,
+    "remote_deploy_allowed_by_this_repo": false,
+    "live_credentials_required": false,
+    "hardcoded_credentials_allowed": false,
+    "paper_tables_only": true,
+    "notes": [
+      "No remote Arena deployment is implied by this local repository contract.",
+      "Any Arena runner must remain paper-only and pass the shared risk gate.",
+      "No strategy can set can_trade=true from this contract."
+    ]
+  },
+  "risk_gate": {
+    "allowed_actions": ["buy", "sell", "hold"],
+    "max_size": 0.5,
+    "decision_log_required": true,
+    "deny_unknown_action": true,
+    "deny_size_over_cap": true,
+    "deny_missing_rationale": true,
+    "deny_real_order_route": true
+  },
+  "validation_gates": {
+    "methodology": "codex_strict_nested_holdout_then_forward_paper",
+    "min_train_trades": 40,
+    "min_positive_folds": 3,
+    "screening_bootstrap_probability": 0.95,
+    "validation_before_oos": true,
+    "oos_before_paper": true,
+    "selection_frozen_before_validation": true,
+    "no_retune_after_validation": true,
+    "costs_required": true,
+    "can_trade_flag_required": true
+  },
+  "arena_tables_contract": {
+    "basis_input_table": {
+      "table": "arena_basis",
+      "status": "not_local_runtime",
+      "required_columns": [
+        "ts",
+        "symbol",
+        "spot_mid",
+        "perp_mid",
+        "basis_bps",
+        "funding_bps",
+        "source",
+        "created_at"
+      ],
+      "notes": "The local repo can specify and validate this schema, but it does not prove the remote Arena collector exists."
+    },
+    "paper_edge_tables": [
+      {
+        "table_pattern": "arena_<edge>",
+        "purpose": "paper trade/event ledger"
+      },
+      {
+        "table_pattern": "arena_<edge>_pos",
+        "purpose": "paper position state"
+      }
+    ]
+  },
+  "edge_tasks": [
+    {
+      "task_id": "basis_shock_larger_data",
+      "claude_priority": 1,
+      "claim": "Basis-shock reversion may become testable with larger multi-symbol Binance Vision data.",
+      "current_codex_status": "retested_multi_symbol_validation_gate_failed_oos_unopened",
+      "existing_local_artifacts": [
+        "tools/basis_shock_reversion_nested_holdout.py",
+        "tools/basis_shock_reversion_multi_symbol_nested_holdout.py",
+        "docs/BASIS_SHOCK_REVERSION_NESTED_HOLDOUT_2026-06-29.json",
+        "docs/BASIS_SHOCK_REVERSION_NESTED_HOLDOUT_2026-06-29.md",
+        "docs/BASIS_SHOCK_REVERSION_MULTI_SYMBOL_NESTED_HOLDOUT_2026-06-30.json",
+        "docs/BASIS_SHOCK_REVERSION_MULTI_SYMBOL_NESTED_HOLDOUT_2026-06-30.md"
+      ],
+      "blocking_reason": "Multi-symbol data fixed train sample size and produced train-qualified candidates, but the selected candidate failed validation on min_trades and cost_stress_positive; OOS remained unopened.",
+      "next_safe_action": "Reject this specific mechanism for promotion; research only genuinely new precommitted basis mechanisms without reusing opened validation for retuning.",
+      "integration_status": "research_rejected_validation_failed",
+      "can_trade": false
+    },
+    {
+      "task_id": "basis_dispersion_reversion_preregistered",
+      "claude_priority": 1,
+      "claim": "A genuinely new cross-sectional basis dispersion mechanism may work better than absolute basis shock/carry rules.",
+      "current_codex_status": "preregistered_and_rejected_train_gate_failed_validation_oos_unopened",
+      "existing_local_artifacts": [
+        "configs/BASIS_DISPERSION_REVERSION_RESEARCH_LOCK.json",
+        "tools/basis_dispersion_reversion_multi_symbol_nested_holdout.py",
+        "docs/HYPOTHESIS_PREREGISTRATION_RECEIPT_BASIS_DISPERSION_2026-06-30.json",
+        "docs/BASIS_DISPERSION_REVERSION_MULTI_SYMBOL_NESTED_HOLDOUT_2026-06-30.json",
+        "docs/BASIS_DISPERSION_REVERSION_MULTI_SYMBOL_NESTED_HOLDOUT_2026-06-30.md"
+      ],
+      "blocking_reason": "The preregistered grid tested 324 configs; zero configs passed train gate. Best train config had negative mean net bps and poor positive rate, so validation and OOS stayed unopened.",
+      "next_safe_action": "Reject this specific dispersion mechanism. Do not retune it on closed validation; only continue with materially different preregistered basis mechanisms.",
+      "integration_status": "research_rejected_train_failed",
+      "can_trade": false
+    },
+    {
+      "task_id": "crowd_fade_1h",
+      "claude_priority": 2,
+      "claim": "Long/short-ratio crowd fade may be useful if it passes strict validation.",
+      "current_codex_status": "rejected_no_train_candidate_on_current_run",
+      "existing_local_artifacts": [
+        "tools/crowd_fade_nested_holdout.py",
+        "tools/crowd_fade_positioning_shadow_observer.py",
+        "docs/CROWD_FADE_NESTED_HOLDOUT_2026-06-23.md"
+      ],
+      "blocking_reason": "Nested holdout found zero train-qualified variants; shadow observer is not trade permission.",
+      "next_safe_action": "Only retest after materially improved or extended positioning data; keep observer/paper boundaries.",
+      "integration_status": "research_only",
+      "can_trade": false
+    },
+    {
+      "task_id": "funding_carry_multi_symbol",
+      "claude_priority": 3,
+      "claim": "A multi-symbol carry basket may have enough basis/funding events where BTC-only did not.",
+      "current_codex_status": "retested_multi_symbol_validation_no_events_oos_unopened",
+      "existing_local_artifacts": [
+        "tools/basis_funding_carry_nested_holdout.py",
+        "tools/basis_funding_carry_multi_symbol_nested_holdout.py",
+        "docs/BASIS_FUNDING_CARRY_NESTED_HOLDOUT_2026-06-29.json",
+        "docs/BASIS_FUNDING_CARRY_NESTED_HOLDOUT_2026-06-29.md",
+        "docs/BASIS_FUNDING_CARRY_MULTI_SYMBOL_NESTED_HOLDOUT_2026-06-30.json",
+        "docs/BASIS_FUNDING_CARRY_MULTI_SYMBOL_NESTED_HOLDOUT_2026-06-30.md"
+      ],
+      "blocking_reason": "Multi-symbol train produced qualified candidates, but the selected carry rule had zero validation trades; OOS remained unopened.",
+      "next_safe_action": "Do not port selected carry configs to Arena. If continuing, preregister a different carry mechanism or less brittle regime definition before testing.",
+      "integration_status": "research_rejected_validation_failed",
+      "can_trade": false
+    },
+    {
+      "task_id": "edge_forward_4h",
+      "claude_priority": 4,
+      "claim": "Existing 4H observer should run to a resolved validation conclusion.",
+      "current_codex_status": "observer_only_waiting_forward_outcomes",
+      "existing_local_artifacts": [
+        "tools/strategy_mix_forward_scheduler.py",
+        "tools/edge_forward_promotion_gate.py",
+        "docs/STRATEGY_RESEARCH_FRONTIER_MATRIX_2026-06-29.json"
+      ],
+      "blocking_reason": "Forward outcomes are not sufficient for promotion.",
+      "next_safe_action": "Continue observer, accumulate independent resolved outcomes, and let promotion gate decide.",
+      "integration_status": "observer_only",
+      "can_trade": false
+    },
+    {
+      "task_id": "liquidation_cascade_rebound",
+      "claude_priority": 5,
+      "claim": "Liquidation-cascade rebound should be validated on real liquidation feed rather than order-book proxy.",
+      "current_codex_status": "real_feed_contract_added_archive_discovery_failed_forward_collector_smoked",
+      "existing_local_artifacts": [
+        "tools/edge_liquidation_context_shadow_observer.py",
+        "tools/edge_liquidation_score_evidence_gate.py",
+        "tools/binance_vision_liquidation_feed_discovery.py",
+        "tools/binance_force_order_real_feed_collector.py",
+        "tools/liquidation_force_order_data_quality.py",
+        "configs/LIQUIDATION_REAL_FEED_CONTRACT.json",
+        "docs/EDGE_LIQUIDATION_SCORE_EVIDENCE_GATE_2026-06-23.json",
+        "docs/LIQUIDATION_REAL_FEED_DISCOVERY_2026-06-30.json",
+        "docs/LIQUIDATION_FORCE_ORDER_FORWARD_COLLECTOR_LIVE_SMOKE_2026-06-30.json",
+        "docs/LIQUIDATION_FORCE_ORDER_DATA_QUALITY_2026-06-30.json"
+      ],
+      "blocking_reason": "Binance Vision archive candidates returned no event files in discovery. Forward websocket collector is monitored by a data-quality guard and currently has zero event-level rows; strategy consumer remains disabled until real rows accumulate.",
+      "next_safe_action": "Keep the forceOrder collector running, monitor LIQUIDATION_FORCE_ORDER_DATA_QUALITY, then preregister a liquidation-feed hypothesis only after enough schema-valid real events exist.",
+      "integration_status": "forward_real_feed_collector_ready_no_strategy_consumer",
+      "can_trade": false
+    },
+    {
+      "task_id": "spread_depth_imbalance_l2",
+      "claude_priority": 6,
+      "claim": "Spread/depth imbalance on L2 or tick data may contain short-horizon edge after costs.",
+      "current_codex_status": "preregistered_waiting_first_sealed_snapshot",
+      "existing_local_artifacts": [
+        "tools/cross_venue_microstructure_preseal_launch_plan.py",
+        "tools/cross_venue_microstructure_post_seal_auto_run_guard.py",
+        "docs/CROSS_VENUE_MICROSTRUCTURE_PRESEAL_LAUNCH_PLAN_2026-06-29.json"
+      ],
+      "blocking_reason": "Microstructure snapshot is not sealed yet; no OOS proof exists.",
+      "next_safe_action": "Wait for sealed 168h snapshot, then let the post-seal guard run the locked preregistered queue.",
+      "integration_status": "waiting_snapshot",
+      "can_trade": false
+    },
+    {
+      "task_id": "arena_edge_verdict_upgrade",
+      "claude_priority": 7,
+      "claim": "Arena edge_verdict should be upgraded from naive cum_realized checks to Codex-strict gates.",
+      "current_codex_status": "methodology_available_local_only",
+      "existing_local_artifacts": [
+        "configs/ARENA_PAPER_EDGE_CONTRACT.json"
+      ],
+      "blocking_reason": "Remote Arena code is outside this local runtime and is not modified by this contract.",
+      "next_safe_action": "Export this contract as a paper-only spec; remote implementation must preserve no-real-order boundary.",
+      "integration_status": "contract_only",
+      "can_trade": false
+    }
+  ],
+  "drift_notes": [
+    {
+      "id": "arena_handoff_overstates_basis_validation",
+      "severity": "P1",
+      "note": "The Arena onboarding text says basis_funding_carry is nested-holdout validated, but current local Codex artifacts reject both BTC-only and multi-symbol basis/funding carry/shock runs. Treat as drift; local artifacts win."
+    },
+    {
+      "id": "arena_remote_runtime_not_local_runtime",
+      "severity": "P1",
+      "note": "Arena tables, timers, dashboards and host details are external. They are not considered runnable local components without remote proof."
+    },
+    {
+      "id": "paper_only_boundary",
+      "severity": "P0",
+      "note": "All imported Arena concepts remain paper-only. This repository must not create real orders from these handoffs."
+    }
+  ]
+}

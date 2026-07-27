@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "lock_id": "liquidation_cross_venue_receipt_leadership_2026_07_13_v1",
+  "status": "prospective_forward_lock_before_outcome_review",
+  "created_at": "2026-07-13T04:46:30Z",
+  "forward_start_at": "2026-07-13T05:00:00Z",
+  "preregistration": {
+    "path": "configs/LIQUIDATION_CROSS_VENUE_LEAD_LAG_PREREG_2026-07-13.json",
+    "sha256": "07538db6ff9002af4d77c776332ba37d55e970e57bbad0de973f7ffa258207aa"
+  },
+  "observer": {
+    "path": "tools/liquidation_cross_venue_lead_lag_forward_observer.py",
+    "sha256": "9190ed9ec15ed30a796b7280ed67de23df8da093ee6f8cb6aa6d325889f5778a"
+  },
+  "sources": {
+    "binance": "data/live/liquidations/binance_force_order",
+    "bybit": "data/live/liquidations/bybit_all_liquidation"
+  },
+  "shared_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "LTCUSDT"
+  ],
+  "fixed_rules": {
+    "required_collector_host": "LAPTOP-F1UKDD7T",
+    "required_ingest_schema_version": 2,
+    "match_dimensions": [
+      "symbol",
+      "side"
+    ],
+    "preceding_exclusion_seconds": 15,
+    "leader_cooldown_seconds": 15,
+    "follow_windows_seconds": [
+      1,
+      5,
+      15
+    ],
+    "primary_window_seconds": 5,
+    "matching": "first strictly later unused same-symbol same-side event on the other venue",
+    "resolution": "leader event must be at least 15 seconds before the latest common receipt timestamp",
+    "notional_usage": "descriptive_only_no_threshold",
+    "no_parameter_changes": true
+  },
+  "terminal_gate": {
+    "minimum_clean_leaders_per_direction": 100,
+    "minimum_utc_days_per_direction": 5,
+    "minimum_symbols_per_direction": 5,
+    "maximum_single_symbol_share": 0.5,
+    "primary_window_seconds": 5,
+    "minimum_absolute_follow_rate_gap": 0.15,
+    "require_non_overlapping_wilson_95_intervals": true,
+    "single_terminal_evaluation": true,
+    "manual_review_before_price_impact_preregistration": true,
+    "automatic_promotion_allowed": false,
+    "terminal_failure_policy": "tombstone_without_reverse_or_retune"
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "research_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  },
+  "can_trade": false,
+  "orders_allowed": false
+}

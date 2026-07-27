@@ -1,0 +1,117 @@
+{
+  "schema_version": 3,
+  "prereg_id": "liquidation_cross_venue_canonical_paired_receipt_leadership_2026_07_13_v3",
+  "status": "prospective_preregistration_before_forward_floor",
+  "created_at": "2026-07-13T06:50:00Z",
+  "forward_floor_at": "2026-07-13T07:30:00Z",
+  "can_trade": false,
+  "orders_allowed": false,
+  "purpose": "Measure which public venue is received first among actually observed same-symbol same-liquidated-position-side Binance/Bybit liquidation event pairs.",
+  "supersedes": {
+    "lock_id": "liquidation_cross_venue_paired_receipt_leadership_2026_07_13_v2",
+    "reason": "V2 matched raw side values even though Binance publishes forced-order side while Bybit publishes liquidated-position side. V2 is terminally invalid as a cross-venue semantic contract; no V2 observation is admitted into V3."
+  },
+  "hypothesis": {
+    "family": "CROSS_VENUE_LIQUIDATION_CANONICAL_PAIRED_RECEIPT_LEADERSHIP",
+    "null": "Within fixed paired-event windows and canonical liquidated-position side, Binance and Bybit are equally likely to be received first.",
+    "candidate_only": "One venue may be received first in at least 65 percent of primary-window paired liquidation events.",
+    "explicitly_not_tested": [
+      "unmatched event follow-through",
+      "future price return",
+      "trade direction",
+      "profitability",
+      "execution feasibility"
+    ]
+  },
+  "sources": {
+    "binance": "data/live/liquidations/binance_force_order",
+    "bybit": "data/live/liquidations/bybit_all_liquidation"
+  },
+  "source_semantics": {
+    "binance": {
+      "raw_field": "side",
+      "raw_meaning": "forced liquidation order side",
+      "mapping_to_liquidated_position_side": {
+        "BUY": "SHORT",
+        "SELL": "LONG"
+      },
+      "reference": "https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/ws-streams/market#all-market-liquidation-order-streams",
+      "mapping_note": "Position-side mapping is inferred from the forced closing order side."
+    },
+    "bybit": {
+      "raw_field": "side",
+      "raw_meaning": "liquidated position side",
+      "mapping_to_liquidated_position_side": {
+        "BUY": "LONG",
+        "SELL": "SHORT"
+      },
+      "reference": "https://bybit-exchange.github.io/docs/v5/websocket/public/all-liquidation"
+    }
+  },
+  "shared_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "LTCUSDT"
+  ],
+  "fixed_rules": {
+    "required_collector_host": "LAPTOP-F1UKDD7T",
+    "required_ingest_schema_version": 2,
+    "match_dimensions": [
+      "symbol",
+      "liquidated_position_side"
+    ],
+    "pair_windows_seconds": [
+      1,
+      5,
+      15
+    ],
+    "primary_window_seconds": 5,
+    "pairing": "global minimum-absolute-delay greedy one-to-one matching within each symbol-canonical-position-side group",
+    "exact_receipt_ties": "excluded",
+    "unmatched_events": "excluded_from_all_rates",
+    "resolution": "both events must be at least 15 seconds before the latest common venue receipt",
+    "notional_usage": "not_used",
+    "pre_floor_events": "excluded",
+    "no_parameter_changes": true
+  },
+  "terminal_gate": {
+    "minimum_primary_window_pairs": 200,
+    "minimum_utc_days": 5,
+    "minimum_symbols": 5,
+    "maximum_single_symbol_share": 0.5,
+    "primary_window_seconds": 5,
+    "minimum_candidate_leader_share": 0.65,
+    "require_candidate_wilson_95_lower_above_half": true,
+    "single_terminal_evaluation": true,
+    "manual_review_before_price_impact_preregistration": true,
+    "automatic_promotion_allowed": false,
+    "terminal_failure_policy": "tombstone_without_reverse_or_retune"
+  },
+  "research_boundary": {
+    "forward_only": true,
+    "same_host_receipt_clock_only": true,
+    "paired_observations_only": true,
+    "v2_observations_admitted": false,
+    "price_outcomes_forbidden": true,
+    "old_directional_outcomes_forbidden": true,
+    "reverse_hypothesis_on_failure_forbidden": true,
+    "retuning_forbidden": true
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "research_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "orders_allowed": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

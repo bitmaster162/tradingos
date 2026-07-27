@@ -1,0 +1,252 @@
+{
+  "datasources": {
+    "spot_candles": {
+      "provider": "exchange_or_aggregator",
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "tfs": [
+        "1m",
+        "5m",
+        "15m",
+        "1h",
+        "4h",
+        "1D"
+      ]
+    },
+    "derivatives": {
+      "funding_rate": {
+        "symbol": "BTC/ETH perpetual",
+        "agg": "7DMA_APY|raw"
+      },
+      "open_interest": {
+        "symbol": "BTC/ETH perpetual",
+        "agg": "raw|ema"
+      },
+      "liquidations": {
+        "symbol": "BTC/ETH perpetual",
+        "agg": "clusters_usd"
+      }
+    },
+    "market_regime": {
+      "trend": "ADX|MA_slope",
+      "volatility": "ATR|HV"
+    }
+  },
+  "setups": [
+    {
+      "setup_id": "rsi_ao_div",
+      "enabled": true,
+      "symbol_group": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "timeframes": [
+        "5m",
+        "15m",
+        "1h",
+        "4h"
+      ],
+      "params": {
+        "rsi_length": 14,
+        "rsi_src": "close",
+        "ao_fast": 5,
+        "ao_slow": 34,
+        "divergence": [
+          "regular_bull",
+          "regular_bear",
+          "hidden_bull",
+          "hidden_bear"
+        ],
+        "pivot_lookback": 5,
+        "min_pivot_strength": 2,
+        "confirmations": {
+          "structure": [
+            "BOS",
+            "CHOCH"
+          ],
+          "volume_surge_sigma": 1.0,
+          "candle_close_filter": true
+        }
+      },
+      "filters": {
+        "funding": {
+          "mode": "contra",
+          "pos_ap_threshold": 0.05,
+          "neg_ap_threshold": -0.05
+        },
+        "oi": {
+          "delta_pct_window": "1h",
+          "min_change_pct_abs": 2.0
+        },
+        "liquidations": {
+          "min_cluster_usd": 5000000,
+          "lookback_min": 30
+        },
+        "regime": {
+          "trend_adx_min": 18,
+          "atr_pct_band": {
+            "max": 2.5
+          }
+        }
+      },
+      "risk": {
+        "stop_mode": "beyond_pivot|structure_low_high",
+        "tp_scheme": [
+          1.0,
+          1.5,
+          2.5
+        ],
+        "max_risk_per_trade_pct": 0.5,
+        "invalidate_on": {
+          "rsi_break": 80,
+          "ao_flip_bars": 3
+        }
+      }
+    },
+    {
+      "setup_id": "liquidity_sweep_eq",
+      "enabled": true,
+      "symbol_group": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "timeframes": [
+        "1m",
+        "5m",
+        "15m",
+        "1h"
+      ],
+      "params": {
+        "swing_window": 50,
+        "eq_detection": {
+          "eqh_tolerance_pct": 0.15,
+          "eql_tolerance_pct": 0.15
+        },
+        "sweep_displacement_ticks": 2,
+        "fvg_validation": {
+          "lookback": 20,
+          "min_fill_pct": 50
+        },
+        "delta_imbalance": {
+          "min_ratio": 1.8
+        }
+      },
+      "filters": {
+        "funding": {
+          "mode": "contra|neutral",
+          "pos_ap_threshold": 0.04,
+          "neg_ap_threshold": -0.04
+        },
+        "oi": {
+          "min_spike_sigma": 1.2
+        },
+        "liquidations": {
+          "directional_cluster": "same_as_sweep",
+          "min_cluster_usd": 8000000
+        },
+        "regime": {
+          "range_bias": true
+        }
+      },
+      "risk": {
+        "entry": "post-sweep close|break-back-in-range",
+        "stop_mode": "beyond_sweep_extreme",
+        "tp_scheme": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "max_risk_per_trade_pct": 0.6,
+        "invalidate_on": {
+          "second_impulse_same_side": true
+        }
+      }
+    },
+    {
+      "setup_id": "smt_btc_eth",
+      "enabled": true,
+      "pairs": [
+        [
+          "BTCUSDT",
+          "ETHUSDT"
+        ]
+      ],
+      "timeframes": [
+        "5m",
+        "15m",
+        "1h",
+        "4h"
+      ],
+      "params": {
+        "lead_asset": "BTCUSDT",
+        "correlation_window": 120,
+        "divergence_threshold_sigma": 1.2,
+        "mean_reversion_trigger": {
+          "zscore": 1.0,
+          "max_lag_bars": 12
+        },
+        "structure_agreement": true
+      },
+      "filters": {
+        "funding": {
+          "cross_check_btc_eth": true
+        },
+        "oi": {
+          "sync_required": true,
+          "allow_desync_sigma": 0.8
+        },
+        "liquidations": {
+          "pair_total_cluster_min_usd": 10000000
+        }
+      },
+      "risk": {
+        "hedge_mode": "pair_trade_optional",
+        "stop_mode": "time_stop_bars|structure_break",
+        "tp_scheme": [
+          0.8,
+          1.6,
+          2.4
+        ],
+        "max_risk_per_trade_pct": 0.5
+      }
+    }
+  ],
+  "composite_filters": {
+    "cooldown_after_alert_min": 5,
+    "max_concurrent_per_symbol": 2,
+    "latency_budget_ms": 1200,
+    "min_liq_heatmap_percentile": 75,
+    "funding_extreme_mode": {
+      "enable": true,
+      "extreme_abs_ap": 0.1
+    }
+  },
+  "risk_manager": {
+    "account_risk_pct_max": 1.2,
+    "per_trade_risk_pct_max": 0.6,
+    "reduce_size_on": {
+      "high_funding_abs_ap": 0.08,
+      "oi_spike_sigma": 2.0
+    },
+    "ban_after_losses": {
+      "count": 3,
+      "cooldown_min": 120
+    },
+    "slippage_bp_hint": 1.5
+  },
+  "scoring": {
+    "weights": {
+      "structure_confirm": 0.25,
+      "derivs_alignment": 0.35,
+      "oscillator_quality": 0.25,
+      "regime_fit": 0.15
+    },
+    "thresholds": {
+      "enter": 0.62,
+      "add": 0.72,
+      "exit": 0.35
+    }
+  }
+}

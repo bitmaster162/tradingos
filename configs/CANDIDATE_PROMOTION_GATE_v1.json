@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "name": "Candidate Promotion Gate",
+  "runtime_boundary": {
+    "classification": "research_to_live_review_promotion_gate",
+    "can_trade": false,
+    "sends_orders": false,
+    "uses_private_credentials": false
+  },
+  "thresholds": {
+    "min_trades": 100,
+    "min_expectancy_r": 0.05,
+    "min_winrate_pct": 50.0,
+    "min_bootstrap_prob_gt_0": 0.8,
+    "min_stable_folds": 4,
+    "max_drawdown_r": -10.0,
+    "max_losing_streak": 6,
+    "require_research_gate_pass": true,
+    "require_trade_level_data": true,
+    "require_no_holdout_fail": true
+  },
+  "default_sources": [
+    "_dl/control_panel/MAX_CORE_LITE_V13_STRUCTURAL_CANDIDATE.json",
+    "_dl/control_panel/MAX_CORE_LITE_V14_LONG_EXPANSION.json",
+    "docs/EVENT_FEATURE_HOLDOUT_VALIDATION_2026-06-04.json",
+    "docs/EVENT_FEATURE_TRADE_EXPORT_2026-06-07.json",
+    "docs/RISK_REWARD_GATE_2026-06-04.json"
+  ],
+  "promotion_decisions": {
+    "promoted_to_live_review_candidate": "May generate a live-review card, still no order permission.",
+    "watchlist_no_promotion": "Keep in research watchlist only.",
+    "blocked_no_promotion": "Do not generate live-review cards from this candidate."
+  },
+  "notes": [
+    "Promotion does not grant trade permission.",
+    "Promotion only removes the research-gate blocker for card review.",
+    "Card validation, Pretrade Guardian and manual review still apply.",
+    "Synthetic liquidation prices still block paper/live promotion."
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "contract_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_RUNNER_CONTRACT_V1",
+  "status": "locked_skeleton",
+  "created_at": "2026-06-25",
+  "prereg_queue": "configs/CROSS_VENUE_MICROSTRUCTURE_PREREG_QUEUE.json",
+  "snapshot_policy": "configs/CROSS_VENUE_MICROSTRUCTURE_SNAPSHOT_POLICY.json",
+  "snapshot_gate": "docs/CROSS_VENUE_MICROSTRUCTURE_SNAPSHOT_GATE_2026-06-25.json",
+  "run_root_relative_to_active": "_dl/research_runs_cross_venue_microstructure",
+  "experiments": {
+    "microstructure_imbalance_continuation": {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-IMBALANCE-001",
+      "family": "BINANCE_AGGRESSOR_DELTA_COINBASE_CONFIRMATION",
+      "script": "tools/microstructure_imbalance_continuation_research.py",
+      "implementation_status": "implemented_locked",
+      "supports_lock_path": true
+    },
+    "microstructure_cross_venue_dislocation_reversion": {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-DISLOCATION-002",
+      "family": "BINANCE_COINBASE_RETURN_DISLOCATION_REVERSION",
+      "script": "tools/microstructure_cross_venue_dislocation_reversion_research.py",
+      "implementation_status": "implemented_locked",
+      "supports_lock_path": true
+    },
+    "microstructure_liquidity_void_expansion": {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-LIQUIDITY-VOID-003",
+      "family": "TOP_OF_BOOK_THINNING_TRADE_BURST_EXPANSION",
+      "script": "tools/microstructure_liquidity_void_expansion_research.py",
+      "implementation_status": "implemented_locked",
+      "supports_lock_path": true
+    },
+    "microstructure_book_pressure_alignment": {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-BOOK-PRESSURE-004",
+      "family": "CROSS_VENUE_TOP_OF_BOOK_PRESSURE_ALIGNMENT",
+      "script": "tools/microstructure_book_pressure_alignment_research.py",
+      "implementation_status": "implemented_locked",
+      "supports_lock_path": true
+    }
+  },
+  "required_cli": {
+    "python_executable": "sys.executable",
+    "positional_experiment": false,
+    "required_args": [
+      "--cache-dir",
+      "--out-prefix",
+      "--lock-path"
+    ],
+    "forbidden_args": [
+      "--latest",
+      "--live",
+      "--paper",
+      "--send-order",
+      "--api-key",
+      "--api-secret"
+    ],
+    "shell": false,
+    "arbitrary_extra_args": false
+  },
+  "required_report_contract": {
+    "top_level_required_fields": [
+      "schema_version",
+      "hypothesis_id",
+      "experiment",
+      "family",
+      "decision",
+      "search",
+      "selected_on_train",
+      "splits",
+      "costs",
+      "runtime_boundary",
+      "can_trade"
+    ],
+    "search_required_fields": [
+      "tested",
+      "train_qualified"
+    ],
+    "selected_train_probability_paths": [
+      "selected_on_train.train.bootstrap_probability_mean_gt_0",
+      "selected_on_train.train.bootstrap_probability_expectancy_gt_0",
+      "selected_on_train.train.bootstrap_prob_expectancy_gt_zero",
+      "selected_on_train.train.bootstrap.expectancy_r.prob_gt_0"
+    ],
+    "must_keep_can_trade_false": true,
+    "must_keep_orders_allowed_false": true,
+    "must_report_cost_stress": true,
+    "must_report_splits": true
+  },
+  "execution_contract": {
+    "exact_snapshot_id_required": true,
+    "sealed_snapshot_required": true,
+    "snapshot_verification_required": true,
+    "hypothesis_authorization_required": true,
+    "multiple_testing_assessment_required": true,
+    "output_must_set_can_trade_false": true,
+    "implementation_required_before_run": true,
+    "run_blocked_while_implementation_status_planned": true,
+    "credentials_allowed": false,
+    "network_required": false,
+    "orders_allowed": false,
+    "signals_allowed": false,
+    "observer_registration_allowed": false,
+    "paper_or_live_promotion_allowed": false
+  },
+  "runtime_boundary": {
+    "contract_only": true,
+    "runner_execution_allowed_now": false,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

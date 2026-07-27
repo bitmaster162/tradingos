@@ -1,0 +1,44 @@
+{
+  "schema": "bitunix-raw-event-replenishment-immutable-lock-v1",
+  "lock_id": "BITUNIX_BTCUSDT_RAW_FLOW_REPLENISHMENT_REVERSAL_V1_LOCK_20260716",
+  "locked_at_utc": "2026-07-16T10:38:33Z",
+  "forward_floor_utc": "2026-07-16T11:00:00Z",
+  "prereg_id": "BITUNIX_BTCUSDT_RAW_FLOW_REPLENISHMENT_REVERSAL_V1_20260716",
+  "status": "IMMUTABLE_FORWARD_ONLY_OFFLINE_SHADOW_NOT_ACTIVATED",
+  "outcomes_inspected_before_lock": false,
+  "historical_capture_role": "SCHEMA_AND_DATA_QUALITY_FIXTURE_ONLY",
+  "bindings": {
+    "prereg": "configs/BITUNIX_RAW_EVENT_REPLENISHMENT_PREREG_2026-07-16.json",
+    "prereg_sha256": "c51d5e8b0e258104fa9d4885bfced09bbb17f5975fb74b13b8836f86190cea20",
+    "oracle": "tools/bitunix_raw_event_replenishment_oracle.py",
+    "oracle_sha256": "80d21426bc3579deb9db8e41dd6d42d1b1eb39a5fb096a6dec89f7b1cfc9d101",
+    "tests": "tests/test_bitunix_raw_event_replenishment_oracle.py",
+    "tests_sha256": "a701fc08c24e8fd43c2598fa77e2a07d855776e4daa6dc356d7b55c47f0cc9b4",
+    "prereg_note": "docs/BITUNIX_RAW_EVENT_REPLENISHMENT_PREREG_2026-07-16.md",
+    "prereg_note_sha256": "d7baa23a77e0657fb4ee5f8ee996bacb965e31233da3800038dcd573288ec06c",
+    "pre_floor_schema_quality_report": "_dl/bitunix_raw_event_replenishment_v1/PRE_FLOOR_SCHEMA_QUALITY.json",
+    "pre_floor_schema_quality_report_sha256": "693488380ba3ba540d40a742a7a2e7b09fcac28fd652a69dc85e7a9aba4cfa41",
+    "pre_floor_capture_manifest": "data/forward/bitunix_wo105_v3r4_ws/run_20260716T092007_962411Z/PUBLIC_CAPTURE_MANIFEST.json",
+    "pre_floor_capture_manifest_sha256": "e90b6d36295f998913b6eda805f5682dedfeacd2792931e0abead816d013ce6c"
+  },
+  "frozen_contract": {
+    "parameters_may_change_after_lock": false,
+    "source_contract_may_change_after_lock": false,
+    "terminal_gate_may_change_after_lock": false,
+    "interim_outcomes_visible": false,
+    "failed_rule_may_be_reversed": false,
+    "failed_rule_may_be_retuned": false,
+    "runtime_activation_requires_new_review": true
+  },
+  "runtime_boundary": {
+    "offline_analysis_only": true,
+    "autoload_allowed": false,
+    "network_calls_allowed": false,
+    "telegram_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY"
+  },
+  "can_trade": false
+}

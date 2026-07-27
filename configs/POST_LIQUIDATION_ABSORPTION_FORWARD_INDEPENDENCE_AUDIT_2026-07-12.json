@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "audit_id": "POST_LIQUIDATION_ABSORPTION_FORWARD_INDEPENDENCE_AUDIT_V1",
+  "status": "fixed_audit_contract",
+  "created_at": "2026-07-12",
+  "source_lock": "configs/POST_LIQUIDATION_ABSORPTION_FORWARD_OBSERVER_LOCK_2026-07-03.json",
+  "source_lock_sha256": "82c294b5be46e3fb5eca7623bc2d856ac22e824e7db2915cbdbE1fa03f179246",
+  "source_builder": "tools/post_liquidation_absorption_spot_perp_confirmation.py",
+  "source_builder_sha256": "35494afee17c48bbf595b5a296308ef2b9a42b901ffbf4fc14e20b9b8b61b2d2",
+  "context_csv": "docs/POST_LIQUIDATION_ABSORPTION_CONTEXT_REFRESH_2026-07-03_FORWARD_bar_context.csv",
+  "cache_dir": "data/cache/binance_spot_perp_extended",
+  "selected_bucket": {
+    "setup": "long_flush_absorption_reversal_long",
+    "spot_confirmed": true,
+    "side": "LONG",
+    "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+    "interval": "1h",
+    "horizons_bars": [1, 2, 4],
+    "after_bar_ts": "2026-07-03T01:30:55Z",
+    "absorption_close_location": 0.6,
+    "spot_confirm_min_bps": 0.0
+  },
+  "execution_realism": {
+    "base_round_trip_cost_bps": 20.0,
+    "stress_round_trip_cost_bps": 30.0,
+    "maximum_horizon_hours": 4,
+    "nonoverlap_block_hours": 4
+  },
+  "review_gate": {
+    "minimum_raw_events_per_horizon": 30,
+    "minimum_symbols": 2,
+    "minimum_independent_blocks_per_horizon": 20,
+    "minimum_positive_horizons_after_base_cost": 2,
+    "minimum_positive_horizons_after_stress_cost": 2,
+    "leave_one_symbol_out_required": true,
+    "automatic_promotion_allowed": false
+  },
+  "bootstrap": {
+    "iterations": 5000,
+    "seed": 20260712,
+    "unit": "nonoverlap_4h_block"
+  },
+  "runtime_boundary": {
+    "audit_only": true,
+    "changes_locked_observer": false,
+    "parameter_search": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

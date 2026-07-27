@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "authority": "local_active_runtime_only",
+  "active_root_resolution": {
+    "environment_variable": "TRADING_OS_ACTIVE_ROOT",
+    "windows_default": "%USERPROFILE%\\TradingOS\\Active"
+  },
+  "source_cache_relative": "data/cross_venue_spot",
+  "snapshot_root_relative": "data/research_snapshots_cross_venue",
+  "reject_google_drive_source": true,
+  "profile": "BTC_CROSS_VENUE_1M_V1",
+  "required_files": [
+    "binance/BTCUSDT/1m_candles.csv",
+    "coinbase/BTC-USD/1m_candles.csv",
+    "aligned/BTCUSDT__BTC-USD/1m_candles.csv"
+  ],
+  "rules": {
+    "closed_bars_only": true,
+    "quote_level_spread_allowed": false,
+    "returns_only_cross_venue_comparison": true,
+    "copy_then_hash_verify": true,
+    "snapshot_files_are_immutable": true,
+    "research_must_record_snapshot_id": true,
+    "fallback_to_drive_cache": false,
+    "live_runtime_mutation": false,
+    "can_trade": false
+  }
+}

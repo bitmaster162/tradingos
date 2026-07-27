@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-CROSS-VENUE-CATCHUP-001",
+  "family": "COINBASE_TO_BINANCE_CATCHUP_1M",
+  "enabled": false,
+  "status": "reject_no_train_qualified_cross_venue_candidate",
+  "selected_on_train": null,
+  "validation_gate": null,
+  "oos_opened": false,
+  "source_report": "C:\\Users\\coins\\TradingOS\\Active\\_dl\\research_runs_cross_venue\\20260624T072914Z-cross_venue_catchup-d26a7c55961d-366ec8\\REPORT.json",
+  "boundaries": {
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

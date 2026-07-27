@@ -1,0 +1,105 @@
+{
+  "schema": "bitunix-raw-event-replenishment-prereg-v1",
+  "prereg_id": "BITUNIX_BTCUSDT_RAW_FLOW_REPLENISHMENT_REVERSAL_V1_20260716",
+  "created_at_utc": "2026-07-16T10:29:46Z",
+  "forward_floor_utc": "2026-07-16T11:00:00Z",
+  "status": "PREREGISTERED_OFFLINE_SHADOW_NOT_ACTIVATED",
+  "hypothesis": "An extreme five-second aggressive trade-flow burst followed by same-side top-five book replenishment and immediate mid-price stabilization predicts a short-horizon reversal after touch-price execution costs.",
+  "independence_contract": {
+    "independent_of_wo105_v1_through_v3r4": true,
+    "prior_signal_counts_admitted": false,
+    "prior_outcomes_admitted": false,
+    "prior_parameters_inherited": false,
+    "pre_floor_capture_use": "schema_and_data_quality_only",
+    "candles_allowed": false,
+    "rest_kline_reconstruction_allowed": false,
+    "funding_allowed": false,
+    "liquidations_allowed": false,
+    "old_signal_import_allowed": false,
+    "retuning_after_floor_allowed": false,
+    "reverse_failed_rule_allowed": false
+  },
+  "source_contract": {
+    "venue": "bitunix_usdt_perp",
+    "symbol": "BTCUSDT",
+    "capture_schema": "bitunix-public-capture-v4",
+    "raw_frames_file": "RAW_FRAMES.jsonl",
+    "raw_index_file": "RAW_FRAME_INDEX.jsonl",
+    "manifest_file": "PUBLIC_CAPTURE_MANIFEST.json",
+    "acceptance_file": "TRADINGOS_INDEPENDENT_ACCEPTANCE.json",
+    "required_channels": [
+      "depth_book15",
+      "trade"
+    ],
+    "required_parse_kinds": [
+      "DepthUpdate",
+      "TradeBatch"
+    ],
+    "causal_clock": "RAW_FRAME_INDEX.recv_ns",
+    "venue_timestamp_use": "diagnostic_only",
+    "raw_index_pair_hash_required": true,
+    "duplicate_frames_admitted": false,
+    "public_data_only": true
+  },
+  "parameters": {
+    "bucket_ms": 5000,
+    "baseline_buckets": 24,
+    "minimum_active_baseline_buckets": 18,
+    "volume_multiple": 3.0,
+    "absolute_flow_imbalance_min": 0.7,
+    "directional_impact_bps_min": 1.0,
+    "top_book_levels": 5,
+    "confirmation_window_ms": 3000,
+    "replenishment_ratio_min": 1.25,
+    "recovery_requires_non_worse_mid": true,
+    "cooldown_ms": 120000,
+    "maximum_book_age_ms": 1000,
+    "horizons_ms": [
+      30000,
+      120000
+    ],
+    "primary_horizon_ms": 120000,
+    "maximum_horizon_lookup_lag_ms": 2000,
+    "execution": {
+      "long_entry": "confirmation_best_ask",
+      "long_exit": "horizon_best_bid",
+      "short_entry": "confirmation_best_bid",
+      "short_exit": "horizon_best_ask",
+      "touch_spread_is_embedded": true,
+      "base_extra_round_trip_cost_bps": 12.0,
+      "stress_extra_round_trip_cost_bps": 20.0,
+      "partial_fills_modeled": false,
+      "queue_position_modeled": false
+    }
+  },
+  "terminal_gate": {
+    "minimum_resolved_events": 100,
+    "minimum_distinct_utc_days": 5,
+    "minimum_independent_4h_blocks": 20,
+    "maximum_single_4h_block_event_share": 0.25,
+    "interim_outcome_metrics_visible": false,
+    "pass_rules": {
+      "primary_mean_net_base_bps_gt": 2.0,
+      "primary_win_rate_gt": 0.52,
+      "primary_mean_net_stress_bps_gt": 0.0,
+      "minimum_positive_utc_days": 3
+    }
+  },
+  "failure_policy": {
+    "insufficient_sample": "WAIT_WITHOUT_RETUNE",
+    "terminal_fail": "TOMBSTONE_DO_NOT_REVERSE_OR_RETUNE",
+    "source_integrity_fail": "REJECT_CAPTURE_AND_APPEND_NO_EDGE_ROWS",
+    "runtime_activation": "SEPARATE_REVIEW_REQUIRED"
+  },
+  "runtime_boundary": {
+    "offline_analysis_only": true,
+    "autoload_allowed": false,
+    "network_calls_allowed": false,
+    "telegram_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  }
+}

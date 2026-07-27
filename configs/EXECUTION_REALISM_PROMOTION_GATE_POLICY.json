@@ -1,0 +1,30 @@
+{
+  "policy_id": "EXECUTION_REALISM_PROMOTION_GATE_POLICY_V3_2026-07-12",
+  "updated_at": "2026-07-12",
+  "purpose": "Require both candidate-specific execution realism and hash-bound portfolio stress before any future paper-design review.",
+  "thresholds": {
+    "min_ledgers_analyzed": 3,
+    "min_shadow_weighted_expectancy_r": 0.05,
+    "min_retention_ratio": 0.5,
+    "min_shadow_total_r": 0.0
+  },
+  "candidate_rules": {
+    "candidate_specific_overlay_required_when_promotable_family_exists": true,
+    "portfolio_stress_gate_required_when_promotable_family_exists": true,
+    "candidate_report_sha256_required": true,
+    "candidate_ledger_sha256_required": true,
+    "candidate_report_must_match_frontier_path": true,
+    "candidate_report_must_keep_can_trade_false": true,
+    "overlay_must_not_change_candidate_parameters": true,
+    "manual_review_required_before_paper_design": true,
+    "external_replication_not_counted_as_codex_forward_sample": true
+  },
+  "runtime_boundary": {
+    "policy_only": true,
+    "alerts_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "pair": "ETHUSDT",
+  "files": {
+    "ohlcv": "data/smoke/ohlcv_ETH_15m.csv",
+    "oi": "data/smoke/oi_ETH_15m.csv",
+    "basis": "data/smoke/basis_ETH_15m.csv"
+  },
+  "pairB": "BTCUSDT",
+  "filesB": {
+    "ohlcv": "data/smoke/ohlcv_BTC_15m.csv"
+  },
+  "timeframes": [
+    "15m"
+  ]
+}

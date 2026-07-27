@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trade Log",
+  "type": "object",
+  "required": [
+    "alert_id",
+    "symbol",
+    "tf",
+    "side",
+    "entry",
+    "sl",
+    "tps",
+    "exit_reason",
+    "pnl_r",
+    "hold_time_min"
+  ],
+  "properties": {
+    "alert_id": {
+      "type": "string"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "tf": {
+      "type": "string"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "long",
+        "short"
+      ]
+    },
+    "entry": {
+      "type": "number"
+    },
+    "sl": {
+      "type": "number"
+    },
+    "tps": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "fills": {
+      "type": "array"
+    },
+    "exit_reason": {
+      "type": "string"
+    },
+    "pnl_r": {
+      "type": "number"
+    },
+    "hold_time_min": {
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "lock_id": "cross_asset_cointegration_residual_v1_2026_07_12",
+  "created_at": "2026-07-12T00:00:00Z",
+  "status": "immutable_research_lock",
+  "can_trade": false,
+  "hypothesis": "A rolling log-price residual between BTCUSDT and a liquid alt perpetual may mean-revert after an extreme deviation, net of conservative two-leg execution costs.",
+  "method_label": "rolling_ols_residual_stationarity_proxy_not_formal_cointegration_proof",
+  "source": {
+    "document": "C:/Users/coins/Downloads/Обзор всех торговых стратегий.docx",
+    "sha256": "a903478ca8a6d7045d312a24537d8bf68c63014e68ebd08e5f6d2dafaea1dff3",
+    "intake_tool": "tools/docx_research_intake.py"
+  },
+  "dataset": {
+    "cache_dir": "data/cache/binance_spot_perp_extended",
+    "interval": "1h",
+    "x_symbol": "BTCUSDT",
+    "y_symbols": ["ETHUSDT", "SOLUSDT", "BCHUSDT"],
+    "market": "binance_usdt_m_perpetual",
+    "alignment": "intersection_of_all_symbol_timestamps",
+    "max_time_inclusive": "2026-07-12T04:00:00+00:00"
+  },
+  "split": {
+    "train_fraction": 0.6,
+    "validation_fraction": 0.2,
+    "oos_fraction": 0.2,
+    "minimum_independent_pairs_to_open_oos": 2
+  },
+  "grid": {
+    "lookback_hours": [168, 336, 720],
+    "entry_z": [1.5, 2.0, 2.5],
+    "exit_z": [0.0, 0.5],
+    "max_hold_hours": [24, 72],
+    "stop_z": 4.0,
+    "min_beta": 0.1,
+    "max_beta": 3.0
+  },
+  "execution": {
+    "signal_at": "bar_close",
+    "entry_at": "next_bar_open",
+    "exit_decision_at": "bar_close",
+    "exit_at": "next_bar_open",
+    "no_overlap_per_pair": true,
+    "round_trip_cost_bps": 20.0,
+    "stress_round_trip_cost_bps": 30.0,
+    "cost_interpretation": "two futures legs, both entry and exit",
+    "funding_mode": "not_modeled_research_limitation"
+  },
+  "bootstrap": {
+    "iterations": 5000,
+    "seed": 20260712
+  },
+  "folds": 4,
+  "gates": {
+    "train": {
+      "min_trades": 40,
+      "min_mean_net_bps": 0.0,
+      "min_positive_pct": 52.0,
+      "min_positive_folds": 3,
+      "min_bootstrap_probability_mean_gt_0": 0.95,
+      "require_stress_mean_positive": true
+    },
+    "validation": {
+      "min_trades": 20,
+      "min_mean_net_bps": 0.0,
+      "min_positive_pct": 50.0,
+      "min_positive_folds": 2,
+      "require_stress_mean_positive": true
+    },
+    "oos": {
+      "min_trades": 20,
+      "min_mean_net_bps": 0.0,
+      "min_positive_pct": 50.0,
+      "min_positive_folds": 2,
+      "require_stress_mean_positive": true
+    }
+  },
+  "selection": {
+    "per_pair": "highest_train_stress_mean_then_base_mean_among_train_qualified",
+    "validation_uses_only_selected_train_config": true,
+    "oos_open_policy": "open_only_if_at_least_two_pairs_pass_validation"
+  },
+  "promotion_policy": {
+    "auto_promote": false,
+    "live_execution": false,
+    "best_possible_result": "research_candidate_oos_passed_forward_shadow_required"
+  }
+}

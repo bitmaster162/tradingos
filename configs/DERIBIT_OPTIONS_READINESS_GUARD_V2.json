@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "contract_id": "DERIBIT_OPTIONS_FORWARD_READINESS_GUARD_V2",
+  "status": "fixed_readiness_contract",
+  "created_at": "2026-07-16T12:15:00Z",
+  "forward_floor_utc": "2026-07-16T13:00:00Z",
+  "predecessor": {
+    "contract_id": "DERIBIT_OPTIONS_FORWARD_READINESS_GUARD_V1",
+    "rows_admitted": false,
+    "readiness_inherited": false,
+    "price_outcomes_read": false,
+    "parameters_changed": false
+  },
+  "collector": {
+    "script": "tools/deribit_options_surface_collector_v3.py",
+    "config": "configs/DERIBIT_OPTIONS_SURFACE_COLLECTOR_V3.json",
+    "lock": "configs/DERIBIT_OPTIONS_SURFACE_COLLECTOR_V3_LOCK.json",
+    "runtime": "data/forward/deribit_options_surface_v3"
+  },
+  "schedule": {
+    "interval_seconds": 300,
+    "maximum_freshness_seconds": 900,
+    "maximum_admitted_gap_seconds": 900
+  },
+  "research_gate": {
+    "minimum_span_days": 7.0,
+    "minimum_healthy_slots": 1800,
+    "minimum_scheduled_coverage": 0.95,
+    "minimum_join_rate": 0.98,
+    "minimum_mark_iv_coverage": 0.95,
+    "minimum_open_interest_coverage": 0.95,
+    "minimum_distinct_expiries": 3,
+    "raw_provenance_required": true,
+    "collector_lock_required": true
+  },
+  "lifecycle": {
+    "pre_floor_rows_excluded": true,
+    "predecessor_rows_admitted": false,
+    "historical_backfill_allowed": false,
+    "automatic_successor_observer_allowed": false,
+    "manual_observer_review_required_after_gate": true,
+    "retune_allowed": false
+  },
+  "runtime_boundary": {
+    "read_only_collector": true,
+    "registers_hypothesis": false,
+    "changes_collector": false,
+    "alerts_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

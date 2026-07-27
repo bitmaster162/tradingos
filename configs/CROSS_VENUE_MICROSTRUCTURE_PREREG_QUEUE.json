@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "queue_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_PREREG_2026Q3",
+  "status": "locked_preregistration_queue",
+  "created_at": "2026-06-25",
+  "amended_at": "2026-06-29",
+  "scope": {
+    "dataset": "first seven-day SQLite/WAL cross-venue microstructure snapshot",
+    "snapshot_policy": "configs/CROSS_VENUE_MICROSTRUCTURE_SNAPSHOT_POLICY.json",
+    "required_snapshot_profile": "BTC_CROSS_VENUE_MICROSTRUCTURE_SQLITE_V2",
+    "exact_snapshot_id_required": true,
+    "sealed_snapshot_required": true,
+    "forbidden_before_seal": [
+      "parameter_search",
+      "candidate_selection",
+      "validation_opening",
+      "oos_opening",
+      "observer_registration",
+      "paper_execution",
+      "live_execution"
+    ]
+  },
+  "portfolio_budget": {
+    "max_hypotheses": 4,
+    "registered_hypotheses": 4,
+    "max_total_configurations": 774,
+    "used_configurations": 0,
+    "max_oos_openings": 1,
+    "used_oos_openings": 0
+  },
+  "multiple_testing_policy": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "selection_bootstrap_is_screening_only": true,
+    "candidate_requires_adjusted_p_value": true,
+    "missing_candidate_probability_fails": true
+  },
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-IMBALANCE-001",
+      "experiment": "microstructure_imbalance_continuation",
+      "family": "BINANCE_AGGRESSOR_DELTA_COINBASE_CONFIRMATION",
+      "status": "registered_pending_first_seal",
+      "registration_type": "prospective_preregistration",
+      "claim": "A Binance aggressor trade imbalance that is confirmed by Coinbase return/top-of-book pressure predicts short-horizon BTC continuation on Binance spot.",
+      "feature_contract": {
+        "uses_completed_minutes_only": true,
+        "entry_delay": "next completed Binance minute after signal",
+        "forbidden_features": [
+          "future trades",
+          "future top-of-book",
+          "Coinbase reported side as aggressor side"
+        ],
+        "allowed_features": [
+          "Binance signed trade delta from aggregate trade maker flag",
+          "Coinbase return over completed minutes",
+          "Binance and Coinbase top-of-book spread/imbalance",
+          "cross-venue return agreement"
+        ]
+      },
+      "grid": {
+        "lookback_minutes": [1, 3, 5, 10],
+        "imbalance_z_window_minutes": [360, 720, 1440],
+        "entry_z": [1.5, 2.0, 2.5],
+        "coinbase_confirm_bps": [0.0, 2.5],
+        "hold_minutes": [1, 3, 5],
+        "side": "LONG_AND_SHORT_SYMMETRIC",
+        "total_configurations": 216
+      },
+      "trial_budget": {
+        "max_configurations": 216,
+        "used_configurations": 0,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 0
+      },
+      "train_gate": {
+        "min_trades": 80,
+        "min_mean_net_bps": 1.5,
+        "min_positive_folds": 3,
+        "max_drawdown_bps": -500.0,
+        "screening_bootstrap_probability": 0.95,
+        "cost_stress_positive": true
+      }
+    },
+    {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-DISLOCATION-002",
+      "experiment": "microstructure_cross_venue_dislocation_reversion",
+      "family": "BINANCE_COINBASE_RETURN_DISLOCATION_REVERSION",
+      "status": "registered_pending_first_seal",
+      "registration_type": "prospective_preregistration",
+      "claim": "A large completed-minute Binance/Coinbase return dislocation followed by spread normalization predicts short-horizon reversion toward cross-venue alignment.",
+      "feature_contract": {
+        "uses_completed_minutes_only": true,
+        "entry_delay": "next completed Binance minute after signal",
+        "forbidden_features": [
+          "future alignment",
+          "USD/USDT absolute level spread as trade edge",
+          "post-entry book state"
+        ],
+        "allowed_features": [
+          "return-only Binance/Coinbase divergence",
+          "pre-entry top-of-book spread state",
+          "pre-entry book imbalance",
+          "pre-entry realized volatility"
+        ]
+      },
+      "grid": {
+        "divergence_lookback_minutes": [1, 3, 5],
+        "divergence_z_window_minutes": [360, 720, 1440],
+        "entry_z": [2.0, 2.5, 3.0],
+        "spread_filter": ["none", "not_widening"],
+        "hold_minutes": [1, 3, 5],
+        "side": "REVERSION_LONG_AND_SHORT",
+        "total_configurations": 162
+      },
+      "trial_budget": {
+        "max_configurations": 162,
+        "used_configurations": 0,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 0
+      },
+      "train_gate": {
+        "min_trades": 60,
+        "min_mean_net_bps": 1.5,
+        "min_positive_folds": 3,
+        "max_drawdown_bps": -500.0,
+        "screening_bootstrap_probability": 0.95,
+        "cost_stress_positive": true
+      }
+    },
+    {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-LIQUIDITY-VOID-003",
+      "experiment": "microstructure_liquidity_void_expansion",
+      "family": "TOP_OF_BOOK_THINNING_TRADE_BURST_EXPANSION",
+      "status": "registered_pending_first_seal",
+      "registration_type": "prospective_preregistration",
+      "claim": "A completed-minute combination of top-of-book thinning, spread expansion and trade burst predicts short-horizon volatility expansion; direction is allowed only when Binance signed delta agrees.",
+      "feature_contract": {
+        "uses_completed_minutes_only": true,
+        "entry_delay": "next completed Binance minute after signal",
+        "forbidden_features": [
+          "post-signal volatility",
+          "future book recovery",
+          "direction without signed-delta agreement"
+        ],
+        "allowed_features": [
+          "completed-minute book spread z-score",
+          "completed-minute book imbalance",
+          "completed-minute trade count/volume burst",
+          "Binance signed delta agreement"
+        ]
+      },
+      "grid": {
+        "book_z_window_minutes": [360, 720],
+        "spread_z": [1.5, 2.0, 2.5],
+        "trade_burst_z": [1.5, 2.0],
+        "delta_agreement": ["required", "strong_required"],
+        "hold_minutes": [1, 3, 5],
+        "side": "DIRECTIONAL_WHEN_DELTA_CONFIRMS",
+        "total_configurations": 72
+      },
+      "trial_budget": {
+        "max_configurations": 72,
+        "used_configurations": 0,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 0
+      },
+      "train_gate": {
+        "min_trades": 40,
+        "min_mean_net_bps": 2.0,
+        "min_positive_folds": 3,
+        "max_drawdown_bps": -400.0,
+        "screening_bootstrap_probability": 0.95,
+        "cost_stress_positive": true
+      }
+    },
+    {
+      "hypothesis_id": "HYP-MICROSTRUCTURE-BOOK-PRESSURE-004",
+      "experiment": "microstructure_book_pressure_alignment",
+      "family": "CROSS_VENUE_TOP_OF_BOOK_PRESSURE_ALIGNMENT",
+      "status": "registered_pending_first_seal",
+      "registration_type": "prospective_preregistration",
+      "claim": "Completed-minute Binance top-of-book pressure that either agrees with or sharply diverges from Coinbase top-of-book pressure predicts short-horizon continuation or reversion on Binance spot.",
+      "feature_contract": {
+        "uses_completed_minutes_only": true,
+        "entry_delay": "next completed Binance minute after signal",
+        "forbidden_features": [
+          "future top-of-book",
+          "post-signal spread recovery",
+          "post-entry book pressure"
+        ],
+        "allowed_features": [
+          "completed-minute Binance top-of-book imbalance",
+          "completed-minute Coinbase top-of-book imbalance",
+          "completed-minute Binance and Coinbase spread state",
+          "cross-venue pressure agreement or divergence"
+        ]
+      },
+      "grid": {
+        "lookback_minutes": [1, 3, 5],
+        "pressure_z_window_minutes": [360, 720, 1440],
+        "entry_z": [1.5, 2.0, 2.5],
+        "alignment_mode": ["agreement_continuation", "divergence_reversion"],
+        "spread_filter": ["none", "both_not_wide"],
+        "hold_minutes": [1, 3, 5],
+        "side": "LONG_AND_SHORT_RESEARCH_SYMMETRIC",
+        "total_configurations": 324
+      },
+      "trial_budget": {
+        "max_configurations": 324,
+        "used_configurations": 0,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 0
+      },
+      "train_gate": {
+        "min_trades": 40,
+        "min_mean_net_bps": 2.0,
+        "min_positive_folds": 3,
+        "max_drawdown_bps": -400.0,
+        "screening_bootstrap_probability": 0.95,
+        "cost_stress_positive": true
+      }
+    }
+  ],
+  "runtime_boundary": {
+    "research_only": true,
+    "automatic_queue_mutation": false,
+    "automatic_parameter_expansion": false,
+    "observer_registration_allowed": false,
+    "paper_or_live_promotion_allowed": false,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

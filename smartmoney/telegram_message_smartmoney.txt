@@ -1,0 +1,6 @@
+⚡️ Smart‑Money Alert
+• {setup} ({tf})  |  {symbol} {side}
+• entry {entry}  |  sl {sl}  |  TP {tp_list}  |  R {r_list}
+• Filters: {filters}
+• Derivs: funding {funding_ap:.3f}  |  OI Δ1h {oi_delta_pct:.1f}%  |  Liq ${liq_usd:,.0f}
+• Score: {score:.2f}  |  Confirm: {confirm}  |  SMT: {smt_hint}

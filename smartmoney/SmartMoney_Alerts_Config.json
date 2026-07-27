@@ -1,0 +1,91 @@
+{
+  "version": "1.0.0",
+  "timeframes": [
+    "5m",
+    "15m",
+    "1h"
+  ],
+  "alerts": {
+    "diver_confirmed": {
+      "if": {
+        "divergence": {
+          "type": [
+            "bear",
+            "bull"
+          ],
+          "rsi_len": 14,
+          "ao_fast": 5,
+          "ao_slow": 34
+        },
+        "confirmation": {
+          "close_in_direction": true,
+          "mbos": {
+            "lookback_bars": 5
+          }
+        },
+        "htf_context": {
+          "tf": [
+            "4h",
+            "1d"
+          ],
+          "trend_filter": "with|against"
+        }
+      },
+      "risk": {
+        "stop": "beyond_div_pivot",
+        "tp_scheme_r": [
+          1.0,
+          1.5,
+          2.5
+        ],
+        "ctrend_r_max": 1.0
+      }
+    },
+    "sweep_return": {
+      "if": {
+        "eq_detect": {
+          "eqh_tol_pct": 0.15,
+          "eql_tol_pct": 0.15,
+          "window": 50
+        },
+        "sweep": {
+          "displacement_ticks": 2
+        },
+        "return_inside": {
+          "max_bars": 5
+        },
+        "mbos": {
+          "lookback_bars": 5
+        }
+      },
+      "risk": {
+        "stop": "beyond_sweep_tail",
+        "targets": "midrange->opposite"
+      }
+    },
+    "funding_hot": {
+      "if": {
+        "funding_ap_abs": {
+          "gte": 0.08
+        }
+      },
+      "action": "bias_contra|reduce_size"
+    },
+    "smt_ethbtc_anomaly": {
+      "if": {
+        "ethbtc_vs_btc": {
+          "sigma": {
+            "gte": 1.2
+          },
+          "max_lag_bars": 12
+        }
+      },
+      "action": "watch_mean_reversion|pair_trade_optional"
+    }
+  },
+  "filters_global": {
+    "cooldown_min": 5,
+    "max_concurrent_per_symbol": 2,
+    "latency_budget_ms": 1200
+  }
+}

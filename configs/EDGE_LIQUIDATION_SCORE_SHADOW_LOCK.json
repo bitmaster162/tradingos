@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-23T11:56:42+00:00",
+  "family": "EDGE_LIQUIDATION_CONTINUOUS_SHADOW",
+  "status": "frozen_train_only_forward_shadow",
+  "score_formula": "abs(displacement_atr) * max(0,-oi_delta_pct/2.0) * max(0,volume_z/1.5)",
+  "source": {
+    "replay_report": "docs/EDGE_LIQUIDATION_CONTEXT_HISTORICAL_REPLAY_2026-06-23.json",
+    "replay_sha256": "C043C8AEBA268A51144FE702602050759F8FFDAB157E531E08B23EBD43A0E002",
+    "edge_split": "2025-01-01T00:00:00+00:00",
+    "threshold_source": "train_rows_only",
+    "oos_used_for_thresholds": false
+  },
+  "train_only_derivation": {
+    "train_trades": 45,
+    "positive_train_scores": 36,
+    "zero_train_scores": 9,
+    "positive_q25": 0.426128,
+    "positive_q50": 1.414128,
+    "positive_q75": 5.109507,
+    "positive_q90_reference_only": 9.385174,
+    "positive_max_reference_only": 43.35846
+  },
+  "bins": [
+    {
+      "id": "inactive",
+      "min_inclusive": 0.0,
+      "max_inclusive": 0.0
+    },
+    {
+      "id": "low",
+      "min_exclusive": 0.0,
+      "max_inclusive": 0.426128
+    },
+    {
+      "id": "medium",
+      "min_exclusive": 0.426128,
+      "max_inclusive": 1.414128
+    },
+    {
+      "id": "elevated",
+      "min_exclusive": 1.414128,
+      "max_inclusive": 5.109507
+    },
+    {
+      "id": "extreme",
+      "min_exclusive": 5.109507,
+      "max_inclusive": null
+    }
+  ],
+  "boundaries": {
+    "label_only": true,
+    "allow_parameter_changes": false,
+    "allow_automatic_reselection": false,
+    "allow_filter": false,
+    "allow_veto": false,
+    "allow_paper_execution": false,
+    "allow_live_execution": false,
+    "allow_orders": false,
+    "can_trade": false
+  },
+  "next_action": "label only new forward Edge evidence; require independent outcomes before any new research proposal",
+  "can_trade": false
+}

@@ -1,0 +1,383 @@
+{
+  "system_id": "btc_trend_flex_v1_1",
+  "instrument": "BTCUSDT",
+  "status": "bundled_playbook_config",
+  "goal": {
+    "target_winrate_pct": 70,
+    "minimum_sample_trades": 100,
+    "note": "Target benchmark only. Requires backtest and forward validation."
+  },
+  "policy": {
+    "use_probabilistic_scenarios": true,
+    "point_price_prediction_allowed": false,
+    "import_dated_price_levels": false,
+    "import_dated_scenario_probabilities": false,
+    "historical_reference_only_docs": [
+      "docs/BTC_EXEC_SUMMARY_2026-02-14_ARCHIVE.md"
+    ]
+  },
+  "timeframe_model": {
+    "swing_default": {
+      "bias_tf": "4h",
+      "execution_tf": "15m",
+      "trigger_tf": "5m"
+    },
+    "m15_agent_mode": {
+      "bias_tf": "1h",
+      "execution_tf": "15m",
+      "trigger_tf": "5m",
+      "require_h4_context": true
+    },
+    "mappings": [
+      {
+        "execution_tf": "1m",
+        "bias_tf": "15m",
+        "trigger_tf": "1m"
+      },
+      {
+        "execution_tf": "5m",
+        "bias_tf": "1h",
+        "trigger_tf": "1m"
+      },
+      {
+        "execution_tf": "15m",
+        "bias_tf": "4h",
+        "trigger_tf": "5m"
+      },
+      {
+        "execution_tf": "1h",
+        "bias_tf": "4h",
+        "trigger_tf": "15m"
+      },
+      {
+        "execution_tf": "4h",
+        "bias_tf": "1d",
+        "trigger_tf": "1h"
+      },
+      {
+        "execution_tf": "1d",
+        "bias_tf": "1w",
+        "trigger_tf": "4h"
+      }
+    ]
+  },
+  "indicators": {
+    "ema_fast": 20,
+    "ema_mid": 50,
+    "ema_trend": 200,
+    "adx_length": 14,
+    "macd": {
+      "fast": 12,
+      "slow": 26,
+      "signal": 9
+    },
+    "psar": {
+      "start": 0.02,
+      "increment": 0.02,
+      "max": 0.2
+    },
+    "rsi_length": 14,
+    "stochastic": {
+      "k": 14,
+      "d": 3,
+      "smooth": 3
+    },
+    "bollinger": {
+      "length": 20,
+      "stddev": 2.0
+    },
+    "atr_length": 14
+  },
+  "market_inputs": {
+    "oi": {
+      "required_for_full_quality": true,
+      "price_up_oi_up": "trend_confirm",
+      "price_up_oi_down": "short_squeeze_warning",
+      "price_down_oi_up": "short_crowding_warning",
+      "sharp_oi_drop": "liquidation_or_capitulation"
+    },
+    "funding": {
+      "required_for_full_quality": true,
+      "positive_extreme": "overheated_longs",
+      "negative_extreme": "overcrowded_shorts",
+      "near_zero": "balanced_market_ready_for_impulse"
+    },
+    "liquidation_heatmap": {
+      "required_for_full_quality": true,
+      "clusters_are_magnets": true,
+      "do_not_enter_into_major_cluster": true,
+      "post_sweep_behavior": "reversal_or_pause"
+    },
+    "spot_vs_perp": {
+      "price_up_spot_cvd_down": "derivatives_led_move_warning",
+      "spot_cvd_up_weak_price": "spot_accumulation_hint",
+      "prefer_spot_led_moves": true
+    },
+    "volume_delta": {
+      "impulse_without_volume": "pullback_risk",
+      "aggressive_delta_with_price": "trend_confirm",
+      "climactic_volume": "phase_exhaustion"
+    },
+    "etf_flows": {
+      "enabled_for_higher_tf_background": true,
+      "not_an_intraday_trigger": true,
+      "inflows_plus_neutral_funding": "bullish_background",
+      "outflows_plus_positive_funding": "selloff_risk"
+    },
+    "htf_context": {
+      "required": true,
+      "levels": [
+        "1d",
+        "1w"
+      ],
+      "phase_required": true,
+      "phase_labels": [
+        "accumulation",
+        "impulse",
+        "distribution",
+        "balance"
+      ]
+    }
+  },
+  "scenario_template": {
+    "active_scenario_required": true,
+    "scenarios": {
+      "bull": {
+        "confirmation": [
+          "htf_support_holds",
+          "oi_supports_move",
+          "funding_not_extreme_against_trade",
+          "spot_or_volume_confirms"
+        ],
+        "invalidation": [
+          "htf_support_breaks_with_acceptance",
+          "spot_participation_fails",
+          "post_sweep_rejection_without_reclaim"
+        ],
+        "trade_response": "prefer_trend_continuation_long"
+      },
+      "base": {
+        "confirmation": [
+          "mixed_oi_and_funding",
+          "weak_follow_through",
+          "range_edges_hold",
+          "adx_neutral_or_low"
+        ],
+        "invalidation": [
+          "breakout_with_volume_and_oi",
+          "clear_structure_shift"
+        ],
+        "trade_response": "prefer_range_reversion"
+      },
+      "bear": {
+        "confirmation": [
+          "htf_levels_fail",
+          "rallies_fail_without_spot_confirmation",
+          "positive_funding_on_weak_price",
+          "liquidity_sweep_up_rejects"
+        ],
+        "invalidation": [
+          "strong_level_reclaim",
+          "spot_led_demand_returns",
+          "sustained_continuation_with_oi_support"
+        ],
+        "trade_response": "prefer_short_continuation_or_fake_break_fade"
+      }
+    }
+  },
+  "regime": {
+    "trend_adx_min": 25,
+    "range_adx_max": 18,
+    "neutral_zone": [
+      18,
+      24
+    ]
+  },
+  "trend_setup": {
+    "direction_filter": "price_vs_ema200_and_di_alignment",
+    "pullback_zone": "ema20_ema50",
+    "trigger": [
+      "psar_flip",
+      "macd_cross_in_direction",
+      "close_back_above_below_ema20"
+    ],
+    "quality_checks": [
+      "oi_should_support_move",
+      "funding_should_not_be_extreme_against_entry",
+      "spot_or_volume_should_confirm",
+      "do_not_enter_directly_into_major_liquidation_cluster"
+    ],
+    "minimum_confirmation_count": 2,
+    "stop_atr_buffer": 0.3,
+    "max_stop_atr": 1.5,
+    "take_profit_r": [
+      1.2,
+      2.0
+    ],
+    "move_to_break_even_after_tp1": true
+  },
+  "range_setup": {
+    "range_lookback_bars": 50,
+    "minimum_touches_per_side": 2,
+    "support_resistance_source": "range_edge_or_bollinger_band",
+    "quality_checks": [
+      "prefer_liquidity_sweep_then_reclaim",
+      "use_funding_and_oi_for_exhaustion_read",
+      "require_volume_response_at_range_edge"
+    ],
+    "long_filters": {
+      "rsi_max": 30,
+      "stoch_k_max": 20,
+      "rejection_close_required": true
+    },
+    "short_filters": {
+      "rsi_min": 70,
+      "stoch_k_min": 80,
+      "rejection_close_required": true
+    },
+    "stop_atr_buffer": 0.25,
+    "time_stop_bars": 6,
+    "partial_take_profit": "midrange",
+    "final_take_profit_pct_of_range": 90
+  },
+  "risk_protocol": {
+    "base_risk_pct": 1.0,
+    "hard_max_risk_pct": 1.5,
+    "validated_upper_bound_pct": 2.0,
+    "validated_upper_bound_note": "Use only after your own positive sample.",
+    "reduced_risk_pct_when_data_degraded": 0.5,
+    "max_open_positions": 1,
+    "daily_stop_r": 2.0,
+    "weekly_stop_r": 6.0,
+    "max_consecutive_losses_before_pause": 3,
+    "pause_after_consecutive_losses": "next_session_or_manual_review",
+    "conflict_with_h4_context_size_multiplier": 0.5,
+    "no_prediction_policy": true
+  },
+  "decision_metrics": {
+    "entry_filters": {
+      "trade_must_have_defined_entry_stop_target": true,
+      "stop_must_be_structural_not_arbitrary": true,
+      "atr_based_stop_calibration_required": true,
+      "trend_min_rr_to_final_target": 1.5,
+      "range_min_rr_to_final_target": 1.2,
+      "fees_and_slippage_must_not_destroy_edge": true
+    },
+    "system_metrics_priority": [
+      "expectancy_r",
+      "avg_win_r",
+      "avg_loss_r",
+      "winrate_pct",
+      "max_drawdown_pct",
+      "max_consecutive_losses"
+    ],
+    "expectancy_formula_r": "E = (winrate * avg_win_r) - ((1 - winrate) * avg_loss_r)",
+    "breakeven_winrate_reference": [
+      {
+        "reward_r": 0.5,
+        "breakeven_winrate_pct": 66.67
+      },
+      {
+        "reward_r": 1.0,
+        "breakeven_winrate_pct": 50.0
+      },
+      {
+        "reward_r": 1.5,
+        "breakeven_winrate_pct": 40.0
+      },
+      {
+        "reward_r": 2.0,
+        "breakeven_winrate_pct": 33.33
+      },
+      {
+        "reward_r": 3.0,
+        "breakeven_winrate_pct": 25.0
+      }
+    ],
+    "r_multiples_required": true,
+    "drawdown_recovery_reference": [
+      {
+        "drawdown_pct": 10,
+        "required_recovery_pct": 11.1
+      },
+      {
+        "drawdown_pct": 20,
+        "required_recovery_pct": 25.0
+      },
+      {
+        "drawdown_pct": 30,
+        "required_recovery_pct": 42.9
+      },
+      {
+        "drawdown_pct": 40,
+        "required_recovery_pct": 66.7
+      },
+      {
+        "drawdown_pct": 50,
+        "required_recovery_pct": 100.0
+      }
+    ]
+  },
+  "monitoring_checklist": {
+    "daily": [
+      "update_d1_w1_levels",
+      "label_market_phase",
+      "review_etf_or_institutional_background",
+      "write_active_bull_base_bear_scenario"
+    ],
+    "every_4h": [
+      "refresh_bias_with_bitmasterai_context",
+      "review_regime_shift",
+      "update_liquidity_map"
+    ],
+    "pre_entry": [
+      "where_is_nearest_liquidity",
+      "is_oi_confirming_the_move",
+      "who_pays_funding",
+      "does_spot_or_volume_confirm",
+      "is_this_range_edge_or_structure_middle",
+      "is_macro_or_etf_background_against_the_trade"
+    ]
+  },
+  "entry_gate": {
+    "skip_if_dirty_answers_gte": 3,
+    "tag_data_degraded_when_missing_context": true
+  },
+  "validation": {
+    "log_fields": [
+      "date",
+      "bias_tf",
+      "execution_tf",
+      "trigger_tf",
+      "mode",
+      "active_scenario",
+      "side",
+      "entry",
+      "stop",
+      "tp1",
+      "tp2",
+      "risk_pct",
+      "result_r",
+      "exit_reason",
+      "notes",
+      "oi_state",
+      "funding_state",
+      "liquidity_context",
+      "spot_perp_confirmation",
+      "volume_delta_confirmation",
+      "etf_background",
+      "data_degraded",
+      "planned_rr_to_final_target",
+      "avg_win_r_snapshot",
+      "avg_loss_r_snapshot",
+      "rolling_expectancy_r",
+      "consecutive_losses"
+    ],
+    "requirements": {
+      "minimum_trades": 100,
+      "winrate_target_pct": 70,
+      "expectancy_r_gt": 0.0,
+      "r_multiple_journaling_required": true
+    }
+  }
+}

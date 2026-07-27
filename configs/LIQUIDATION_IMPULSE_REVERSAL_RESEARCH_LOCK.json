@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "family": "LIQUIDATION_IMPULSE_REVERSAL_1H",
+  "enabled": false,
+  "status": "historically_rejected_train_2026-06-23",
+  "evidence": {
+    "source_report": "docs/LIQUIDATION_IMPULSE_REVERSAL_NESTED_HOLDOUT_2026-06-23.json",
+    "tested_configs": 288,
+    "train_qualified": 0,
+    "validation_opened": false,
+    "oos_opened": false,
+    "best_ranked_train_trades": 10,
+    "best_ranked_train_expectancy_r": -0.09395
+  },
+  "boundaries": {
+    "allow_reselection": false,
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "can_trade": false
+  }
+}

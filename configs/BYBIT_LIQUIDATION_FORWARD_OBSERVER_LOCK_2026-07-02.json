@@ -1,0 +1,40 @@
+{
+  "lock_id": "bybit_short_liquidation_squeeze_continuation_forward_observer_2026_07_02",
+  "status": "accepted_forward_observer_only",
+  "accepted_at": "2026-07-02T10:38:00Z",
+  "forward_start_at": "2026-07-02T10:35:08Z",
+  "forward_start_rule": "start from the next complete 1h bar after forward_start_at; the partially visible lock-hour bar is excluded",
+  "can_trade": false,
+  "orders_allowed": false,
+  "source_study": "docs/BYBIT_ALL_LIQUIDATION_CONTEXT_INTAKE_2026-07-02_AFTER_PRICE_GAP_FILL_bar_context.csv",
+  "discovery_report": "docs/BYBIT_ALL_LIQUIDATION_EVENT_STUDY_2026-07-02_AFTER_PRICE_GAP_FILL.json",
+  "review_report": "docs/BYBIT_LIQUIDATION_EVENT_STUDY_REVIEW_2026-07-02.json",
+  "hypothesis": {
+    "plain_english": "After a Bybit short-liquidation squeeze bar, monitor whether continuation upside persists on untouched forward events.",
+    "context": "short_liquidation_squeeze",
+    "direction": "continuation",
+    "side": "long_bias_watch_only",
+    "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BCHUSDT"],
+    "interval": "1h",
+    "candidate_horizons_bars": [1, 2, 4]
+  },
+  "forward_gate_required": {
+    "minimum_new_event_bars": 15,
+    "minimum_new_liquidation_events": 30,
+    "minimum_positive_horizons": 2,
+    "minimum_mean_bps_after_cost_buffer": 0.0,
+    "cost_buffer_bps": 7.0,
+    "no_parameter_changes": true,
+    "manual_review_before_any_paper": true
+  },
+  "boundary": {
+    "observer_only": true,
+    "discovery_sample_not_validation": true,
+    "emits_alerts": false,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

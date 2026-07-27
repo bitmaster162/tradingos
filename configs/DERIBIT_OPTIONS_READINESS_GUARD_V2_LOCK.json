@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "sealed_at": "2026-07-16T12:16:38+00:00",
+  "contract_id": "DERIBIT_OPTIONS_FORWARD_READINESS_GUARD_V2",
+  "forward_floor_utc": "2026-07-16T13:00:00Z",
+  "script_sha256": "e04028f67a386ff437014b8c849d03a77ca23801afd3552771720924461676d8",
+  "config_sha256": "80e7d8bf63ad98f6d12c0a1f073bd2e522b992400a341ff525cc56e368e9869b",
+  "collector_lock_sha256": "ba11fb7a6706e084d79d0eb27c3fd156f58e0eb614aa0786450f925ad111e250",
+  "registers_hypothesis": false,
+  "predecessor_rows_admitted": false,
+  "orders_allowed": false,
+  "can_trade": false
+}

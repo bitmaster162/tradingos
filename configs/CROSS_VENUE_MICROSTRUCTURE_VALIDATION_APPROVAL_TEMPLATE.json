@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "approval_template_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_VALIDATION_APPROVAL_V1",
+  "status": "template_not_granted",
+  "instructions": "Copy this file to configs/CROSS_VENUE_MICROSTRUCTURE_VALIDATION_APPROVAL.json only after manual candidate review. Keep can_trade=false. This file does not permit observer, paper, live, signals, or orders.",
+  "approval": {
+    "manual_approval_granted": false,
+    "validation_opening_allowed": false,
+    "approval_scope": "microstructure_validation_only",
+    "candidate_rank": null,
+    "strategy_id": null,
+    "source_train_snapshot_id": null,
+    "validation_snapshot_id": null,
+    "review_pack_path": "docs/CROSS_VENUE_MICROSTRUCTURE_CANDIDATE_REVIEW_PACK_2026-06-25.json",
+    "protocol_path": "docs/CROSS_VENUE_MICROSTRUCTURE_VALIDATION_PROTOCOL_DRAFT_2026-06-25.json",
+    "approved_by": null,
+    "approved_at_utc": null,
+    "expires_at_utc": null,
+    "checked": {
+      "candidate_report_reviewed": false,
+      "train_result_reproducible": false,
+      "cost_stress_survives_reviewed": false,
+      "fold_stability_reviewed": false,
+      "drawdown_tail_risk_reviewed": false,
+      "no_feature_leakage_reviewed": false,
+      "multiple_testing_policy_reviewed": false,
+      "validation_budget_accepted": false,
+      "no_live_execution_understood": false
+    },
+    "prohibitions": {
+      "parameter_search_allowed": false,
+      "reoptimization_allowed": false,
+      "observer_registration_allowed": false,
+      "paper_execution_allowed": false,
+      "live_execution_allowed": false,
+      "signals_allowed": false,
+      "orders_allowed": false
+    },
+    "can_trade": false
+  }
+}

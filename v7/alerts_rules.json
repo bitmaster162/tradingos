@@ -1,0 +1,72 @@
+[
+  {
+    "id": "entry.explicit",
+    "category": "entry",
+    "pattern": "(?i)\\b(entry|вход|buy stop|sell stop|stop-limit|stop-buy|sell-stop|buy-stop|лимит|trigger|триггер входа)\\b",
+    "flags": "IGNORECASE",
+    "priority": 3
+  },
+  {
+    "id": "stop.explicit",
+    "category": "stop",
+    "pattern": "(?i)\\b(stop|sl|stop-loss|стоп|инвалидац)\\b",
+    "flags": "IGNORECASE",
+    "priority": 3
+  },
+  {
+    "id": "take.explicit",
+    "category": "take",
+    "pattern": "(?i)\\b(tp\\d*|tp|take profit|тейк|цели?|targets?)\\b",
+    "flags": "IGNORECASE",
+    "priority": 2
+  },
+  {
+    "id": "prohibition.guardrail",
+    "category": "prohibition",
+    "pattern": "(?i)\\b(no trade|avoid|skip|kill-switch|stop-1-3|не входить|не брать|не торговать|запрет|без исключений|усреднен)\\b",
+    "flags": "IGNORECASE",
+    "priority": 3
+  },
+  {
+    "id": "ict.structure",
+    "category": "ict",
+    "pattern": "(?i)\\b(fvg|fair value gap|ob|order block|bos|mbos|choch|breaker|ote|eqh|eql|sfp)\\b|дисбаланс|ордер ?блок",
+    "flags": "IGNORECASE",
+    "priority": 2
+  },
+  {
+    "id": "orderflow.flow",
+    "category": "orderflow",
+    "pattern": "(?i)\\b(cvd|delta|footprint|dom|open interest|oi|liquidations?)\\b|дельта|ликвидац",
+    "flags": "IGNORECASE",
+    "priority": 2
+  },
+  {
+    "id": "profile.auction",
+    "category": "profile",
+    "pattern": "(?i)\\b(tpo|poc|vah|val|profile|volume profile|auction)\\b|профил",
+    "flags": "IGNORECASE",
+    "priority": 2
+  },
+  {
+    "id": "vwap.session",
+    "category": "vwap",
+    "pattern": "(?i)\\b(vwap|uvwap|anchored vwap)\\b",
+    "flags": "IGNORECASE",
+    "priority": 2
+  },
+  {
+    "id": "smt.divergence",
+    "category": "smt",
+    "pattern": "(?i)\\b(smt|btc.?eth divergence|equal highs?|equal lows?)\\b|дивергенц.{0,12}btc.{0,12}eth",
+    "flags": "IGNORECASE",
+    "priority": 2
+  },
+  {
+    "id": "news.catalyst",
+    "category": "news",
+    "pattern": "(?i)\\b(cpi|fomc|nfp|sec|etf|listing|macro|news|release)\\b|релиз|новост|макро",
+    "flags": "IGNORECASE",
+    "priority": 3
+  }
+]

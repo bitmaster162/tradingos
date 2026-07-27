@@ -1,0 +1,41 @@
+{
+  "lock_id": "liq_timing_vol_continuation_20260703_0500z",
+  "created_at": "2026-07-03T06:05:30Z",
+  "source_report": "docs/LIQUIDATION_TIMING_VOL_CONTINUATION_2026-07-03_FIRST_PASS.json",
+  "runtime_boundary": {
+    "can_trade": false,
+    "orders_allowed": false,
+    "paper_entries_allowed": false,
+    "signals_allowed": false,
+    "purpose": "forward-only observer lock"
+  },
+  "selected_setup": {
+    "setup": "short_liquidation_squeeze__late_40_60m__vol_normal_0p8_1p2x__close_misaligned",
+    "direction": "continuation_long_after_short_liquidation_squeeze",
+    "horizons_bars": [4],
+    "interval": "1h",
+    "symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
+    "after_bar_ts": "2026-07-03T05:00:00.000Z"
+  },
+  "fixed_parameters": {
+    "lookback_bars_for_prior_range": 24,
+    "cost_bps": 4.0,
+    "timing_bucket": "late_40_60m",
+    "vol_bucket": "vol_normal_0p8_1p2x",
+    "close_alignment": "close_misaligned",
+    "dominant_context": "short_liquidation_squeeze"
+  },
+  "forward_gate": {
+    "minimum_new_events": 30,
+    "minimum_new_symbols": 2,
+    "minimum_positive_horizons": 1,
+    "minimum_mean_bps_after_cost_buffer": 15.0,
+    "minimum_winrate_pct": 55.0
+  },
+  "anti_overfit_rules": [
+    "Do not change selected_setup after the lock timestamp.",
+    "Do not tune timing, volatility, close-alignment, cost or horizon thresholds on post-lock observations.",
+    "If sample thresholds are met and the gate fails, move to manual tombstone review before any retest.",
+    "Passing this gate only allows manual review; it does not allow paper or live trading."
+  ]
+}

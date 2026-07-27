@@ -1,0 +1,57 @@
+{
+  "playbook_id": "hl3_regime_playbook_v1",
+  "status": "bundled_expectation_regime_playbook",
+  "purpose": "Trade expectation-driven range conditions through bounce and trap setups instead of blind breakout entries.",
+  "regime_definition": {
+    "visual_signs": [
+      "long_compression_under_or_over_key_level",
+      "micro_fake_impulses_without_acceptance",
+      "volume_buildup_before_level_but_weak_confirmation_on_breakout"
+    ],
+    "breakout_entry_allowed": false,
+    "breakout_acceptance_required_to_invalidate_hl3": true
+  },
+  "setups": {
+    "long_bounce": {
+      "requires_hl3_regime": true,
+      "requires_support_zone": true,
+      "requires_rejection_signal": true,
+      "stop_atr_buffer_min": 1.0,
+      "stop_atr_buffer_max": 1.5,
+      "tp1_atr_min": 0.8,
+      "tp1_atr_max": 1.2,
+      "minimum_main_target_rr": 1.8
+    },
+    "short_trap": {
+      "requires_hl3_regime": true,
+      "requires_fake_break": true,
+      "requires_reentry_into_range": true,
+      "stop_atr_buffer_min": 0.8,
+      "stop_atr_buffer_max": 1.2,
+      "minimum_main_target_rr": 1.8
+    }
+  },
+  "risk": {
+    "risk_per_trade_pct_max": 1.5,
+    "size_from_structural_stop_only": true,
+    "volume_confirmation_required": true
+  },
+  "invalidators": [
+    "breakout_acceptance_on_volume",
+    "loss_of_support_for_long_bounce",
+    "failed_reentry_for_short_trap"
+  ],
+  "telegram_card_fields": [
+    "pair",
+    "regime",
+    "timeframes",
+    "setup",
+    "conditions",
+    "entry",
+    "stop",
+    "tp1",
+    "tp2",
+    "cancel",
+    "control"
+  ]
+}

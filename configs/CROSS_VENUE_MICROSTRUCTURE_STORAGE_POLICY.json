@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "policy_id": "BTC_CROSS_VENUE_MICROSTRUCTURE_STORAGE_GUARD_V1",
+  "status": "locked",
+  "source_cache_relative": "data/cross_venue_microstructure",
+  "readiness_report": "docs/CROSS_VENUE_MICROSTRUCTURE_DATA_QUALITY_2026-06-24.json",
+  "target_hours": 168,
+  "min_free_bytes_hard": 2147483648,
+  "min_free_pct_hard": 2.0,
+  "max_authoritative_bytes_hard": 10737418240,
+  "max_estimated_target_bytes_hard": 8589934592,
+  "warn_free_bytes": 10737418240,
+  "warn_free_pct": 5.0,
+  "warn_estimated_target_bytes": 4294967296,
+  "runtime_boundary": {
+    "storage_monitor_only": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

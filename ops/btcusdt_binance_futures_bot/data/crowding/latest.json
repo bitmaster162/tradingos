@@ -1,0 +1,44 @@
+{
+  "symbol": "BTCUSDT",
+  "period": "5m",
+  "snapshot_time_ms": 1780853920834,
+  "open_interest": {
+    "symbol": "BTCUSDT",
+    "openInterest": "101574.563",
+    "time": 1780853918345
+  },
+  "open_interest_hist": {
+    "symbol": "BTCUSDT",
+    "sumOpenInterest": "101528.26500000",
+    "sumOpenInterestValue": "6318378937.07594000",
+    "CMCCirculatingSupply": "20039087.00000000",
+    "timestamp": 1780853700000
+  },
+  "global_long_short_account_ratio": {
+    "symbol": "BTCUSDT",
+    "longAccount": "0.6647",
+    "longShortRatio": "1.9824",
+    "shortAccount": "0.3353",
+    "timestamp": 1780853700000
+  },
+  "top_long_short_account_ratio": {
+    "symbol": "BTCUSDT",
+    "longAccount": "0.6686",
+    "longShortRatio": "2.0175",
+    "shortAccount": "0.3314",
+    "timestamp": 1780853700000
+  },
+  "top_long_short_position_ratio": {
+    "symbol": "BTCUSDT",
+    "longAccount": "0.5318",
+    "longShortRatio": "1.1359",
+    "shortAccount": "0.4682",
+    "timestamp": 1780853700000
+  },
+  "taker_buy_sell_ratio": {
+    "buySellRatio": "2.3806",
+    "sellVol": "122.3690",
+    "buyVol": "291.3170",
+    "timestamp": 1780853400000
+  }
+}

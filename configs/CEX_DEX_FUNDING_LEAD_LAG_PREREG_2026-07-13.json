@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "lock_id": "cex_dex_predicted_funding_lead_lag_forward_2026_07_13_v1",
+  "sealed_at": "2026-07-13T00:26:29Z",
+  "status": "fixed_forward_data_collection_contract",
+  "source": {
+    "provider": "Hyperliquid public info API",
+    "url": "https://api.hyperliquid.xyz/info",
+    "requests": [
+      {
+        "purpose": "cex_predicted_funding",
+        "method": "POST",
+        "json": {
+          "type": "predictedFundings"
+        }
+      },
+      {
+        "purpose": "direct_hyperliquid_current_funding",
+        "method": "POST",
+        "json": {
+          "type": "metaAndAssetCtxs"
+        }
+      }
+    ],
+    "official_docs": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint/perpetuals",
+    "provenance_warning": "BinPerp and BybitPerp values are venue estimates redistributed by Hyperliquid. Any apparent lead-lag remains provisional until replicated with direct venue feeds."
+  },
+  "collection": {
+    "symbols": [
+      "BTC",
+      "ETH",
+      "SOL"
+    ],
+    "venue_ids": [
+      "BinPerp",
+      "BybitPerp",
+      "HlPerp"
+    ],
+    "polling_seconds": 60,
+    "request_timeout_seconds": 20,
+    "bucket_seconds": 60,
+    "direct_hyperliquid_context_required": true,
+    "hyperliquid_funding_interval_hours": 1,
+    "append_only": true,
+    "selected_rows_only": true,
+    "credentials_allowed": false
+  },
+  "normalization": {
+    "preserve_raw_funding_rate": true,
+    "mechanical_hourly_rate_formula": "fundingRate / fundingIntervalHours",
+    "mechanical_annualized_simple_pct_formula": "hourly_rate * 24 * 365 * 100",
+    "annualized_value_is_not_realized_return": true
+  },
+  "quality_gate": {
+    "all_symbols_required": true,
+    "all_venues_required_per_symbol": true,
+    "minimum_payload_rows": 3,
+    "minimum_interval_hours_exclusive": 0,
+    "maximum_interval_hours": 24,
+    "maximum_next_funding_past_seconds": 300,
+    "maximum_next_funding_future_hours": 24,
+    "direct_hyperliquid_context_required": true
+  },
+  "future_research_lock": {
+    "hypothesis": "Changes in CEX predicted funding mechanically normalized per hour may lead same-direction changes in Hyperliquid predicted funding.",
+    "registered_cex_venues": [
+      "BinPerp",
+      "BybitPerp"
+    ],
+    "registered_response_venue": "HlPerp",
+    "registered_lags_minutes": [
+      1,
+      5,
+      15
+    ],
+    "minimum_forward_span_days": 14,
+    "minimum_unique_minute_snapshots": 10000,
+    "minimum_independent_utc_days": 10,
+    "minimum_required_point_coverage": 0.98,
+    "parameter_search_allowed": false,
+    "historical_backfill_admitted_for_selection": false,
+    "observer_creation_allowed_before_gate": false,
+    "direct_source_replication_required_before_paper_review": true
+  },
+  "runtime_boundary": {
+    "collector_only": true,
+    "directional_signal": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

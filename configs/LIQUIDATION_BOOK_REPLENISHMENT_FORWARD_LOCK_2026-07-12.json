@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "lock_id": "liquidation_book_replenishment_forward_observer_2026_07_12",
+  "status": "prospective_forward_lock_before_outcome_review",
+  "created_at": "2026-07-12T10:00:53Z",
+  "forward_start_at": "2026-07-12T10:00:53Z",
+  "can_trade": false,
+  "orders_allowed": false,
+  "hypothesis": {
+    "family": "LIQUIDATION_BOOK_REPLENISHMENT_FADE_1M",
+    "plain_english": "A real BTC forced-liquidation burst is more likely to mean-revert when the Binance top of book replenishes against the liquidation direction and Coinbase does not confirm the forced move.",
+    "event_source": "Binance USD-M BTCUSDT !forceOrder websocket",
+    "microstructure_source": "completed Binance BTCUSDT and Coinbase BTC-USD minute features",
+    "independence_note": "This is not standalone spot/perp return divergence and not the existing 1h candle-close liquidation absorption rule. It requires a real force-order event plus post-event book recovery and cross-venue non-confirmation."
+  },
+  "fixed_rules": {
+    "symbol": "BTCUSDT",
+    "event_bucket_seconds": 60,
+    "minimum_prior_event_minutes": 20,
+    "rolling_event_minutes": 1440,
+    "burst_notional_quantile": 0.75,
+    "minimum_burst_notional_usd": 2500.0,
+    "minimum_side_dominance_ratio": 1.5,
+    "pre_event_minutes": 5,
+    "confirmation_minutes": 3,
+    "minimum_post_book_minutes": 3,
+    "minimum_abs_post_imbalance": 0.05,
+    "minimum_imbalance_recovery": 0.10,
+    "maximum_spread_ratio_to_pre": 1.25,
+    "coinbase_nonconfirmation_bps": 5.0,
+    "outcome_horizons_minutes": [5, 15, 30],
+    "fee_and_slippage_bps_per_side": 7.0,
+    "execution_spread_bps_included": true,
+    "side_mapping": {
+      "SELL": "LONG",
+      "BUY": "SHORT"
+    }
+  },
+  "forward_gate": {
+    "minimum_resolved_events_per_horizon": 30,
+    "minimum_positive_horizons": 2,
+    "minimum_mean_net_bps": 5.0,
+    "minimum_winrate_pct": 52.0,
+    "minimum_profit_factor": 1.05,
+    "no_parameter_changes": true,
+    "manual_review_before_any_paper_design": true
+  },
+  "runtime_boundary": {
+    "observer_only": true,
+    "research_only": true,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

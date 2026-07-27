@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "classification": "independent_offline_linear_portfolio_stress_policy",
+  "thresholds": {
+    "max_stressed_mmr_pct": 80.0,
+    "max_equity_drawdown_pct": 25.0,
+    "min_stressed_equity_usd": 1000.0
+  },
+  "scenarios": [
+    {
+      "id": "correlated_crypto_crash",
+      "returns_pct": {
+        "BTC": -10.0,
+        "ETH": -15.0,
+        "USDT": -1.0
+      }
+    },
+    {
+      "id": "correlated_crypto_rally",
+      "returns_pct": {
+        "BTC": 10.0,
+        "ETH": 15.0,
+        "USDT": 0.0
+      }
+    },
+    {
+      "id": "eth_underperformance",
+      "returns_pct": {
+        "BTC": 5.0,
+        "ETH": -15.0,
+        "USDT": -0.5
+      }
+    },
+    {
+      "id": "btc_underperformance",
+      "returns_pct": {
+        "BTC": -10.0,
+        "ETH": 8.0,
+        "USDT": -0.5
+      }
+    }
+  ],
+  "assumptions": [
+    "starting_equity_usd already includes current collateral values and derivative mark-to-market",
+    "collateral haircut is deducted before scenario PnL",
+    "derivative PnL is linear in underlying return",
+    "maintenance margin is approximated from stressed absolute notional and configured maintenance rate",
+    "every exposed asset must have an explicit return in every scenario",
+    "this is not an exchange WCE implementation and grants no paper or live permission"
+  ],
+  "runtime_boundary": {
+    "uses_private_credentials": false,
+    "paper_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

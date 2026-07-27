@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "locked_allowlist",
+  "snapshot_policy": "configs/CROSS_VENUE_RESEARCH_DATA_AUTHORITY.json",
+  "hypothesis_registry": "configs/CROSS_VENUE_HYPOTHESIS_REGISTRY.json",
+  "run_root_relative_to_active": "_dl/research_runs_cross_venue",
+  "experiments": {
+    "cross_venue_catchup": {
+      "hypothesis_id": "HYP-CROSS-VENUE-CATCHUP-001",
+      "script": "tools/cross_venue_catchup_nested_holdout.py",
+      "family": "COINBASE_TO_BINANCE_CATCHUP_1M",
+      "supports_lock_path": true
+    },
+    "cross_venue_negative_rebound": {
+      "hypothesis_id": "HYP-CROSS-VENUE-REBOUND-002",
+      "script": "tools/cross_venue_negative_rebound_train_search.py",
+      "family": "COINBASE_NEGATIVE_DISLOCATION_REBOUND_1M",
+      "supports_lock_path": true
+    }
+  },
+  "execution_contract": {
+    "shell": false,
+    "arbitrary_extra_args": false,
+    "exact_snapshot_id_required": true,
+    "snapshot_verification_required": true,
+    "hypothesis_authorization_required": true,
+    "multiple_testing_assessment_required": true,
+    "output_must_set_can_trade_false": true,
+    "credentials_allowed": false,
+    "network_required": false,
+    "orders_allowed": false,
+    "observer_registration_allowed": false,
+    "paper_or_live_promotion_allowed": false
+  }
+}

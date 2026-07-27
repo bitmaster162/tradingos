@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "registry_id": "BTC_MICROSTRUCTURE_2026Q2",
+  "status": "locked_governance",
+  "created_at": "2026-06-24",
+  "registration_note": "Independent microstructure cycle. The closed BTC_RESEARCH_2026Q2 registry is not expanded or rewritten.",
+  "portfolio_budget": {
+    "max_hypotheses": 3,
+    "registered_hypotheses": 2,
+    "max_total_configurations": 300,
+    "used_configurations": 216,
+    "max_oos_openings": 1,
+    "used_oos_openings": 0
+  },
+  "multiple_testing_policy": {
+    "method": "bonferroni_over_tested_configurations",
+    "familywise_alpha": 0.05,
+    "selection_bootstrap_is_screening_only": true,
+    "candidate_requires_adjusted_p_value": true,
+    "missing_candidate_probability_fails": true
+  },
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-CROSS-VENUE-CATCHUP-001",
+      "experiment": "cross_venue_catchup",
+      "family": "COINBASE_TO_BINANCE_CATCHUP_1M",
+      "claim": "A sufficiently large positive Coinbase BTC-USD return that leads Binance BTCUSDT predicts a tradeable long-only Binance spot catch-up after next-minute entry.",
+      "registration_type": "prospective_preregistration",
+      "status": "rejected_train_gate",
+      "protocol": "configs/CROSS_VENUE_CATCHUP_RESEARCH_PROTOCOL.json",
+      "report": "docs/CROSS_VENUE_CATCHUP_NESTED_HOLDOUT_2026-06-24.json",
+      "trial_budget": {
+        "max_configurations": 108,
+        "used_configurations": 108,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2026-06-08T00:00:00+00:00",
+        "validation_end_exclusive": "2026-06-15T00:00:00+00:00",
+        "validation_opened": false,
+        "oos_opened": false,
+        "max_oos_openings": 1
+      },
+      "result": {
+        "decision": "reject_no_train_qualified_cross_venue_candidate",
+        "train_qualified": 0
+      }
+    },
+    {
+      "hypothesis_id": "HYP-CROSS-VENUE-REBOUND-002",
+      "experiment": "cross_venue_negative_rebound",
+      "family": "COINBASE_NEGATIVE_DISLOCATION_REBOUND_1M",
+      "claim": "An extreme negative Coinbase BTC-USD return relative to Binance BTCUSDT predicts a tradeable long-only Binance spot rebound after next-minute entry.",
+      "registration_type": "prospective_preregistration",
+      "evidence_status": "adaptive_followup_after_train_rejection_not_independent_confirmation",
+      "status": "rejected_train_gate",
+      "protocol": "configs/CROSS_VENUE_NEGATIVE_REBOUND_RESEARCH_PROTOCOL.json",
+      "report": "docs/CROSS_VENUE_NEGATIVE_REBOUND_TRAIN_2026-06-24.json",
+      "trial_budget": {
+        "max_configurations": 108,
+        "used_configurations": 108,
+        "max_verified_discovery_runs": 1,
+        "used_verified_discovery_runs": 1
+      },
+      "splits": {
+        "train_end_exclusive": "2026-06-24T02:37:00+00:00",
+        "validation_start_inclusive": "2026-06-24T02:37:00+00:00",
+        "minimum_future_validation_days": 14,
+        "validation_opened": false,
+        "oos_opened": false,
+        "max_oos_openings": 0
+      },
+      "result": {
+        "decision": "reject_no_train_qualified_negative_rebound_candidate",
+        "train_qualified": 0,
+        "validation_opened": false,
+        "oos_opened": false
+      }
+    }
+  ],
+  "runtime_boundary": {
+    "research_only": true,
+    "automatic_registry_mutation": false,
+    "automatic_parameter_expansion": false,
+    "observer_registration_allowed": false,
+    "paper_or_live_promotion_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

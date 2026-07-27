@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "policy": "precommitted_forward_evidence_only",
+  "minimum_expectancy_r": 0.1,
+  "maximum_drawdown_r": -6.0,
+  "early_pause": {
+    "minimum_resolved": 10,
+    "maximum_drawdown_r": -8.0
+  },
+  "decisions": {
+    "collecting": "collecting_independent_evidence",
+    "paused": "paused_early_risk_breach",
+    "rejected_expectancy": "rejected_no_positive_edge",
+    "rejected_winrate": "rejected_below_breakeven",
+    "rejected_drawdown": "rejected_drawdown_breach",
+    "rejected_historical": "rejected_historical_invalidation",
+    "paper_review": "paper_design_review_only",
+    "invalid": "blocked_invalid_evidence"
+  },
+  "boundaries": {
+    "allow_threshold_tuning_before_checkpoint": false,
+    "allow_paper_execution": false,
+    "allow_live_execution": false,
+    "allow_orders": false
+  }
+}

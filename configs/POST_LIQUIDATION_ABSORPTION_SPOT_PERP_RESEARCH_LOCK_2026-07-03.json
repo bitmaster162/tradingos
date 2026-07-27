@@ -1,0 +1,61 @@
+{
+  "lock_id": "post_liquidation_absorption_spot_perp_confirmation_2026_07_03",
+  "status": "research_lock_fixed_rules_not_runtime",
+  "created_at": "2026-07-03T00:00:00Z",
+  "can_trade": false,
+  "orders_allowed": false,
+  "hypothesis": {
+    "plain_english": "After a real liquidation bar, acceptance or absorption is more meaningful when spot/perp behavior confirms the intended side.",
+    "event_source": "real liquidation context rows only",
+    "confirmation_source": "Binance spot vs perpetual 1h OHLCV cache",
+    "not_a_signal": true
+  },
+  "fixed_rules": {
+    "interval": "1h",
+    "horizons_bars": [1, 2, 4],
+    "absorption_close_location": 0.6,
+    "spot_confirm_min_bps": 0.0,
+    "contexts": {
+      "long_liquidation_flush": {
+        "absorption_reversal": {
+          "condition": "futures close_location >= 0.60",
+          "side": "LONG",
+          "spot_confirmation": "spot_event_return_bps - perp_event_return_bps >= 0"
+        },
+        "acceptance_continuation": {
+          "condition": "futures close_location <= 0.40",
+          "side": "SHORT",
+          "spot_confirmation": "spot_event_return_bps - perp_event_return_bps <= 0"
+        }
+      },
+      "short_liquidation_squeeze": {
+        "absorption_reversal": {
+          "condition": "futures close_location <= 0.40",
+          "side": "SHORT",
+          "spot_confirmation": "spot_event_return_bps - perp_event_return_bps <= 0"
+        },
+        "acceptance_continuation": {
+          "condition": "futures close_location >= 0.60",
+          "side": "LONG",
+          "spot_confirmation": "spot_event_return_bps - perp_event_return_bps >= 0"
+        }
+      }
+    }
+  },
+  "review_gate": {
+    "min_events_per_bucket": 10,
+    "min_mean_bps": 10.0,
+    "min_winrate_pct": 55.0,
+    "result_status_if_passed": "observer_candidate_needs_untouched_forward",
+    "manual_review_before_any_paper": true,
+    "no_parameter_changes_after_review": true
+  },
+  "runtime_boundary": {
+    "research_only": true,
+    "paper_entries_allowed": false,
+    "live_entries_allowed": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "can_trade": false
+  }
+}

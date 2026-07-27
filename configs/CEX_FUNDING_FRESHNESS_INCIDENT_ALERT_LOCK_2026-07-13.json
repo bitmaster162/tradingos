@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "lock_id": "cex_funding_freshness_incident_alert_2026_07_13_v1",
+  "sealed_at": "2026-07-13T02:10:00Z",
+  "status": "fixed_transition_only_incident_policy",
+  "inputs": {
+    "watchdog_report": "docs/CEX_FUNDING_FRESHNESS_WATCHDOG_2026-07-13.json",
+    "state": "logs/cex_dex_funding/cex_funding_freshness_incident_alert_state.json",
+    "ledger": "logs/cex_dex_funding/cex_funding_freshness_incidents.jsonl",
+    "out_prefix": "docs/CEX_FUNDING_FRESHNESS_INCIDENT_ALERT_2026-07-13"
+  },
+  "transition_policy": {
+    "baseline_emits_notification": false,
+    "healthy_to_blocked_emits": true,
+    "blocked_to_recovered_emits": true,
+    "repeated_same_state_emits": false,
+    "changed_blocker_signature_emits": false,
+    "pending_delivery_is_retried": true,
+    "maximum_pending_notifications": 20,
+    "maximum_recorded_keys": 500
+  },
+  "telegram": {
+    "managed_loop_send_requested": true,
+    "token_env": "TELEGRAM_BOT_TOKEN",
+    "chat_id_env": "TELEGRAM_CHAT_ID",
+    "env_files": [
+      ".env",
+      "configs/telegram.env",
+      "configs/.env"
+    ],
+    "timeout_seconds": 15
+  },
+  "runtime_boundary": {
+    "operational_incident_alert_only": true,
+    "automatic_restart_allowed": false,
+    "trade_signal": false,
+    "credentials_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

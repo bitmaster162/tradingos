@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "lock_id": "cex_funding_source_semantic_alignment_2026_07_13_v1",
+  "sealed_at": "2026-07-13T01:10:00Z",
+  "status": "fixed_source_alignment_contract",
+  "inputs": {
+    "aggregate_journal": "data/forward/cex_dex_funding_lead_lag/funding_snapshots.jsonl",
+    "direct_journal": "data/forward/cex_dex_funding_lead_lag/direct_cex_funding_snapshots.jsonl",
+    "join_key": "minute_bucket_ms"
+  },
+  "mapping": [
+    {
+      "aggregate_venue": "BinPerp",
+      "direct_venue": "BinanceDirect",
+      "label": "binance"
+    },
+    {
+      "aggregate_venue": "BybitPerp",
+      "direct_venue": "BybitDirect",
+      "label": "bybit"
+    }
+  ],
+  "symbols": [
+    "BTC",
+    "ETH",
+    "SOL"
+  ],
+  "metrics": {
+    "field": "funding_rate_per_hour",
+    "delta_unit": "bps_per_hour",
+    "delta_formula": "(aggregate - direct) * 10000",
+    "same_minute_only": true,
+    "reported": [
+      "mean_signed_delta_bps_per_hour",
+      "median_absolute_delta_bps_per_hour",
+      "p95_absolute_delta_bps_per_hour",
+      "maximum_absolute_delta_bps_per_hour",
+      "same_minute_pearson_correlation"
+    ],
+    "lagged_comparisons_allowed": false,
+    "price_outcomes_allowed": false
+  },
+  "readiness_gate": {
+    "minimum_matching_minute_buckets": 1440,
+    "minimum_independent_utc_days": 2,
+    "minimum_comparison_coverage": 0.98,
+    "minimum_matching_time_coverage": 0.95,
+    "maximum_consecutive_gap_minutes": 5,
+    "maximum_bad_jsonl_lines": 0,
+    "automatic_source_equivalence_claim_allowed": false,
+    "manual_semantic_review_required": true
+  },
+  "runtime_boundary": {
+    "data_quality_only": true,
+    "edge_evaluator": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

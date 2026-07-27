@@ -1,0 +1,73 @@
+{
+  "overlay_id": "ethbtc_core_hedge_dashboard_v1",
+  "status": "bundled_portfolio_role_overlay",
+  "instrument": "ETHBTC",
+  "timeframe": "1d",
+  "history_required_days": 220,
+  "metrics": {
+    "sma200": {
+      "type": "simple_moving_average",
+      "length": 200,
+      "source": "close"
+    },
+    "high30": {
+      "type": "rolling_max",
+      "length": 30,
+      "source": "high"
+    },
+    "low30": {
+      "type": "rolling_min",
+      "length": 30,
+      "source": "low"
+    },
+    "hl_30_ratio": {
+      "formula": "high30 / low30"
+    }
+  },
+  "signals": {
+    "above_200dma": "close > sma200",
+    "holding_above_200dma_closes": 3,
+    "near_200dma_band_pct": 2.0,
+    "core_impulse_hl30_min": 1.15,
+    "risk_off_hl30_max": 1.05,
+    "failsafe_below_sma_pct": 2.0,
+    "fast_recovery_days": 2
+  },
+  "states": {
+    "core": {
+      "trigger_any": [
+        "close_above_sma200_for_3_closes",
+        "hl30_ratio_gte_1_15"
+      ],
+      "portfolio_role": "ETH may be core allocation"
+    },
+    "hedge": {
+      "conditions": [
+        "close_near_sma200_within_2pct",
+        "hl30_ratio_lt_1_15"
+      ],
+      "portfolio_role": "ETH tactical hedge only"
+    },
+    "risk_off": {
+      "trigger_any": [
+        "close_below_sma200_without_fast_recovery",
+        "close_below_sma200_by_more_than_2pct",
+        "hl30_ratio_lte_1_05"
+      ],
+      "portfolio_role": "Reduce ETH, prefer BTC/cash/stables"
+    }
+  },
+  "actions": {
+    "core": "Increase ETH allocation in tiers",
+    "hedge": "Hold ETH only as tactical hedge; do not add to core",
+    "risk_off": "Reduce ETH longs and rotate toward BTC/cash/stables"
+  },
+  "alerts": {
+    "upgrade_alert": "close crosses above sma200 and hold_count >= 3",
+    "impulse_alert": "hl30_ratio crosses above 1.15",
+    "fail_safe_alert": "close below sma200 by more than 2pct or hl30_ratio <= 1.05"
+  },
+  "companion_layers": [
+    "configs/ARBITER_CTI_PANEL_v1.json"
+  ]
+}

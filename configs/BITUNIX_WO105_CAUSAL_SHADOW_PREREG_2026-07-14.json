@@ -1,0 +1,179 @@
+{
+  "schema": "bitunix-wo105-causal-shadow-prereg-v1",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V1_20260714",
+  "frozen_at_utc": "2026-07-13T19:46:00Z",
+  "forward_start_at": "2026-07-14T06:00:00Z",
+  "status": "FROZEN_CAUSAL_SHADOW_EVALUATOR",
+  "parameter_cohort_sha256": "254a8c8ed8055c48dd55927b3fad08bf16a4f2433ada5fac29d0dd8ba2f9efe8",
+  "supersedes_for_evaluation_only": {
+    "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_v3_20260713",
+    "v3_mutated": false,
+    "reason": "WO105 computes all gates from raw causal inputs and therefore requires a new prospective cohort."
+  },
+  "bindings": {
+    "exact_replay_report": "docs/BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json",
+    "exact_replay_report_sha256": "2ee80e579f39c17437a23738070a7ac5592d8de3126e770029eedd0ca8f3965e",
+    "evaluator": "tools/bitunix_wo105_causal_shadow_evaluator.py",
+    "evaluator_sha256": "48bdd6132af8649ca791f662ec70dce92aea12f5d9842e7cd18664cebdaadc45",
+    "v3_path": "HANDOFF/INCOMING/claude/20260713_bitunix_wo104_canonical/SETUP_A_PREREG_V3.json",
+    "v3_sha256": "fb7b78878f889391d9cbe7378de1b7df6fcdfda24b737a890137aefdddb0d159"
+  },
+  "scope": {
+    "public_data_only": true,
+    "credentials_allowed": false,
+    "private_api_allowed": false,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "params": {
+    "venue": "bitunix_usdt_perp",
+    "symbol": "BTCUSDT",
+    "timeframes": {
+      "signal": "1h",
+      "trigger": "5m",
+      "htf": "4h"
+    },
+    "record_schemas": {
+      "signal_bars": "ohlcv-bar-v1",
+      "htf_bars": "ohlcv-bar-v1",
+      "crowd": "crowd-point-v1",
+      "books": "public-book-v1",
+      "trades": "public-trade-v1",
+      "outcome_bars": "ohlcv-bar-v1",
+      "funding_events": "funding-event-v1"
+    },
+    "pivot": {
+      "algorithm": "rolling_extreme_with_forward_confirmation",
+      "lookback_bars": 20,
+      "confirmation_delay_bars": 2,
+      "tie_handling": "earliest_bar_wins",
+      "causal": true
+    },
+    "sweep_threshold_ticks": 1,
+    "reclaim_window_bars": 3,
+    "reclaim_rule": "closed_signal_bar_back_inside_confirmed_pivot",
+    "invalidation_buffer_ticks": 1,
+    "htf": {
+      "source": "raw_closed_4h_bars_only",
+      "ema_fast": 50,
+      "ema_slow": 200,
+      "slope_lookback_bars": 3,
+      "minimum_bars": 203,
+      "latest_close_max_age_ms": 15300000,
+      "veto_short": "up_strong",
+      "veto_long": "down_strong"
+    },
+    "entry": {
+      "order_rule": "limit_maker_at_tick_rounded_reclaim_close",
+      "latency_ms": 250,
+      "book_age_max_ms": 3000,
+      "maker_order_ttl_ms": 900000,
+      "taker_fallback": false
+    },
+    "exit": {
+      "risk_or_time_trigger": "first_closed_5m_stop_then_target_else_time",
+      "same_bar_stop_and_target": "stop_first",
+      "latency_ms": 250,
+      "book_age_max_ms": 3000,
+      "execution": "walk_first_causal_public_book_depth",
+      "protective_taker_exit_preregistered": true
+    },
+    "crowd_funding": {
+      "quorum_fresh_inputs_required": 3,
+      "sources": {
+        "funding_rate_8h": {
+          "abs_max": 0.0005,
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 28800000
+        },
+        "oi_delta_pct": {
+          "abs_max": 5.0,
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 3600000
+        },
+        "cvd_norm": {
+          "abs_max": 2.0,
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 3600000
+        },
+        "liquidation_skew": {
+          "abs_max": 2.0,
+          "sign_positive_means": "SHORT",
+          "freshness_max_age_ms": 3600000
+        },
+        "btc_ls_composite": {
+          "abs_max": 2.0,
+          "sign_positive_means": "LONG",
+          "freshness_max_age_ms": 86400000
+        }
+      },
+      "veto_rule": "fresh_quorum_required_and_no_extreme_on_intended_side"
+    },
+    "contract": {
+      "tick_size": 0.1,
+      "lot_step": 0.0001,
+      "min_qty": 0.0001,
+      "metadata_label": "INFERRED_NOT_EXPLICIT_ORDER_RULE"
+    },
+    "execution_model": {
+      "entry_fill": "trade_through_by_at_least_one_tick_after_eligible_book",
+      "queue_penalty_multiplier": 1.25,
+      "partial_fill_allowed": true,
+      "no_fill_is_terminal_after_ttl": true,
+      "immediate_top_level_fill_assumed": false,
+      "taker_entry_fallback": false
+    },
+    "fees": {
+      "tier": "VIP0",
+      "maker_bps": 2.0,
+      "taker_bps": 6.0,
+      "as_of": "2026-07-13"
+    },
+    "funding_treatment": {
+      "interval_h": 8,
+      "rule": "apply_each_causal_funding_event_crossed_by_shadow_position",
+      "positive_rate_long_pays": true
+    },
+    "shadow_sizing": {
+      "notional_usdt": 100.0,
+      "compounding": false
+    },
+    "outcome": {
+      "target_r": 2.0,
+      "max_holding_ms": 14400000,
+      "outcome_bars": "closed_5m_only",
+      "metrics_hidden_until_shadow_closed": true
+    },
+    "event_identity": {
+      "fields": [
+        "cohort_id",
+        "symbol",
+        "signal_close_ms",
+        "pivot_price",
+        "direction",
+        "source_manifest_sha256"
+      ],
+      "duplicate_terminal_event": "CAPTURE_INVALID",
+      "opened_event_parameter_change": "CAPTURE_INVALID"
+    },
+    "lifecycle_states": [
+      "CAPTURE_INVALID",
+      "NO_SETUP",
+      "NO_FILL",
+      "SHADOW_OPEN",
+      "SHADOW_CLOSED",
+      "COHORT_TOMBSTONED"
+    ],
+    "evaluation": {
+      "minimum_new_post_freeze_events": 30,
+      "historical_backfill_allowed": false,
+      "retuning_allowed": false,
+      "edge_evaluated_before_terminal_gate": false,
+      "minimum_expected_net_edge_r_for_independent_review": 0.25
+    }
+  },
+  "can_trade": false
+}

@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "status": "frozen_train_selected_observer_only_2026-06-23",
+  "candidate": {
+    "family": "EDGE_FORWARD_4H",
+    "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8",
+    "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+    "filter_mode": "oi_contraction",
+    "filters": [
+      "oi_contraction"
+    ],
+    "interval": "4h",
+    "side": "LONG",
+    "trigger": "sweep_down_reclaim",
+    "rr": "1:2",
+    "max_hold_bars": 8
+  },
+  "selection": {
+    "method": "train_only_nested_selection_then_untouched_calendar_oos",
+    "source_report": "docs/RANGE_EDGE_NESTED_HOLDOUT_2026-06-23.json",
+    "source_sha256": "5C9A365C32C6EA6DAEC847057B6F585E2528D31BA923466E6937013A4BCB6D43",
+    "split_ts": "2025-01-01T00:00:00+00:00",
+    "train_trades": 45,
+    "train_expectancy_r": 0.355012,
+    "oos_trades": 17,
+    "oos_expectancy_r": 0.281659,
+    "oos_cost10_expectancy_r": 0.093201,
+    "decision": "insufficient_oos_evidence_keep_observer_only"
+  },
+  "boundaries": {
+    "observer_only": true,
+    "allow_parameter_changes": false,
+    "allow_automatic_reselection": false,
+    "allow_paper_execution": false,
+    "allow_live_execution": false,
+    "allow_orders": false,
+    "can_trade": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "hypothesis_id": "HYP-CROSS-VENUE-REBOUND-002",
+  "family": "COINBASE_NEGATIVE_DISLOCATION_REBOUND_1M",
+  "enabled": false,
+  "status": "reject_no_train_qualified_negative_rebound_candidate",
+  "selected_on_train": null,
+  "validation_opened": false,
+  "oos_opened": false,
+  "future_validation_start": "2026-06-24T02:37:00+00:00",
+  "source_report": "C:\\Users\\coins\\TradingOS\\Active\\_dl\\research_runs_cross_venue\\20260624T073910Z-cross_venue_negative_rebound-d26a7c55961d-514344\\REPORT.json",
+  "boundaries": {
+    "observer_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}

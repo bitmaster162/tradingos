@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "work_order_id": "CODEX02-R3-RECOVER-OR-BUILD-TRADINGOS-CANONICAL-SOURCE",
+  "registry_role": "proposal_only",
+  "authority": {
+    "human_authority": "ROBERT",
+    "authority_status": "CANDIDATE_ONLY",
+    "human_approval_status": "PENDING",
+    "registered_source_root": null,
+    "proposed_source_root": "C:\\Users\\coins\\TradingOS\\Source\\tradingos-canonical",
+    "adoption_permitted": false,
+    "self_application": false
+  },
+  "candidate_repository": {
+    "required_parent_root": "C:\\PROJECTS\\_CANDIDATES",
+    "required_name_prefix": "tradingos-canonical-source-r3-",
+    "expected_branch": "codex02/r3-canonical-source-candidate",
+    "role": "ISOLATED_CANDIDATE_ONLY",
+    "clean_required": true,
+    "non_nested_required": true,
+    "final_commit_binding": "EXTERNAL_RETURN_MANIFEST",
+    "writable_remotes_allowed": false
+  },
+  "provenance": {
+    "r2_return_zip_sha256": "1f43bc2e43df8539721f6eb0e2b1efe7e05a3734b20cf1d863c57290e5cf24ce",
+    "r2_baseline_commit": "6a6583585117300c553d68aaff846d82024c7f9b",
+    "r2_baseline_tree": "f5ff623290ba3d546b7fa3dcf73b638860f38ef1",
+    "r2_proposal_commit": "b7c19f05dfa54ed7bd183db424e567992f8645b1",
+    "r2_proposal_tree": "47bf102286e63ee5bdb2db0f2eb61f530bf02954",
+    "r2_source_bundle_sha256": "5f830f9536193be9964da4073e22cd4d040424421302e165a41399ef061b6a0f",
+    "required_parent_commit": "b7c19f05dfa54ed7bd183db424e567992f8645b1",
+    "baseline_tests": {
+      "command": "python -m pytest -q",
+      "expected_passed": 60
+    }
+  },
+  "active_relationship": {
+    "path": "C:\\Users\\coins\\TradingOS\\Active",
+    "role": "RUNTIME_ONLY",
+    "source_authority": false,
+    "write_policy": "READ_ONLY",
+    "automatic_sync": false,
+    "runtime_wiring": "NONE",
+    "deployment_authorized": false,
+    "contract": "ACTIVE_RELATIONSHIP_CONTRACT.md"
+  },
+  "divergent_roots": [
+    {
+      "path": "C:\\Users\\coins\\TradingOS\\Staging\\WO008_20260718\\source_repo",
+      "branch": "wo009-v3r5-observability",
+      "head": "cb6aa2f225e2f749d2ee6919418ae1ffbaf8eb49",
+      "tree": "539552e04d2f5ba46d06e0caf398128a305cdb41",
+      "candidate_is_ancestor": false,
+      "authority_status": "REJECTED",
+      "disposition": "QUARANTINE_NO_MERGE",
+      "contract": "DIVERGENT_WO009_DISPOSITION.md"
+    }
+  ],
+  "remote_policy": {
+    "configured_remotes_required": [],
+    "writable_remote": "NONE",
+    "future_remote_requires_separate_human_approval": true
+  },
+  "required_documents": [
+    "SOURCE_AUTHORITY_REGISTRY.json",
+    "ACTIVE_RELATIONSHIP_CONTRACT.md",
+    "DIVERGENT_WO009_DISPOSITION.md",
+    "ADOPTION_PLAN.md",
+    "ROLLBACK_PLAN.md"
+  ],
+  "permissions": {
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "exchange_connection": false,
+    "orders": false,
+    "wallet_effect": false,
+    "scheduler_effect": false,
+    "service_effect": false,
+    "deployment_effect": false,
+    "active_write": false
+  }
+}

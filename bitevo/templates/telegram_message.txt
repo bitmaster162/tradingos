@@ -1,0 +1,8 @@
+BitEvo Composite Alert
+Setup: {setup_id} ({tf})
+Signal: {symbol} {side} entry {entry} | sl {sl}
+TP: {tp_list} | R: {r_list}
+Filters: {filters_passed}
+Derivatives: funding {funding_ap_7dma:.3f} | OI d1h {oi_delta_pct_1h:.1f}% | Liq ${liq_cluster_usd:,.0f}
+Score: {score:.2f} | Latency: {lat_ms} ms
+Invalidation: {invalidate_on}
