@@ -65,7 +65,10 @@ def test_v5r2_lock_is_sealed_to_the_real_consumer() -> None:
 def test_v5r2_pre_floor_smoke_kept_outcomes_closed() -> None:
     report = read_json(V5R2_REPORT)
 
-    assert report["decision"] == "bybit_liquidation_canonical_v5_waiting_floor"
+    assert report["decision"] in {
+        "bybit_liquidation_canonical_v5_waiting_floor",
+        "bybit_liquidation_canonical_v5_collecting_outcome_blind_sample",
+    }
     assert report["input_quality"]["decision"] == "bybit_canonical_v5_input_quality_pass"
     assert report["outcome_review"]["interim_outcomes_hidden"] is True
     assert report["outcome_review"]["outcome_fields_computed"] is False

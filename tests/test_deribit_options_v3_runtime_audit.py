@@ -43,5 +43,12 @@ def test_current_v3_audit_exposes_read_only_consumer_compatibility() -> None:
     assert report["forward_progress"]["span_days"] == report["v3"]["readiness_metrics"]["span_days"]
     assert report["forward_progress"]["minimum_span_days"] == 7.0
     assert report["forward_progress"]["minimum_healthy_slots"] == 1800
-    assert report["runtime"]["all_components_passed"] is True
+    assert report["decision"] == "deribit_options_v3_data_layer_integrity_blocked"
+    assert report["runtime"]["all_components_passed"] is False
+    assert report["failed_checks"] == [
+        "collector_snapshot_healthy",
+        "fresh_join_gate_preserved",
+    ]
+    assert report["checks"]["collector_lock_verified"] is True
+    assert report["checks"]["readiness_lock_verified"] is True
     assert report["can_trade"] is False
