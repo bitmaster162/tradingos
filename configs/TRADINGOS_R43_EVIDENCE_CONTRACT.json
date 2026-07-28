@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "contract_id": "TRADINGOS_R43_SOURCE_EVIDENCE_CLOSURE",
+  "status": "DISPOSABLE_OUTCOME_CANDIDATE",
+  "predecessor": {
+    "r6_zip_sha256": "81c0d87433f94309dce17bc6fe0fa315c55668490ba7128f44df6f6386cf93f1",
+    "head": "c38f299b2e192c2b2b6c422859e749570b4d1480",
+    "tree": "005e883ca731755feb92ee07d01077e67290c9d6",
+    "source_manifest_sha256": "ad312247bbcd92e1f7cf3e08654ea0434076c7652aaf56d5331ec97523a2ae87",
+    "evidence_manifest_sha256": "83258e48b652483f097f43d2e02fbe62693c3ded607052e821480207953d7c49"
+  },
+  "runtime_state_exclusions": [
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/backtest/latest_execution_quality.json",
+      "sha256": "b7aa17f4564a58f6d717a8d60e9b05647256222b09acd4f29e54153de30e9f57",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    },
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/backtest/latest_report.json",
+      "sha256": "f27a2f4395ec420a5ef6487705779ff6561803c941bc6507dd77d04f6ba2178f",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    },
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/backtest/latest_walkforward_report.json",
+      "sha256": "d1f2b5d1ce5a811f944e4baa7ecc9ef1e197a9c820718d30d62e284c03f25a69",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    },
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/crowding/latest.json",
+      "sha256": "1f594601046fddb372a6987d97b2d7461e3e3e696086a3a87b469dfe26211142",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    },
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/live/status/latest.json",
+      "sha256": "00f53f8abf7fd20291d30749258f716dff635655be963e25f10acb2af23cef5b",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    },
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/public_live_capture/crowding/latest.json",
+      "sha256": "769f7017b0f1339cc0374575558f8b7d19b7f37b58a77265b5dd19f65d0ae0be",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    },
+    {
+      "path": "ops/btcusdt_binance_futures_bot/data/public_live_smoke/crowding/latest.json",
+      "sha256": "92fc111f01902d1d782eedc04f34f34c5babcfd93c12e6ff2d7bfcfbd733b673",
+      "classification": "RUNTIME_STATE",
+      "action": "EXCLUDE"
+    }
+  ],
+  "external_evidence_additions": [
+    {
+      "path": "docs/BYBIT_LIQUIDATION_CANONICAL_DISCOVERY_AUDIT_2026-07-13.json",
+      "size": 54519,
+      "sha256": "acf6aab9fc09ed2ba55d749faf50e8c78049d561a9229066e3eb8ae6f31aa0f1",
+      "classification": "EXTERNAL_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "docs/BYBIT_LIQUIDATION_CANONICAL_V5_SOURCE_COMPAT_TOMBSTONE_2026-07-15.json",
+      "size": 1947,
+      "sha256": "d853880123275a1c3040a36a00bcd6d67f00b936ffd3b58b94188da5a8a69568",
+      "classification": "EXTERNAL_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "docs/BYBIT_LIQUIDATION_CANONICAL_FORWARD_OBSERVER_V5R2_2026-07-18.json",
+      "size": 25552,
+      "sha256": "27ffea252c3a99ea7442b2a1683e1e4201947b5aa211f11e998b74796cd96242",
+      "classification": "EXTERNAL_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "docs/CEX_FUNDING_SOURCE_ALIGNMENT_V2_TERMINAL_TOMBSTONE_2026-07-14.json",
+      "size": 1955,
+      "sha256": "6aaf9115fbfbff68d988e2ef159faa141a14a4b937e759594985bbf61871022e",
+      "classification": "EXTERNAL_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "docs/DERIBIT_OPTIONS_V3_DATA_LAYER_AUDIT_2026-07-16.json",
+      "size": 3643,
+      "sha256": "7531ad301c90f3f05acd8f06f2b95161f1b362026f1ce06b06f509bf1b588368",
+      "classification": "EXTERNAL_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "docs/SPOT_PERP_DIVERGENCE_HARDENING_2026-06-03.json",
+      "size": 9443930,
+      "sha256": "aa2d0f4120a3be5367023bf8dd6318a30b57bcf7d2440133b46d46fb7db43afe",
+      "classification": "EXTERNAL_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "HANDOFF/INCOMING/codex/20260712_research_runtime_supervisor/REGISTRY.json",
+      "size": 7821,
+      "sha256": "2f73b68c0b923555a9efc6f1ee30704afc5a90699ab65c1755b250c1154d08f7",
+      "classification": "EXTERNAL_GOVERNANCE_EVIDENCE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    }
+  ],
+  "immutable_test_fixtures": [
+    {
+      "path": "HANDOFF/INCOMING/claude/20260713_bitunix_wo104_canonical/setup_a_gate.py",
+      "size": 12245,
+      "sha256": "dae7085f8a9a55c9ea0e7c1469191ae99dd59669c5702fc1c9e64849669d868b",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "HANDOFF/INCOMING/claude/20260713_bitunix_gateB_part2/reviewed_v2/public_ws_venue.py",
+      "size": 6665,
+      "sha256": "be56205745e65640cb93b6c6a557ca66aefb7a5e29b0859b2298552b043255f0",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "HANDOFF/INCOMING/claude/20260713_bitunix_wo104_canonical/public_ws_venue.py",
+      "size": 8843,
+      "sha256": "85159345675fb89a636e8169d9fbc5756e4886e50a4ab6033cfff5bde0ec9a19",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "_dl/bitunix_gateb_v2_15s_smoke/RAW_FRAMES.jsonl",
+      "size": 39011,
+      "sha256": "cd3033168c4154711c2aba91877cf8fdc1504510b25b5f8c28dd5191929fe481",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "_dl/bitunix_gateb_v2_15s_smoke/RAW_FRAME_INDEX.jsonl",
+      "size": 34729,
+      "sha256": "ebe909c55d8746de8bd1c9adf92516a150d760d75c2fc36dfc81196a8241319d",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "_dl/bitunix_gateb_v2_15s_smoke/PUBLIC_CAPTURE_MANIFEST.json",
+      "size": 1132,
+      "sha256": "5c84528f72f69d96d1af4e2711701d817ff8fb621289d22a091ce118bbd74baa",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "UNLOCKED_ACTIVE_OBSERVED"
+    },
+    {
+      "path": "_dl/bitunix_wo105_v3r2_ws_intake/WS_INTAKE_MANIFEST.json",
+      "size": 1204,
+      "sha256": "0502afea0ac36b8643b9c773a6f2349fc007935c1ca8ebf64f9b29accb05f317",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "R6_EXCLUDED_GENERATED_HASH_BOUND"
+    },
+    {
+      "path": "_dl/bitunix_wo105_shadow_v3r3/LAST_EVALUATION.json",
+      "size": 653,
+      "sha256": "484a545a570274520bc77d5b0cf8918bf89e8fa397dce220efaf02f6b4253a9d",
+      "classification": "IMMUTABLE_TEST_FIXTURE",
+      "source_relation": "R6_EXCLUDED_GENERATED_HASH_BOUND"
+    }
+  ],
+  "test_assembly_policy": {
+    "source_is_immutable_input": true,
+    "evidence_projection_is_test_only": true,
+    "fixture_projection_is_test_only": true,
+    "runtime_state_projection_allowed": false,
+    "collision_policy": "FAIL_UNLESS_BYTE_IDENTICAL",
+    "path_traversal_policy": "FAIL_CLOSED"
+  },
+  "accepted_strength_preservation": {
+    "strategy_parameters_changed": false,
+    "runtime_permissions_changed": false,
+    "registration_performed": false,
+    "promotion_performed": false,
+    "active_mutation_allowed": false
+  },
+  "self_application": false,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}
