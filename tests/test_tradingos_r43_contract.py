@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -9,6 +10,7 @@ from tools.tradingos_r43_contract import safe_relative, verify_identity
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SOURCE_ROOT = Path(os.environ.get("TRADINGOS_SOURCE_ROOT", ROOT))
 CONTRACT_PATH = ROOT / "configs" / "TRADINGOS_R43_EVIDENCE_CONTRACT.json"
 
 
@@ -46,7 +48,7 @@ def test_external_evidence_and_fixtures_are_explicitly_separate() -> None:
     assert all(row["source_relation"] == "UNLOCKED_ACTIVE_OBSERVED" for row in evidence)
     assert sum(row["source_relation"] == "UNLOCKED_ACTIVE_OBSERVED" for row in fixtures) == 6
     assert sum(row["source_relation"] == "R6_EXCLUDED_GENERATED_HASH_BOUND" for row in fixtures) == 2
-    assert all(not (ROOT / row["path"]).exists() for row in evidence + fixtures)
+    assert all(not (SOURCE_ROOT / row["path"]).exists() for row in evidence + fixtures)
 
 
 def test_each_external_input_has_size_and_sha256() -> None:
