@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "policy_id": "TRADINGOS_DECISION_BRIEF_POLICY_V1",
+  "product": "TradingOS VIP Daily Decision Brief",
+  "supported_symbol": "BTCUSDT",
+  "required_sources": [
+    "ohlcv",
+    "open_interest",
+    "funding",
+    "spot_flow"
+  ],
+  "max_snapshot_age_minutes": 90,
+  "max_future_clock_skew_minutes": 5,
+  "edge_gate": {
+    "minimum_direction_score": 3.0,
+    "minimum_score_margin": 2.0,
+    "minimum_independent_dimensions": 3
+  },
+  "funding_z_extreme": 1.5,
+  "basis_z_extreme": 1.5,
+  "relative_volume_confirm": 1.2,
+  "relative_volume_weak": 0.8,
+  "allowed_timeframes": [
+    "15m",
+    "1h",
+    "4h",
+    "1d"
+  ],
+  "output_permissions": {
+    "watch_stances_allowed": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "credentials_allowed": false,
+    "can_trade": false,
+    "capital_permission": "DENY"
+  }
+}

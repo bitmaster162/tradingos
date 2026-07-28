@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "brief_id": "e0992cf3e700197dc80bd76d",
+  "snapshot_id": "BTCUSDT-2026-07-29T00:00:00Z-sample",
+  "generated_at": "2026-07-29T00:30:00Z",
+  "as_of": "2026-07-29T00:00:00Z",
+  "symbol": "BTCUSDT",
+  "timeframe": "4h",
+  "status": "READY",
+  "decision": {
+    "stance": "WATCH_LONG",
+    "reason": "edge_gate_passed",
+    "lead_direction": "LONG",
+    "score_margin": 6.5,
+    "edge_sufficient": true
+  },
+  "regime": {
+    "label": "TREND_UP",
+    "volatility": "NORMAL",
+    "basis": [
+      "market_structure.trend=up",
+      "price.atr_pct=1.9"
+    ]
+  },
+  "intent_hypotheses": [
+    {
+      "intent": "LONG_CONTINUATION_OR_ROTATION",
+      "direction": "LONG",
+      "support_score": 6.5,
+      "counter_score": 0,
+      "independent_support_dimensions": 5,
+      "supporting_evidence": [
+        {
+          "dimension": "market_structure",
+          "label": "HTF trend",
+          "direction": "LONG",
+          "strength": 2.0,
+          "observation": "trend=up"
+        },
+        {
+          "dimension": "price_trend",
+          "label": "EMA alignment",
+          "direction": "LONG",
+          "strength": 1.0,
+          "observation": "ema_fast > ema_slow"
+        },
+        {
+          "dimension": "open_interest",
+          "label": "Price/OI alignment",
+          "direction": "LONG",
+          "strength": 1.25,
+          "observation": "price=1.8% OI=2.1%"
+        },
+        {
+          "dimension": "spot_flow",
+          "label": "Spot CVD",
+          "direction": "LONG",
+          "strength": 1.25,
+          "observation": "spot=up, perp=up"
+        },
+        {
+          "dimension": "volume",
+          "label": "Relative volume confirmation",
+          "direction": "LONG",
+          "strength": 1.0,
+          "observation": "relative_volume=1.35"
+        }
+      ],
+      "contradicting_evidence": []
+    },
+    {
+      "intent": "SHORT_CONTINUATION_OR_ROTATION",
+      "direction": "SHORT",
+      "support_score": 0,
+      "counter_score": 6.5,
+      "independent_support_dimensions": 0,
+      "supporting_evidence": [],
+      "contradicting_evidence": [
+        {
+          "dimension": "market_structure",
+          "label": "HTF trend",
+          "direction": "LONG",
+          "strength": 2.0,
+          "observation": "trend=up"
+        },
+        {
+          "dimension": "price_trend",
+          "label": "EMA alignment",
+          "direction": "LONG",
+          "strength": 1.0,
+          "observation": "ema_fast > ema_slow"
+        },
+        {
+          "dimension": "open_interest",
+          "label": "Price/OI alignment",
+          "direction": "LONG",
+          "strength": 1.25,
+          "observation": "price=1.8% OI=2.1%"
+        },
+        {
+          "dimension": "spot_flow",
+          "label": "Spot CVD",
+          "direction": "LONG",
+          "strength": 1.25,
+          "observation": "spot=up, perp=up"
+        },
+        {
+          "dimension": "volume",
+          "label": "Relative volume confirmation",
+          "direction": "LONG",
+          "strength": 1.0,
+          "observation": "relative_volume=1.35"
+        }
+      ]
+    }
+  ],
+  "derivatives_context": {
+    "open_interest_change_pct": 2.1,
+    "open_interest_read": "leverage_building",
+    "funding_rate": 8e-05,
+    "funding_z": 0.7,
+    "funding_read": "balanced_or_unconfirmed",
+    "basis_pct": 0.04,
+    "basis_z": 0.6,
+    "liquidation_bias": "balanced"
+  },
+  "scenarios": [
+    {
+      "name": "bull",
+      "trigger": "4h close above 119600.0 with spot-flow and OI confirmation",
+      "invalidation": "4h close back below 119600.0 or loss of 116800.0",
+      "operator_use": "reassess WATCH_LONG; this brief itself is not an entry signal"
+    },
+    {
+      "name": "base",
+      "trigger": "price remains between 116800.0 and 119600.0",
+      "invalidation": "accepted close outside [116800.0, 119600.0]",
+      "operator_use": "NO_ACTION in the middle of the range; wait for new evidence"
+    },
+    {
+      "name": "bear",
+      "trigger": "4h close below 116800.0 with spot-flow and OI confirmation",
+      "invalidation": "4h close back above 116800.0 or reclaim of 119600.0",
+      "operator_use": "reassess WATCH_SHORT; this brief itself is not an entry signal"
+    }
+  ],
+  "invalidation": {
+    "global": "Any stale, missing, conflicting, or unsafe input invalidates the brief.",
+    "long": "4h close back below 119600.0 or loss of 116800.0",
+    "short": "4h close back above 116800.0 or reclaim of 119600.0"
+  },
+  "uncertainty": {
+    "input_gate_passed": true,
+    "snapshot_age_minutes": 30.0,
+    "missing_data": [],
+    "conflicts": [],
+    "blockers": [],
+    "model_probability_claimed": false,
+    "caveats": [
+      "Scores are deterministic evidence weights, not calibrated probabilities.",
+      "A WATCH stance is an observation priority, not an entry signal.",
+      "This generator does not assess execution, account state, fees, or position sizing."
+    ]
+  },
+  "operator_feedback": {
+    "prior_decision": "NO_ACTION",
+    "changed_decision": "WATCH_LONG only after confirmation",
+    "prevented_decision": "Prevented chasing price before a confirmed close"
+  },
+  "operator_next_action": "Wait for a 4h close above 119600.0 with spot-flow and OI confirmation; do not place an order from this brief.",
+  "provenance": {
+    "input_path": "examples/tradingos_decision_brief/market_snapshot.sample.json",
+    "input_sha256": "7fde85171fd7e1f4906467159e15d41ffe4070b8a1063f7631b6869d93af942a",
+    "input_producer": "frozen_product_sample",
+    "input_sources": [
+      {
+        "kind": "ohlcv",
+        "source_id": "sample:binance-public-klines",
+        "observed_at": "2026-07-29T00:00:00Z"
+      },
+      {
+        "kind": "open_interest",
+        "source_id": "sample:public-oi",
+        "observed_at": "2026-07-29T00:00:00Z"
+      },
+      {
+        "kind": "funding",
+        "source_id": "sample:public-funding",
+        "observed_at": "2026-07-29T00:00:00Z"
+      },
+      {
+        "kind": "spot_flow",
+        "source_id": "sample:public-aggtrades",
+        "observed_at": "2026-07-29T00:00:00Z"
+      }
+    ],
+    "policy_path": "configs/TRADINGOS_DECISION_BRIEF_POLICY_V1.json",
+    "policy_id": "TRADINGOS_DECISION_BRIEF_POLICY_V1",
+    "policy_sha256": "a0a85405c83c8ce0afe0e3d965730f752d5c329efd16ae310de5133bd94aa3d4",
+    "generator": "tools/tradingos_decision_brief.py",
+    "generator_version": "1.0.0"
+  },
+  "permissions": {
+    "read_only_analysis": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "uses_credentials": false,
+    "can_trade": false,
+    "capital_permission": "DENY"
+  },
+  "can_trade": false
+}

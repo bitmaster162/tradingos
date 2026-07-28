@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "BTCUSDT-2026-07-29T00:00:00Z-sample",
+  "as_of": "2026-07-29T00:00:00Z",
+  "symbol": "BTCUSDT",
+  "timeframe": "4h",
+  "can_trade": false,
+  "provenance": {
+    "producer": "frozen_product_sample",
+    "sources": [
+      {
+        "kind": "ohlcv",
+        "source_id": "sample:binance-public-klines",
+        "observed_at": "2026-07-29T00:00:00Z"
+      },
+      {
+        "kind": "open_interest",
+        "source_id": "sample:public-oi",
+        "observed_at": "2026-07-29T00:00:00Z"
+      },
+      {
+        "kind": "funding",
+        "source_id": "sample:public-funding",
+        "observed_at": "2026-07-29T00:00:00Z"
+      },
+      {
+        "kind": "spot_flow",
+        "source_id": "sample:public-aggtrades",
+        "observed_at": "2026-07-29T00:00:00Z"
+      }
+    ]
+  },
+  "price": {
+    "last": 118400.0,
+    "change_pct": 1.8,
+    "ema_fast": 117900.0,
+    "ema_slow": 116700.0,
+    "atr_pct": 1.9
+  },
+  "market_structure": {
+    "trend": "up",
+    "support": 116800.0,
+    "resistance": 119600.0,
+    "range_position": 0.57
+  },
+  "derivatives": {
+    "open_interest_change_pct": 2.1,
+    "funding_rate": 0.00008,
+    "funding_z": 0.7,
+    "basis_pct": 0.04,
+    "basis_z": 0.6,
+    "liquidation_bias": "balanced"
+  },
+  "flow": {
+    "spot_cvd_direction": "up",
+    "perp_cvd_direction": "up",
+    "relative_volume": 1.35
+  },
+  "data_quality": {
+    "present_sources": [
+      "ohlcv",
+      "open_interest",
+      "funding",
+      "spot_flow"
+    ],
+    "conflicts": []
+  },
+  "operator": {
+    "prior_decision": "NO_ACTION",
+    "changed_decision": "WATCH_LONG only after confirmation",
+    "prevented_decision": "Prevented chasing price before a confirmed close"
+  }
+}
