@@ -15,7 +15,11 @@ hypothesis”, not “enter a position”. Every artifact keeps `can_trade=false
 
 ## Frozen sample replay
 
-From the repository root:
+For a non-developer, double-click `RUN_DECISION_BRIEF_SAMPLE.cmd`. It generates
+the three brief files, writes `_dl/decision_brief_sample/RUN_RECEIPT.json`, and
+opens the printable HTML in the default browser.
+
+From PowerShell, the equivalent command is:
 
 ```powershell
 python tools/tradingos_decision_brief.py `
