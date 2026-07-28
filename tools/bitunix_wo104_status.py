@@ -41,11 +41,19 @@ def read_json(path: Path | None) -> dict[str, Any]:
         return {}
 
 
+def freshness_key(path: Path) -> tuple[int, str, str]:
+    return (
+        path.stat().st_mtime_ns,
+        path.name.casefold(),
+        path.as_posix().casefold(),
+    )
+
+
 def latest(directory: Path, pattern: str, *, directories: bool = False) -> Path | None:
     if not directory.exists():
         return None
     values = [item for item in directory.glob(pattern) if item.is_dir() == directories]
-    return max(values, key=lambda item: item.stat().st_mtime) if values else None
+    return max(values, key=freshness_key) if values else None
 
 
 def windows_pid_alive(pid: int) -> bool:
@@ -83,7 +91,7 @@ def build_report(
     launch_path = latest(logs_dir, "capture_*_launch.json")
     source_receipt_path = latest(logs_dir, "capture_*_source_receipt*.json")
     attempt_receipts = [item for item in (launch_path, source_receipt_path) if item is not None]
-    attempt_path = max(attempt_receipts, key=lambda item: item.stat().st_mtime) if attempt_receipts else None
+    attempt_path = max(attempt_receipts, key=freshness_key) if attempt_receipts else None
     run_dir = latest(captures_dir, "run_*", directories=True)
     manifest_path = run_dir / "PUBLIC_CAPTURE_MANIFEST.json" if run_dir else None
     acceptance_path = run_dir / "TRADINGOS_INDEPENDENT_ACCEPTANCE.json" if run_dir else None

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 from tools.bitunix_wo104_status import build_report
@@ -78,7 +79,9 @@ def test_status_uses_newest_attempt_receipt_and_names_confirmed_shadow_state(tmp
         paths[0] / "capture_2_source_receipt_v2.json",
         {"receipt_id": "v2", "can_trade": False},
     )
-    source_receipt.touch()
+    same_timestamp_ns = 1_750_000_000_000_000_000
+    os.utime(paths[0] / "capture_1_launch.json", ns=(same_timestamp_ns, same_timestamp_ns))
+    os.utime(source_receipt, ns=(same_timestamp_ns, same_timestamp_ns))
     run = paths[1] / "run_1"
     write(
         run / "PUBLIC_CAPTURE_MANIFEST.json",
