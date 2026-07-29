@@ -1,0 +1,40 @@
+{
+  "schema": "TRADINGOS_R59_FROZEN_SOURCE_PLAN_V1",
+  "frozen_at_utc": "2026-07-29T19:30:36Z",
+  "base_url": "https://data.binance.vision/data",
+  "months": [
+    "2026-01",
+    "2026-02",
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06"
+  ],
+  "series": [
+    {
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "folder": "futures/um/monthly/fundingRate/BTCUSDT",
+      "filename_template": "BTCUSDT-fundingRate-{ym}.zip"
+    },
+    {
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "folder": "futures/um/monthly/klines/BTCUSDT/1h",
+      "filename_template": "BTCUSDT-1h-{ym}.zip"
+    },
+    {
+      "hypothesis": "H02_BTC_ETH_LEAD_LAG",
+      "folder": "spot/monthly/klines/BTCUSDT/15m",
+      "filename_template": "BTCUSDT-15m-{ym}.zip"
+    },
+    {
+      "hypothesis": "H02_BTC_ETH_LEAD_LAG",
+      "folder": "spot/monthly/klines/ETHUSDT/15m",
+      "filename_template": "ETHUSDT-15m-{ym}.zip"
+    }
+  ],
+  "expected_file_count": 24,
+  "observation_policy": "freeze_hashes_before_evaluation",
+  "public_read_only": true,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "TRADINGOS_R59_BASELINE_RECEIPT_V1",
+  "work_order": "CODEX02-R59-BOUNDED-EDGE-RESEARCH-CYCLE-03",
+  "captured_at_utc": "2026-07-29T19:30:36Z",
+  "predecessor": {
+    "work_order": "CODEX02-R57-BOUNDED-EDGE-RESEARCH-CYCLE-02",
+    "strict_zip_sha256": "de8ad5f740f99cf8be4bb8853f4e9056aebdd7ee551f029928033a931c1a0cb5",
+    "proposal_bundle_sha256": "b8d9176dedbc1ffccf7e1e04fbf0dbf68f9007e9a18b7c5e5dadcfe106793c81",
+    "proposal_bundle_bytes": 2546976,
+    "head": "47349d6949a8d552c90f53a0e34b4fa8c540d87e",
+    "tree": "0e9916478487916c5ea8383508f45f5e0a83883f",
+    "branch": "codex02/r57-bounded-edge-cycle-02",
+    "status": "clean",
+    "broker_delivery_id": "CODEX02-R57-BOUNDED-EDGE-RESEARCH-CYCLE-02__20260729T192757064607Z__de8ad5f740f9"
+  },
+  "r59_branch": "codex02/r59-bounded-edge-cycle-03",
+  "authorized_root_class": "disposable_clone_only",
+  "canonical_active_modified": false,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}
