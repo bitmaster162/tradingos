@@ -1,0 +1,186 @@
+{
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "hypothesis_count": 1,
+  "result": {
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "cost_ledger": {
+      "entry_fee": 0.0005,
+      "entry_slippage": 0.0001,
+      "exit_fee": 0.0005,
+      "exit_slippage": 0.0001,
+      "total_deducted_once": 0.0012
+    },
+    "data_quality": {
+      "candidate_oos_feature_bars": 4340,
+      "complete_oos_feature_bars": 4340,
+      "feature_coverage": 1.0,
+      "funding_rows": 1185,
+      "kline_bars": 9480,
+      "metrics_rows": 113742,
+      "source_files": 421
+    },
+    "decision": "INSUFFICIENT_DATA",
+    "hypothesis": "BTC_CROWDING_EXHAUSTION",
+    "neighbor_sensitivity": {
+      "evidence": {
+        "chronological_halves": {
+          "first": {
+            "1h": {
+              "bootstrap_95_lower_mean": -0.00421068235849937,
+              "matched_win_rate": 0.2,
+              "mean_control_return": 0.0006281742377761489,
+              "mean_matched_underperformance_after_cost": -0.001233492594256954,
+              "mean_short_net_return": -0.0018616668320331029,
+              "mean_signal_return": 0.0006616668320331032,
+              "median_matched_underperformance_after_cost": -0.000955968529429706,
+              "n": 10
+            },
+            "4h": {
+              "bootstrap_95_lower_mean": -0.002792957963095185,
+              "matched_win_rate": 0.5,
+              "mean_control_return": 0.0008655461227472627,
+              "mean_matched_underperformance_after_cost": -0.0007306666708977161,
+              "mean_short_net_return": -0.0015962127936449786,
+              "mean_signal_return": 0.00039621279364497884,
+              "median_matched_underperformance_after_cost": -8.650228758570917e-05,
+              "n": 10
+            }
+          },
+          "second": {
+            "1h": {
+              "bootstrap_95_lower_mean": null,
+              "matched_win_rate": null,
+              "mean_control_return": null,
+              "mean_matched_underperformance_after_cost": null,
+              "mean_short_net_return": null,
+              "mean_signal_return": null,
+              "median_matched_underperformance_after_cost": null,
+              "n": 0
+            },
+            "4h": {
+              "bootstrap_95_lower_mean": null,
+              "matched_win_rate": null,
+              "mean_control_return": null,
+              "mean_matched_underperformance_after_cost": null,
+              "mean_short_net_return": null,
+              "mean_signal_return": null,
+              "median_matched_underperformance_after_cost": null,
+              "n": 0
+            }
+          }
+        },
+        "full": {
+          "1h": {
+            "bootstrap_95_lower_mean": -0.00421068235849937,
+            "matched_win_rate": 0.2,
+            "mean_control_return": 0.0006281742377761489,
+            "mean_matched_underperformance_after_cost": -0.001233492594256954,
+            "mean_short_net_return": -0.0018616668320331029,
+            "mean_signal_return": 0.0006616668320331032,
+            "median_matched_underperformance_after_cost": -0.000955968529429706,
+            "n": 10
+          },
+          "4h": {
+            "bootstrap_95_lower_mean": -0.002792957963095185,
+            "matched_win_rate": 0.5,
+            "mean_control_return": 0.0008655461227472627,
+            "mean_matched_underperformance_after_cost": -0.0007306666708977161,
+            "mean_short_net_return": -0.0015962127936449786,
+            "mean_signal_return": 0.00039621279364497884,
+            "median_matched_underperformance_after_cost": -8.650228758570917e-05,
+            "n": 10
+          }
+        }
+      },
+      "matched_signal_count": 10,
+      "non_overlapping_signal_count": 10,
+      "raw_signal_count": 14,
+      "selected_as_replacement": false,
+      "unmatched_signal_count": 0
+    },
+    "parameter_changes_after_freeze": false,
+    "primary": {
+      "evidence": {
+        "chronological_halves": {
+          "first": {
+            "1h": {
+              "bootstrap_95_lower_mean": -0.006328086956732361,
+              "matched_win_rate": 0.3333333333333333,
+              "mean_control_return": 0.00014446750062342042,
+              "mean_matched_underperformance_after_cost": -0.0015758272905234075,
+              "mean_short_net_return": -0.0017202947911468282,
+              "mean_signal_return": 0.0005202947911468284,
+              "median_matched_underperformance_after_cost": -0.001449711376653261,
+              "n": 6
+            },
+            "4h": {
+              "bootstrap_95_lower_mean": -0.004091940845101989,
+              "matched_win_rate": 0.5,
+              "mean_control_return": 0.00034061676947803784,
+              "mean_matched_underperformance_after_cost": -0.0010508820233132144,
+              "mean_short_net_return": -0.0013914987927912518,
+              "mean_signal_return": 0.00019149879279125223,
+              "median_matched_underperformance_after_cost": -0.0002796893724181337,
+              "n": 6
+            }
+          },
+          "second": {
+            "1h": {
+              "bootstrap_95_lower_mean": null,
+              "matched_win_rate": null,
+              "mean_control_return": null,
+              "mean_matched_underperformance_after_cost": null,
+              "mean_short_net_return": null,
+              "mean_signal_return": null,
+              "median_matched_underperformance_after_cost": null,
+              "n": 0
+            },
+            "4h": {
+              "bootstrap_95_lower_mean": null,
+              "matched_win_rate": null,
+              "mean_control_return": null,
+              "mean_matched_underperformance_after_cost": null,
+              "mean_short_net_return": null,
+              "mean_signal_return": null,
+              "median_matched_underperformance_after_cost": null,
+              "n": 0
+            }
+          }
+        },
+        "full": {
+          "1h": {
+            "bootstrap_95_lower_mean": -0.006328086956732361,
+            "matched_win_rate": 0.3333333333333333,
+            "mean_control_return": 0.00014446750062342042,
+            "mean_matched_underperformance_after_cost": -0.0015758272905234075,
+            "mean_short_net_return": -0.0017202947911468282,
+            "mean_signal_return": 0.0005202947911468284,
+            "median_matched_underperformance_after_cost": -0.001449711376653261,
+            "n": 6
+          },
+          "4h": {
+            "bootstrap_95_lower_mean": -0.004091940845101989,
+            "matched_win_rate": 0.5,
+            "mean_control_return": 0.00034061676947803784,
+            "mean_matched_underperformance_after_cost": -0.0010508820233132144,
+            "mean_short_net_return": -0.0013914987927912518,
+            "mean_signal_return": 0.00019149879279125223,
+            "median_matched_underperformance_after_cost": -0.0002796893724181337,
+            "n": 6
+          }
+        }
+      },
+      "matched_signal_count": 6,
+      "non_overlapping_signal_count": 6,
+      "raw_signal_count": 9,
+      "unmatched_signal_count": 0
+    },
+    "reason": "fewer than 30 matched primary OOS signals",
+    "same_snapshot_entry_exit": false,
+    "schema": "TRADINGOS_R62_BTC_CROWDING_RESULT_V1"
+  },
+  "schema": "TRADINGOS_R62_SINGLE_HYPOTHESIS_CYCLE_V1",
+  "terminal": "INSUFFICIENT_DATA"
+}

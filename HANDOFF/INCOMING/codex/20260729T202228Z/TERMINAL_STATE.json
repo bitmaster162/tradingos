@@ -1,0 +1,13 @@
+{
+  "schema": "TRADINGOS_R62_TERMINAL_STATE_V1",
+  "work_order": "CODEX02-R62-BTC-CROWDING-EXHAUSTION-CHALLENGE",
+  "hypothesis_count": 1,
+  "hypothesis": "BTC_CROWDING_EXHAUSTION",
+  "terminal": "INSUFFICIENT_DATA",
+  "matched_primary_oos_signals": 6,
+  "minimum_required": 30,
+  "research_only": true,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "no_further_agent_work": true
+}

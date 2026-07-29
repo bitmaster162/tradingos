@@ -1,0 +1,27 @@
+{
+  "calibration_feature_count": 3694,
+  "calibration_period": [
+    "2025-07-01T00:00:00Z",
+    "2026-01-01T00:00:00Z"
+  ],
+  "derived_before_oos_evaluation": true,
+  "schema": "TRADINGOS_R62_FROZEN_THRESHOLDS_V1",
+  "thresholds": {
+    "neighbor_sensitivity": {
+      "funding_rate_min": 5.491e-05,
+      "oi_change_4h_min": 0.0,
+      "oi_level_z_min": 0.5010174299576176,
+      "top_position_ratio_min": 2.0431672
+    },
+    "primary": {
+      "funding_rate_min": 6.041e-05,
+      "oi_change_4h_min": 0.0004719139789960192,
+      "oi_level_z_min": 0.7805153784178753,
+      "top_position_ratio_min": 2.09527395
+    },
+    "volatility_regime": {
+      "low_max": 0.0028226750427666194,
+      "mid_max": 0.004454749513289556
+    }
+  }
+}

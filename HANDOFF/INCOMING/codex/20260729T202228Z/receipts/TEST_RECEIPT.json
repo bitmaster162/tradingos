@@ -1,0 +1,38 @@
+{
+  "schema": "TRADINGOS_R62_TEST_RECEIPT_V1",
+  "unit_tests": {
+    "passed": 14,
+    "failed": 0,
+    "status": "PASS"
+  },
+  "deterministic_replay": {
+    "runs": 2,
+    "files_per_run": 6,
+    "sha256_differences": 0,
+    "status": "PASS"
+  },
+  "source_contract": {
+    "planned_files": 421,
+    "verified_files": 421,
+    "missing": 0,
+    "hash_mismatch": 0,
+    "status": "PASS"
+  },
+  "tested_invariants": [
+    "exactly one hypothesis",
+    "exactly 421 frozen source archives",
+    "frozen UTC boundaries",
+    "latest-at-or-before source joins",
+    "blank public metrics rows treated as missing",
+    "linear quantile calculation",
+    "all signal conditions required",
+    "four-hour overlap removed",
+    "five deterministic controls",
+    "entry and exits use different snapshots",
+    "cost deducted exactly once",
+    "minimum 30 signals fails closed",
+    "low feature coverage fails closed",
+    "negative chronological half kills a classified sample",
+    "bootstrap determinism"
+  ]
+}

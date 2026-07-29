@@ -1,0 +1,19 @@
+test_all_frozen_gates_keep (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_all_frozen_gates_keep) ... ok
+test_bootstrap_is_deterministic (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_bootstrap_is_deterministic) ... ok
+test_four_hour_overlap_is_removed (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_four_hour_overlap_is_removed) ... ok
+test_frozen_utc_boundaries (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_frozen_utc_boundaries) ... ok
+test_latest_lookup_never_uses_future (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_latest_lookup_never_uses_future) ... ok
+test_low_coverage_is_insufficient (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_low_coverage_is_insufficient) ... ok
+test_matching_uses_five_controls_and_cost_once (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_matching_uses_five_controls_and_cost_once) ... ok
+test_metrics_loader_skips_blank_public_rows (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_metrics_loader_skips_blank_public_rows) ... ok
+test_negative_primary_half_kills_even_if_sensitivity_passes (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_negative_primary_half_kills_even_if_sensitivity_passes) ... ok
+test_quantile_linear_interpolation (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_quantile_linear_interpolation) ... ok
+test_signal_requires_all_frozen_conditions (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_signal_requires_all_frozen_conditions) ... ok
+test_single_hypothesis_identity (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_single_hypothesis_identity) ... ok
+test_small_sample_is_insufficient (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_small_sample_is_insufficient) ... ok
+test_source_plan_has_exactly_421_files (HANDOFF.INCOMING.codex.20260729T202228Z.test_r62.R62Tests.test_source_plan_has_exactly_421_files) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.038s
+
+OK
