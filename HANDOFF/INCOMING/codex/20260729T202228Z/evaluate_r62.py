@@ -13,7 +13,7 @@ import random
 import statistics
 import zipfile
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Iterable
 
@@ -504,19 +504,35 @@ def disposition(
 
 def expand_plan(plan: dict[str, object]) -> list[dict[str, str]]:
     base = str(plan["base_url"]).rstrip("/")
-    month_period = {
-        month: period
-        for period, months in plan["periods"].items()
-        for month in months
+
+    def dates(start: str, end: str) -> list[date]:
+        current = date.fromisoformat(start)
+        final = date.fromisoformat(end)
+        values = []
+        while current <= final:
+            values.append(current)
+            current += timedelta(days=1)
+        return values
+
+    daily_period = {
+        day.isoformat(): period
+        for period, bounds in plan["periods"].items()
+        for day in dates(bounds["start"], bounds["end"])
     }
+    monthly_period: dict[str, str] = {}
+    for token, period in daily_period.items():
+        monthly_period[token[:7]] = period
     records: list[dict[str, str]] = []
     for series in plan["series"]:
-        for month in sorted(month_period):
-            name = str(series["filename_template"]).format(ym=month)
+        granularity = str(series["archive_granularity"])
+        token_period = daily_period if granularity == "daily" else monthly_period
+        for token in sorted(token_period):
+            name = str(series["filename_template"]).format(token=token)
             relative = f"{series['folder']}/{name}"
             records.append(
                 {
-                    "period": month_period[month],
+                    "period": token_period[token],
+                    "archive_granularity": granularity,
                     "source_class": str(series["source_class"]),
                     "source_id": f"binance-vision:{relative}",
                     "url": f"{base}/{relative}",
@@ -536,7 +552,14 @@ def verify_sources(
     if len(actual) != len(expected):
         raise ValueError("source manifest count mismatch")
     for wanted, observed in zip(expected, actual):
-        for field in ("period", "source_class", "source_id", "url", "path"):
+        for field in (
+            "period",
+            "archive_granularity",
+            "source_class",
+            "source_id",
+            "url",
+            "path",
+        ):
             if wanted[field] != observed[field]:
                 raise ValueError(f"source manifest mismatch: {field}")
         path = data / str(observed["path"])

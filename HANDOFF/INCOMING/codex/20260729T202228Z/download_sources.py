@@ -8,7 +8,7 @@ import hashlib
 import json
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -22,20 +22,36 @@ def digest(path: Path) -> str:
 
 def expand(plan: dict[str, object]) -> list[dict[str, str]]:
     base = str(plan["base_url"]).rstrip("/")
-    month_period = {
-        month: period
-        for period, months in plan["periods"].items()
-        for month in months
+
+    def dates(start: str, end: str) -> list[date]:
+        current = date.fromisoformat(start)
+        final = date.fromisoformat(end)
+        values = []
+        while current <= final:
+            values.append(current)
+            current += timedelta(days=1)
+        return values
+
+    daily_period = {
+        day.isoformat(): period
+        for period, bounds in plan["periods"].items()
+        for day in dates(bounds["start"], bounds["end"])
     }
+    monthly_period: dict[str, str] = {}
+    for token, period in daily_period.items():
+        monthly_period[token[:7]] = period
     jobs: list[dict[str, str]] = []
     for series in plan["series"]:
-        for month in sorted(month_period):
-            name = str(series["filename_template"]).format(ym=month)
+        granularity = str(series["archive_granularity"])
+        token_period = daily_period if granularity == "daily" else monthly_period
+        for token in sorted(token_period):
+            name = str(series["filename_template"]).format(token=token)
             folder = str(series["folder"])
             relative = f"{folder}/{name}"
             jobs.append(
                 {
-                    "period": month_period[month],
+                    "period": token_period[token],
+                    "archive_granularity": granularity,
                     "source_class": str(series["source_class"]),
                     "source_id": f"binance-vision:{relative}",
                     "url": f"{base}/{relative}",

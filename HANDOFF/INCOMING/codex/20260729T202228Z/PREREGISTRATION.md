@@ -28,7 +28,11 @@ is permitted.
 - Warm-up source period: 2025-06-01 through 2025-06-30.
 - Calibration period: 2025-07-01 through 2025-12-31.
 - Frozen OOS period: 2026-01-01 through the final complete June 2026 bar.
-- Exact monthly public URLs are frozen in `FROZEN_SOURCE_PLAN.json`.
+- Exact public archive URLs are frozen in `FROZEN_SOURCE_PLAN.json`. Binance
+  metrics use the official daily layout; funding and klines use monthly layout.
+- The initial monthly-metrics layout returned HTTP 404 before any outcome was
+  inspected. `SOURCE_ENDPOINT_CORRECTION.md` records the superseding
+  source-layout-only freeze. Analytical parameters are unchanged.
 
 ## Features
 

@@ -1,44 +1,44 @@
 {
-  "schema": "TRADINGOS_R62_FROZEN_SOURCE_PLAN_V1",
-  "frozen_at_utc": "2026-07-29T20:22:28Z",
+  "schema": "TRADINGOS_R62_FROZEN_SOURCE_PLAN_V2",
+  "frozen_at_utc": "2026-07-29T20:34:00Z",
   "base_url": "https://data.binance.vision/data",
   "periods": {
-    "warmup": ["2025-06"],
-    "calibration": [
-      "2025-07",
-      "2025-08",
-      "2025-09",
-      "2025-10",
-      "2025-11",
-      "2025-12"
-    ],
-    "oos": [
-      "2026-01",
-      "2026-02",
-      "2026-03",
-      "2026-04",
-      "2026-05",
-      "2026-06"
-    ]
+    "warmup": {
+      "start": "2025-06-01",
+      "end": "2025-06-30"
+    },
+    "calibration": {
+      "start": "2025-07-01",
+      "end": "2025-12-31"
+    },
+    "oos": {
+      "start": "2026-01-01",
+      "end": "2026-06-30"
+    }
   },
   "series": [
     {
       "source_class": "metrics",
-      "folder": "futures/um/monthly/metrics/BTCUSDT",
-      "filename_template": "BTCUSDT-metrics-{ym}.zip"
+      "archive_granularity": "daily",
+      "folder": "futures/um/daily/metrics/BTCUSDT",
+      "filename_template": "BTCUSDT-metrics-{token}.zip"
     },
     {
       "source_class": "funding",
+      "archive_granularity": "monthly",
       "folder": "futures/um/monthly/fundingRate/BTCUSDT",
-      "filename_template": "BTCUSDT-fundingRate-{ym}.zip"
+      "filename_template": "BTCUSDT-fundingRate-{token}.zip"
     },
     {
       "source_class": "klines_1h",
+      "archive_granularity": "monthly",
       "folder": "futures/um/monthly/klines/BTCUSDT/1h",
-      "filename_template": "BTCUSDT-1h-{ym}.zip"
+      "filename_template": "BTCUSDT-1h-{token}.zip"
     }
   ],
-  "expected_file_count": 39,
+  "expected_file_count": 421,
+  "supersedes_invalid_plan_commit": "9128a63b0e380d7c1449e3e68b68c76f3f09baac",
+  "analytical_parameters_changed": false,
   "public_read_only": true,
   "observation_policy": "freeze_hashes_before_evaluation",
   "can_trade": false,

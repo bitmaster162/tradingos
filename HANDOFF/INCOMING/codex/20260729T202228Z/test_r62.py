@@ -83,15 +83,15 @@ class R62Tests(unittest.TestCase):
     def test_single_hypothesis_identity(self):
         self.assertEqual(M.HYPOTHESIS, "BTC_CROWDING_EXHAUSTION")
 
-    def test_source_plan_has_exactly_39_files(self):
+    def test_source_plan_has_exactly_421_files(self):
         plan = json.loads(
             Path(__file__).with_name("FROZEN_SOURCE_PLAN.json").read_text(
                 encoding="utf-8"
             )
         )
         records = M.expand_plan(plan)
-        self.assertEqual(len(records), 39)
-        self.assertEqual(len({item["source_id"] for item in records}), 39)
+        self.assertEqual(len(records), 421)
+        self.assertEqual(len({item["source_id"] for item in records}), 421)
 
     def test_frozen_utc_boundaries(self):
         self.assertEqual(M.CAL_START, 1_751_328_000_000)
