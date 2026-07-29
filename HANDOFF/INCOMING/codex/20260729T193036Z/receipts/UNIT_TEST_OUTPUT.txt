@@ -1,0 +1,15 @@
+test_bootstrap_is_deterministic (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_bootstrap_is_deterministic) ... ok
+test_cost_is_deducted_once (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_cost_is_deducted_once) ... ok
+test_disposition_fails_closed_on_small_sample (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_disposition_fails_closed_on_small_sample) ... ok
+test_disposition_kills_missing_concentration (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_disposition_kills_missing_concentration) ... ok
+test_frozen_plan_has_exactly_24_sources (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_frozen_plan_has_exactly_24_sources) ... ok
+test_funding_uses_distinct_entry_exit_and_no_overlap (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_funding_uses_distinct_entry_exit_and_no_overlap) ... ok
+test_merge_rejects_cross_period_overlap (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_merge_rejects_cross_period_overlap) ... ok
+test_merge_rejects_duplicate (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_merge_rejects_duplicate) ... ok
+test_timestamp_microseconds_normalize (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_timestamp_microseconds_normalize) ... ok
+test_trade_csv_round_trip (HANDOFF.INCOMING.codex.20260729T193036Z.test_cycle03.Cycle03Tests.test_trade_csv_round_trip) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.090s
+
+OK

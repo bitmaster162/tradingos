@@ -1,0 +1,14 @@
+{
+  "schema": "TRADINGOS_R59_TERMINAL_STATE_V1",
+  "work_order": "CODEX02-R59-BOUNDED-EDGE-RESEARCH-CYCLE-03",
+  "terminal": "TWO_HYPOTHESES_DISPOSED",
+  "hypothesis_count": 2,
+  "dispositions": {
+    "H01_FUNDING_EXTREME_REVERSAL": "INSUFFICIENT_DATA",
+    "H02_BTC_ETH_LEAD_LAG": "INSUFFICIENT_DATA"
+  },
+  "research_only": true,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "no_further_agent_work": true
+}

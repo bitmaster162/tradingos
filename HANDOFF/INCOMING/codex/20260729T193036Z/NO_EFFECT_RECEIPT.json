@@ -1,0 +1,19 @@
+{
+  "schema": "TRADINGOS_R59_NO_EFFECT_RECEIPT_V1",
+  "task_class": "RESEARCH_AND_FALSIFICATION_ONLY",
+  "canonical_active_root": "C:\\Users\\coins\\TradingOS\\Active",
+  "active_integrity_decision": "active_source_integrity_clean",
+  "active_files_checked": 1078,
+  "active_drift_count": 0,
+  "tradingos_implementation_modified": false,
+  "runtime_mutated": false,
+  "scheduler_mutated": false,
+  "service_mutated": false,
+  "credentials_accessed": false,
+  "network_write": false,
+  "signal_emitted": false,
+  "order_emitted": false,
+  "capital_effect": false,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

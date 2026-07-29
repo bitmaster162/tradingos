@@ -1,0 +1,40 @@
+{
+  "schema": "TRADINGOS_R59_TEST_RECEIPT_V1",
+  "unit_tests": {
+    "command": "python -m unittest -v HANDOFF\\INCOMING\\codex\\20260729T193036Z\\test_cycle03.py",
+    "passed": 10,
+    "failed": 0,
+    "status": "PASS"
+  },
+  "deterministic_replay": {
+    "runs": 2,
+    "files_per_run": 11,
+    "sha256_differences": 0,
+    "status": "PASS"
+  },
+  "source_contract": {
+    "planned_files": 24,
+    "verified_files": 24,
+    "missing": 0,
+    "hash_mismatch": 0,
+    "status": "PASS"
+  },
+  "prior_contract": {
+    "H01_sha256": "528206859a9f86d57a1abcf36f220913bc2ffb903245e2d40a6d9f02e9a6e0a6",
+    "H02_sha256": "328fa0ce1c473bf775c3a5e34780a15b86741f68206e35d14f92116ec030948c",
+    "copied_unchanged": true,
+    "status": "PASS"
+  },
+  "tested_invariants": [
+    "exactly 24 preregistered extension sources",
+    "microsecond timestamp normalization",
+    "round-trip cost deducted exactly once",
+    "entry and exit are distinct",
+    "overlapping positions rejected",
+    "duplicate trade identities rejected",
+    "small samples fail closed",
+    "missing concentration fails closed",
+    "trade CSV round-trip",
+    "bootstrap determinism"
+  ]
+}

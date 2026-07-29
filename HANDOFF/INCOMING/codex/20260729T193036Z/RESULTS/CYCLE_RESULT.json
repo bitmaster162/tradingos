@@ -1,0 +1,101 @@
+{
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "data_quality": {
+    "funding_events": 543,
+    "futures_btc_1h_bars": 4344,
+    "spot_btc_15m_bars": 17376,
+    "spot_eth_15m_bars": 17376
+  },
+  "hypotheses": [
+    {
+      "can_trade": false,
+      "capital_permission": "DENY",
+      "cost_deducted_once": true,
+      "cumulative_oos": {
+        "bootstrap_95_lower_mean": null,
+        "max_positive_quarter_concentration": null,
+        "n": 0,
+        "net_mean": null,
+        "net_median": null,
+        "net_sum": 0,
+        "profit_factor": null,
+        "win_rate": null
+      },
+      "decision": "INSUFFICIENT_DATA",
+      "extension_2026_h1": {
+        "bootstrap_95_lower_mean": null,
+        "max_positive_quarter_concentration": null,
+        "n": 0,
+        "net_mean": null,
+        "net_median": null,
+        "net_sum": 0,
+        "profit_factor": null,
+        "win_rate": null
+      },
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "next_minimum_observation_requirement": "at least 20 additional frozen OOS trades to classify; 30 additional trades to reach the keep sample floor",
+      "overlap_prohibited": true,
+      "parameter_search": false,
+      "prior_2025": {
+        "bootstrap_95_lower_mean": null,
+        "max_positive_quarter_concentration": null,
+        "n": 0,
+        "net_mean": null,
+        "net_median": null,
+        "net_sum": 0,
+        "profit_factor": null,
+        "win_rate": null
+      },
+      "reason": "fewer than 20 cumulative OOS trades",
+      "same_snapshot_entry_exit": false
+    },
+    {
+      "can_trade": false,
+      "capital_permission": "DENY",
+      "cost_deducted_once": true,
+      "cumulative_oos": {
+        "bootstrap_95_lower_mean": -0.011814738553037404,
+        "max_positive_quarter_concentration": 0.7851743609247797,
+        "n": 12,
+        "net_mean": 0.0035292261037883493,
+        "net_median": -0.00467574860040397,
+        "net_sum": 0.04235071324546019,
+        "profit_factor": 1.443428314876152,
+        "win_rate": 0.3333333333333333
+      },
+      "decision": "INSUFFICIENT_DATA",
+      "extension_2026_h1": {
+        "bootstrap_95_lower_mean": -0.009311241568558823,
+        "max_positive_quarter_concentration": 1.0,
+        "n": 5,
+        "net_mean": 0.0015123274285185476,
+        "net_median": -0.0023849879603441847,
+        "net_sum": 0.007561637142592739,
+        "profit_factor": 1.3428717780810402,
+        "win_rate": 0.4
+      },
+      "hypothesis": "H02_BTC_ETH_LEAD_LAG",
+      "next_minimum_observation_requirement": "at least 28 additional frozen OOS trades to classify; 88 additional trades to reach the keep sample floor",
+      "overlap_prohibited": true,
+      "parameter_search": false,
+      "prior_2025": {
+        "bootstrap_95_lower_mean": -0.018350689369109448,
+        "max_positive_quarter_concentration": 1.0,
+        "n": 7,
+        "net_mean": 0.0049698680146953505,
+        "net_median": -0.005279230928088061,
+        "net_sum": 0.03478907610286745,
+        "profit_factor": 1.4736195682954911,
+        "win_rate": 0.2857142857142857
+      },
+      "reason": "fewer than 40 cumulative OOS trades",
+      "same_snapshot_entry_exit": false
+    }
+  ],
+  "hypothesis_count": 2,
+  "no_parameter_search": true,
+  "schema": "TRADINGOS_R59_BOUNDED_EDGE_CYCLE_03_V1",
+  "source_file_count": 24,
+  "terminal": "TWO_HYPOTHESES_DISPOSED"
+}

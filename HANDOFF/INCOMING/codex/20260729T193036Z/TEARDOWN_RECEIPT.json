@@ -1,0 +1,10 @@
+{
+  "schema": "TRADINGOS_R59_TEARDOWN_RECEIPT_V1",
+  "long_running_process_started": false,
+  "service_started": false,
+  "scheduler_task_created": false,
+  "listener_started": false,
+  "credentials_materialized": false,
+  "cleanup_required_before_return": false,
+  "disposable_clone_retained_for_readback": true
+}

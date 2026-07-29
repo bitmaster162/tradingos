@@ -1,0 +1,119 @@
+{
+  "extension_files": [
+    {
+      "bytes": 965,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-01.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:58.666679+00:00",
+      "sha256": "fcdc796484f395830d418588a34a26baed8849dbef0ff2b56173247e493ff51f",
+      "source_id": "binance-vision:futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-01.zip"
+    },
+    {
+      "bytes": 937,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-02.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:58.463263+00:00",
+      "sha256": "80df1dd669dc1e3afc360c9da8b9a949a127fce088eedbf5bf708bd37b0a1f58",
+      "source_id": "binance-vision:futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-02.zip"
+    },
+    {
+      "bytes": 1008,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-03.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:58.638311+00:00",
+      "sha256": "5c069d5e9597a44fd0e213395082e59ff223fb99c9eab3a2a5a2a5622ba7867c",
+      "source_id": "binance-vision:futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-03.zip"
+    },
+    {
+      "bytes": 960,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-04.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:58.547549+00:00",
+      "sha256": "51cdeb4de7d5ef1d4eece80b6115e391bdf7a2d0803bf9ad8371ab23340b22d3",
+      "source_id": "binance-vision:futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-04.zip"
+    },
+    {
+      "bytes": 980,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-05.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:58.739094+00:00",
+      "sha256": "445b65fd6b17bfcfb5e4d035db29fad34f729fa078f0449024db42621be84e6e",
+      "source_id": "binance-vision:futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-05.zip"
+    },
+    {
+      "bytes": 964,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-06.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:58.787700+00:00",
+      "sha256": "cff97ce688329592bccbbf5873b5c7021649e093f5f5806e332c5b4fb7fd6a00",
+      "source_id": "binance-vision:futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-06.zip"
+    },
+    {
+      "bytes": 38152,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-01.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:59.195583+00:00",
+      "sha256": "6c15ac5fd895f26bf8e12b99df6ab9aff637dc94b37128e92c75c19887d0e3b3",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-01.zip"
+    },
+    {
+      "bytes": 35154,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-02.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:59.256279+00:00",
+      "sha256": "886fca9764139a1d71d97ca28e0a2cb30fe7d6f44df9be2539452c02e3c4e775",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-02.zip"
+    },
+    {
+      "bytes": 38671,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-03.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:59.312779+00:00",
+      "sha256": "41199df2dd62c333ea306d28de331bfffbbfed03609d100c63b2de1d173f7414",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-03.zip"
+    },
+    {
+      "bytes": 36965,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-04.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:59.313775+00:00",
+      "sha256": "c822801b16eb317f4672e376a73664f2e5f9180409c57b6c7517707f4f873e8c",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-04.zip"
+    },
+    {
+      "bytes": 37968,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-05.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:59.591677+00:00",
+      "sha256": "9a367708c90de999a7a9d3114fd111ff28203b13c8daef77d154b5216fb571f7",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-05.zip"
+    },
+    {
+      "bytes": 37239,
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-06.zip",
+      "retrieved_at_utc": "2026-07-29T19:36:59.824749+00:00",
+      "sha256": "30bba473837a672a6a00a181a447446852414e6927bbda6684f873571788e9aa",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-06.zip"
+    }
+  ],
+  "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+  "prior_r57": {
+    "bytes": 74,
+    "path": "oos_trades.csv",
+    "sha256": "528206859a9f86d57a1abcf36f220913bc2ffb903245e2d40a6d9f02e9a6e0a6"
+  },
+  "schema": "TRADINGOS_R59_HYPOTHESIS_SOURCE_MANIFEST_V1"
+}

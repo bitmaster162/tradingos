@@ -1,0 +1,22 @@
+{
+  "schema": "TRADINGOS_R59_ACCEPTED_R57_PRIOR_INPUT_V1",
+  "predecessor_work_order": "CODEX02-R57-BOUNDED-EDGE-RESEARCH-CYCLE-02",
+  "predecessor_strict_zip_sha256": "de8ad5f740f99cf8be4bb8853f4e9056aebdd7ee551f029928033a931c1a0cb5",
+  "files": [
+    {
+      "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+      "relative_path": "H01_FUNDING_EXTREME_REVERSAL/oos_trades.csv",
+      "bytes": 74,
+      "sha256": "528206859a9f86d57a1abcf36f220913bc2ffb903245e2d40a6d9f02e9a6e0a6"
+    },
+    {
+      "hypothesis": "H02_BTC_ETH_LEAD_LAG",
+      "relative_path": "H02_BTC_ETH_LEAD_LAG/oos_trades.csv",
+      "bytes": 743,
+      "sha256": "328fa0ce1c473bf775c3a5e34780a15b86741f68206e35d14f92116ec030948c"
+    }
+  ],
+  "copied_unchanged": true,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

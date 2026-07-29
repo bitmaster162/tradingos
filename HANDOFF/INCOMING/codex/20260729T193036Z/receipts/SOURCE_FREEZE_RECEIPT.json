@@ -1,0 +1,15 @@
+{
+  "schema": "TRADINGOS_R59_SOURCE_FREEZE_RECEIPT_V1",
+  "preregistration_commit": "f95bde5e9b6a36846d864ce07bc9d7dda1ff4a4f",
+  "preregistration_tree": "fe08a3c20d35bfbbd9514d5206ab670f2e469d2b",
+  "preregistration_commit_utc": "2026-07-29T19:36:37Z",
+  "source_file_count": 24,
+  "source_bytes": 2108685,
+  "frozen_plan_sha256": "e939c3bf3920a1acd22a2f77338a342d64483c898c469e7d9c744cb874a07863",
+  "first_retrieval_utc": "2026-07-29T19:36:58.463263Z",
+  "last_retrieval_utc": "2026-07-29T19:37:01.050370Z",
+  "retrieval_after_preregistration": true,
+  "source_manifest": "../SOURCE_MANIFEST.json",
+  "public_read_only": true,
+  "backfill_after_result": false
+}

@@ -1,0 +1,42 @@
+{
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "cost_deducted_once": true,
+  "cumulative_oos": {
+    "bootstrap_95_lower_mean": null,
+    "max_positive_quarter_concentration": null,
+    "n": 0,
+    "net_mean": null,
+    "net_median": null,
+    "net_sum": 0,
+    "profit_factor": null,
+    "win_rate": null
+  },
+  "decision": "INSUFFICIENT_DATA",
+  "extension_2026_h1": {
+    "bootstrap_95_lower_mean": null,
+    "max_positive_quarter_concentration": null,
+    "n": 0,
+    "net_mean": null,
+    "net_median": null,
+    "net_sum": 0,
+    "profit_factor": null,
+    "win_rate": null
+  },
+  "hypothesis": "H01_FUNDING_EXTREME_REVERSAL",
+  "next_minimum_observation_requirement": "at least 20 additional frozen OOS trades to classify; 30 additional trades to reach the keep sample floor",
+  "overlap_prohibited": true,
+  "parameter_search": false,
+  "prior_2025": {
+    "bootstrap_95_lower_mean": null,
+    "max_positive_quarter_concentration": null,
+    "n": 0,
+    "net_mean": null,
+    "net_median": null,
+    "net_sum": 0,
+    "profit_factor": null,
+    "win_rate": null
+  },
+  "reason": "fewer than 20 cumulative OOS trades",
+  "same_snapshot_entry_exit": false
+}
