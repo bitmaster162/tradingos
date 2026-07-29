@@ -1,7 +1,9 @@
 import importlib.util
 import json
 import sys
+import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 
@@ -103,6 +105,24 @@ class R62Tests(unittest.TestCase):
         times = [100, 200, 300]
         self.assertEqual(M.latest_index_at_or_before(times, 250), 1)
         self.assertEqual(M.latest_index_at_or_before(times, 99), -1)
+
+    def test_metrics_loader_skips_blank_public_rows(self):
+        header = (
+            "create_time,symbol,sum_open_interest,sum_open_interest_value,"
+            "count_toptrader_long_short_ratio,sum_toptrader_long_short_ratio,"
+            "count_long_short_ratio,sum_taker_long_short_vol_ratio\n"
+        )
+        rows = (
+            "2025-06-01 00:00:00,BTCUSDT,,,,,,\n"
+            "2025-06-01 00:05:00,BTCUSDT,100,1,1,1.2,1,1\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "metrics.zip"
+            with zipfile.ZipFile(path, "w") as archive:
+                archive.writestr("metrics.csv", header + rows)
+            result = M.load_metrics([path])
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].open_interest, 100.0)
 
     def test_quantile_linear_interpolation(self):
         self.assertEqual(M.quantile([0.0, 10.0], 0.6), 6.0)

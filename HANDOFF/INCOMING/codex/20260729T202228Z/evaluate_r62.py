@@ -142,6 +142,10 @@ def load_metrics(paths: Iterable[Path]) -> list[Metric]:
     values: dict[int, Metric] = {}
     for path in sorted(paths):
         for row in csv.DictReader(read_zip_lines(path)):
+            if not row.get("sum_open_interest") or not row.get(
+                "sum_toptrader_long_short_ratio"
+            ):
+                continue
             ts = parse_utc_ms(row["create_time"])
             values[ts] = Metric(
                 ts,
@@ -596,7 +600,7 @@ def main() -> int:
 
     bars = load_bars(files(args.data, "futures/um/monthly/klines/BTCUSDT/1h"))
     metrics_rows = load_metrics(
-        files(args.data, "futures/um/monthly/metrics/BTCUSDT")
+        files(args.data, "futures/um/daily/metrics/BTCUSDT")
     )
     funding = load_funding(
         files(args.data, "futures/um/monthly/fundingRate/BTCUSDT")
