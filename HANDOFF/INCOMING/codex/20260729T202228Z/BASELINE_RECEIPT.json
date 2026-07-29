@@ -1,0 +1,22 @@
+{
+  "schema": "TRADINGOS_R62_BASELINE_RECEIPT_V1",
+  "work_order": "CODEX02-R62-BTC-CROWDING-EXHAUSTION-CHALLENGE",
+  "work_order_sha256": "4fb7d0ed0e0707cd19db03840213c96f64d77fee09f6a37e54561863bd9da0f8",
+  "captured_at_utc": "2026-07-29T20:22:28Z",
+  "predecessor": {
+    "work_order": "CODEX02-R59-BOUNDED-EDGE-RESEARCH-CYCLE-03",
+    "broker_delivery_id": "CODEX02-R59-BOUNDED-EDGE-RESEARCH-CYCLE-03__20260729T194846061648Z__65b47df539bc",
+    "strict_zip_sha256": "65b47df539bc017c8a80b4add45451e8892ec48de8639d4529849de1a5b4b983",
+    "proposal_bundle_sha256": "b3107a3432a0bc94a7cfe55eaeb8fd47ab7affb583c42280be1bb87a19c7201b",
+    "head": "7e9351003da24281b1748c5e018a84068aa4d517",
+    "tree": "421ddc9902568398033855380e41482f372c2615",
+    "branch": "codex02/r59-bounded-edge-cycle-03",
+    "status": "clean",
+    "published_through_return_broker": true
+  },
+  "r62_branch": "codex02/r62-btc-crowding-exhaustion",
+  "authorized_root_class": "disposable_clone_only",
+  "canonical_active_modified": false,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

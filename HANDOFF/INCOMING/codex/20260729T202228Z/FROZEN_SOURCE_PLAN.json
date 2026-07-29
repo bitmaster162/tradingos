@@ -1,0 +1,46 @@
+{
+  "schema": "TRADINGOS_R62_FROZEN_SOURCE_PLAN_V1",
+  "frozen_at_utc": "2026-07-29T20:22:28Z",
+  "base_url": "https://data.binance.vision/data",
+  "periods": {
+    "warmup": ["2025-06"],
+    "calibration": [
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12"
+    ],
+    "oos": [
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06"
+    ]
+  },
+  "series": [
+    {
+      "source_class": "metrics",
+      "folder": "futures/um/monthly/metrics/BTCUSDT",
+      "filename_template": "BTCUSDT-metrics-{ym}.zip"
+    },
+    {
+      "source_class": "funding",
+      "folder": "futures/um/monthly/fundingRate/BTCUSDT",
+      "filename_template": "BTCUSDT-fundingRate-{ym}.zip"
+    },
+    {
+      "source_class": "klines_1h",
+      "folder": "futures/um/monthly/klines/BTCUSDT/1h",
+      "filename_template": "BTCUSDT-1h-{ym}.zip"
+    }
+  ],
+  "expected_file_count": 39,
+  "public_read_only": true,
+  "observation_policy": "freeze_hashes_before_evaluation",
+  "can_trade": false,
+  "capital_permission": "DENY"
+}
