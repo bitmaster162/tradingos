@@ -1,0 +1,72 @@
+{
+  "schema": "trading_edge.preregistration.v1",
+  "hypothesis_id": "SYNTH_E99_CONTRACT_FIXTURE",
+  "version": "1.0.0",
+  "status": "PREREGISTERED_BEFORE_OUTCOMES",
+  "frozen_at_utc": "2026-08-01T12:00:00Z",
+  "claim": "Synthetic channel imbalance at a frozen event predicts a bounded synthetic return.",
+  "material_difference_from_prior_work": "Contract-only synthetic fixture with no market observations.",
+  "source_contract": {
+    "required_channels": ["spot_trades", "perp_trades"],
+    "source_ids": ["fixture_spot", "fixture_perp"],
+    "timestamp_semantics": {
+      "event_time": "exchange event timestamp",
+      "arrival_time": "collector receipt timestamp",
+      "entry_time": "first complete interval after event"
+    },
+    "timezone": "UTC",
+    "join_keys": ["symbol", "event_time_bucket"],
+    "minimum_join_coverage_rule": {
+      "metric": "causal_inner_join_coverage",
+      "operator": ">=",
+      "value": 0.99
+    },
+    "missingness_policy": "Reject any event missing either required channel."
+  },
+  "event_contract": {
+    "event_definition": "Synthetic imbalance is greater than the frozen fixture threshold at a complete interval.",
+    "event_independence_rule": "Only the first event in each four-hour cluster is retained.",
+    "cluster_dedupe_rule": "Cluster by symbol when consecutive event timestamps are no more than 14400 seconds apart.",
+    "entry_time": "First complete interval open strictly after the event timestamp.",
+    "invalidation": "Reject missing, non-monotonic, or same-snapshot entry and outcome timestamps.",
+    "holding_horizons_seconds": [3600, 14400],
+    "exclusions": ["source outage", "clock skew above frozen bound"]
+  },
+  "data_split": {
+    "train": {"start": "2024-01-01T00:00:00Z", "end": "2024-12-31T00:00:00Z"},
+    "validation": {"start": "2025-01-02T00:00:00Z", "end": "2025-06-30T00:00:00Z"},
+    "final_test": {"start": "2025-07-02T00:00:00Z", "end": "2025-12-31T00:00:00Z"},
+    "purge_embargo": {"purge_seconds": 14400, "embargo_seconds": 3600},
+    "walk_forward": {"mode": "ANCHORED", "minimum_train_seconds": 7776000, "step_seconds": 2592000}
+  },
+  "cost_model": {
+    "fees_bps": 10.0,
+    "spread_bps": 2.0,
+    "slippage_bps": 2.0,
+    "funding_bps": 0.0,
+    "latency_ms": 500.0,
+    "adverse_multiplier": 2.0
+  },
+  "statistical_plan": {
+    "primary_metric": "POST_COST_OOS_EXPECTANCY",
+    "secondary_metrics": ["median", "tail_cvar", "win_rate"],
+    "power_or_sequential_evidence_plan": "Freeze a sequential confidence interval and return insufficient when width exceeds the stated tolerance.",
+    "bootstrap_or_resampling_plan": "Moving-block and stationary bootstrap with seed 2202 and 1000 synthetic repetitions.",
+    "multiple_testing_family": "M2B_CYCLE_FAMILY_01",
+    "correction": "HOLM",
+    "placebo_tests": ["direction randomization", "timestamp displacement"],
+    "ablation_tests": ["one source removed", "compression-only baseline"]
+  },
+  "decision_rule": {
+    "KEEP_FOR_FORWARD_PAPER": ["positive post-cost final-test expectancy", "positive lower bound", "robustness controls pass"],
+    "KILL": ["non-positive post-cost expectancy", "robustness control fails"],
+    "INSUFFICIENT_DATA": ["effective sample or coverage is inadequate"],
+    "INVALID_RESEARCH_RETURN": ["source mutation, leakage, or preregistration mismatch"]
+  },
+  "effect_ceiling": {
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "deploy_permission": "DENY",
+    "implementation_handoff": "ONLY_AFTER_KEEP_FOR_FORWARD_PAPER"
+  }
+}

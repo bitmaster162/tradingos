@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trading_edge.preregistration.v1",
+  "type": "object",
+  "required": ["hypothesis_id", "version", "status", "frozen_at_utc", "claim", "source_contract", "event_contract", "data_split", "cost_model", "statistical_plan", "decision_rule", "effect_ceiling"],
+  "properties": {
+    "status": {"const": "PREREGISTERED_BEFORE_OUTCOMES"},
+    "hypothesis_id": {"type": "string", "minLength": 1},
+    "source_contract": {"type": "object"},
+    "event_contract": {"type": "object"},
+    "data_split": {"type": "object"},
+    "cost_model": {"type": "object"},
+    "statistical_plan": {"type": "object"},
+    "decision_rule": {"type": "object"},
+    "effect_ceiling": {"type": "object"}
+  },
+  "additionalProperties": true
+}

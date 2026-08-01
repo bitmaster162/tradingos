@@ -1,0 +1,34 @@
+{
+  "available_channels": [
+    "perp_trades",
+    "spot_trades"
+  ],
+  "available_source_ids": [
+    "fixture_perp",
+    "fixture_spot"
+  ],
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "catalog_id": "SYNTHETIC_CATALOG_M2A_01",
+  "catalog_sha256": "b79227002ab91307d37ba1c0311cb8c93a7af0ff8451a592af15f8b8bb01f476",
+  "controller_adjudication": {
+    "outcome_budget": "DENY",
+    "status": "PENDING"
+  },
+  "hypothesis_id": "SYNTH_E99_CONTRACT_FIXTURE",
+  "minimum_join_coverage": 1.0,
+  "missing_channels": [],
+  "missing_source_ids": [],
+  "provenance_failures": [],
+  "reason": "all required channels and provenance checks pass",
+  "required_channels": [
+    "perp_trades",
+    "spot_trades"
+  ],
+  "required_source_ids": [
+    "fixture_perp",
+    "fixture_spot"
+  ],
+  "schema": "trading_edge.hypothesis_data_readiness.v1",
+  "status": "DATA_READY"
+}

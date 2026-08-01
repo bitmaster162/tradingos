@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trading_edge.research_evidence.v1",
+  "type": "object",
+  "required": ["preregistration_valid", "source_provenance_valid", "source_hashes_match", "final_test_evaluated", "independent_sample_sufficient", "post_cost_expectancy", "bootstrap_lower_bound", "placebo_materially_weaker", "tail_risk_acceptable", "source_ablation_robust", "regime_ablation_robust", "leakage_detected"]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trading_edge.data_catalog.v1",
+  "type": "object",
+  "required": ["catalog_id", "frozen_at_utc", "raw_packets"],
+  "properties": {
+    "catalog_id": {"type": "string", "minLength": 1},
+    "raw_packets": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["source_id", "exchange", "vendor", "symbol", "channel", "raw_path", "sha256", "bytes", "timestamp_unit", "timezone", "min_time", "max_time", "missingness_rate", "duplicate_rows", "monotonic", "clock_skew_ms", "freshness_status", "last_observed_at_utc", "provenance_status", "immutable"]}}
+  }
+}

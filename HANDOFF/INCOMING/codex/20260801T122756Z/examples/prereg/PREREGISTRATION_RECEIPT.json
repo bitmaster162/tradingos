@@ -1,0 +1,31 @@
+{
+  "can_trade": false,
+  "canonical_sha256": "6114ffe80f86b91ce30494f67e3f82fc619971cce3a94237f1e16d4b532c4be8",
+  "capital_permission": "DENY",
+  "compiler_version": "TRADING_EDGE_PREREG_COMPILER_M2A_V1",
+  "content_signature": "5c9e0f29b7a57ddd96782658976d0e70590bd10de0026c9ada3e41011d56876e",
+  "content_signature_scheme": "SHA256_DOMAIN_SEPARATED_INTEGRITY_V1",
+  "deploy_permission": "DENY",
+  "frozen_at_utc": "2026-08-01T12:00:00Z",
+  "hypothesis_id": "SYNTH_E99_CONTRACT_FIXTURE",
+  "input_sha256": "8a54cc861b08d02eb603c5f093ec71cb7027f85290c267a1529cc9b751648f68",
+  "outcome_commands_locked_until_controller_data_ready": true,
+  "schema": "trading_edge.preregistration_receipt.v1",
+  "validation": {
+    "final_test": [
+      "2025-07-02T00:00:00+00:00",
+      "2025-12-31T00:00:00+00:00"
+    ],
+    "hypothesis_id": "SYNTH_E99_CONTRACT_FIXTURE",
+    "status": "VALID",
+    "train": [
+      "2024-01-01T00:00:00+00:00",
+      "2024-12-31T00:00:00+00:00"
+    ],
+    "validation": [
+      "2025-01-02T00:00:00+00:00",
+      "2025-06-30T00:00:00+00:00"
+    ]
+  },
+  "version": "1.0.0"
+}

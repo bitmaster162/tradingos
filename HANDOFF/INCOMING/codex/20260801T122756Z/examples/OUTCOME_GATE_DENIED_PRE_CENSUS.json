@@ -1,0 +1,6 @@
+{
+  "details": {},
+  "error_code": "CONTROLLER_ADJUDICATION_MISSING",
+  "message": "DATA_READY has not been controller-authorized",
+  "status": "REJECTED"
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "trading_edge.hypothesis_family_registry.m2a.v1",
+  "status": "PRE_OUTCOME_CONTROLLER_OWNED",
+  "hypotheses": [
+    {
+      "id": "M1_H01_PRESSURE_OI_ABSORPTION",
+      "family": "pressure_oi_absorption",
+      "claim": "Aggressive taker pressure that fails to move BTC while open interest is elevated may be absorbed and reverse.",
+      "causal_signature": ["aggressor_pressure", "price_nonresponse", "elevated_oi", "absorption", "reversal"],
+      "required_channels": ["perp_trades", "open_interest", "mark_price"],
+      "terminal": "INSUFFICIENT_DATA",
+      "allowed_next_state": "NEW_INDEPENDENT_SAMPLE_ONLY",
+      "evidence_ref": "control/M1_EDGE_TRUTH_LOCK.json"
+    },
+    {
+      "id": "M1_H02_BTC_SFP_ETH_SMT_TRIGGER",
+      "family": "sfp_smt_local_trigger",
+      "claim": "A rejected BTC liquidity sweep with ETH nonconfirmation and a later local reversal trigger predicts reversal.",
+      "causal_signature": ["btc_liquidity_sweep", "eth_nonconfirmation", "local_reversal_trigger", "next_bar_entry"],
+      "required_channels": ["btc_price", "eth_price"],
+      "terminal": "KILL",
+      "allowed_next_state": "CLOSED_DO_NOT_RENAME_OR_RESURRECT",
+      "evidence_ref": "control/M1_EDGE_TRUTH_LOCK.json"
+    },
+    {
+      "id": "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION",
+      "family": "regime_hidden_rsi_continuation",
+      "claim": "Hidden RSI divergence inside an aligned EMA regime predicts trend continuation after confirmed pivots.",
+      "causal_signature": ["hidden_rsi_divergence", "ema_regime", "confirmed_pivot", "trend_continuation"],
+      "required_channels": ["btc_price"],
+      "terminal": "KILL",
+      "allowed_next_state": "CLOSED_DO_NOT_RENAME_OR_RESURRECT",
+      "evidence_ref": "control/M1_EDGE_TRUTH_LOCK.json"
+    },
+    {
+      "id": "H01_FUNDING_EXTREME_REVERSAL",
+      "family": "funding_contrarian_reversion",
+      "claim": "An extreme BTC perpetual funding event predicts an eight-hour return against the crowded funding direction.",
+      "causal_signature": ["funding_extreme", "crowded_positioning", "contrarian_direction", "eight_hour_reversion"],
+      "required_channels": ["funding", "btc_perp_price"],
+      "terminal": "INSUFFICIENT_DATA",
+      "observed_in_cycles": ["R57_CYCLE_02", "R59_CYCLE_03"],
+      "evidence_ref": "HANDOFF/INCOMING/codex/20260729T193036Z/RESULTS/H01_FUNDING_EXTREME_REVERSAL/RESULT.json"
+    },
+    {
+      "id": "H02_BTC_ETH_LEAD_LAG",
+      "family": "cross_asset_lead_lag",
+      "claim": "A large BTC move that ETH has not matched predicts ETH continuation in the BTC direction.",
+      "causal_signature": ["btc_impulse", "eth_lag", "same_direction", "one_hour_catchup"],
+      "required_channels": ["btc_spot_price", "eth_spot_price"],
+      "terminal": "INSUFFICIENT_DATA",
+      "observed_in_cycles": ["R57_CYCLE_02", "R59_CYCLE_03"],
+      "evidence_ref": "HANDOFF/INCOMING/codex/20260729T193036Z/RESULTS/H02_BTC_ETH_LEAD_LAG/RESULT.json"
+    },
+    {
+      "id": "H03_BTC_COMPRESSION_BREAKOUT",
+      "family": "volatility_compression_breakout",
+      "claim": "A BTC close outside a narrow prior range predicts directional continuation.",
+      "causal_signature": ["compression", "narrow_range", "range_breakout", "continuation", "next_bar_entry"],
+      "required_channels": ["btc_spot_price"],
+      "terminal": "KILL",
+      "observed_in_cycles": ["R57_CYCLE_02"],
+      "evidence_ref": "HANDOFF/INCOMING/codex/20260729T193036Z/CYCLE_PREREGISTRATION.md"
+    },
+    {
+      "id": "E1_PRESSURE_OI_ABSORPTION_EXTENSION",
+      "family": "pressure_oi_absorption",
+      "claim": "Continue M1 H1 only with new independent aggressor-flow and open-interest events.",
+      "causal_signature": ["aggressor_pressure", "price_nonresponse", "elevated_oi", "absorption", "reversal", "new_independent_sample"],
+      "required_channels": ["perp_trades", "open_interest", "mark_price"],
+      "terminal": "PRE_OUTCOME",
+      "lineage_continuation_of": "M1_H01_PRESSURE_OI_ABSORPTION",
+      "runtime_acceptance": false
+    },
+    {
+      "id": "E2_OI_FLUSH_SPOT_LED_RECLAIM",
+      "family": "oi_flush_spot_reclaim",
+      "claim": "A forced OI flush followed by a spot-led reclaim may differ from a perp-led rebound.",
+      "causal_signature": ["oi_flush", "liquidation_proxy", "spot_led_reclaim", "perp_flow_ablation"],
+      "required_channels": ["open_interest", "liquidations", "spot_trades", "perp_trades", "mark_price"],
+      "terminal": "PRE_OUTCOME",
+      "runtime_acceptance": false
+    },
+    {
+      "id": "E3_FUNDING_BASIS_CROWD_UNWIND",
+      "family": "funding_basis_crowd_unwind",
+      "claim": "Funding and basis crowding combined with price and OI dislocation may precede a bounded unwind.",
+      "causal_signature": ["funding_crowding", "basis_extreme", "oi_dislocation", "bounded_unwind", "publication_time_guard"],
+      "required_channels": ["funding", "basis", "open_interest", "spot_trades", "perp_trades"],
+      "terminal": "PRE_OUTCOME",
+      "runtime_acceptance": false
+    },
+    {
+      "id": "E4_LIQUIDATION_CASCADE_ABSORPTION_REVERSAL",
+      "family": "liquidation_cascade_absorption",
+      "claim": "A liquidation cascade that fails to extend and is absorbed by opposing flow may reverse rather than continue.",
+      "causal_signature": ["liquidation_cascade", "extension_failure", "opposing_flow", "absorption", "reversal"],
+      "required_channels": ["liquidations", "trade_flow", "open_interest", "mark_price"],
+      "terminal": "PRE_OUTCOME",
+      "runtime_acceptance": false
+    },
+    {
+      "id": "E5_CROSS_VENUE_LEAD_LAG_LATENCY_COST",
+      "family": "cross_venue_lead_lag",
+      "claim": "A venue lead may predict another venue only when the horizon exceeds measured clock skew, latency, spread, and fees.",
+      "causal_signature": ["cross_venue_lead", "clock_skew_bound", "latency_bound", "cost_adjusted_lag"],
+      "required_channels": ["venue_a_trades", "venue_b_trades", "clock_diagnostics"],
+      "terminal": "PRE_OUTCOME",
+      "runtime_acceptance": false
+    },
+    {
+      "id": "E6_COMPRESSION_ORDER_FLOW_CONFIRMATION",
+      "family": "volatility_compression_breakout",
+      "claim": "A volatility breakout after compression may differ only when explicit spot and perp order-flow confirmation is present.",
+      "causal_signature": ["compression", "breakout", "spot_flow_confirmation", "perp_flow_confirmation", "compression_only_ablation"],
+      "required_channels": ["btc_price", "spot_trades", "perp_trades"],
+      "terminal": "PRE_OUTCOME",
+      "runtime_acceptance": false
+    }
+  ],
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "trading_edge.hypothesis_data_readiness.v1",
+  "type": "object",
+  "required": ["hypothesis_id", "status", "catalog_sha256", "required_channels", "required_source_ids", "controller_adjudication"],
+  "properties": {
+    "status": {"enum": ["DATA_READY", "PARTIAL_DATA", "NO_DATA", "PROVENANCE_BLOCKED"]},
+    "catalog_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "controller_adjudication": {"type": "object"}
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "trading_edge.synthetic_events.v1",
+  "events": [
+    {"event_id": "e1", "timestamp": 100, "score": 2.0, "source": "A", "regime": "LOW"},
+    {"event_id": "e2", "timestamp": 120, "score": 1.5, "source": "A", "regime": "LOW"},
+    {"event_id": "e3", "timestamp": 500, "score": -1.0, "source": "B", "regime": "HIGH"},
+    {"event_id": "e4", "timestamp": 900, "score": 3.0, "source": "B", "regime": "HIGH"}
+  ],
+  "returns": [0.01, -0.02, 0.03, 0.005, -0.004, 0.012],
+  "synthetic_only": true
+}

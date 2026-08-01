@@ -1,0 +1,10 @@
+{
+  "catalog_id": "SYNTHETIC_CATALOG_M2A_01",
+  "catalog_sha256": "b79227002ab91307d37ba1c0311cb8c93a7af0ff8451a592af15f8b8bb01f476",
+  "channels": [
+    "perp_trades",
+    "spot_trades"
+  ],
+  "packet_count": 2,
+  "status": "CATALOG_VALID"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "NEW_BTC_SWEEP_ETH_CONFIRMATION_V2",
+  "family": "sfp_smt_local_trigger",
+  "claim": "A BTC liquidity sweep rejected with ETH nonconfirmation and a local reversal trigger predicts reversal.",
+  "causal_signature": ["btc_liquidity_sweep", "eth_nonconfirmation", "local_reversal_trigger", "next_bar_entry"],
+  "required_channels": ["btc_price", "eth_price"]
+}
