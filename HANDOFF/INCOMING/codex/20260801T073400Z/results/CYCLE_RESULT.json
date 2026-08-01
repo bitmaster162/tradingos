@@ -1,0 +1,11 @@
+{
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "dispositions": {
+    "M1_H01_PRESSURE_OI_ABSORPTION": "INSUFFICIENT_DATA",
+    "M1_H02_BTC_SFP_ETH_SMT_TRIGGER": "KILL",
+    "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION": "KILL"
+  },
+  "schema": "TRADINGOS_EDGE_RESEARCH_MARATHON_M1_CYCLE_V1",
+  "terminal": "EDGE_RESEARCH_M1_COMPLETE"
+}

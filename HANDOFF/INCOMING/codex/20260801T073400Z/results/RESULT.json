@@ -1,0 +1,191 @@
+{
+  "adaptive_changes_after_freeze": false,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "cost_ledger": {
+    "entry_fee": 0.0005,
+    "entry_slippage": 0.0001,
+    "exit_fee": 0.0005,
+    "exit_slippage": 0.0001,
+    "total_deducted_once": 0.0012
+  },
+  "deploy_permission": "DENY",
+  "hypothesis_count": 3,
+  "no_further_agent_work": true,
+  "results": {
+    "M1_H01_PRESSURE_OI_ABSORPTION": {
+      "coverage": 1.0,
+      "diagnostics": {
+        "calibration_features": 3624,
+        "feature_counts": {
+          "candidate_oos": 715,
+          "complete_oos": 715
+        },
+        "non_overlapping_signals": 13,
+        "oos_features": 715,
+        "raw_signals": 15,
+        "thresholds": {
+          "oi_change_q70_nonnegative": 0.0042028274366552095,
+          "oi_z_q60": 0.6375780263181663,
+          "rv_q33": 0.003516668397696871,
+          "rv_q67": 0.004813449437871884,
+          "taker_q15": 0.6089947,
+          "taker_q85": 1.6673611499999996
+        },
+        "unmatched_signals": 12
+      },
+      "disposition": "INSUFFICIENT_DATA",
+      "evidence": {
+        "chronological_halves": {
+          "first": {
+            "bootstrap_95_lower_mean": null,
+            "mean": null,
+            "median": null,
+            "n": 0,
+            "sum": null,
+            "win_rate": null
+          },
+          "second": {
+            "bootstrap_95_lower_mean": -0.0012601656595511367,
+            "mean": -0.0012601656595511367,
+            "median": -0.0012601656595511367,
+            "n": 1,
+            "sum": -0.0012601656595511367,
+            "win_rate": 0.0
+          }
+        },
+        "full": {
+          "primary": {
+            "bootstrap_95_lower_mean": -0.0012601656595511367,
+            "mean": -0.0012601656595511367,
+            "median": -0.0012601656595511367,
+            "n": 1,
+            "sum": -0.0012601656595511367,
+            "win_rate": 0.0
+          },
+          "secondary": {
+            "bootstrap_95_lower_mean": 0.00017359631883124963,
+            "mean": 0.00017359631883124963,
+            "median": 0.00017359631883124963,
+            "n": 1,
+            "sum": 0.00017359631883124963,
+            "win_rate": 1.0
+          }
+        }
+      },
+      "observations": 1,
+      "reason": "fewer than three independent observations"
+    },
+    "M1_H02_BTC_SFP_ETH_SMT_TRIGGER": {
+      "coverage": 1.0,
+      "diagnostics": {
+        "aligned_bars": 2880,
+        "btc_oos_bars": 2880,
+        "eth_oos_bars": 2880,
+        "expected_through_last_source_bar": 2880,
+        "non_overlapping_signals": 41,
+        "raw_confirmed_signals": 57
+      },
+      "disposition": "KILL",
+      "evidence": {
+        "chronological_halves": {
+          "first": {
+            "bootstrap_95_lower_mean": -0.005542109563798524,
+            "mean": -0.0013988379993733204,
+            "median": -0.001170264784270979,
+            "n": 23,
+            "sum": -0.03217327398558637,
+            "win_rate": 0.43478260869565216
+          },
+          "second": {
+            "bootstrap_95_lower_mean": -0.003988735706534182,
+            "mean": -0.001705975831182528,
+            "median": -0.001308994431340159,
+            "n": 18,
+            "sum": -0.030707564961285502,
+            "win_rate": 0.3888888888888889
+          }
+        },
+        "full": {
+          "primary": {
+            "bootstrap_95_lower_mean": -0.00402168448966145,
+            "mean": -0.0015336789987041922,
+            "median": -0.001170264784270979,
+            "n": 41,
+            "sum": -0.06288083894687188,
+            "win_rate": 0.4146341463414634
+          },
+          "secondary": {
+            "bootstrap_95_lower_mean": -0.0029590052778180184,
+            "mean": -0.0014703044352980931,
+            "median": -0.0012,
+            "n": 41,
+            "sum": -0.06028248184722181,
+            "win_rate": 0.2926829268292683
+          }
+        }
+      },
+      "observations": 41,
+      "reason": "one or more frozen robustness gates failed"
+    },
+    "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION": {
+      "coverage": 1.0,
+      "diagnostics": {
+        "bars": 5064,
+        "expected_through_last_source_bar": 720,
+        "non_overlapping_signals": 10,
+        "oos_bars": 720,
+        "pivot_confirmation_delay_bars": 3,
+        "raw_oos_signals": 10,
+        "strict_pivot_highs": 524,
+        "strict_pivot_lows": 530
+      },
+      "disposition": "KILL",
+      "evidence": {
+        "chronological_halves": {
+          "first": {
+            "bootstrap_95_lower_mean": -0.018720288673190113,
+            "mean": -0.008294600786856031,
+            "median": -0.0029569863582603814,
+            "n": 8,
+            "sum": -0.06635680629484825,
+            "win_rate": 0.375
+          },
+          "second": {
+            "bootstrap_95_lower_mean": -0.007244737623684959,
+            "mean": -0.005907318868991006,
+            "median": -0.005907318868991006,
+            "n": 2,
+            "sum": -0.011814637737982012,
+            "win_rate": 0.0
+          }
+        },
+        "full": {
+          "primary": {
+            "bootstrap_95_lower_mean": -0.016355244823864003,
+            "mean": -0.007817144403283027,
+            "median": -0.0038017756402496036,
+            "n": 10,
+            "sum": -0.07817144403283027,
+            "win_rate": 0.3
+          },
+          "secondary": {
+            "bootstrap_95_lower_mean": -0.0068328369313704436,
+            "mean": -0.003150682797277525,
+            "median": -0.0025812718609986227,
+            "n": 10,
+            "sum": -0.03150682797277525,
+            "win_rate": 0.2
+          }
+        }
+      },
+      "observations": 10,
+      "reason": "one or more frozen robustness gates failed"
+    }
+  },
+  "same_snapshot_entry_exit": false,
+  "schema": "TRADINGOS_EDGE_RESEARCH_MARATHON_M1_RESULT_V1",
+  "self_application": false,
+  "source_files": 307,
+  "terminal": "EDGE_RESEARCH_M1_COMPLETE"
+}

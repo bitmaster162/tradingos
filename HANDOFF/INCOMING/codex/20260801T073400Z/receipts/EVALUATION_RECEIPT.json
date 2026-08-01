@@ -1,0 +1,16 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_EVALUATION_RECEIPT_V1",
+  "completed_at_utc": "2026-08-01T07:51:02.5855639Z",
+  "preregistration_commit": "d8d560020e91a0c082e11e1f227ee5be42caedb0",
+  "source_freeze_commit": "a30049a286bdf7023eadd80a657a0bcaa8914507",
+  "source_manifest_sha256": "000b41f8eea0ef52e223350b5f412b2216eb75e8a04e3f6c10715f8eeeb1a0c7",
+  "command": "python evaluate_marathon.py --data C:\\tmp\\codex02_m1_edge_marathon_20260801T073400Z\\raw --source-manifest SOURCE_MANIFEST.json --plan FROZEN_SOURCE_PLAN.json --prereg PREREGISTRATION.json --out C:\\tmp\\codex02_m1_edge_marathon_20260801T073400Z\\evaluation_run1",
+  "exit_code": 0,
+  "stdout": "{\"dispositions\": {\"M1_H01_PRESSURE_OI_ABSORPTION\": \"INSUFFICIENT_DATA\", \"M1_H02_BTC_SFP_ETH_SMT_TRIGGER\": \"KILL\", \"M1_H03_REGIME_HIDDEN_RSI_CONTINUATION\": \"KILL\"}, \"observations\": {\"M1_H01_PRESSURE_OI_ABSORPTION\": 1, \"M1_H02_BTC_SFP_ETH_SMT_TRIGGER\": 41, \"M1_H03_REGIME_HIDDEN_RSI_CONTINUATION\": 10}, \"terminal\": \"EDGE_RESEARCH_M1_COMPLETE\"}",
+  "stderr": "",
+  "parameter_changes_after_freeze": false,
+  "same_snapshot_entry_exit": false,
+  "cost_deducted_once": true,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_DETERMINISM_RECEIPT_V1",
+  "replay_completed_at_utc": "2026-08-01T07:51:50.4831379Z",
+  "same_code": true,
+  "same_preregistration": true,
+  "same_source_manifest": true,
+  "same_raw_sources": true,
+  "parameter_changes": 0,
+  "run1_run2_byte_identical": true,
+  "file_sha256": {
+    "CYCLE_RESULT.json": "65a84228e3cd61c25d8580895e7bc88862407284a21d8f04ed844fa76d8599a7",
+    "FALSIFICATION_REPORT.md": "59fd3bbf00338804d33a36b4b9b6f5c41ba0ed8dbdfc67cfa2f66bb8685afa1b",
+    "M1_H01_PRESSURE_OI_ABSORPTION.csv": "a74e79da78aa1dab532e22a66dbe116317a453de5edb0566e2c49bb0d1402def",
+    "M1_H02_BTC_SFP_ETH_SMT_TRIGGER.csv": "7db35e3ee88d1b34ca3b77007cdaa31d17231134b800f85a75b4db5ba6b6ed2d",
+    "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION.csv": "f10f6d6b1aed13c2765fe4de5ea87a501a5eedfb69be7dfb509f0c59e214ba03",
+    "OBSERVATION_LEDGER.csv": "d834b05bc43b72f1f668c90b4fba427babb9eca7d7bec0c5d7f1f4a3b7bbca9e",
+    "RAW_EVIDENCE_LOCATORS.json": "dd36160193c9b821026e1674aa10162cbcb47ef3c6bb4611a231f86b89475719",
+    "RESULT.json": "8643a430433b95d68b456facfc438a57abfab62ad2e5c578fc7bf1a269b2821a",
+    "THRESHOLDS.json": "51cee740954dd72ee82eaaeda0d676c8e2376f7b8cf21dc6ad26c28c6afea2b5"
+  },
+  "result": "PASS"
+}

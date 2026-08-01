@@ -1,0 +1,18 @@
+test_bootstrap_is_deterministic (__main__.MarathonTests.test_bootstrap_is_deterministic) ... ok
+test_cost_is_deducted_exactly_once (__main__.MarathonTests.test_cost_is_deducted_exactly_once) ... ok
+test_exact_three_preregistered_hypotheses (__main__.MarathonTests.test_exact_three_preregistered_hypotheses) ... ok
+test_h02_entry_follows_separate_trigger (__main__.MarathonTests.test_h02_entry_follows_separate_trigger) ... ok
+test_h02_requires_a_separate_trigger_bar (__main__.MarathonTests.test_h02_requires_a_separate_trigger_bar) ... ok
+test_keep_requires_both_chronological_halves (__main__.MarathonTests.test_keep_requires_both_chronological_halves) ... ok
+test_latest_metric_join_never_uses_future (__main__.MarathonTests.test_latest_metric_join_never_uses_future) ... ok
+test_low_coverage_is_insufficient (__main__.MarathonTests.test_low_coverage_is_insufficient) ... ok
+test_metrics_loader_uses_taker_volume_ratio_and_skips_blank_rows (__main__.MarathonTests.test_metrics_loader_uses_taker_volume_ratio_and_skips_blank_rows) ... ok
+test_observation_snapshots_are_strictly_ordered (__main__.MarathonTests.test_observation_snapshots_are_strictly_ordered) ... ok
+test_small_samples_fail_closed (__main__.MarathonTests.test_small_samples_fail_closed) ... ok
+test_source_plan_expands_to_exactly_307_unique_files (__main__.MarathonTests.test_source_plan_expands_to_exactly_307_unique_files) ... ok
+test_strict_pivot_needs_three_right_bars (__main__.MarathonTests.test_strict_pivot_needs_three_right_bars) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.577s
+
+OK

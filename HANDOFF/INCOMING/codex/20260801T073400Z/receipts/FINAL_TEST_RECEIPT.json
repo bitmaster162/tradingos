@@ -1,0 +1,19 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_FINAL_TEST_RECEIPT_V1",
+  "commands": [
+    "python -m py_compile download_sources.py evaluate_marathon.py test_marathon.py",
+    "python test_marathon.py -v",
+    "JSON parse audit over every proposal JSON",
+    "observation ledger ordering and cost audit"
+  ],
+  "python_tests_run": 13,
+  "python_tests_passed": 13,
+  "python_tests_failed": 0,
+  "json_files_valid": true,
+  "observation_rows": 52,
+  "bad_ordering_rows": 0,
+  "bad_cost_rows": 0,
+  "stdout_stderr_log": "FINAL_TEST_STDOUT_STDERR.txt",
+  "result": "PASS",
+  "can_trade": false
+}

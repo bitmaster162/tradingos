@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-01T07:53:37+00:00",
+  "decision": "active_source_integrity_clean",
+  "lock_path": "C:\\Users\\coins\\TradingOS\\Active\\configs\\ACTIVE_SOURCE_INTEGRITY_LOCK.json",
+  "lock_present": true,
+  "lock_review_id": "CODEX_REVIEWED_2026-07-18_MICROSTRUCTURE_BOOK_RESILIENCE_V113",
+  "lock_sealed_at": "2026-07-18T14:37:05+00:00",
+  "expected_files": 1078,
+  "current_files": 1078,
+  "missing": [],
+  "changed": [],
+  "untracked": [],
+  "drift_count": 0,
+  "checks": {
+    "lock_present": true,
+    "no_missing_files": true,
+    "no_changed_files": true,
+    "no_untracked_files": true
+  },
+  "next_action": "continue_locked_runtime",
+  "runtime_boundary": {
+    "guard_only": true,
+    "research_runner_unblocked_by_integrity": true,
+    "automatic_restore": false,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "can_trade": false
+}
