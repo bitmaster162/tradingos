@@ -1,0 +1,51 @@
+{
+  "schema": "TRADINGOS_M1_FROZEN_SOURCE_PLAN_V1",
+  "frozen_at_utc": "2026-08-01T07:34:00Z",
+  "base_url": "https://data.binance.vision/data",
+  "series": [
+    {
+      "source_class": "btc_metrics_calibration_and_oos",
+      "archive_granularity": "daily",
+      "folder": "futures/um/daily/metrics/BTCUSDT",
+      "filename_template": "BTCUSDT-metrics-{token}.zip",
+      "start": "2026-01-01",
+      "end": "2026-07-30"
+    },
+    {
+      "source_class": "btc_1h_calibration",
+      "archive_granularity": "monthly",
+      "folder": "futures/um/monthly/klines/BTCUSDT/1h",
+      "filename_template": "BTCUSDT-1h-{token}.zip",
+      "tokens": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"]
+    },
+    {
+      "source_class": "btc_1h_oos",
+      "archive_granularity": "daily",
+      "folder": "futures/um/daily/klines/BTCUSDT/1h",
+      "filename_template": "BTCUSDT-1h-{token}.zip",
+      "start": "2026-07-01",
+      "end": "2026-07-30"
+    },
+    {
+      "source_class": "btc_15m_oos",
+      "archive_granularity": "daily",
+      "folder": "futures/um/daily/klines/BTCUSDT/15m",
+      "filename_template": "BTCUSDT-15m-{token}.zip",
+      "start": "2026-07-01",
+      "end": "2026-07-30"
+    },
+    {
+      "source_class": "eth_15m_oos",
+      "archive_granularity": "daily",
+      "folder": "futures/um/daily/klines/ETHUSDT/15m",
+      "filename_template": "ETHUSDT-15m-{token}.zip",
+      "start": "2026-07-01",
+      "end": "2026-07-30"
+    }
+  ],
+  "expected_file_count": 307,
+  "observation_policy": "freeze_hashes_before_evaluation",
+  "public_read_only": true,
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

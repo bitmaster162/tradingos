@@ -1,0 +1,97 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_MARATHON_M1_PREREG_V1",
+  "frozen_at_utc": "2026-08-01T07:34:00Z",
+  "hypothesis_count": 3,
+  "shared": {
+    "venue": "Binance USD-M public data",
+    "instrument_scope": ["BTCUSDT", "ETHUSDT_SMT_REFERENCE_ONLY"],
+    "calibration_period": ["2026-01-01T00:00:00Z", "2026-07-01T00:00:00Z"],
+    "oos_period": ["2026-07-01T00:00:00Z", "2026-07-31T00:00:00Z"],
+    "source_cutoff": "2026-07-30T23:59:59.999Z",
+    "chronological_split": "2026-07-16T00:00:00Z",
+    "bootstrap": {"method": "paired_or_trade_level_resample_with_replacement", "repetitions": 10000, "seed": 8102, "lower_quantile": 0.025},
+    "classification": {
+      "fewer_than_3_independent_observations": "INSUFFICIENT_DATA",
+      "between_3_and_9": "KILL if primary mean net edge is non-positive, otherwise INSUFFICIENT_DATA",
+      "at_least_10": "KEEP only if mean, median, bootstrap lower bound are positive and both chronological half means are non-negative; otherwise KILL"
+    },
+    "cost_model_id": "BINANCE_UM_TAKER_CONSERVATIVE_12BPS_V1",
+    "same_snapshot_entry_exit": false,
+    "adaptive_changes_after_freeze": false,
+    "no_universal_threshold_claim": true
+  },
+  "hypotheses": [
+    {
+      "id": "M1_H01_PRESSURE_OI_ABSORPTION",
+      "family": "pressure_OI_CVD_dislocation",
+      "market_timeframe": "BTCUSDT perpetual, completed 1h bars; 5m metrics causally sampled at bar close",
+      "mechanism": "Extreme aggressive taker pressure that fails to move price while OI is elevated and growing indicates absorption; price subsequently moves against the aggressor.",
+      "entry_condition": {
+        "oi_level": "30d causal OI z-score >= calibration q60",
+        "oi_change_4h": ">= max(0, calibration q70)",
+        "buy_absorption_short": "taker long/short volume ratio >= calibration q85 and completed 1h return <= 0",
+        "sell_absorption_long": "taker long/short volume ratio <= calibration q15 and completed 1h return >= 0",
+        "entry": "next 1h bar open after completed signal bar",
+        "overlap": "4h evaluation horizons may not overlap"
+      },
+      "invalidation": "missing metrics older than 10 minutes, OOS feature coverage below 95 percent, fewer than five regime controls, or chronology violation",
+      "observation_horizons": ["1h", "4h"],
+      "required_data": ["BTCUSDT 1h klines", "sum_open_interest", "sum_taker_long_short_vol_ratio"],
+      "primary_metric": "4h direction-adjusted signal return minus mean of five regime controls minus one 12bps cost ledger",
+      "matched_controls": "same July half, calibration-frozen 24h volatility tercile, 24h trend sign, UTC hour; nearest non-signal timestamps outside +/-4h of every signal",
+      "kill_criterion": "classified sample fails the shared rule, or 3-9 observations have non-positive 4h mean matched edge",
+      "keep_criterion": "shared >=10 rule on 4h matched edge plus non-negative 1h mean matched edge",
+      "leakage_controls": ["calibration quantiles frozen before July retrieval", "latest metric at or before bar close", "control matching excludes outcomes", "entry after completed signal"]
+    },
+    {
+      "id": "M1_H02_BTC_SFP_ETH_SMT_TRIGGER",
+      "family": "SFP_SMT_local_trigger",
+      "market_timeframe": "BTCUSDT perpetual traded, ETHUSDT perpetual SMT reference, completed 15m bars",
+      "mechanism": "A BTC liquidity sweep rejected back inside a six-hour range is stronger when ETH does not confirm the sweep and a separate completed local reversal bar confirms rejection.",
+      "entry_condition": {
+        "liquidity_lookback": "24 completed 15m bars, hypothesis-specific only",
+        "bearish": "BTC high exceeds prior 24-bar high and closes below it; ETH high does not exceed its own prior 24-bar high",
+        "bullish": "BTC low breaks prior 24-bar low and closes above it; ETH low does not break its own prior 24-bar low",
+        "local_trigger": "next completed 15m bar closes beyond the SFP candle midpoint and beyond the SFP close in reversal direction",
+        "entry": "open of the bar after the completed trigger",
+        "overlap": "4h evaluation horizons may not overlap"
+      },
+      "invalidation": "BTC/ETH timestamps are not aligned, trigger absent, entry/exit continuity failure, or fewer than 95 percent aligned OOS bars",
+      "observation_horizons": ["1h", "4h"],
+      "required_data": ["BTCUSDT 15m klines", "ETHUSDT 15m klines"],
+      "primary_metric": "direction-adjusted 4h return minus one 12bps cost ledger",
+      "kill_criterion": "classified sample fails the shared rule, or 3-9 observations have non-positive 4h mean net return",
+      "keep_criterion": "shared >=10 rule on 4h net return plus non-negative 1h mean net return",
+      "leakage_controls": ["SFP uses only prior 24 completed bars", "SMT evaluated on the same completed bar", "trigger is a later completed bar", "entry is later than trigger"]
+    },
+    {
+      "id": "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION",
+      "family": "regime_gated_divergence_continuation",
+      "market_timeframe": "BTCUSDT perpetual, completed 1h bars",
+      "mechanism": "Hidden RSI divergence at a confirmed swing inside an aligned EMA trend marks a pullback that subsequently continues with the regime.",
+      "entry_condition": {
+        "indicators": "Wilder RSI14, EMA50, EMA200",
+        "pivot_confirmation": "strict three bars left and three bars right; signal exists only after the third right bar completes",
+        "bullish": "current pivot low is above prior pivot low, RSI is lower, close > EMA200, EMA50 > EMA200, EMA200 slope over 24h > 0",
+        "bearish": "current pivot high is below prior pivot high, RSI is higher, close < EMA200, EMA50 < EMA200, EMA200 slope over 24h < 0",
+        "pivot_pair_max_distance": "72 completed 1h bars, hypothesis-specific only",
+        "entry": "next 1h bar open after pivot confirmation",
+        "overlap": "12h evaluation horizons may not overlap"
+      },
+      "invalidation": "insufficient EMA/RSI warmup, unconfirmed pivot, entry/exit continuity failure, or OOS bar coverage below 95 percent",
+      "observation_horizons": ["4h", "12h"],
+      "required_data": ["BTCUSDT 1h klines with January-June warmup"],
+      "primary_metric": "direction-adjusted 12h return minus one 12bps cost ledger",
+      "kill_criterion": "classified sample fails the shared rule, or 3-9 observations have non-positive 12h mean net return",
+      "keep_criterion": "shared >=10 rule on 12h net return plus non-negative 4h mean net return",
+      "leakage_controls": ["right-side pivot bars delay signal", "trend regime measured at confirmation", "entry is next bar", "July outcomes not used for indicator parameters"]
+    }
+  ],
+  "allowed_dispositions": ["KEEP_FOR_FORWARD_PAPER", "KILL", "INSUFFICIENT_DATA"],
+  "terminal": "EDGE_RESEARCH_M1_COMPLETE",
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY",
+  "self_application": false,
+  "no_further_agent_work": true
+}

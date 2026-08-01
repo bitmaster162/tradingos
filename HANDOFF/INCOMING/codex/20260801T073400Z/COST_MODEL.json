@@ -1,0 +1,12 @@
+{
+  "schema": "TRADINGOS_M1_COST_MODEL_V1",
+  "id": "BINANCE_UM_TAKER_CONSERVATIVE_12BPS_V1",
+  "entry_taker_fee": 0.0005,
+  "exit_taker_fee": 0.0005,
+  "entry_slippage": 0.0001,
+  "exit_slippage": 0.0001,
+  "total_round_trip_cost": 0.0012,
+  "deduction_count_per_hypothetical_trade": 1,
+  "funding_and_carry": "excluded because all horizons are <=12h; this omission is conservative only when realized carry would favor the position and is reported as a limitation",
+  "can_trade": false
+}

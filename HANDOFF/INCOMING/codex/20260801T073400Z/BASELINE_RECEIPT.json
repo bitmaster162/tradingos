@@ -1,0 +1,28 @@
+{
+  "schema": "TRADINGOS_M1_BASELINE_RECEIPT_V1",
+  "work_order": "CODEX-02-TRADING-EDGE-RESEARCH-MARATHON-M1",
+  "work_order_sha256": "2e1e3936808f4e871592f24ef6b8a5758bf9749e4d214661de18befa00c697ec",
+  "captured_at_utc": "2026-08-01T07:34:00Z",
+  "registry": {
+    "path": "C:\\Users\\coins\\My Drive\\Control canter\\00_RETURN_DROP\\CURRENT_RETURN_REGISTRY.json",
+    "read_first": true,
+    "registry_updated_at_utc": "2026-07-29T12:20:00Z",
+    "exact_m1_entry_present": false
+  },
+  "predecessor": {
+    "work_order": "CODEX02-R62-BTC-CROWDING-EXHAUSTION-CHALLENGE",
+    "broker_delivery_id": "CODEX02-R62-BTC-CROWDING-EXHAUSTION-CHALLENGE__20260729T204615252707Z__f8cdcdd9e666",
+    "strict_zip_sha256": "f8cdcdd9e666bd306aa7d2b0ba7c09f6a53621d7aa4452a7c6eb89a7cc0ce409",
+    "proposal_bundle_sha256": "5a80175a15176f10d5d1eef431948f7ae6b1dcdd20df561e83e85da3255e1c89",
+    "head": "cb975967f002b9348f4fa6ec596ae64af84c9261",
+    "tree": "632a281e48a23afbb8030b974813a6cf4f24cafc",
+    "branch": "codex02/r62-btc-crowding-exhaustion",
+    "status": "clean",
+    "published_through_return_broker": true
+  },
+  "m1_branch": "codex02/m1-edge-research-marathon",
+  "authorized_root_class": "disposable_clone_only",
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY"
+}

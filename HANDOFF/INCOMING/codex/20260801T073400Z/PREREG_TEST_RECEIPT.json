@@ -1,0 +1,18 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_PREREG_TEST_RECEIPT_V1",
+  "executed_at_utc": "2026-08-01T07:50:00Z",
+  "python": "Python 3.11.9",
+  "commands": [
+    "python -m py_compile download_sources.py evaluate_marathon.py test_marathon.py",
+    "python test_marathon.py -v"
+  ],
+  "tests_run": 13,
+  "tests_passed": 13,
+  "tests_failed": 0,
+  "result": "PASS",
+  "data_retrieved_before_prereg_test": false,
+  "oos_evaluated_before_prereg_test": false,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY"
+}

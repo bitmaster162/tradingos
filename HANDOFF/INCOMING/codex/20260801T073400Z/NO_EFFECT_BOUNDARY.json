@@ -1,0 +1,17 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_NO_EFFECT_BOUNDARY_V1",
+  "authorized_root": "C:/Users/coins/My Drive/04_PRODUCT_SHELLS/Trade/.codex_staging/m1_edge_marathon_20260801T073400Z",
+  "source_data": "public read-only Binance Vision archives only",
+  "network_effect": "bounded public GET retrieval after preregistration commit only",
+  "exchange_credentials_accessed": false,
+  "orders_sent": 0,
+  "signals_published": 0,
+  "scheduler_mutations": 0,
+  "service_mutations": 0,
+  "canonical_active_writes": 0,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY",
+  "self_application": false,
+  "no_further_agent_work": true
+}
