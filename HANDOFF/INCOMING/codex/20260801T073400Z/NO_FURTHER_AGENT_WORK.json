@@ -1,0 +1,9 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_NO_FURTHER_AGENT_WORK_V1",
+  "work_order_terminal": "EDGE_RESEARCH_M1_COMPLETE",
+  "no_successor_work_order_created": true,
+  "no_further_agent_work": true,
+  "reason": "The bounded three-hypothesis research cycle is complete; no hypothesis passed its frozen promotion gate.",
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

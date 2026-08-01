@@ -1,0 +1,20 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_MARATHON_M1_TERMINAL_STATE_V1",
+  "work_order": "CODEX-02-TRADING-EDGE-RESEARCH-MARATHON-M1",
+  "terminal": "EDGE_RESEARCH_M1_COMPLETE",
+  "result_commit": "bf6559ba2306a058593a7ed34515fbc9aa03862b",
+  "result_tree": "239f5e18b61e2d02503ce41080647b6c4bbd0f5b",
+  "hypotheses_evaluated": 3,
+  "dispositions": {
+    "M1_H01_PRESSURE_OI_ABSORPTION": "INSUFFICIENT_DATA",
+    "M1_H02_BTC_SFP_ETH_SMT_TRIGGER": "KILL",
+    "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION": "KILL"
+  },
+  "accepted_for_runtime_implementation": [],
+  "handoff_to_codex05_required": false,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY",
+  "self_application": false,
+  "no_further_agent_work": true
+}
