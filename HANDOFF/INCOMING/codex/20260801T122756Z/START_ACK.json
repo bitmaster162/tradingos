@@ -1,0 +1,18 @@
+{
+  "schema": "trading_edge.m2a_start_ack.v1",
+  "visible_model": "GPT-5 Codex",
+  "session_id": "current-codex-desktop-task",
+  "workspace": "C:/tmp/codex02_m2a_20260801T122756Z/repo",
+  "git_identity": {
+    "branch": "codex02/m2a-edge-research-engine",
+    "baseline_head": "b0990c5190c0efa7c581015a68cecbe11687f146",
+    "baseline_tree": "83714e1a3b40a0dc28f43567a22209ca42465e20"
+  },
+  "work_order": "TRADING_EDGE_RESEARCH_ENGINE_M2A",
+  "tools": ["PowerShell", "Git", "Python 3.11 stdlib", "apply_patch"],
+  "effect_ceiling": "DISPOSABLE_SOURCE_AND_SYNTHETIC_TESTS_ONLY",
+  "missing_inputs": ["controller-adjudicated EDGE_HYPOTHESIS_DATA_READINESS.json", "controller authorization for outcome computation"],
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY"
+}

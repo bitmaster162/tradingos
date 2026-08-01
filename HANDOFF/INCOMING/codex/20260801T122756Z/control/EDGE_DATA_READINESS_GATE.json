@@ -1,0 +1,61 @@
+{
+  "schema": "trading_edge.data_readiness_gate.v1",
+  "input_required": "EDGE_HYPOTHESIS_DATA_READINESS.json",
+  "allowed_input_statuses": [
+    "DATA_READY",
+    "PARTIAL_DATA",
+    "NO_DATA",
+    "PROVENANCE_BLOCKED"
+  ],
+  "decision_rules": [
+    {
+      "when": "PROVENANCE_BLOCKED",
+      "decision": "HOLD",
+      "codex_budget": "DENY",
+      "reason": "Timestamp/source identity cannot support a trustworthy result."
+    },
+    {
+      "when": "NO_DATA",
+      "decision": "DO_NOT_DISPATCH",
+      "codex_budget": "DENY",
+      "reason": "Required channels are absent."
+    },
+    {
+      "when": "PARTIAL_DATA",
+      "decision": "GAP_REVIEW",
+      "codex_budget": "CONDITIONAL",
+      "requirements": [
+        "Gap must be exact and closeable without account credentials or trading effects.",
+        "No outcome computation until the gap is closed or the hypothesis is narrowed.",
+        "Controller must approve the narrowed claim and new task hash."
+      ]
+    },
+    {
+      "when": "DATA_READY",
+      "decision": "ELIGIBLE_FOR_PREREGISTRATION",
+      "codex_budget": "ALLOW_AFTER_CONTROLLER_TASK",
+      "requirements": [
+        "Duplicate-diff PASS.",
+        "Frozen hypothesis specification.",
+        "Frozen train/validation/test windows.",
+        "Frozen cost and latency model.",
+        "No final-test inspection before registration."
+      ]
+    }
+  ],
+  "selection_limit_per_cycle": 3,
+  "selection_order": [
+    "provenance_pass",
+    "non_duplicate",
+    "independent_coverage",
+    "cost_and_latency_model_available",
+    "falsifiability",
+    "resource_fit"
+  ],
+  "forbidden": [
+    "weighted pseudo-score without empirical calibration",
+    "renaming a killed M1 family",
+    "using final test to select thresholds",
+    "accepting an edge from in-sample performance"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "trading_edge.preregistration.v1",
+  "hypothesis_id": "REQUIRED",
+  "version": "REQUIRED",
+  "status": "PREREGISTERED_BEFORE_OUTCOMES",
+  "claim": "REQUIRED_FALSIFIABLE_SENTENCE",
+  "material_difference_from_prior_work": "REQUIRED",
+  "source_contract": {
+    "required_channels": [],
+    "source_ids": [],
+    "timestamp_semantics": {},
+    "timezone": "UTC",
+    "join_keys": [],
+    "minimum_join_coverage_rule": "HYPOTHESIS_SPECIFIC_AND_JUSTIFIED",
+    "missingness_policy": "REQUIRED"
+  },
+  "event_contract": {
+    "event_definition": "REQUIRED",
+    "event_independence_rule": "REQUIRED",
+    "cluster_dedupe_rule": "REQUIRED",
+    "entry_time": "REQUIRED",
+    "invalidation": "REQUIRED",
+    "holding_horizons": [],
+    "exclusions": []
+  },
+  "data_split": {
+    "train": "REQUIRED",
+    "validation": "REQUIRED",
+    "final_test": "REQUIRED_FROZEN",
+    "purge_embargo": "REQUIRED_WHEN_WINDOWS_OVERLAP",
+    "walk_forward": "REQUIRED_OR_JUSTIFY_ABSENCE"
+  },
+  "cost_model": {
+    "fees": "REQUIRED",
+    "spread": "REQUIRED",
+    "slippage": "REQUIRED",
+    "funding": "WHEN_APPLICABLE",
+    "latency": "WHEN_APPLICABLE",
+    "adverse_scenario": "REQUIRED"
+  },
+  "statistical_plan": {
+    "primary_metric": "POST_COST_OOS_EXPECTANCY",
+    "secondary_metrics": [],
+    "power_or_sequential_evidence_plan": "REQUIRED",
+    "bootstrap_or_resampling_plan": "REQUIRED",
+    "multiple_testing_family": "REQUIRED",
+    "correction": "HOLM_OR_MORE_CONSERVATIVE",
+    "placebo_tests": [],
+    "ablation_tests": []
+  },
+  "decision_rule": {
+    "KEEP_FOR_FORWARD_PAPER": [
+      "preregistered rule met",
+      "independent sample sufficiency justified",
+      "positive post-cost final-test expectancy",
+      "robustness controls do not materially invalidate",
+      "no material leakage or source defect"
+    ],
+    "KILL": [
+      "preregistered failure rule met",
+      "post-cost final-test result non-positive or materially unstable",
+      "critical leakage/provenance flaw invalidates the claim"
+    ],
+    "INSUFFICIENT_DATA": [
+      "coverage or effective sample is inadequate",
+      "result cannot be distinguished from source/provenance uncertainty"
+    ]
+  },
+  "effect_ceiling": {
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "deploy_permission": "DENY",
+    "implementation_handoff": "ONLY_AFTER_KEEP_FOR_FORWARD_PAPER"
+  }
+}

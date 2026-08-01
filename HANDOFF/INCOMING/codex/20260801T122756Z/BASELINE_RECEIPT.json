@@ -1,0 +1,39 @@
+{
+  "schema": "trading_edge.m2a_baseline_receipt.v1",
+  "task_id": "TRADING_EDGE_RESEARCH_ENGINE_M2A",
+  "slot": "CODEX-02",
+  "captured_at_utc": "2026-08-01T12:30:44.6161572Z",
+  "dispatch_zip": {
+    "path": "C:/Users/coins/Downloads/CODEX-02_SAFE_DISPATCH_R1.zip",
+    "sha256": "6f711f5487862c54f3d5195693900e4ca35ffd66a845bf70262777a680134fb9",
+    "manifest_files": 9,
+    "manifest_errors": 0,
+    "authority_generation": "R63"
+  },
+  "m1_predecessor": {
+    "zip_sha256": "d3126e9cd2fc504b98659bb0bf938f2a855d6d2d8a43ca247cac06719602977d",
+    "git_bundle_sha256": "420a5f071bd358510fe0094dfee75934fd1e353c2c443e1b3dea272d080cd4e3",
+    "bundle_complete_history": true,
+    "branch": "codex02/m1-edge-research-marathon",
+    "head": "b0990c5190c0efa7c581015a68cecbe11687f146",
+    "tree": "83714e1a3b40a0dc28f43567a22209ca42465e20",
+    "status": "clean"
+  },
+  "candidate_branch": "codex02/m2a-edge-research-engine",
+  "candidate_root": "C:/tmp/codex02_m2a_20260801T122756Z/repo",
+  "source_root_decisions": {
+    "current_session_root": "NOT_A_VALID_GIT_REPOSITORY",
+    "c_projects_trading_edge": "NON_GIT_SNAPSHOT_NOT_USED",
+    "exact_m1_bundle": "SELECTED"
+  },
+  "baseline_secret_candidate_files": 0,
+  "baseline_credential_artifacts": 0,
+  "python": "Python 3.11.9",
+  "c_free_gib_at_start": 15.27,
+  "dependency_install_allowed": false,
+  "heavy_build_allowed": false,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY",
+  "self_application": false
+}

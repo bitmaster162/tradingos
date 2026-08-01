@@ -1,0 +1,20 @@
+{
+  "schema": "trading_edge.m2a_import_provenance.v1",
+  "source_archive": "C:/Users/coins/Downloads/CODEX-02_SAFE_DISPATCH_R1.zip",
+  "source_archive_sha256": "6f711f5487862c54f3d5195693900e4ca35ffd66a845bf70262777a680134fb9",
+  "destination_prefix": "control/",
+  "files": [
+    {"path": "00_READ_FIRST.md", "sha256": "fea260d77abe9086fcbf649360417fd9baf1c2ca7ff1939963e63ad3d23e19bf"},
+    {"path": "CODEX02_EDGE_RESEARCH_ENGINE_M2A.md", "sha256": "7350e7fb1fd74ed57b10ef37dab65748f33542e2c89a8602ecef1f543343debe"},
+    {"path": "COMMON_CONTROL_CONTRACT.md", "sha256": "b8c210ee9c8cf146a936d151b1145287afd9af17b9fc6a40b85c3c42e88b8810"},
+    {"path": "EDGE_DATA_READINESS_GATE.json", "sha256": "5a7fdb6a06248dc69010fcebf8c419296eff15293fa3223cee1d1164360d144a"},
+    {"path": "EDGE_KEEP_KILL_RUBRIC.json", "sha256": "611e0892fdc2c9396d4d49268d843fe9a99574b69e4f9bf35af26604bb42dae4"},
+    {"path": "EDGE_PREREGISTRATION_TEMPLATE.json", "sha256": "706fa3979d0262ddda3686a5ec7b6beddb2c1cbe450abf4d89ec35cff42a22ec"},
+    {"path": "EDGE_RESEARCH_CANDIDATE_REGISTRY.md", "sha256": "78decb8bfda209fe59a85bfa5bf5c11aa743a96d5db98f0cffe356bcfe6c5663"},
+    {"path": "EDGE_STATISTICAL_OOS_POLICY.md", "sha256": "14583993da224dafbe5b611c5e06214cc18565c86683f04369cf1da24a74dbed"},
+    {"path": "M1_EDGE_TRUTH_LOCK.json", "sha256": "5fe1b592dc3461e636d32c2b2038e0d26cbd9ecac54b5508d7b568e9c389d7be"},
+    {"path": "MANIFEST.json", "sha256": "facb03bc8e42977769db4462dc6f32035c3b815f6f3c6d56da1cbe3ae5ac3d65"}
+  ],
+  "bytes_modified_during_import": false,
+  "market_outcomes_read": false
+}

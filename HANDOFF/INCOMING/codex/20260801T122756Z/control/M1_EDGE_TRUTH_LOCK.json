@@ -1,0 +1,40 @@
+{
+  "schema": "trading_edge.m1_truth_lock.v1",
+  "created_at_utc": "2026-08-01T11:02:43.629036+00:00",
+  "source_return": {
+    "task_id": "TRADING_EDGE_RESEARCH_MARATHON_M1",
+    "terminal": "EDGE_RESEARCH_M1_COMPLETE",
+    "zip_sha256": "d3126e9cd2fc504b98659bb0bf938f2a855d6d2d8a43ca247cac06719602977d"
+  },
+  "hypotheses": [
+    {
+      "id": "M1_H01_PRESSURE_OI_ABSORPTION",
+      "terminal": "INSUFFICIENT_DATA",
+      "independent_observations": 1,
+      "post_cost_mean_pct": -0.126,
+      "runtime_acceptance": false,
+      "allowed_next_state": "NEW_INDEPENDENT_SAMPLE_ONLY"
+    },
+    {
+      "id": "M1_H02_BTC_SFP_ETH_SMT_TRIGGER",
+      "terminal": "KILL",
+      "independent_observations": 41,
+      "post_cost_mean_pct": -0.1534,
+      "runtime_acceptance": false,
+      "allowed_next_state": "CLOSED_DO_NOT_RENAME_OR_RESURRECT"
+    },
+    {
+      "id": "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION",
+      "terminal": "KILL",
+      "independent_observations": 10,
+      "post_cost_mean_pct": -0.7817,
+      "runtime_acceptance": false,
+      "allowed_next_state": "CLOSED_DO_NOT_RENAME_OR_RESURRECT"
+    }
+  ],
+  "accepted_for_runtime": [],
+  "handoff_to_codex05_required": false,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "trading_edge.keep_kill_rubric.v1",
+  "controller_statuses": [
+    "KEEP_FOR_FORWARD_PAPER",
+    "KILL",
+    "INSUFFICIENT_DATA",
+    "INVALID_RESEARCH_RETURN"
+  ],
+  "hard_reject_conditions": [
+    "producer terminal or result rewritten by harvester",
+    "placeholder or truncated SHA-256",
+    "missing preregistration timestamp/hash",
+    "final-test thresholds selected after outcome inspection",
+    "unmodeled fees/spread/slippage where economically material",
+    "source timestamp ambiguity or clock skew capable of producing the effect",
+    "duplicate or renamed M1 killed hypothesis",
+    "strategy implementation or live recommendation inside CODEX-02 return",
+    "missing raw command/stdout/stderr/test evidence"
+  ],
+  "keep_required_evidence": [
+    "exact preregistration bytes and SHA",
+    "source/data catalog binding",
+    "train/validation/final-test separation",
+    "post-cost final-test results",
+    "confidence or resampling evidence",
+    "placebo/permutation evidence",
+    "regime and source ablations",
+    "event independence and cluster-dedupe report",
+    "negative-control results",
+    "no-effect receipt"
+  ],
+  "controller_note": "KEEP_FOR_FORWARD_PAPER is not strategy acceptance and not trading permission. It only authorizes a CODEX-05 measurement handoff.",
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

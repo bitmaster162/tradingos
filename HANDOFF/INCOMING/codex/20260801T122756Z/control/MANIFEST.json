@@ -1,0 +1,52 @@
+{
+  "schema": "safe_codex_dispatch.slot_manifest.v1",
+  "slot": "CODEX-02",
+  "created_at_utc": "2026-08-01T11:54:24.595055+00:00",
+  "files": [
+    {
+      "file": "00_READ_FIRST.md",
+      "bytes": 457,
+      "sha256": "fea260d77abe9086fcbf649360417fd9baf1c2ca7ff1939963e63ad3d23e19bf"
+    },
+    {
+      "file": "CODEX02_EDGE_RESEARCH_ENGINE_M2A.md",
+      "bytes": 5013,
+      "sha256": "7350e7fb1fd74ed57b10ef37dab65748f33542e2c89a8602ecef1f543343debe"
+    },
+    {
+      "file": "COMMON_CONTROL_CONTRACT.md",
+      "bytes": 1817,
+      "sha256": "b8c210ee9c8cf146a936d151b1145287afd9af17b9fc6a40b85c3c42e88b8810"
+    },
+    {
+      "file": "EDGE_DATA_READINESS_GATE.json",
+      "bytes": 1813,
+      "sha256": "5a7fdb6a06248dc69010fcebf8c419296eff15293fa3223cee1d1164360d144a"
+    },
+    {
+      "file": "EDGE_KEEP_KILL_RUBRIC.json",
+      "bytes": 1370,
+      "sha256": "611e0892fdc2c9396d4d49268d843fe9a99574b69e4f9bf35af26604bb42dae4"
+    },
+    {
+      "file": "EDGE_PREREGISTRATION_TEMPLATE.json",
+      "bytes": 2378,
+      "sha256": "706fa3979d0262ddda3686a5ec7b6beddb2c1cbe450abf4d89ec35cff42a22ec"
+    },
+    {
+      "file": "EDGE_RESEARCH_CANDIDATE_REGISTRY.md",
+      "bytes": 4330,
+      "sha256": "78decb8bfda209fe59a85bfa5bf5c11aa743a96d5db98f0cffe356bcfe6c5663"
+    },
+    {
+      "file": "EDGE_STATISTICAL_OOS_POLICY.md",
+      "bytes": 1659,
+      "sha256": "14583993da224dafbe5b611c5e06214cc18565c86683f04369cf1da24a74dbed"
+    },
+    {
+      "file": "M1_EDGE_TRUTH_LOCK.json",
+      "bytes": 1277,
+      "sha256": "5fe1b592dc3461e636d32c2b2038e0d26cbd9ecac54b5508d7b568e9c389d7be"
+    }
+  ]
+}
