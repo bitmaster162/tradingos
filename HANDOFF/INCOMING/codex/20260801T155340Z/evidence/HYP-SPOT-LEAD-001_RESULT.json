@@ -1,0 +1,199 @@
+{
+  "can_trade": false,
+  "candidate_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+  "freeze": {
+    "configuration": {
+      "divergence_z_window_hours": 336,
+      "entry_abs_z": 2.5,
+      "max_hold_hours": 8,
+      "return_lookback_hours": 3,
+      "side": "SHORT_SPOT_LEADS",
+      "stop_atr": 1.5,
+      "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "take_atr": 2.0,
+      "volume_filter": "spot_relative_volume_leads",
+      "volume_z_window_hours": 168
+    },
+    "cost_bps_per_side": 7.0,
+    "dataset_sha256": "d3d32fec337171f06040fd228acdec2f6820f34cfb0edc49818c67ad5b3a430a",
+    "entry_semantics": "completed signal bar; next-hour entry",
+    "minimum_trades": 80,
+    "original_data_cutoff": "2026-06-23T16:00:00+00:00",
+    "preregistered_at": "2026-06-23T22:09:17+00:00",
+    "protocol_sha256": "134D5A2037928E411D92346125A77BA453FD86997EE3F0C500FD8CE5684E2E35",
+    "stress_extra_bps_per_side": 10.0
+  },
+  "fresh_evaluation": {
+    "bootstrap_probability_expectancy_gt_0": null,
+    "cost_stress": {
+      "extra_bps_per_side": 10.0,
+      "summary": {
+        "avg_loss_r": -1.431463,
+        "avg_win_r": 1.052889,
+        "expectancy_r": -0.189287,
+        "losses": 1,
+        "max_drawdown_r": -1.431463,
+        "max_losing_streak": 1,
+        "net_r_total": -0.378574,
+        "trades": 2,
+        "winrate_pct": 50.0,
+        "wins": 1
+      }
+    },
+    "folds": [
+      {
+        "avg_loss_r": null,
+        "avg_win_r": null,
+        "expectancy_r": null,
+        "fold": 1,
+        "losses": 0,
+        "max_drawdown_r": 0.0,
+        "max_losing_streak": 0,
+        "net_r_total": 0.0,
+        "stable": false,
+        "trades": 0,
+        "winrate_pct": null,
+        "wins": 0
+      },
+      {
+        "avg_loss_r": null,
+        "avg_win_r": 1.217856,
+        "expectancy_r": 1.217856,
+        "fold": 2,
+        "losses": 0,
+        "max_drawdown_r": 0.0,
+        "max_losing_streak": 0,
+        "net_r_total": 1.217856,
+        "stable": false,
+        "trades": 1,
+        "winrate_pct": 100.0,
+        "wins": 1
+      },
+      {
+        "avg_loss_r": -1.172133,
+        "avg_win_r": null,
+        "expectancy_r": -1.172133,
+        "fold": 3,
+        "losses": 1,
+        "max_drawdown_r": -1.172133,
+        "max_losing_streak": 1,
+        "net_r_total": -1.172133,
+        "stable": false,
+        "trades": 1,
+        "winrate_pct": 0.0,
+        "wins": 0
+      },
+      {
+        "avg_loss_r": null,
+        "avg_win_r": null,
+        "expectancy_r": null,
+        "fold": 4,
+        "losses": 0,
+        "max_drawdown_r": 0.0,
+        "max_losing_streak": 0,
+        "net_r_total": 0.0,
+        "stable": false,
+        "trades": 0,
+        "winrate_pct": null,
+        "wins": 0
+      }
+    ],
+    "sample_trades": [
+      {
+        "atr": 483.1,
+        "bars_held": 1,
+        "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+        "entry": 60254.9,
+        "entry_ts": "2026-06-24T16:00:00+00:00",
+        "exit": 59288.7,
+        "exit_reason": "take_profit",
+        "exit_ts": "2026-06-24T16:00:00+00:00",
+        "r_net": 1.217856,
+        "side": "SHORT",
+        "stop": 60979.55,
+        "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "take": 59288.7
+      },
+      {
+        "atr": 330.1,
+        "bars_held": 2,
+        "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+        "entry": 63956.1,
+        "entry_ts": "2026-07-10T08:00:00+00:00",
+        "exit": 64451.25,
+        "exit_reason": "stop_loss",
+        "exit_ts": "2026-07-10T09:00:00+00:00",
+        "r_net": -1.172133,
+        "side": "SHORT",
+        "stop": 64451.25,
+        "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "take": 63295.9
+      }
+    ],
+    "signals": 2,
+    "stable_folds": 0,
+    "summary": {
+      "avg_loss_r": -1.172133,
+      "avg_win_r": 1.217856,
+      "expectancy_r": 0.022861,
+      "losses": 1,
+      "max_drawdown_r": -1.172133,
+      "max_losing_streak": 1,
+      "net_r_total": 0.045723,
+      "trades": 2,
+      "winrate_pct": 50.0,
+      "wins": 1
+    }
+  },
+  "fresh_signal_records": [
+    {
+      "atr": 483.1000000000001,
+      "bar_index": 48015,
+      "futures_volume_z": 2.9773233113699797,
+      "reason": "spot_led_return_divergence",
+      "side_hint": "SHORT",
+      "spot_perp_divergence_pct": -0.052117953418884255,
+      "spot_perp_divergence_z": -4.8087727307844785,
+      "spot_return_pct": -3.782136566764571,
+      "spot_volume_z": 4.597611215058229
+    },
+    {
+      "atr": 330.1000000000001,
+      "bar_index": 48391,
+      "futures_volume_z": -0.28445063894786027,
+      "reason": "spot_led_return_divergence",
+      "side_hint": "SHORT",
+      "spot_perp_divergence_pct": -0.03380562441465118,
+      "spot_perp_divergence_z": -3.012777822981579,
+      "spot_return_pct": -0.13252585409539996,
+      "spot_volume_z": -0.13460179075854048
+    }
+  ],
+  "fresh_source": {
+    "combined_evidence_count": 45,
+    "first_bar": "2026-06-23T17:00:00+00:00",
+    "fresh_bars": 782,
+    "fresh_effective_trades": 2,
+    "fresh_raw_signals": 2,
+    "last_futures_bar": "2026-07-26T06:00:00+00:00",
+    "missingness_note": "spot alignment counted on copied immutable CSV snapshot; no network fetch",
+    "old_trades_not_counted_as_new": 43,
+    "spot_aligned_fresh_bars": 781
+  },
+  "historical_observations_reused_as_new": false,
+  "original_candidate_train_gate": {
+    "checks": {
+      "cost_stress_positive": true,
+      "max_drawdown_r": true,
+      "min_expectancy_r": true,
+      "min_positive_folds": true,
+      "min_trades": false,
+      "screening_bootstrap_probability": false
+    },
+    "pass": false
+  },
+  "original_validation_opened": false,
+  "reason": "Only 2 new resolved trades; old 43 are not new evidence and combined 45 < 80.",
+  "terminal": "INSUFFICIENT_DATA",
+  "track_id": "HYP-SPOT-LEAD-001"
+}

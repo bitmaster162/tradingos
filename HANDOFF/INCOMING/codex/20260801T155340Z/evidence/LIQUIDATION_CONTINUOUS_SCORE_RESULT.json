@@ -1,0 +1,62 @@
+{
+  "can_trade": false,
+  "filter_change_allowed": false,
+  "freeze": {
+    "bins_recomputed_from_outcomes": false,
+    "generated_at": "2026-06-23T11:56:42+00:00",
+    "lock_sha256": "356a4d58dbf61fbd7e18feadb354e52bfc2c8a68d0edda3e2adcbe7952e84319",
+    "q25": 0.426128,
+    "q50": 1.414128,
+    "q75": 5.109507,
+    "score_formula": "abs(displacement_atr) * max(0,-oi_delta_pct/2.0) * max(0,volume_z/1.5)"
+  },
+  "frozen_gate": {
+    "bootstrap_delta_percentile": 0.1,
+    "bootstrap_iterations": 2000,
+    "min_baseline_resolved": 8,
+    "min_bin_expectancy_r": 0.05,
+    "min_bin_resolved": 8,
+    "min_delta_r": 0.1,
+    "min_total_resolved": 30
+  },
+  "gate_checks": {
+    "eligible_non_inactive_bin": false,
+    "min_inactive_resolved": false,
+    "min_total_resolved": false
+  },
+  "reason": "Only 1/30 resolved; inactive baseline 0/8; no non-inactive bin reaches 8.",
+  "reconciliation": {
+    "duplicate_context_rows": 0,
+    "duplicate_signal_rows": 0,
+    "inactive_resolved": 0,
+    "invalid_context_json_rows": 0,
+    "invalid_edge_json_rows": 0,
+    "invalid_outcomes": 0,
+    "pending": 0,
+    "post_lock_signal_rows": 1,
+    "raw_context_rows": 161,
+    "raw_edge_rows": 244,
+    "resolved": 1,
+    "resolved_by_bin": {
+      "low": 1
+    },
+    "strict_post_lock_context_rows": 153,
+    "unique_post_lock_context_rows": 153,
+    "unique_post_lock_signals": 1
+  },
+  "terminal": "INSUFFICIENT_DATA",
+  "track_id": "LIQUIDATION_CONTINUOUS_SCORE",
+  "validated_outcomes": [
+    {
+      "context": "none",
+      "context_bar_ts": "2026-07-13T04:00:00+00:00",
+      "continuous_score": 0.12282,
+      "r": -1.0,
+      "score_bin": "low",
+      "signal_bar_ts": "2026-07-13T04:00:00+00:00",
+      "signal_key": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction|2026-07-13T04:00:00+00:00|observer",
+      "status": "loss"
+    }
+  ],
+  "veto_allowed": false
+}

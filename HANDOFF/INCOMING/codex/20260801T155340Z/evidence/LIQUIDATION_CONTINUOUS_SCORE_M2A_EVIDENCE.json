@@ -1,0 +1,14 @@
+{
+  "bootstrap_lower_bound": null,
+  "final_test_evaluated": true,
+  "independent_sample_sufficient": false,
+  "leakage_detected": false,
+  "placebo_materially_weaker": false,
+  "post_cost_expectancy": -1.0,
+  "preregistration_valid": true,
+  "regime_ablation_robust": false,
+  "source_ablation_robust": false,
+  "source_hashes_match": true,
+  "source_provenance_valid": true,
+  "tail_risk_acceptable": false
+}

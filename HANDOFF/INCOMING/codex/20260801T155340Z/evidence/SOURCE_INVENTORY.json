@@ -1,0 +1,97 @@
+[
+  {
+    "bytes": 9165,
+    "path": "track_a/EDGE_TOMBSTONE_REGISTRY_2026-07-03_AFTER_BYBIT_FORWARD_REVIEW.json",
+    "sha256": "2102fe459dc9099fb4a13f484f51ece451242e758ee3aa473b5362521a92007f"
+  },
+  {
+    "bytes": 150376,
+    "path": "track_a/RANGE_EDGE_NESTED_HOLDOUT_2026-06-23.json",
+    "sha256": "5c9a365c32c6ea6daec847057b6f585e2528d31ba923466e6937013a4bcb6d43"
+  },
+  {
+    "bytes": 5420757,
+    "path": "track_a/RANGE_FAMILY_VALIDATOR_2026-06-16.json",
+    "sha256": "67752cef2af0b03342c57d3ee7a2f77a03834378d2420b1dd82eaac7ecdfcad5"
+  },
+  {
+    "bytes": 50264,
+    "path": "track_a/range_refined_forward_observer.jsonl",
+    "sha256": "7b3c3430c2531667229e0ff313a10ae40710f5bda2d47c3b25823b0973d604c5"
+  },
+  {
+    "bytes": 7505,
+    "path": "track_a/RANGE_REFINED_PROMOTION_GATE_2026-06-17.json",
+    "sha256": "bd2a094ca8e04088141bea867695268e8322046432cd3c83a2f50b54bceb2ee1"
+  },
+  {
+    "bytes": 2690176,
+    "path": "track_a/RANGE_WATCHLIST_REFINER_2026-06-16.json",
+    "sha256": "be55c8e3672363e8ae470d5e647b9e8f6865eb2fa8360b29c9c564dcfc56dffd"
+  },
+  {
+    "bytes": 6343,
+    "path": "track_b/cache/cache_manifest.json",
+    "sha256": "aa4161f4b405485cc5ac614eb2cbf5b7721d72de43a64b1b02103d1c08fa3d78"
+  },
+  {
+    "bytes": 4064789,
+    "path": "track_b/cache/futures/BTCUSDT/1h_klines.csv",
+    "sha256": "6e03e3104c73d0b7856d4950c3107d029bb1cf84457e8c8923b95de67d528ac2"
+  },
+  {
+    "bytes": 3066496,
+    "path": "track_b/cache/futures/BTCUSDT/1h_oi_aligned.csv",
+    "sha256": "e2c39aacda15d261d38d4a7332a7928b24ff3af7ece5eaddcb775c0f439f1ff6"
+  },
+  {
+    "bytes": 207476,
+    "path": "track_b/cache/futures/BTCUSDT/funding_raw.csv",
+    "sha256": "efc634a136e5ca14465070d728301f7364564f55a7322916a29cf7c4d9da41ab"
+  },
+  {
+    "bytes": 4249994,
+    "path": "track_b/cache/spot/BTCUSDT/1h_klines.csv",
+    "sha256": "2463597d8ae1aee6d7b87ed3074452672f51f12650d07a929875f00ddb1890ee"
+  },
+  {
+    "bytes": 882,
+    "path": "track_b/HYPOTHESIS_PREREGISTRATION_RECEIPT_SPOT_LEAD_2026-06-24.json",
+    "sha256": "c61f60a004954567c3284dc93a92bef8d3140285c2aae7183f7ac80d04bf2b6a"
+  },
+  {
+    "bytes": 56378,
+    "path": "track_b/SPOT_LED_CONTINUATION_NESTED_HOLDOUT_2026-06-24.json",
+    "sha256": "585d55ef38178c1d92c219ebafff8cd15eec48949e2dcdd629abd87854d62a8c"
+  },
+  {
+    "bytes": 3208,
+    "path": "track_b/SPOT_LED_CONTINUATION_RESEARCH_PROTOCOL.json",
+    "sha256": "134d5a2037928e411d92346125a77ba453fd86997ee3f0c500fd8ce5684e2e35"
+  },
+  {
+    "bytes": 183544,
+    "path": "track_c/edge_forward_range_observer.jsonl",
+    "sha256": "96712cc5a387450ce8bbead911a4d97ca80dca431fb9553ab27e9fb726c0d33a"
+  },
+  {
+    "bytes": 118070,
+    "path": "track_c/edge_liquidation_context_shadow.jsonl",
+    "sha256": "f280dffc2c4a7d53f410c93310255afe936b2c06a2a14cbd555bac1755ba7080"
+  },
+  {
+    "bytes": 1624,
+    "path": "track_c/EDGE_LIQUIDATION_CONTEXT_SHADOW_SCOREBOARD_2026-06-23.json",
+    "sha256": "84285a3c50eb950342e1831c31241a074ace50a521b1548fb8a2a682f72d58a3"
+  },
+  {
+    "bytes": 1949,
+    "path": "track_c/EDGE_LIQUIDATION_SCORE_EVIDENCE_GATE_2026-06-23.json",
+    "sha256": "b301a2826302b9c1615eab0e05d5dd56b10f9069db9921157775011a23435730"
+  },
+  {
+    "bytes": 1888,
+    "path": "track_c/EDGE_LIQUIDATION_SCORE_SHADOW_LOCK.json",
+    "sha256": "356a4d58dbf61fbd7e18feadb354e52bfc2c8a68d0edda3e2adcbe7952e84319"
+  }
+]

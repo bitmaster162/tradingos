@@ -1,0 +1,9 @@
+{
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY",
+  "measurement_authorization_only": false,
+  "reason": "frozen final-test evidence or independent sample is insufficient",
+  "strategy_accepted": false,
+  "terminal": "INSUFFICIENT_DATA"
+}

@@ -1,0 +1,99 @@
+{
+  "can_trade": false,
+  "candidate_id": "range_4h_short_near_high_lb40_edge0.2_rr1x2_h16__refine_funding_spot_oi_expansion",
+  "forward_journal": {
+    "duplicates": 20,
+    "event_counts": {
+      "range_refined_no_signal": 60
+    },
+    "first_post_cutoff_bar": "2026-06-16T08:00:00+00:00",
+    "invalid_rows": 0,
+    "last_post_cutoff_bar": "2026-06-22T20:00:00+00:00",
+    "raw_rows": 61,
+    "strict_post_cutoff_rows": 60,
+    "timestamp_semantics": "timezone-aware 4h completed bar timestamps; strict bar_ts > original cutoff",
+    "unique_post_cutoff_rows": 40
+  },
+  "freeze": {
+    "configuration_hash": "be55c8e3672363e8ae470d5e647b9e8f6865eb2fa8360b29c9c564dcfc56dffd",
+    "cost_bps_per_side": 7.0,
+    "filters": [
+      "funding_aligned",
+      "spot_confirms",
+      "oi_expansion"
+    ],
+    "max_hold_bars": 16,
+    "original_data_cutoff": "2026-06-16T04:00:00+00:00",
+    "rr": "1:2",
+    "selection_report_generated_at": "2026-06-16T08:23:52+00:00",
+    "side": "SHORT"
+  },
+  "historical_holdout_used_for_keep": false,
+  "independent_oos": {
+    "data_last": "2026-06-23T00:00:00+00:00",
+    "expectancy_r": -0.240632,
+    "family_decision": "reject_oos_gate_failed",
+    "gate": {
+      "checks": {
+        "cost_stress_positive": false,
+        "max_drawdown_r": false,
+        "min_expectancy_r": false,
+        "min_stable_folds": false,
+        "min_trades": true
+      },
+      "pass": false
+    },
+    "method": "train_only_nested_selection_then_untouched_calendar_oos",
+    "selection_frozen_before_oos": true,
+    "split_ts": "2025-01-01T00:00:00+00:00",
+    "stress_expectancy_r": -0.411049,
+    "stress_extra_bps_per_side": 10.0,
+    "trades": 29
+  },
+  "promotion_boundary": {
+    "can_trade": false,
+    "live_execution_allowed": false,
+    "manual_review_required": true,
+    "observer_allowed": true,
+    "paper_design_review_allowed": false,
+    "paper_execution_allowed": false
+  },
+  "reason": "The originally attractive full-history observer was later rejected by a selection-frozen, untouched calendar OOS gate and tombstoned. Reusing the same family/parameters would resurrect a killed family. The post-cutoff observer also emitted no signals.",
+  "terminal": "KILL",
+  "tombstone": {
+    "can_trade": false,
+    "evidence": {
+      "decision": "reject_oos_gate_failed",
+      "oos": {
+        "avg_loss_r": -1.117476,
+        "avg_win_r": 1.194203,
+        "expectancy_r": -0.240632,
+        "losses": 18,
+        "max_drawdown_r": -7.312613,
+        "max_losing_streak": 4,
+        "net_r_total": -6.978334,
+        "trades": 29,
+        "winrate_pct": 37.931,
+        "wins": 11
+      },
+      "train": {
+        "avg_loss_r": -1.046448,
+        "avg_win_r": 1.415983,
+        "expectancy_r": 0.283264,
+        "losses": 23,
+        "max_drawdown_r": -7.040687,
+        "max_losing_streak": 5,
+        "net_r_total": 14.163217,
+        "trades": 50,
+        "winrate_pct": 54.0,
+        "wins": 27
+      }
+    },
+    "family": "RANGE_REFINED_4H",
+    "id": "range_refined_4h_oos_failed",
+    "reason": "Range train edge failed untouched calendar OOS.",
+    "reuse_rule": "Do not revive same family/parameters. Only new preregistered range mechanism with untouched validation.",
+    "status": "tombstoned_no_retune"
+  },
+  "track_id": "RANGE_REFINED_FORWARD"
+}

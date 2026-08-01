@@ -1,0 +1,16 @@
+{
+  "bootstrap_absence_policy": "nonpositive fail-closed sentinel; primary and stress OOS expectancy are negative",
+  "bootstrap_computed": false,
+  "bootstrap_lower_bound": 0.0,
+  "final_test_evaluated": true,
+  "independent_sample_sufficient": true,
+  "leakage_detected": false,
+  "placebo_materially_weaker": false,
+  "post_cost_expectancy": -0.240632,
+  "preregistration_valid": true,
+  "regime_ablation_robust": false,
+  "source_ablation_robust": false,
+  "source_hashes_match": true,
+  "source_provenance_valid": true,
+  "tail_risk_acceptable": false
+}
