@@ -1,0 +1,24 @@
+{
+  "schema": "codex02.forward_edge_evidence_m2b.binding.v1",
+  "created_at_utc": "2026-08-01T15:28:34.978888+00:00",
+  "slot": "CODEX-02",
+  "task_id": "TRADING_EDGE_FORWARD_EVIDENCE_M2B",
+  "predecessor": {
+    "task_id": "TRADING_EDGE_RESEARCH_ENGINE_M2A",
+    "terminal": "EDGE_RESEARCH_ENGINE_M2A_READY",
+    "return_zip_sha256": "ea105a63679dc03381c548fe13964c10e7bf4d1f91ee29ce07aad6af466c6567",
+    "reported_tests": "64/64 PASS",
+    "return_path": "C:\\Users\\coins\\My Drive\\04_PRODUCT_SHELLS\\Trade\\HANDOFF\\INCOMING\\codex\\20260801T125813Z\\TRADING_EDGE_RESEARCH_ENGINE_M2A_RETURN_20260801T125813Z.zip"
+  },
+  "immutable_m1_truth": {
+    "M1_H01_PRESSURE_OI_ABSORPTION": "INSUFFICIENT_DATA",
+    "M1_H02_BTC_SFP_ETH_SMT_TRIGGER": "KILL",
+    "M1_H03_REGIME_HIDDEN_RSI_CONTINUATION": "KILL",
+    "accepted_for_runtime": []
+  },
+  "research_mode": "FORWARD_EVIDENCE_ONLY",
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "deploy_permission": "DENY",
+  "self_application": false
+}

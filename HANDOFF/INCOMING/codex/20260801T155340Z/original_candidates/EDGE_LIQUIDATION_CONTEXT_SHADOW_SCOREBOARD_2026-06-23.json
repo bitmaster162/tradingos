@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-07-26T08:13:50+00:00",
+  "runtime_boundary": {
+    "classification": "edge_context_shadow_scoreboard_only",
+    "changes_edge_signal": false,
+    "applies_filter": false,
+    "recommended_filter_change": false,
+    "sends_orders": false,
+    "can_trade": false
+  },
+  "paths": {
+    "edge_journal": "logs/forward_paper_feed/edge_forward_range_observer.jsonl",
+    "context_journal": "logs/forward_paper_feed/edge_liquidation_context_shadow.jsonl",
+    "cache_csv": "_dl/forward_paper_feed/cache/futures/BTCUSDT/4h_klines.csv"
+  },
+  "classification": "edge_context_shadow_evidence_collecting",
+  "edge_signal_events": 1,
+  "context_events": 161,
+  "context_labelled_signals": 1,
+  "by_context": {
+    "none": {
+      "signals": 1,
+      "resolved": 1,
+      "winrate_pct": 0.0,
+      "expectancy_r": -1.0,
+      "net_r_total": -1.0
+    }
+  },
+  "by_score_bin": {
+    "low": {
+      "signals": 1,
+      "resolved": 1,
+      "winrate_pct": 0.0,
+      "expectancy_r": -1.0,
+      "net_r_total": -1.0
+    }
+  },
+  "labelled_outcomes": [
+    {
+      "signal_key": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction|2026-07-13T04:00:00+00:00|observer",
+      "signal_bar_ts": "2026-07-13T04:00:00+00:00",
+      "context": "none",
+      "context_bar_ts": "2026-07-13T04:00:00+00:00",
+      "continuous_score": 0.12282,
+      "score_bin": "low",
+      "status": "loss",
+      "r": -1.0
+    }
+  ],
+  "recommended_filter_change": false,
+  "decision": "edge_context_shadow_scoreboard_no_trade_permission",
+  "can_trade": false
+}

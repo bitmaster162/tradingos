@@ -1,0 +1,4214 @@
+{
+  "generated_at": "2026-06-23T01:00:09+00:00",
+  "method": "train_only_nested_selection_then_untouched_calendar_oos",
+  "selection_frozen_before_oos": true,
+  "runtime_boundary": {
+    "research_only": true,
+    "sends_orders": false,
+    "changes_observers": false,
+    "can_trade": false
+  },
+  "data": {
+    "cache_dir": "C:\\Users\\coins\\TradingOS\\Active\\data\\cache\\binance_spot_perp_extended",
+    "bars": 12117,
+    "first_bar_ts": "2020-12-11T16:00:00+00:00",
+    "last_bar_ts": "2026-06-23T00:00:00+00:00",
+    "split_ts": "2025-01-01T00:00:00+00:00",
+    "split_index": 8888,
+    "train_bars": 8888,
+    "oos_bars": 3229,
+    "train_feature_coverage": {
+      "bars": 8888,
+      "funding": {
+        "present": 8888,
+        "coverage_pct": 100.0
+      },
+      "oi_delta_pct": {
+        "present": 8744,
+        "coverage_pct": 98.38
+      },
+      "spot_perp_divergence_pct": {
+        "present": 8876,
+        "coverage_pct": 99.865
+      },
+      "volume_z": {
+        "present": 8869,
+        "coverage_pct": 99.786
+      }
+    },
+    "oos_feature_coverage": {
+      "bars": 3229,
+      "funding": {
+        "present": 3229,
+        "coverage_pct": 100.0
+      },
+      "oi_delta_pct": {
+        "present": 3229,
+        "coverage_pct": 100.0
+      },
+      "spot_perp_divergence_pct": {
+        "present": 3229,
+        "coverage_pct": 100.0
+      },
+      "volume_z": {
+        "present": 3229,
+        "coverage_pct": 100.0
+      }
+    }
+  },
+  "search": {
+    "grid": {
+      "rr": "1:1,1:1.2,1:1.5,1:2",
+      "max_holds": "8,12,16",
+      "lookbacks": "20,40",
+      "edge_pcts": "0.15,0.2"
+    },
+    "base_shortlist_per_lane": 12,
+    "filter_modes": [
+      "baseline",
+      "funding_aligned",
+      "funding_compressed",
+      "spot_confirms",
+      "spot_strong_confirms",
+      "oi_expansion",
+      "oi_contraction",
+      "volume_calm",
+      "volume_quiet",
+      "funding_spot",
+      "funding_spot_oi_expansion",
+      "funding_spot_oi_contraction",
+      "spot_oi_expansion",
+      "spot_oi_contraction",
+      "funding_compressed_spot",
+      "perp_exhaustion",
+      "quiet_spot_reversion"
+    ],
+    "oos_not_used_for_ranking_or_selection": true
+  },
+  "gates": {
+    "train": {
+      "min_trades": 40,
+      "min_expectancy_r": 0.1,
+      "min_stable_folds": 2,
+      "max_drawdown_r": -10.0,
+      "cost_stress_extra_bps_per_side": 10.0,
+      "cost_stress_expectancy_must_be_positive": true
+    },
+    "oos": {
+      "min_trades": 20,
+      "min_expectancy_r": 0.1,
+      "min_stable_folds": 2,
+      "max_drawdown_r": -6.0,
+      "cost_stress_extra_bps_per_side": 10.0,
+      "cost_stress_expectancy_must_be_positive": true
+    }
+  },
+  "families": [
+    {
+      "family": "RANGE_REFINED_4H",
+      "lane_policy": {
+        "description": "slower range mean-reversion, 12-16 bar holding window",
+        "holds": [
+          12,
+          16
+        ]
+      },
+      "base_configs_tested_on_train": 128,
+      "eligible_bases": 96,
+      "base_shortlist_size": 12,
+      "refined_candidates_tested_on_train": 204,
+      "train_qualified_count": 11,
+      "top_train_candidates": [
+        {
+          "base_strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16",
+          "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+          "filter_mode": "volume_quiet",
+          "filters": [
+            "volume_quiet"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "near_low",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 45.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 66,
+            "summary": {
+              "trades": 50,
+              "wins": 27,
+              "losses": 23,
+              "winrate_pct": 54.0,
+              "expectancy_r": 0.283264,
+              "net_r_total": 14.163217,
+              "avg_win_r": 1.415983,
+              "avg_loss_r": -1.046448,
+              "max_drawdown_r": -7.040687,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.814823,
+                "net_r_total": 9.777877,
+                "avg_win_r": 1.437084,
+                "avg_loss_r": -1.051959,
+                "max_drawdown_r": -1.056243,
+                "max_losing_streak": 1,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 7,
+                "losses": 6,
+                "winrate_pct": 53.846,
+                "expectancy_r": 0.342177,
+                "net_r_total": 4.448299,
+                "avg_win_r": 1.437307,
+                "avg_loss_r": -0.935474,
+                "max_drawdown_r": -4.538242,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 5,
+                "losses": 8,
+                "winrate_pct": 38.462,
+                "expectancy_r": -0.143895,
+                "net_r_total": -1.870631,
+                "avg_win_r": 1.370247,
+                "avg_loss_r": -1.090233,
+                "max_drawdown_r": -3.945242,
+                "max_losing_streak": 3,
+                "fold": 3,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 6,
+                "losses": 6,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.150639,
+                "net_r_total": 1.807672,
+                "avg_win_r": 1.397565,
+                "avg_loss_r": -1.096287,
+                "max_drawdown_r": -2.192187,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 50,
+                "wins": 27,
+                "losses": 23,
+                "winrate_pct": 54.0,
+                "expectancy_r": 0.166119,
+                "net_r_total": 8.305955,
+                "avg_win_r": 1.295958,
+                "avg_loss_r": -1.160213,
+                "max_drawdown_r": -8.688683,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+                "entry_ts": "2021-01-17T08:00:00+00:00",
+                "exit_ts": "2021-01-18T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 34787.76,
+                "exit": 37210.4325,
+                "stop": 33172.645,
+                "take": 37210.4325,
+                "atr": 1615.115,
+                "r_net": 1.468796,
+                "exit_reason": "take_profit",
+                "bars_held": 8
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+                "entry_ts": "2021-04-08T00:00:00+00:00",
+                "exit_ts": "2021-04-08T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 56018.17,
+                "exit": 57591.79857143,
+                "stop": 54969.08428571,
+                "take": 57591.79857143,
+                "atr": 1049.08571429,
+                "r_net": 1.424194,
+                "exit_reason": "take_profit",
+                "bars_held": 4
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+                "entry_ts": "2021-06-05T20:00:00+00:00",
+                "exit_ts": "2021-06-07T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35784.94,
+                "exit": 34666.46,
+                "stop": 34666.46,
+                "take": 37462.66,
+                "atr": 1118.48,
+                "r_net": -1.044092,
+                "exit_reason": "stop_loss",
+                "bars_held": 13
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h12",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h12__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h12__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 12
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 24,
+              "losses": 21,
+              "winrate_pct": 53.333,
+              "expectancy_r": 0.320209,
+              "net_r_total": 14.409394,
+              "avg_win_r": 1.522185,
+              "avg_loss_r": -1.053478,
+              "max_drawdown_r": -6.893257,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.362249,
+                "net_r_total": 3.984738,
+                "avg_win_r": 1.541106,
+                "avg_loss_r": -1.052379,
+                "max_drawdown_r": -5.261897,
+                "max_losing_streak": 5,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 4,
+                "losses": 7,
+                "winrate_pct": 36.364,
+                "expectancy_r": -0.118495,
+                "net_r_total": -1.30344,
+                "avg_win_r": 1.403431,
+                "avg_loss_r": -0.988166,
+                "max_drawdown_r": -6.893257,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 8,
+                "losses": 4,
+                "winrate_pct": 66.667,
+                "expectancy_r": 0.762753,
+                "net_r_total": 9.153036,
+                "avg_win_r": 1.708609,
+                "avg_loss_r": -1.128959,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.234096,
+                "net_r_total": 2.57506,
+                "avg_win_r": 1.333868,
+                "avg_loss_r": -1.085629,
+                "max_drawdown_r": -4.023187,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 23,
+                "losses": 22,
+                "winrate_pct": 51.111,
+                "expectancy_r": 0.167468,
+                "net_r_total": 7.536039,
+                "avg_win_r": 1.398622,
+                "avg_loss_r": -1.119649,
+                "max_drawdown_r": -7.703699,
+                "max_losing_streak": 8
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h12__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-19T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 37376.48,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 1.258626,
+                "exit_reason": "time_exit",
+                "bars_held": 13
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h12__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 54346.64857143,
+                "stop": 54346.64857143,
+                "take": 58914.93285714,
+                "atr": 1522.76142857,
+                "r_net": -1.050665,
+                "exit_reason": "stop_loss",
+                "bars_held": 11
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h12__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38596.19142857,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h12",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h12__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h12__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 12
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 24,
+              "losses": 21,
+              "winrate_pct": 53.333,
+              "expectancy_r": 0.320209,
+              "net_r_total": 14.409394,
+              "avg_win_r": 1.522185,
+              "avg_loss_r": -1.053478,
+              "max_drawdown_r": -6.893257,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.362249,
+                "net_r_total": 3.984738,
+                "avg_win_r": 1.541106,
+                "avg_loss_r": -1.052379,
+                "max_drawdown_r": -5.261897,
+                "max_losing_streak": 5,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 4,
+                "losses": 7,
+                "winrate_pct": 36.364,
+                "expectancy_r": -0.118495,
+                "net_r_total": -1.30344,
+                "avg_win_r": 1.403431,
+                "avg_loss_r": -0.988166,
+                "max_drawdown_r": -6.893257,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 8,
+                "losses": 4,
+                "winrate_pct": 66.667,
+                "expectancy_r": 0.762753,
+                "net_r_total": 9.153036,
+                "avg_win_r": 1.708609,
+                "avg_loss_r": -1.128959,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.234096,
+                "net_r_total": 2.57506,
+                "avg_win_r": 1.333868,
+                "avg_loss_r": -1.085629,
+                "max_drawdown_r": -4.023187,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 23,
+                "losses": 22,
+                "winrate_pct": 51.111,
+                "expectancy_r": 0.167468,
+                "net_r_total": 7.536039,
+                "avg_win_r": 1.398622,
+                "avg_loss_r": -1.119649,
+                "max_drawdown_r": -7.703699,
+                "max_losing_streak": 8
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h12__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-19T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 37376.48,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 1.258626,
+                "exit_reason": "time_exit",
+                "bars_held": 13
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h12__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 54346.64857143,
+                "stop": 54346.64857143,
+                "take": 58914.93285714,
+                "atr": 1522.76142857,
+                "r_net": -1.050665,
+                "exit_reason": "stop_loss",
+                "bars_held": 11
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h12__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38596.19142857,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h12",
+          "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h12__refine_volume_quiet",
+          "filter_mode": "volume_quiet",
+          "filters": [
+            "volume_quiet"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h12__refine_volume_quiet",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "near_low",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 45.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 12
+          },
+          "train": {
+            "signals": 66,
+            "summary": {
+              "trades": 50,
+              "wins": 27,
+              "losses": 23,
+              "winrate_pct": 54.0,
+              "expectancy_r": 0.267,
+              "net_r_total": 13.350019,
+              "avg_win_r": 1.392819,
+              "avg_loss_r": -1.054612,
+              "max_drawdown_r": -7.22846,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.814823,
+                "net_r_total": 9.777877,
+                "avg_win_r": 1.437084,
+                "avg_loss_r": -1.051959,
+                "max_drawdown_r": -1.056243,
+                "max_losing_streak": 1,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 7,
+                "losses": 6,
+                "winrate_pct": 53.846,
+                "expectancy_r": 0.279623,
+                "net_r_total": 3.635101,
+                "avg_win_r": 1.34796,
+                "avg_loss_r": -0.96677,
+                "max_drawdown_r": -4.726015,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 5,
+                "losses": 8,
+                "winrate_pct": 38.462,
+                "expectancy_r": -0.143895,
+                "net_r_total": -1.870631,
+                "avg_win_r": 1.370247,
+                "avg_loss_r": -1.090233,
+                "max_drawdown_r": -3.945242,
+                "max_losing_streak": 3,
+                "fold": 3,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 6,
+                "losses": 6,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.150639,
+                "net_r_total": 1.807672,
+                "avg_win_r": 1.397565,
+                "avg_loss_r": -1.096287,
+                "max_drawdown_r": -2.192187,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 50,
+                "wins": 27,
+                "losses": 23,
+                "winrate_pct": 54.0,
+                "expectancy_r": 0.149871,
+                "net_r_total": 7.493571,
+                "avg_win_r": 1.272817,
+                "avg_loss_r": -1.168369,
+                "max_drawdown_r": -8.876268,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h12__refine_volume_quiet",
+                "entry_ts": "2021-01-17T08:00:00+00:00",
+                "exit_ts": "2021-01-18T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 34787.76,
+                "exit": 37210.4325,
+                "stop": 33172.645,
+                "take": 37210.4325,
+                "atr": 1615.115,
+                "r_net": 1.468796,
+                "exit_reason": "take_profit",
+                "bars_held": 8
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h12__refine_volume_quiet",
+                "entry_ts": "2021-04-08T00:00:00+00:00",
+                "exit_ts": "2021-04-08T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 56018.17,
+                "exit": 57591.79857143,
+                "stop": 54969.08428571,
+                "take": 57591.79857143,
+                "atr": 1049.08571429,
+                "r_net": 1.424194,
+                "exit_reason": "take_profit",
+                "bars_held": 4
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h12__refine_volume_quiet",
+                "entry_ts": "2021-06-05T20:00:00+00:00",
+                "exit_ts": "2021-06-07T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35784.94,
+                "exit": 34666.46,
+                "stop": 34666.46,
+                "take": 37462.66,
+                "atr": 1118.48,
+                "r_net": -1.044092,
+                "exit_reason": "stop_loss",
+                "bars_held": 13
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 25,
+              "losses": 20,
+              "winrate_pct": 55.556,
+              "expectancy_r": 0.285961,
+              "net_r_total": 12.868243,
+              "avg_win_r": 1.349077,
+              "avg_loss_r": -1.042935,
+              "max_drawdown_r": -5.305121,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.307216,
+                "net_r_total": 3.379372,
+                "avg_win_r": 1.440211,
+                "avg_loss_r": -1.052379,
+                "max_drawdown_r": -5.261897,
+                "max_losing_streak": 5,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 4,
+                "losses": 7,
+                "winrate_pct": 36.364,
+                "expectancy_r": -0.110387,
+                "net_r_total": -1.214254,
+                "avg_win_r": 1.378784,
+                "avg_loss_r": -0.961341,
+                "max_drawdown_r": -5.305121,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.714611,
+                "net_r_total": 8.57533,
+                "avg_win_r": 1.334954,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.193436,
+                "net_r_total": 2.127795,
+                "avg_win_r": 1.259324,
+                "avg_loss_r": -1.085629,
+                "max_drawdown_r": -3.540924,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 25,
+                "losses": 20,
+                "winrate_pct": 55.556,
+                "expectancy_r": 0.133254,
+                "net_r_total": 5.99643,
+                "avg_win_r": 1.16689,
+                "avg_loss_r": -1.158791,
+                "max_drawdown_r": -6.117152,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-19T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 37719.68892857,
+                "stop": 33638.24071429,
+                "take": 37719.68892857,
+                "atr": 1632.57928571,
+                "r_net": 1.468704,
+                "exit_reason": "take_profit",
+                "bars_held": 14
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 54346.64857143,
+                "stop": 54346.64857143,
+                "take": 58153.55214286,
+                "atr": 1522.76142857,
+                "r_net": -1.050665,
+                "exit_reason": "stop_loss",
+                "bars_held": 11
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38026.25607143,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h16",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h16__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h16__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 25,
+              "losses": 20,
+              "winrate_pct": 55.556,
+              "expectancy_r": 0.285961,
+              "net_r_total": 12.868243,
+              "avg_win_r": 1.349077,
+              "avg_loss_r": -1.042935,
+              "max_drawdown_r": -5.305121,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.307216,
+                "net_r_total": 3.379372,
+                "avg_win_r": 1.440211,
+                "avg_loss_r": -1.052379,
+                "max_drawdown_r": -5.261897,
+                "max_losing_streak": 5,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 4,
+                "losses": 7,
+                "winrate_pct": 36.364,
+                "expectancy_r": -0.110387,
+                "net_r_total": -1.214254,
+                "avg_win_r": 1.378784,
+                "avg_loss_r": -0.961341,
+                "max_drawdown_r": -5.305121,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.714611,
+                "net_r_total": 8.57533,
+                "avg_win_r": 1.334954,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.193436,
+                "net_r_total": 2.127795,
+                "avg_win_r": 1.259324,
+                "avg_loss_r": -1.085629,
+                "max_drawdown_r": -3.540924,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 25,
+                "losses": 20,
+                "winrate_pct": 55.556,
+                "expectancy_r": 0.133254,
+                "net_r_total": 5.99643,
+                "avg_win_r": 1.16689,
+                "avg_loss_r": -1.158791,
+                "max_drawdown_r": -6.117152,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h16__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-19T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 37719.68892857,
+                "stop": 33638.24071429,
+                "take": 37719.68892857,
+                "atr": 1632.57928571,
+                "r_net": 1.468704,
+                "exit_reason": "take_profit",
+                "bars_held": 14
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h16__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 54346.64857143,
+                "stop": 54346.64857143,
+                "take": 58153.55214286,
+                "atr": 1522.76142857,
+                "r_net": -1.050665,
+                "exit_reason": "stop_loss",
+                "bars_held": 11
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h16__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38026.25607143,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h16",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h16__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h16__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 22,
+              "losses": 23,
+              "winrate_pct": 48.889,
+              "expectancy_r": 0.280024,
+              "net_r_total": 12.601058,
+              "avg_win_r": 1.666309,
+              "avg_loss_r": -1.045989,
+              "max_drawdown_r": -7.803371,
+              "max_losing_streak": 8
+            },
+            "stable_folds": 2,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 5,
+                "losses": 6,
+                "winrate_pct": 45.455,
+                "expectancy_r": 0.148242,
+                "net_r_total": 1.630667,
+                "avg_win_r": 1.58821,
+                "avg_loss_r": -1.05173,
+                "max_drawdown_r": -5.261897,
+                "max_losing_streak": 5,
+                "fold": 1,
+                "stable": false
+              },
+              {
+                "trades": 11,
+                "wins": 3,
+                "losses": 8,
+                "winrate_pct": 27.273,
+                "expectancy_r": -0.201232,
+                "net_r_total": -2.213554,
+                "avg_win_r": 1.863272,
+                "avg_loss_r": -0.975421,
+                "max_drawdown_r": -7.803371,
+                "max_losing_streak": 8,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 8,
+                "losses": 4,
+                "winrate_pct": 66.667,
+                "expectancy_r": 0.713158,
+                "net_r_total": 8.5579,
+                "avg_win_r": 1.634217,
+                "avg_loss_r": -1.128959,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.42055,
+                "net_r_total": 4.626045,
+                "avg_win_r": 1.675699,
+                "avg_loss_r": -1.085629,
+                "max_drawdown_r": -3.540924,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 22,
+                "losses": 23,
+                "winrate_pct": 48.889,
+                "expectancy_r": 0.127323,
+                "net_r_total": 5.729513,
+                "avg_win_r": 1.472215,
+                "avg_loss_r": -1.159097,
+                "max_drawdown_r": -8.612902,
+                "max_losing_streak": 8
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h16__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-20T04:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 35679.08,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 0.219649,
+                "exit_reason": "time_exit",
+                "bars_held": 17
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h16__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 54346.64857143,
+                "stop": 54346.64857143,
+                "take": 58914.93285714,
+                "atr": 1522.76142857,
+                "r_net": -1.050665,
+                "exit_reason": "stop_loss",
+                "bars_held": 11
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h16__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38596.19142857,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h16",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h16__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h16__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 22,
+              "losses": 23,
+              "winrate_pct": 48.889,
+              "expectancy_r": 0.280024,
+              "net_r_total": 12.601058,
+              "avg_win_r": 1.666309,
+              "avg_loss_r": -1.045989,
+              "max_drawdown_r": -7.803371,
+              "max_losing_streak": 8
+            },
+            "stable_folds": 2,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 5,
+                "losses": 6,
+                "winrate_pct": 45.455,
+                "expectancy_r": 0.148242,
+                "net_r_total": 1.630667,
+                "avg_win_r": 1.58821,
+                "avg_loss_r": -1.05173,
+                "max_drawdown_r": -5.261897,
+                "max_losing_streak": 5,
+                "fold": 1,
+                "stable": false
+              },
+              {
+                "trades": 11,
+                "wins": 3,
+                "losses": 8,
+                "winrate_pct": 27.273,
+                "expectancy_r": -0.201232,
+                "net_r_total": -2.213554,
+                "avg_win_r": 1.863272,
+                "avg_loss_r": -0.975421,
+                "max_drawdown_r": -7.803371,
+                "max_losing_streak": 8,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 8,
+                "losses": 4,
+                "winrate_pct": 66.667,
+                "expectancy_r": 0.713158,
+                "net_r_total": 8.5579,
+                "avg_win_r": 1.634217,
+                "avg_loss_r": -1.128959,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.42055,
+                "net_r_total": 4.626045,
+                "avg_win_r": 1.675699,
+                "avg_loss_r": -1.085629,
+                "max_drawdown_r": -3.540924,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 22,
+                "losses": 23,
+                "winrate_pct": 48.889,
+                "expectancy_r": 0.127323,
+                "net_r_total": 5.729513,
+                "avg_win_r": 1.472215,
+                "avg_loss_r": -1.159097,
+                "max_drawdown_r": -8.612902,
+                "max_losing_streak": 8
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h16__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-20T04:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 35679.08,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 0.219649,
+                "exit_reason": "time_exit",
+                "bars_held": 17
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h16__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 54346.64857143,
+                "stop": 54346.64857143,
+                "take": 58914.93285714,
+                "atr": 1522.76142857,
+                "r_net": -1.050665,
+                "exit_reason": "stop_loss",
+                "bars_held": 11
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h16__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38596.19142857,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x2_h16",
+          "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x2_h16__refine_volume_quiet",
+          "filter_mode": "volume_quiet",
+          "filters": [
+            "volume_quiet"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x2_h16__refine_volume_quiet",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "near_low",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 45.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 66,
+            "summary": {
+              "trades": 49,
+              "wins": 22,
+              "losses": 27,
+              "winrate_pct": 44.898,
+              "expectancy_r": 0.216741,
+              "net_r_total": 10.620299,
+              "avg_win_r": 1.772022,
+              "avg_loss_r": -1.050526,
+              "max_drawdown_r": -9.039287,
+              "max_losing_streak": 6
+            },
+            "stable_folds": 2,
+            "folds": [
+              {
+                "trades": 12,
+                "wins": 7,
+                "losses": 5,
+                "winrate_pct": 58.333,
+                "expectancy_r": 0.539313,
+                "net_r_total": 6.471758,
+                "avg_win_r": 1.682538,
+                "avg_loss_r": -1.061201,
+                "max_drawdown_r": -2.128782,
+                "max_losing_streak": 2,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 12,
+                "wins": 6,
+                "losses": 6,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.438877,
+                "net_r_total": 5.266526,
+                "avg_win_r": 1.813229,
+                "avg_loss_r": -0.935474,
+                "max_drawdown_r": -4.538242,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 4,
+                "losses": 9,
+                "winrate_pct": 30.769,
+                "expectancy_r": -0.225051,
+                "net_r_total": -2.925657,
+                "avg_win_r": 1.717501,
+                "avg_loss_r": -1.088407,
+                "max_drawdown_r": -6.443492,
+                "max_losing_streak": 6,
+                "fold": 3,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 5,
+                "losses": 7,
+                "winrate_pct": 41.667,
+                "expectancy_r": 0.150639,
+                "net_r_total": 1.807672,
+                "avg_win_r": 1.891471,
+                "avg_loss_r": -1.092812,
+                "max_drawdown_r": -4.356588,
+                "max_losing_streak": 4,
+                "fold": 4,
+                "stable": false
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 49,
+                "wins": 22,
+                "losses": 27,
+                "winrate_pct": 44.898,
+                "expectancy_r": 0.101154,
+                "net_r_total": 4.956539,
+                "avg_win_r": 1.652728,
+                "avg_loss_r": -1.163092,
+                "max_drawdown_r": -11.366409,
+                "max_losing_streak": 6
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x2_h16__refine_volume_quiet",
+                "entry_ts": "2021-01-17T08:00:00+00:00",
+                "exit_ts": "2021-01-20T00:00:00+00:00",
+                "side": "LONG",
+                "entry": 34787.76,
+                "exit": 35097.16,
+                "stop": 33172.645,
+                "take": 38017.99,
+                "atr": 1615.115,
+                "r_net": 0.161277,
+                "exit_reason": "time_exit",
+                "bars_held": 17
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x2_h16__refine_volume_quiet",
+                "entry_ts": "2021-04-08T00:00:00+00:00",
+                "exit_ts": "2021-04-08T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 56018.17,
+                "exit": 58116.34142857,
+                "stop": 54969.08428571,
+                "take": 58116.34142857,
+                "atr": 1049.08571429,
+                "r_net": 1.923844,
+                "exit_reason": "take_profit",
+                "bars_held": 5
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x2_h16__refine_volume_quiet",
+                "entry_ts": "2021-06-05T20:00:00+00:00",
+                "exit_ts": "2021-06-07T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35784.94,
+                "exit": 34666.46,
+                "stop": 34666.46,
+                "take": 38021.9,
+                "atr": 1118.48,
+                "r_net": -1.044092,
+                "exit_reason": "stop_loss",
+                "bars_held": 13
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_volume_calm",
+          "filter_mode": "volume_calm",
+          "filters": [
+            "volume_calm"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_volume_calm",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 16
+          },
+          "train": {
+            "signals": 72,
+            "summary": {
+              "trades": 57,
+              "wins": 29,
+              "losses": 28,
+              "winrate_pct": 50.877,
+              "expectancy_r": 0.179664,
+              "net_r_total": 10.240857,
+              "avg_win_r": 1.372664,
+              "avg_loss_r": -1.055943,
+              "max_drawdown_r": -4.920155,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 2,
+            "folds": [
+              {
+                "trades": 14,
+                "wins": 8,
+                "losses": 6,
+                "winrate_pct": 57.143,
+                "expectancy_r": 0.370877,
+                "net_r_total": 5.192278,
+                "avg_win_r": 1.440647,
+                "avg_loss_r": -1.055484,
+                "max_drawdown_r": -2.825404,
+                "max_losing_streak": 2,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 14,
+                "wins": 6,
+                "losses": 8,
+                "winrate_pct": 42.857,
+                "expectancy_r": 0.060039,
+                "net_r_total": 0.840547,
+                "avg_win_r": 1.434657,
+                "avg_loss_r": -0.970924,
+                "max_drawdown_r": -4.920155,
+                "max_losing_streak": 5,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 15,
+                "wins": 9,
+                "losses": 6,
+                "winrate_pct": 60.0,
+                "expectancy_r": 0.299124,
+                "net_r_total": 4.48686,
+                "avg_win_r": 1.24892,
+                "avg_loss_r": -1.12557,
+                "max_drawdown_r": -3.140586,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 14,
+                "wins": 6,
+                "losses": 8,
+                "winrate_pct": 42.857,
+                "expectancy_r": -0.019916,
+                "net_r_total": -0.278828,
+                "avg_win_r": 1.405645,
+                "avg_loss_r": -1.089087,
+                "max_drawdown_r": -4.065955,
+                "max_losing_streak": 3,
+                "fold": 4,
+                "stable": false
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 57,
+                "wins": 29,
+                "losses": 28,
+                "winrate_pct": 50.877,
+                "expectancy_r": 0.05806,
+                "net_r_total": 3.30941,
+                "avg_win_r": 1.248413,
+                "avg_loss_r": -1.174806,
+                "max_drawdown_r": -7.544679,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_volume_calm",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-19T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 37719.68892857,
+                "stop": 33638.24071429,
+                "take": 37719.68892857,
+                "atr": 1632.57928571,
+                "r_net": 1.468704,
+                "exit_reason": "take_profit",
+                "bars_held": 14
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_volume_calm",
+                "entry_ts": "2021-03-05T04:00:00+00:00",
+                "exit_ts": "2021-03-07T00:00:00+00:00",
+                "side": "LONG",
+                "entry": 47300.22,
+                "exit": 49805.37964286,
+                "stop": 45630.11357143,
+                "take": 49805.37964286,
+                "atr": 1670.10642857,
+                "r_net": 1.4593,
+                "exit_reason": "take_profit",
+                "bars_held": 12
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h16__refine_volume_calm",
+                "entry_ts": "2021-04-04T04:00:00+00:00",
+                "exit_ts": "2021-04-05T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 57545.12,
+                "exit": 58974.59107143,
+                "stop": 56592.13928571,
+                "take": 58974.59107143,
+                "atr": 952.98071429,
+                "r_net": 1.414412,
+                "exit_reason": "take_profit",
+                "bars_held": 9
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        }
+      ],
+      "selected_on_train": {
+        "base_strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16",
+        "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+        "filter_mode": "volume_quiet",
+        "filters": [
+          "volume_quiet"
+        ],
+        "config": {
+          "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+          "interval": "4h",
+          "side": "LONG",
+          "trigger": "near_low",
+          "lookback": 20,
+          "edge_pct": 0.15,
+          "min_width_atr": 2.0,
+          "max_width_atr": 12.0,
+          "max_abs_trend_atr": 2.2,
+          "max_atr_ratio": 1.15,
+          "rsi_filter": "lte",
+          "rsi_threshold": 45.0,
+          "stop_atr": 1.0,
+          "take_atr": 1.5,
+          "max_hold_bars": 16
+        },
+        "train": {
+          "signals": 66,
+          "summary": {
+            "trades": 50,
+            "wins": 27,
+            "losses": 23,
+            "winrate_pct": 54.0,
+            "expectancy_r": 0.283264,
+            "net_r_total": 14.163217,
+            "avg_win_r": 1.415983,
+            "avg_loss_r": -1.046448,
+            "max_drawdown_r": -7.040687,
+            "max_losing_streak": 5
+          },
+          "stable_folds": 3,
+          "folds": [
+            {
+              "trades": 12,
+              "wins": 9,
+              "losses": 3,
+              "winrate_pct": 75.0,
+              "expectancy_r": 0.814823,
+              "net_r_total": 9.777877,
+              "avg_win_r": 1.437084,
+              "avg_loss_r": -1.051959,
+              "max_drawdown_r": -1.056243,
+              "max_losing_streak": 1,
+              "fold": 1,
+              "stable": true
+            },
+            {
+              "trades": 13,
+              "wins": 7,
+              "losses": 6,
+              "winrate_pct": 53.846,
+              "expectancy_r": 0.342177,
+              "net_r_total": 4.448299,
+              "avg_win_r": 1.437307,
+              "avg_loss_r": -0.935474,
+              "max_drawdown_r": -4.538242,
+              "max_losing_streak": 5,
+              "fold": 2,
+              "stable": true
+            },
+            {
+              "trades": 13,
+              "wins": 5,
+              "losses": 8,
+              "winrate_pct": 38.462,
+              "expectancy_r": -0.143895,
+              "net_r_total": -1.870631,
+              "avg_win_r": 1.370247,
+              "avg_loss_r": -1.090233,
+              "max_drawdown_r": -3.945242,
+              "max_losing_streak": 3,
+              "fold": 3,
+              "stable": false
+            },
+            {
+              "trades": 12,
+              "wins": 6,
+              "losses": 6,
+              "winrate_pct": 50.0,
+              "expectancy_r": 0.150639,
+              "net_r_total": 1.807672,
+              "avg_win_r": 1.397565,
+              "avg_loss_r": -1.096287,
+              "max_drawdown_r": -2.192187,
+              "max_losing_streak": 2,
+              "fold": 4,
+              "stable": true
+            }
+          ],
+          "cost_stress": {
+            "extra_bps_per_side": 10.0,
+            "summary": {
+              "trades": 50,
+              "wins": 27,
+              "losses": 23,
+              "winrate_pct": 54.0,
+              "expectancy_r": 0.166119,
+              "net_r_total": 8.305955,
+              "avg_win_r": 1.295958,
+              "avg_loss_r": -1.160213,
+              "max_drawdown_r": -8.688683,
+              "max_losing_streak": 5
+            }
+          },
+          "sample_trades": [
+            {
+              "dataset_id": "range_family_BTCUSDT_4h",
+              "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+              "entry_ts": "2021-01-17T08:00:00+00:00",
+              "exit_ts": "2021-01-18T12:00:00+00:00",
+              "side": "LONG",
+              "entry": 34787.76,
+              "exit": 37210.4325,
+              "stop": 33172.645,
+              "take": 37210.4325,
+              "atr": 1615.115,
+              "r_net": 1.468796,
+              "exit_reason": "take_profit",
+              "bars_held": 8
+            },
+            {
+              "dataset_id": "range_family_BTCUSDT_4h",
+              "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+              "entry_ts": "2021-04-08T00:00:00+00:00",
+              "exit_ts": "2021-04-08T12:00:00+00:00",
+              "side": "LONG",
+              "entry": 56018.17,
+              "exit": 57591.79857143,
+              "stop": 54969.08428571,
+              "take": 57591.79857143,
+              "atr": 1049.08571429,
+              "r_net": 1.424194,
+              "exit_reason": "take_profit",
+              "bars_held": 4
+            },
+            {
+              "dataset_id": "range_family_BTCUSDT_4h",
+              "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+              "entry_ts": "2021-06-05T20:00:00+00:00",
+              "exit_ts": "2021-06-07T20:00:00+00:00",
+              "side": "LONG",
+              "entry": 35784.94,
+              "exit": 34666.46,
+              "stop": 34666.46,
+              "take": 37462.66,
+              "atr": 1118.48,
+              "r_net": -1.044092,
+              "exit_reason": "stop_loss",
+              "bars_held": 13
+            }
+          ]
+        },
+        "train_gate": {
+          "pass": true,
+          "checks": {
+            "min_trades": true,
+            "min_expectancy_r": true,
+            "min_stable_folds": true,
+            "max_drawdown_r": true,
+            "cost_stress_positive": true
+          }
+        }
+      },
+      "oos": {
+        "signals": 55,
+        "summary": {
+          "trades": 29,
+          "wins": 11,
+          "losses": 18,
+          "winrate_pct": 37.931,
+          "expectancy_r": -0.240632,
+          "net_r_total": -6.978334,
+          "avg_win_r": 1.194203,
+          "avg_loss_r": -1.117476,
+          "max_drawdown_r": -7.312613,
+          "max_losing_streak": 4
+        },
+        "stable_folds": 1,
+        "folds": [
+          {
+            "trades": 7,
+            "wins": 3,
+            "losses": 4,
+            "winrate_pct": 42.857,
+            "expectancy_r": -0.215486,
+            "net_r_total": -1.508404,
+            "avg_win_r": 0.983631,
+            "avg_loss_r": -1.114824,
+            "max_drawdown_r": -2.210207,
+            "max_losing_streak": 2,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 7,
+            "wins": 2,
+            "losses": 5,
+            "winrate_pct": 28.571,
+            "expectancy_r": -0.412261,
+            "net_r_total": -2.885827,
+            "avg_win_r": 1.38868,
+            "avg_loss_r": -1.132638,
+            "max_drawdown_r": -3.419404,
+            "max_losing_streak": 3,
+            "fold": 2,
+            "stable": false
+          },
+          {
+            "trades": 8,
+            "wins": 4,
+            "losses": 4,
+            "winrate_pct": 50.0,
+            "expectancy_r": 0.036564,
+            "net_r_total": 0.29251,
+            "avg_win_r": 1.158262,
+            "avg_loss_r": -1.085134,
+            "max_drawdown_r": -3.273611,
+            "max_losing_streak": 3,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 7,
+            "wins": 2,
+            "losses": 5,
+            "winrate_pct": 28.571,
+            "expectancy_r": -0.410945,
+            "net_r_total": -2.876613,
+            "avg_win_r": 1.387464,
+            "avg_loss_r": -1.130308,
+            "max_drawdown_r": -4.555183,
+            "max_losing_streak": 4,
+            "fold": 4,
+            "stable": false
+          }
+        ],
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 29,
+            "wins": 11,
+            "losses": 18,
+            "winrate_pct": 37.931,
+            "expectancy_r": -0.411049,
+            "net_r_total": -11.920413,
+            "avg_win_r": 1.019541,
+            "avg_loss_r": -1.285298,
+            "max_drawdown_r": -11.973361,
+            "max_losing_streak": 4
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "range_family_BTCUSDT_4h",
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+            "entry_ts": "2025-02-01T12:00:00+00:00",
+            "exit_ts": "2025-02-01T20:00:00+00:00",
+            "side": "LONG",
+            "entry": 101980.0,
+            "exit": 100775.16428571,
+            "stop": 100775.16428571,
+            "take": 103787.25357143,
+            "atr": 1204.83571429,
+            "r_net": -1.117799,
+            "exit_reason": "stop_loss",
+            "bars_held": 3
+          },
+          {
+            "dataset_id": "range_family_BTCUSDT_4h",
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+            "entry_ts": "2025-02-08T08:00:00+00:00",
+            "exit_ts": "2025-02-09T20:00:00+00:00",
+            "side": "LONG",
+            "entry": 96153.4,
+            "exit": 94707.61428571,
+            "stop": 94707.61428571,
+            "take": 98322.07857143,
+            "atr": 1445.78571429,
+            "r_net": -1.092408,
+            "exit_reason": "stop_loss",
+            "bars_held": 10
+          },
+          {
+            "dataset_id": "range_family_BTCUSDT_4h",
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h16__refine_volume_quiet",
+            "entry_ts": "2025-02-17T08:00:00+00:00",
+            "exit_ts": "2025-02-17T12:00:00+00:00",
+            "side": "LONG",
+            "entry": 96023.8,
+            "exit": 96860.68214286,
+            "stop": 95465.87857143,
+            "take": 96860.68214286,
+            "atr": 557.92142857,
+            "r_net": 1.257996,
+            "exit_reason": "take_profit",
+            "bars_held": 2
+          }
+        ]
+      },
+      "oos_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": true,
+          "min_expectancy_r": false,
+          "min_stable_folds": false,
+          "max_drawdown_r": false,
+          "cost_stress_positive": false
+        }
+      },
+      "decision": "reject_oos_gate_failed"
+    },
+    {
+      "family": "EDGE_FORWARD_4H",
+      "lane_policy": {
+        "description": "fast range edge, 8 bar holding window",
+        "holds": [
+          8
+        ]
+      },
+      "base_configs_tested_on_train": 64,
+      "eligible_bases": 48,
+      "base_shortlist_size": 12,
+      "refined_candidates_tested_on_train": 204,
+      "train_qualified_count": 11,
+      "top_train_candidates": [
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 26,
+              "losses": 19,
+              "winrate_pct": 57.778,
+              "expectancy_r": 0.355012,
+              "net_r_total": 15.975524,
+              "avg_win_r": 1.334971,
+              "avg_loss_r": -0.985986,
+              "max_drawdown_r": -6.645731,
+              "max_losing_streak": 6
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 7,
+                "losses": 4,
+                "winrate_pct": 63.636,
+                "expectancy_r": 0.335478,
+                "net_r_total": 3.690261,
+                "avg_win_r": 1.128785,
+                "avg_loss_r": -1.052808,
+                "max_drawdown_r": -4.211232,
+                "max_losing_streak": 4,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 4,
+                "losses": 7,
+                "winrate_pct": 36.364,
+                "expectancy_r": -0.095992,
+                "net_r_total": -1.055914,
+                "avg_win_r": 1.405674,
+                "avg_loss_r": -0.954087,
+                "max_drawdown_r": -6.645731,
+                "max_losing_streak": 6,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.793649,
+                "net_r_total": 9.523791,
+                "avg_win_r": 1.440339,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.347035,
+                "net_r_total": 3.817386,
+                "avg_win_r": 1.370336,
+                "avg_loss_r": -0.880926,
+                "max_drawdown_r": -4.404629,
+                "max_losing_streak": 5,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 24,
+                "losses": 21,
+                "winrate_pct": 53.333,
+                "expectancy_r": 0.202236,
+                "net_r_total": 9.100604,
+                "avg_win_r": 1.261984,
+                "avg_loss_r": -1.008906,
+                "max_drawdown_r": -7.456419,
+                "max_losing_streak": 8
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 36686.86,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 0.83651,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T08:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 56472.06,
+                "stop": 54346.64857143,
+                "take": 58914.93285714,
+                "atr": 1522.76142857,
+                "r_net": 0.344119,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38596.19142857,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 26,
+              "losses": 19,
+              "winrate_pct": 57.778,
+              "expectancy_r": 0.355012,
+              "net_r_total": 15.975524,
+              "avg_win_r": 1.334971,
+              "avg_loss_r": -0.985986,
+              "max_drawdown_r": -6.645731,
+              "max_losing_streak": 6
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 7,
+                "losses": 4,
+                "winrate_pct": 63.636,
+                "expectancy_r": 0.335478,
+                "net_r_total": 3.690261,
+                "avg_win_r": 1.128785,
+                "avg_loss_r": -1.052808,
+                "max_drawdown_r": -4.211232,
+                "max_losing_streak": 4,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 4,
+                "losses": 7,
+                "winrate_pct": 36.364,
+                "expectancy_r": -0.095992,
+                "net_r_total": -1.055914,
+                "avg_win_r": 1.405674,
+                "avg_loss_r": -0.954087,
+                "max_drawdown_r": -6.645731,
+                "max_losing_streak": 6,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.793649,
+                "net_r_total": 9.523791,
+                "avg_win_r": 1.440339,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.347035,
+                "net_r_total": 3.817386,
+                "avg_win_r": 1.370336,
+                "avg_loss_r": -0.880926,
+                "max_drawdown_r": -4.404629,
+                "max_losing_streak": 5,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 24,
+                "losses": 21,
+                "winrate_pct": 53.333,
+                "expectancy_r": 0.202236,
+                "net_r_total": 9.100604,
+                "avg_win_r": 1.261984,
+                "avg_loss_r": -1.008906,
+                "max_drawdown_r": -7.456419,
+                "max_losing_streak": 8
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 36686.86,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 0.83651,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T08:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 56472.06,
+                "stop": 54346.64857143,
+                "take": 58914.93285714,
+                "atr": 1522.76142857,
+                "r_net": 0.344119,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38596.19142857,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8",
+          "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_quiet",
+          "filter_mode": "volume_quiet",
+          "filters": [
+            "volume_quiet"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_quiet",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "near_low",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 45.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 66,
+            "summary": {
+              "trades": 50,
+              "wins": 29,
+              "losses": 21,
+              "winrate_pct": 58.0,
+              "expectancy_r": 0.262223,
+              "net_r_total": 13.111149,
+              "avg_win_r": 1.210476,
+              "avg_loss_r": -1.047269,
+              "max_drawdown_r": -5.481406,
+              "max_losing_streak": 3
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 12,
+                "wins": 10,
+                "losses": 2,
+                "winrate_pct": 83.333,
+                "expectancy_r": 0.925495,
+                "net_r_total": 11.105938,
+                "avg_win_r": 1.321772,
+                "avg_loss_r": -1.055893,
+                "max_drawdown_r": -1.056243,
+                "max_losing_streak": 1,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 8,
+                "losses": 5,
+                "winrate_pct": 61.538,
+                "expectancy_r": 0.15909,
+                "net_r_total": 2.06817,
+                "avg_win_r": 0.831181,
+                "avg_loss_r": -0.916256,
+                "max_drawdown_r": -2.978961,
+                "max_losing_streak": 2,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 5,
+                "losses": 8,
+                "winrate_pct": 38.462,
+                "expectancy_r": -0.143895,
+                "net_r_total": -1.870631,
+                "avg_win_r": 1.370247,
+                "avg_loss_r": -1.090233,
+                "max_drawdown_r": -3.945242,
+                "max_losing_streak": 3,
+                "fold": 3,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 6,
+                "losses": 6,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.150639,
+                "net_r_total": 1.807672,
+                "avg_win_r": 1.397565,
+                "avg_loss_r": -1.096287,
+                "max_drawdown_r": -2.192187,
+                "max_losing_streak": 2,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 50,
+                "wins": 27,
+                "losses": 23,
+                "winrate_pct": 54.0,
+                "expectancy_r": 0.145099,
+                "net_r_total": 7.254941,
+                "avg_win_r": 1.177095,
+                "avg_loss_r": -1.066375,
+                "max_drawdown_r": -7.098114,
+                "max_losing_streak": 3
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_quiet",
+                "entry_ts": "2021-01-17T08:00:00+00:00",
+                "exit_ts": "2021-01-18T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 34787.76,
+                "exit": 37210.4325,
+                "stop": 33172.645,
+                "take": 37210.4325,
+                "atr": 1615.115,
+                "r_net": 1.468796,
+                "exit_reason": "take_profit",
+                "bars_held": 8
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_quiet",
+                "entry_ts": "2021-04-08T00:00:00+00:00",
+                "exit_ts": "2021-04-08T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 56018.17,
+                "exit": 57591.79857143,
+                "stop": 54969.08428571,
+                "take": 57591.79857143,
+                "atr": 1049.08571429,
+                "r_net": 1.424194,
+                "exit_reason": "take_profit",
+                "bars_held": 4
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_quiet",
+                "entry_ts": "2021-06-05T20:00:00+00:00",
+                "exit_ts": "2021-06-07T04:00:00+00:00",
+                "side": "LONG",
+                "entry": 35784.94,
+                "exit": 36152.91,
+                "stop": 34666.46,
+                "take": 37462.66,
+                "atr": 1118.48,
+                "r_net": 0.283969,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_near_low_lb40_edge0.2_rr1x2_h8",
+          "strategy_id": "range_4h_long_near_low_lb40_edge0.2_rr1x2_h8__refine_spot_oi_expansion",
+          "filter_mode": "spot_oi_expansion",
+          "filters": [
+            "spot_confirms",
+            "oi_expansion"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_near_low_lb40_edge0.2_rr1x2_h8__refine_spot_oi_expansion",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "near_low",
+            "lookback": 40,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 45.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 82,
+            "summary": {
+              "trades": 49,
+              "wins": 23,
+              "losses": 26,
+              "winrate_pct": 46.939,
+              "expectancy_r": 0.25137,
+              "net_r_total": 12.317153,
+              "avg_win_r": 1.593005,
+              "avg_loss_r": -0.93546,
+              "max_drawdown_r": -8.483853,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 2,
+            "folds": [
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.945917,
+                "net_r_total": 11.351006,
+                "avg_win_r": 1.609604,
+                "avg_loss_r": -1.045143,
+                "max_drawdown_r": -2.068022,
+                "max_losing_streak": 2,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 12,
+                "wins": 6,
+                "losses": 6,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.340831,
+                "net_r_total": 4.089975,
+                "avg_win_r": 1.764885,
+                "avg_loss_r": -1.083223,
+                "max_drawdown_r": -2.203303,
+                "max_losing_streak": 2,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 13,
+                "wins": 5,
+                "losses": 8,
+                "winrate_pct": 38.462,
+                "expectancy_r": -0.179438,
+                "net_r_total": -2.332697,
+                "avg_win_r": 1.303585,
+                "avg_loss_r": -1.106328,
+                "max_drawdown_r": -6.28055,
+                "max_losing_streak": 3,
+                "fold": 3,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 3,
+                "losses": 9,
+                "winrate_pct": 25.0,
+                "expectancy_r": -0.065928,
+                "net_r_total": -0.791131,
+                "avg_win_r": 1.681817,
+                "avg_loss_r": -0.648509,
+                "max_drawdown_r": -3.432811,
+                "max_losing_streak": 4,
+                "fold": 4,
+                "stable": false
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 49,
+                "wins": 23,
+                "losses": 26,
+                "winrate_pct": 46.939,
+                "expectancy_r": 0.12294,
+                "net_r_total": 6.024059,
+                "avg_win_r": 1.477512,
+                "avg_loss_r": -1.075335,
+                "max_drawdown_r": -10.113152,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb40_edge0.2_rr1x2_h8__refine_spot_oi_expansion",
+                "entry_ts": "2021-01-20T04:00:00+00:00",
+                "exit_ts": "2021-01-20T16:00:00+00:00",
+                "side": "LONG",
+                "entry": 35098.12,
+                "exit": 33896.05785714,
+                "stop": 33896.05785714,
+                "take": 37502.24428571,
+                "atr": 1202.06214286,
+                "r_net": -1.040178,
+                "exit_reason": "stop_loss",
+                "bars_held": 4
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb40_edge0.2_rr1x2_h8__refine_spot_oi_expansion",
+                "entry_ts": "2021-02-26T00:00:00+00:00",
+                "exit_ts": "2021-02-26T04:00:00+00:00",
+                "side": "LONG",
+                "entry": 47087.97,
+                "exit": 44778.44857143,
+                "stop": 44778.44857143,
+                "take": 51707.01285714,
+                "atr": 2309.52142857,
+                "r_net": -1.027844,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb40_edge0.2_rr1x2_h8__refine_spot_oi_expansion",
+                "entry_ts": "2021-03-17T16:00:00+00:00",
+                "exit_ts": "2021-03-17T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 54959.44,
+                "exit": 58444.60142857,
+                "stop": 53216.85928571,
+                "take": 58444.60142857,
+                "atr": 1742.58071429,
+                "r_net": 1.954445,
+                "exit_reason": "take_profit",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h8__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h8__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 27,
+              "losses": 18,
+              "winrate_pct": 60.0,
+              "expectancy_r": 0.265719,
+              "net_r_total": 11.957355,
+              "avg_win_r": 1.127855,
+              "avg_loss_r": -1.027486,
+              "max_drawdown_r": -4.98247,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 7,
+                "losses": 4,
+                "winrate_pct": 63.636,
+                "expectancy_r": 0.327027,
+                "net_r_total": 3.597293,
+                "avg_win_r": 1.115504,
+                "avg_loss_r": -1.052808,
+                "max_drawdown_r": -4.211232,
+                "max_losing_streak": 4,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 5,
+                "losses": 6,
+                "winrate_pct": 45.455,
+                "expectancy_r": -0.081055,
+                "net_r_total": -0.891603,
+                "avg_win_r": 1.109603,
+                "avg_loss_r": -1.07327,
+                "max_drawdown_r": -4.98247,
+                "max_losing_streak": 3,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.619407,
+                "net_r_total": 7.432879,
+                "avg_win_r": 1.208015,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.165344,
+                "net_r_total": 1.818786,
+                "avg_win_r": 1.037236,
+                "avg_loss_r": -0.880926,
+                "max_drawdown_r": -4.404629,
+                "max_losing_streak": 5,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 26,
+                "losses": 19,
+                "winrate_pct": 57.778,
+                "expectancy_r": 0.113032,
+                "net_r_total": 5.086455,
+                "avg_win_r": 0.993558,
+                "avg_loss_r": -1.091898,
+                "max_drawdown_r": -5.794823,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h8__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 36686.86,
+                "stop": 33638.24071429,
+                "take": 37719.68892857,
+                "atr": 1632.57928571,
+                "r_net": 0.83651,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h8__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T08:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 56472.06,
+                "stop": 54346.64857143,
+                "take": 58153.55214286,
+                "atr": 1522.76142857,
+                "r_net": 0.344119,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.5_h8__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38026.25607143,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h8__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h8__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 27,
+              "losses": 18,
+              "winrate_pct": 60.0,
+              "expectancy_r": 0.265719,
+              "net_r_total": 11.957355,
+              "avg_win_r": 1.127855,
+              "avg_loss_r": -1.027486,
+              "max_drawdown_r": -4.98247,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 3,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 7,
+                "losses": 4,
+                "winrate_pct": 63.636,
+                "expectancy_r": 0.327027,
+                "net_r_total": 3.597293,
+                "avg_win_r": 1.115504,
+                "avg_loss_r": -1.052808,
+                "max_drawdown_r": -4.211232,
+                "max_losing_streak": 4,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 5,
+                "losses": 6,
+                "winrate_pct": 45.455,
+                "expectancy_r": -0.081055,
+                "net_r_total": -0.891603,
+                "avg_win_r": 1.109603,
+                "avg_loss_r": -1.07327,
+                "max_drawdown_r": -4.98247,
+                "max_losing_streak": 3,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.619407,
+                "net_r_total": 7.432879,
+                "avg_win_r": 1.208015,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.165344,
+                "net_r_total": 1.818786,
+                "avg_win_r": 1.037236,
+                "avg_loss_r": -0.880926,
+                "max_drawdown_r": -4.404629,
+                "max_losing_streak": 5,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 26,
+                "losses": 19,
+                "winrate_pct": 57.778,
+                "expectancy_r": 0.113032,
+                "net_r_total": 5.086455,
+                "avg_win_r": 0.993558,
+                "avg_loss_r": -1.091898,
+                "max_drawdown_r": -5.794823,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h8__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 36686.86,
+                "stop": 33638.24071429,
+                "take": 37719.68892857,
+                "atr": 1632.57928571,
+                "r_net": 0.83651,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h8__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T08:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 56472.06,
+                "stop": 54346.64857143,
+                "take": 58153.55214286,
+                "atr": 1522.76142857,
+                "r_net": 0.344119,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x1.5_h8__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 38026.25607143,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.2_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.2_h8__refine_oi_contraction",
+          "filter_mode": "oi_contraction",
+          "filters": [
+            "oi_contraction"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.2_h8__refine_oi_contraction",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.2,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 60,
+            "summary": {
+              "trades": 45,
+              "wins": 28,
+              "losses": 17,
+              "winrate_pct": 62.222,
+              "expectancy_r": 0.235724,
+              "net_r_total": 10.607578,
+              "avg_win_r": 1.000991,
+              "avg_loss_r": -1.024715,
+              "max_drawdown_r": -4.404629,
+              "max_losing_streak": 5
+            },
+            "stable_folds": 4,
+            "folds": [
+              {
+                "trades": 11,
+                "wins": 7,
+                "losses": 4,
+                "winrate_pct": 63.636,
+                "expectancy_r": 0.321292,
+                "net_r_total": 3.534213,
+                "avg_win_r": 1.106492,
+                "avg_loss_r": -1.052808,
+                "max_drawdown_r": -4.211232,
+                "max_losing_streak": 4,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.009791,
+                "net_r_total": 0.107697,
+                "avg_win_r": 0.912122,
+                "avg_loss_r": -1.073007,
+                "max_drawdown_r": -4.239364,
+                "max_losing_streak": 3,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 12,
+                "wins": 9,
+                "losses": 3,
+                "winrate_pct": 75.0,
+                "expectancy_r": 0.489768,
+                "net_r_total": 5.87722,
+                "avg_win_r": 1.035164,
+                "avg_loss_r": -1.14642,
+                "max_drawdown_r": -2.251443,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 11,
+                "wins": 6,
+                "losses": 5,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.09895,
+                "net_r_total": 1.088448,
+                "avg_win_r": 0.915513,
+                "avg_loss_r": -0.880926,
+                "max_drawdown_r": -4.404629,
+                "max_losing_streak": 5,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 45,
+                "wins": 27,
+                "losses": 18,
+                "winrate_pct": 60.0,
+                "expectancy_r": 0.083067,
+                "net_r_total": 3.738027,
+                "avg_win_r": 0.863072,
+                "avg_loss_r": -1.08694,
+                "max_drawdown_r": -5.313333,
+                "max_losing_streak": 5
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.2_h8__refine_oi_contraction",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 37229.91514286,
+                "stop": 33638.24071429,
+                "take": 37229.91514286,
+                "atr": 1632.57928571,
+                "r_net": 1.168914,
+                "exit_reason": "take_profit",
+                "bars_held": 7
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.2_h8__refine_oi_contraction",
+                "entry_ts": "2021-05-11T00:00:00+00:00",
+                "exit_ts": "2021-05-12T00:00:00+00:00",
+                "side": "LONG",
+                "entry": 55869.41,
+                "exit": 57696.72371429,
+                "stop": 54346.64857143,
+                "take": 57696.72371429,
+                "atr": 1522.76142857,
+                "r_net": 1.147795,
+                "exit_reason": "take_profit",
+                "bars_held": 7
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x1.2_h8__refine_oi_contraction",
+                "entry_ts": "2021-06-05T16:00:00+00:00",
+                "exit_ts": "2021-06-05T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 36316.45,
+                "exit": 35176.57928571,
+                "stop": 35176.57928571,
+                "take": 37684.29485714,
+                "atr": 1139.87071429,
+                "r_net": -1.043904,
+                "exit_reason": "stop_loss",
+                "bars_held": 2
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_volume_calm",
+          "filter_mode": "volume_calm",
+          "filters": [
+            "volume_calm"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_volume_calm",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 72,
+            "summary": {
+              "trades": 57,
+              "wins": 30,
+              "losses": 27,
+              "winrate_pct": 52.632,
+              "expectancy_r": 0.160572,
+              "net_r_total": 9.152616,
+              "avg_win_r": 1.218047,
+              "avg_loss_r": -1.0144,
+              "max_drawdown_r": -3.987428,
+              "max_losing_streak": 3
+            },
+            "stable_folds": 4,
+            "folds": [
+              {
+                "trades": 14,
+                "wins": 7,
+                "losses": 7,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.102003,
+                "net_r_total": 1.428036,
+                "avg_win_r": 1.115747,
+                "avg_loss_r": -0.911742,
+                "max_drawdown_r": -3.901817,
+                "max_losing_streak": 2,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 14,
+                "wins": 7,
+                "losses": 7,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.107244,
+                "net_r_total": 1.501413,
+                "avg_win_r": 1.160716,
+                "avg_loss_r": -0.946229,
+                "max_drawdown_r": -3.216364,
+                "max_losing_streak": 3,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 15,
+                "wins": 9,
+                "losses": 6,
+                "winrate_pct": 60.0,
+                "expectancy_r": 0.270085,
+                "net_r_total": 4.051268,
+                "avg_win_r": 1.200521,
+                "avg_loss_r": -1.12557,
+                "max_drawdown_r": -2.350345,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 14,
+                "wins": 7,
+                "losses": 7,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.155136,
+                "net_r_total": 2.171899,
+                "avg_win_r": 1.400212,
+                "avg_loss_r": -1.089941,
+                "max_drawdown_r": -3.987428,
+                "max_losing_streak": 3,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 57,
+                "wins": 28,
+                "losses": 29,
+                "winrate_pct": 49.123,
+                "expectancy_r": 0.038987,
+                "net_r_total": 2.222261,
+                "avg_win_r": 1.176151,
+                "avg_loss_r": -1.058964,
+                "max_drawdown_r": -6.029557,
+                "max_losing_streak": 3
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_volume_calm",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 36686.86,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 0.83651,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_volume_calm",
+                "entry_ts": "2021-03-05T04:00:00+00:00",
+                "exit_ts": "2021-03-06T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 47300.22,
+                "exit": 47284.11,
+                "stop": 45630.11357143,
+                "take": 50640.43285714,
+                "atr": 1670.10642857,
+                "r_net": -0.04929,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_volume_calm",
+                "entry_ts": "2021-04-04T04:00:00+00:00",
+                "exit_ts": "2021-04-05T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 57545.12,
+                "exit": 59098.01,
+                "stop": 56592.13928571,
+                "take": 59451.08142857,
+                "atr": 952.98071429,
+                "r_net": 1.54383,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8",
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_volume_calm",
+          "filter_mode": "volume_calm",
+          "filters": [
+            "volume_calm"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_volume_calm",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "sweep_down_reclaim",
+            "lookback": 20,
+            "edge_pct": 0.2,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 50.0,
+            "stop_atr": 1.0,
+            "take_atr": 2.0,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 72,
+            "summary": {
+              "trades": 57,
+              "wins": 30,
+              "losses": 27,
+              "winrate_pct": 52.632,
+              "expectancy_r": 0.160572,
+              "net_r_total": 9.152616,
+              "avg_win_r": 1.218047,
+              "avg_loss_r": -1.0144,
+              "max_drawdown_r": -3.987428,
+              "max_losing_streak": 3
+            },
+            "stable_folds": 4,
+            "folds": [
+              {
+                "trades": 14,
+                "wins": 7,
+                "losses": 7,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.102003,
+                "net_r_total": 1.428036,
+                "avg_win_r": 1.115747,
+                "avg_loss_r": -0.911742,
+                "max_drawdown_r": -3.901817,
+                "max_losing_streak": 2,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 14,
+                "wins": 7,
+                "losses": 7,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.107244,
+                "net_r_total": 1.501413,
+                "avg_win_r": 1.160716,
+                "avg_loss_r": -0.946229,
+                "max_drawdown_r": -3.216364,
+                "max_losing_streak": 3,
+                "fold": 2,
+                "stable": true
+              },
+              {
+                "trades": 15,
+                "wins": 9,
+                "losses": 6,
+                "winrate_pct": 60.0,
+                "expectancy_r": 0.270085,
+                "net_r_total": 4.051268,
+                "avg_win_r": 1.200521,
+                "avg_loss_r": -1.12557,
+                "max_drawdown_r": -2.350345,
+                "max_losing_streak": 2,
+                "fold": 3,
+                "stable": true
+              },
+              {
+                "trades": 14,
+                "wins": 7,
+                "losses": 7,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.155136,
+                "net_r_total": 2.171899,
+                "avg_win_r": 1.400212,
+                "avg_loss_r": -1.089941,
+                "max_drawdown_r": -3.987428,
+                "max_losing_streak": 3,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 57,
+                "wins": 28,
+                "losses": 29,
+                "winrate_pct": 49.123,
+                "expectancy_r": 0.038987,
+                "net_r_total": 2.222261,
+                "avg_win_r": 1.176151,
+                "avg_loss_r": -1.058964,
+                "max_drawdown_r": -6.029557,
+                "max_losing_streak": 3
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_volume_calm",
+                "entry_ts": "2021-01-17T12:00:00+00:00",
+                "exit_ts": "2021-01-18T20:00:00+00:00",
+                "side": "LONG",
+                "entry": 35270.82,
+                "exit": 36686.86,
+                "stop": 33638.24071429,
+                "take": 38535.97857143,
+                "atr": 1632.57928571,
+                "r_net": 0.83651,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_volume_calm",
+                "entry_ts": "2021-03-05T04:00:00+00:00",
+                "exit_ts": "2021-03-06T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 47300.22,
+                "exit": 47284.11,
+                "stop": 45630.11357143,
+                "take": 50640.43285714,
+                "atr": 1670.10642857,
+                "r_net": -0.04929,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.2_rr1x2_h8__refine_volume_calm",
+                "entry_ts": "2021-04-04T04:00:00+00:00",
+                "exit_ts": "2021-04-05T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 57545.12,
+                "exit": 59098.01,
+                "stop": 56592.13928571,
+                "take": 59451.08142857,
+                "atr": 952.98071429,
+                "r_net": 1.54383,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        },
+        {
+          "base_strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8",
+          "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_calm",
+          "filter_mode": "volume_calm",
+          "filters": [
+            "volume_calm"
+          ],
+          "config": {
+            "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_calm",
+            "interval": "4h",
+            "side": "LONG",
+            "trigger": "near_low",
+            "lookback": 20,
+            "edge_pct": 0.15,
+            "min_width_atr": 2.0,
+            "max_width_atr": 12.0,
+            "max_abs_trend_atr": 2.2,
+            "max_atr_ratio": 1.15,
+            "rsi_filter": "lte",
+            "rsi_threshold": 45.0,
+            "stop_atr": 1.0,
+            "take_atr": 1.5,
+            "max_hold_bars": 8
+          },
+          "train": {
+            "signals": 131,
+            "summary": {
+              "trades": 90,
+              "wins": 47,
+              "losses": 43,
+              "winrate_pct": 52.222,
+              "expectancy_r": 0.139242,
+              "net_r_total": 12.531751,
+              "avg_win_r": 1.181421,
+              "avg_loss_r": -0.999884,
+              "max_drawdown_r": -9.940549,
+              "max_losing_streak": 4
+            },
+            "stable_folds": 2,
+            "folds": [
+              {
+                "trades": 22,
+                "wins": 16,
+                "losses": 6,
+                "winrate_pct": 72.727,
+                "expectancy_r": 0.642011,
+                "net_r_total": 14.124246,
+                "avg_win_r": 1.213967,
+                "avg_loss_r": -0.883205,
+                "max_drawdown_r": -2.116162,
+                "max_losing_streak": 2,
+                "fold": 1,
+                "stable": true
+              },
+              {
+                "trades": 23,
+                "wins": 10,
+                "losses": 13,
+                "winrate_pct": 43.478,
+                "expectancy_r": -0.151701,
+                "net_r_total": -3.489119,
+                "avg_win_r": 0.877588,
+                "avg_loss_r": -0.943462,
+                "max_drawdown_r": -6.626424,
+                "max_losing_streak": 3,
+                "fold": 2,
+                "stable": false
+              },
+              {
+                "trades": 23,
+                "wins": 9,
+                "losses": 14,
+                "winrate_pct": 39.13,
+                "expectancy_r": -0.147747,
+                "net_r_total": -3.398189,
+                "avg_win_r": 1.297452,
+                "avg_loss_r": -1.076804,
+                "max_drawdown_r": -8.084895,
+                "max_losing_streak": 4,
+                "fold": 3,
+                "stable": false
+              },
+              {
+                "trades": 22,
+                "wins": 12,
+                "losses": 10,
+                "winrate_pct": 54.545,
+                "expectancy_r": 0.240673,
+                "net_r_total": 5.294813,
+                "avg_win_r": 1.304196,
+                "avg_loss_r": -1.035554,
+                "max_drawdown_r": -3.270445,
+                "max_losing_streak": 3,
+                "fold": 4,
+                "stable": true
+              }
+            ],
+            "cost_stress": {
+              "extra_bps_per_side": 10.0,
+              "summary": {
+                "trades": 90,
+                "wins": 45,
+                "losses": 45,
+                "winrate_pct": 50.0,
+                "expectancy_r": 0.014595,
+                "net_r_total": 1.313541,
+                "avg_win_r": 1.113038,
+                "avg_loss_r": -1.083848,
+                "max_drawdown_r": -17.168254,
+                "max_losing_streak": 4
+              }
+            },
+            "sample_trades": [
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_calm",
+                "entry_ts": "2021-01-17T08:00:00+00:00",
+                "exit_ts": "2021-01-18T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 34787.76,
+                "exit": 37210.4325,
+                "stop": 33172.645,
+                "take": 37210.4325,
+                "atr": 1615.115,
+                "r_net": 1.468796,
+                "exit_reason": "take_profit",
+                "bars_held": 8
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_calm",
+                "entry_ts": "2021-02-28T04:00:00+00:00",
+                "exit_ts": "2021-03-01T08:00:00+00:00",
+                "side": "LONG",
+                "entry": 44646.32,
+                "exit": 47739.97785714,
+                "stop": 42583.88142857,
+                "take": 47739.97785714,
+                "atr": 2062.43857143,
+                "r_net": 1.468644,
+                "exit_reason": "take_profit",
+                "bars_held": 8
+              },
+              {
+                "dataset_id": "range_family_BTCUSDT_4h",
+                "strategy_id": "range_4h_long_near_low_lb20_edge0.15_rr1x1.5_h8__refine_volume_calm",
+                "entry_ts": "2021-03-05T04:00:00+00:00",
+                "exit_ts": "2021-03-06T12:00:00+00:00",
+                "side": "LONG",
+                "entry": 47300.22,
+                "exit": 47284.11,
+                "stop": 45630.11357143,
+                "take": 49805.37964286,
+                "atr": 1670.10642857,
+                "r_net": -0.04929,
+                "exit_reason": "time_exit",
+                "bars_held": 9
+              }
+            ]
+          },
+          "train_gate": {
+            "pass": true,
+            "checks": {
+              "min_trades": true,
+              "min_expectancy_r": true,
+              "min_stable_folds": true,
+              "max_drawdown_r": true,
+              "cost_stress_positive": true
+            }
+          }
+        }
+      ],
+      "selected_on_train": {
+        "base_strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8",
+        "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+        "filter_mode": "oi_contraction",
+        "filters": [
+          "oi_contraction"
+        ],
+        "config": {
+          "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+          "interval": "4h",
+          "side": "LONG",
+          "trigger": "sweep_down_reclaim",
+          "lookback": 20,
+          "edge_pct": 0.15,
+          "min_width_atr": 2.0,
+          "max_width_atr": 12.0,
+          "max_abs_trend_atr": 2.2,
+          "max_atr_ratio": 1.15,
+          "rsi_filter": "lte",
+          "rsi_threshold": 50.0,
+          "stop_atr": 1.0,
+          "take_atr": 2.0,
+          "max_hold_bars": 8
+        },
+        "train": {
+          "signals": 60,
+          "summary": {
+            "trades": 45,
+            "wins": 26,
+            "losses": 19,
+            "winrate_pct": 57.778,
+            "expectancy_r": 0.355012,
+            "net_r_total": 15.975524,
+            "avg_win_r": 1.334971,
+            "avg_loss_r": -0.985986,
+            "max_drawdown_r": -6.645731,
+            "max_losing_streak": 6
+          },
+          "stable_folds": 3,
+          "folds": [
+            {
+              "trades": 11,
+              "wins": 7,
+              "losses": 4,
+              "winrate_pct": 63.636,
+              "expectancy_r": 0.335478,
+              "net_r_total": 3.690261,
+              "avg_win_r": 1.128785,
+              "avg_loss_r": -1.052808,
+              "max_drawdown_r": -4.211232,
+              "max_losing_streak": 4,
+              "fold": 1,
+              "stable": true
+            },
+            {
+              "trades": 11,
+              "wins": 4,
+              "losses": 7,
+              "winrate_pct": 36.364,
+              "expectancy_r": -0.095992,
+              "net_r_total": -1.055914,
+              "avg_win_r": 1.405674,
+              "avg_loss_r": -0.954087,
+              "max_drawdown_r": -6.645731,
+              "max_losing_streak": 6,
+              "fold": 2,
+              "stable": false
+            },
+            {
+              "trades": 12,
+              "wins": 9,
+              "losses": 3,
+              "winrate_pct": 75.0,
+              "expectancy_r": 0.793649,
+              "net_r_total": 9.523791,
+              "avg_win_r": 1.440339,
+              "avg_loss_r": -1.14642,
+              "max_drawdown_r": -2.251443,
+              "max_losing_streak": 2,
+              "fold": 3,
+              "stable": true
+            },
+            {
+              "trades": 11,
+              "wins": 6,
+              "losses": 5,
+              "winrate_pct": 54.545,
+              "expectancy_r": 0.347035,
+              "net_r_total": 3.817386,
+              "avg_win_r": 1.370336,
+              "avg_loss_r": -0.880926,
+              "max_drawdown_r": -4.404629,
+              "max_losing_streak": 5,
+              "fold": 4,
+              "stable": true
+            }
+          ],
+          "cost_stress": {
+            "extra_bps_per_side": 10.0,
+            "summary": {
+              "trades": 45,
+              "wins": 24,
+              "losses": 21,
+              "winrate_pct": 53.333,
+              "expectancy_r": 0.202236,
+              "net_r_total": 9.100604,
+              "avg_win_r": 1.261984,
+              "avg_loss_r": -1.008906,
+              "max_drawdown_r": -7.456419,
+              "max_losing_streak": 8
+            }
+          },
+          "sample_trades": [
+            {
+              "dataset_id": "range_family_BTCUSDT_4h",
+              "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+              "entry_ts": "2021-01-17T12:00:00+00:00",
+              "exit_ts": "2021-01-18T20:00:00+00:00",
+              "side": "LONG",
+              "entry": 35270.82,
+              "exit": 36686.86,
+              "stop": 33638.24071429,
+              "take": 38535.97857143,
+              "atr": 1632.57928571,
+              "r_net": 0.83651,
+              "exit_reason": "time_exit",
+              "bars_held": 9
+            },
+            {
+              "dataset_id": "range_family_BTCUSDT_4h",
+              "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+              "entry_ts": "2021-05-11T00:00:00+00:00",
+              "exit_ts": "2021-05-12T08:00:00+00:00",
+              "side": "LONG",
+              "entry": 55869.41,
+              "exit": 56472.06,
+              "stop": 54346.64857143,
+              "take": 58914.93285714,
+              "atr": 1522.76142857,
+              "r_net": 0.344119,
+              "exit_reason": "time_exit",
+              "bars_held": 9
+            },
+            {
+              "dataset_id": "range_family_BTCUSDT_4h",
+              "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+              "entry_ts": "2021-06-05T16:00:00+00:00",
+              "exit_ts": "2021-06-05T20:00:00+00:00",
+              "side": "LONG",
+              "entry": 36316.45,
+              "exit": 35176.57928571,
+              "stop": 35176.57928571,
+              "take": 38596.19142857,
+              "atr": 1139.87071429,
+              "r_net": -1.043904,
+              "exit_reason": "stop_loss",
+              "bars_held": 2
+            }
+          ]
+        },
+        "train_gate": {
+          "pass": true,
+          "checks": {
+            "min_trades": true,
+            "min_expectancy_r": true,
+            "min_stable_folds": true,
+            "max_drawdown_r": true,
+            "cost_stress_positive": true
+          }
+        }
+      },
+      "oos": {
+        "signals": 17,
+        "summary": {
+          "trades": 17,
+          "wins": 9,
+          "losses": 8,
+          "winrate_pct": 52.941,
+          "expectancy_r": 0.281659,
+          "net_r_total": 4.788198,
+          "avg_win_r": 1.308008,
+          "avg_loss_r": -0.872984,
+          "max_drawdown_r": -2.308323,
+          "max_losing_streak": 3
+        },
+        "stable_folds": 0,
+        "folds": [
+          {
+            "trades": 4,
+            "wins": 1,
+            "losses": 3,
+            "winrate_pct": 25.0,
+            "expectancy_r": -0.12813,
+            "net_r_total": -0.512521,
+            "avg_win_r": 1.795802,
+            "avg_loss_r": -0.769441,
+            "max_drawdown_r": -2.308323,
+            "max_losing_streak": 3,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 4,
+            "wins": 3,
+            "losses": 1,
+            "winrate_pct": 75.0,
+            "expectancy_r": 0.304809,
+            "net_r_total": 1.219235,
+            "avg_win_r": 0.79151,
+            "avg_loss_r": -1.155296,
+            "max_drawdown_r": -1.155296,
+            "max_losing_streak": 1,
+            "fold": 2,
+            "stable": false
+          },
+          {
+            "trades": 5,
+            "wins": 2,
+            "losses": 3,
+            "winrate_pct": 40.0,
+            "expectancy_r": -0.078662,
+            "net_r_total": -0.393311,
+            "avg_win_r": 1.51758,
+            "avg_loss_r": -1.142823,
+            "max_drawdown_r": -1.191718,
+            "max_losing_streak": 1,
+            "fold": 3,
+            "stable": false
+          },
+          {
+            "trades": 4,
+            "wins": 3,
+            "losses": 1,
+            "winrate_pct": 75.0,
+            "expectancy_r": 1.118699,
+            "net_r_total": 4.474795,
+            "avg_win_r": 1.522194,
+            "avg_loss_r": -0.091786,
+            "max_drawdown_r": -0.091786,
+            "max_losing_streak": 1,
+            "fold": 4,
+            "stable": false
+          }
+        ],
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 17,
+            "wins": 8,
+            "losses": 9,
+            "winrate_pct": 47.059,
+            "expectancy_r": 0.093201,
+            "net_r_total": 1.584419,
+            "avg_win_r": 1.265937,
+            "avg_loss_r": -0.949231,
+            "max_drawdown_r": -2.960639,
+            "max_losing_streak": 3
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "range_family_BTCUSDT_4h",
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+            "entry_ts": "2025-02-08T00:00:00+00:00",
+            "exit_ts": "2025-02-09T08:00:00+00:00",
+            "side": "LONG",
+            "entry": 96454.5,
+            "exit": 96511.2,
+            "stop": 94875.21428571,
+            "take": 99613.07142857,
+            "atr": 1579.28571429,
+            "r_net": -0.049627,
+            "exit_reason": "time_exit",
+            "bars_held": 9
+          },
+          {
+            "dataset_id": "range_family_BTCUSDT_4h",
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+            "entry_ts": "2025-02-10T00:00:00+00:00",
+            "exit_ts": "2025-02-10T00:00:00+00:00",
+            "side": "LONG",
+            "entry": 96423.6,
+            "exit": 95464.10714286,
+            "stop": 95464.10714286,
+            "take": 98342.58571429,
+            "atr": 959.49285714,
+            "r_net": -1.139992,
+            "exit_reason": "stop_loss",
+            "bars_held": 1
+          },
+          {
+            "dataset_id": "range_family_BTCUSDT_4h",
+            "strategy_id": "range_4h_long_sweep_down_reclaim_lb20_edge0.15_rr1x2_h8__refine_oi_contraction",
+            "entry_ts": "2025-03-28T12:00:00+00:00",
+            "exit_ts": "2025-03-28T12:00:00+00:00",
+            "side": "LONG",
+            "entry": 85214.0,
+            "exit": 84214.87142857,
+            "stop": 84214.87142857,
+            "take": 87212.25714286,
+            "atr": 999.12857143,
+            "r_net": -1.118704,
+            "exit_reason": "stop_loss",
+            "bars_held": 1
+          }
+        ]
+      },
+      "oos_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": true,
+          "min_stable_folds": false,
+          "max_drawdown_r": true,
+          "cost_stress_positive": true
+        }
+      },
+      "decision": "insufficient_oos_evidence_keep_observer_only"
+    }
+  ],
+  "cross_family_oos_signal_overlap": {
+    "intersection": 4,
+    "union": 68,
+    "jaccard": 0.058824,
+    "independent_enough": true
+  },
+  "passed_oos_families": [],
+  "rejected_oos_families": [
+    "RANGE_REFINED_4H"
+  ],
+  "insufficient_oos_families": [
+    "EDGE_FORWARD_4H"
+  ],
+  "decision": "range_rejected_edge_insufficient_oos_evidence",
+  "next_action": "pause_rejected_range_family_and_keep_edge_observer_only",
+  "can_trade": false
+}

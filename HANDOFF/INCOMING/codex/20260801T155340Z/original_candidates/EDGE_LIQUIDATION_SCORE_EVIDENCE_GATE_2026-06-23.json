@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-07-26T08:13:50+00:00",
+  "inputs": {
+    "scoreboard": "docs/EDGE_LIQUIDATION_CONTEXT_SHADOW_SCOREBOARD_2026-06-23.json",
+    "score_lock": "configs/EDGE_LIQUIDATION_SCORE_SHADOW_LOCK.json",
+    "score_lock_valid": true
+  },
+  "requirements": {
+    "min_total_resolved": 30,
+    "min_baseline_resolved": 8,
+    "min_bin_resolved": 8,
+    "min_bin_expectancy_r": 0.05,
+    "min_delta_r": 0.1,
+    "bootstrap_iterations": 2000,
+    "bootstrap_delta_percentile": 0.1
+  },
+  "evidence": {
+    "classification": "collecting_total_forward_outcomes",
+    "resolved_total": 1,
+    "inactive_resolved": 0,
+    "inactive_expectancy_r": null,
+    "resolved_by_bin": {
+      "low": 1
+    },
+    "sample_checks": {
+      "min_total_resolved": false,
+      "min_inactive_resolved": false,
+      "eligible_non_inactive_bin": false
+    },
+    "eligible_bins": [],
+    "qualifying_bins": [],
+    "bin_evidence": {
+      "low": {
+        "resolved": 1,
+        "expectancy_r": -1.0,
+        "delta_vs_inactive_r": null,
+        "bootstrap_p10_delta_r": null,
+        "checks": {
+          "min_resolved": false,
+          "min_expectancy_r": false,
+          "min_delta_r": false,
+          "bootstrap_p10_delta_positive": false
+        }
+      }
+    },
+    "research_review_allowed": false,
+    "filter_change_allowed": false,
+    "veto_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "can_trade": false
+  },
+  "runtime_boundary": {
+    "research_review_only": true,
+    "changes_edge_signal": false,
+    "filter_change_allowed": false,
+    "veto_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "sends_orders": false,
+    "can_trade": false
+  },
+  "decision": "collecting_total_forward_outcomes",
+  "next_action": "continue independent forward collection",
+  "can_trade": false
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-06-23T22:09:17+00:00",
+  "hypothesis_id": "HYP-SPOT-LEAD-001",
+  "experiment": "spot_led_continuation",
+  "registration_type": "prospective_preregistration",
+  "registry_sha256_before_code": "96CFFF73B043F6E9BCA69B33E2EEA6DF901A97E36C9231625B20095C413CE82A",
+  "protocol_sha256_before_code": "134D5A2037928E411D92346125A77BA453FD86997EE3F0C500FD8CE5684E2E35",
+  "snapshot_id": "20260623T165650Z-d3d32fec3371",
+  "dataset_sha256": "d3d32fec337171f06040fd228acdec2f6820f34cfb0edc49818c67ad5b3a430a",
+  "fixed_configuration_budget": 96,
+  "proof": {
+    "research_script_existed": false,
+    "test_file_existed": false,
+    "runner_experiment_allowlisted": false,
+    "registry_audit_decision": "hypothesis_registry_valid"
+  },
+  "runtime_boundary": {
+    "research_only": true,
+    "orders_allowed": false,
+    "can_trade": false
+  }
+}

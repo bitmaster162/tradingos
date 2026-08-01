@@ -1,0 +1,32 @@
+{
+  "actual_sha256": "ea105a63679dc03381c548fe13964c10e7bf4d1f91ee29ce07aad6af466c6567",
+  "expected_sha256": "ea105a63679dc03381c548fe13964c10e7bf4d1f91ee29ce07aad6af466c6567",
+  "head": "31a095e252b3445cad9fa4923a7fc16e0071d76d",
+  "pass": true,
+  "ready": {
+    "NO_FURTHER_AGENT_WORK": true,
+    "archive_files": 43,
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "created_at_utc": "2026-08-01T13:10:16.4000356Z",
+    "deploy_permission": "DENY",
+    "manifest_payload_files": 42,
+    "ready_written_last": true,
+    "schema": "strict_ready_for_sync.v1",
+    "self_application": false,
+    "slot": "CODEX-02",
+    "status": "READY_FOR_SYNC",
+    "task_id": "TRADING_EDGE_RESEARCH_ENGINE_M2A",
+    "terminal": "EDGE_RESEARCH_ENGINE_M2A_READY",
+    "zip_bytes": 2810115,
+    "zip_filename": "TRADING_EDGE_RESEARCH_ENGINE_M2A_RETURN_20260801T125813Z.zip",
+    "zip_readback": "PASS",
+    "zip_sha256": "ea105a63679dc03381c548fe13964c10e7bf4d1f91ee29ce07aad6af466c6567"
+  },
+  "ready_written_after_zip": true,
+  "sidecar_text": "ea105a63679dc03381c548fe13964c10e7bf4d1f91ee29ce07aad6af466c6567  TRADING_EDGE_RESEARCH_ENGINE_M2A_RETURN_20260801T125813Z.zip",
+  "task": "TRADING_EDGE_RESEARCH_ENGINE_M2A",
+  "terminal": "EDGE_RESEARCH_ENGINE_M2A_READY",
+  "tree": "f9c60da1c430d7fb4e243bfcf52a511785407056",
+  "zip": "C:\\Users\\coins\\My Drive\\04_PRODUCT_SHELLS\\Trade\\HANDOFF\\INCOMING\\codex\\20260801T125813Z\\TRADING_EDGE_RESEARCH_ENGINE_M2A_RETURN_20260801T125813Z.zip"
+}

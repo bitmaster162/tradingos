@@ -1,0 +1,33 @@
+{
+  "bounded_m2b_test_status": "PASS",
+  "broad_root_unittest": {
+    "baseline_blockers": [
+      "docs/BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json missing",
+      "docs/BITUNIX_WO105_V1_PRE_FLOOR_UNIT_TOMBSTONE_2026-07-14.json missing"
+    ],
+    "errors": 2,
+    "exit": "EXIT_CODE=1",
+    "m2b_related_failures": false,
+    "passed": false,
+    "passed_count": 110,
+    "raw_confirms_two_errors": true,
+    "tests": 112
+  },
+  "m2a_predecessor": {
+    "passed": true,
+    "tests": 64
+  },
+  "relevant_root_unittest": {
+    "passed": true,
+    "tests": 22
+  },
+  "schema": "codex02.m2b.tests.v1",
+  "spot_led_pytest": {
+    "passed": true,
+    "tests": 5
+  },
+  "targeted_m2b": {
+    "passed": true,
+    "tests": 6
+  }
+}

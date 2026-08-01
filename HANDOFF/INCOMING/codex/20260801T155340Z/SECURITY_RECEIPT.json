@@ -1,0 +1,13 @@
+{
+  "can_trade": false,
+  "credential_access": false,
+  "findings": [],
+  "market_network_access": false,
+  "pass": true,
+  "schema": "codex02.m2b.security.v1",
+  "secret_scan_patterns": [
+    "telegram_bot_token",
+    "aws_access_key",
+    "private_key_marker"
+  ]
+}

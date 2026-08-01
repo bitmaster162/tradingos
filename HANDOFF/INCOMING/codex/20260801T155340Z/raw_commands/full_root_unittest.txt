@@ -1,0 +1,160 @@
+test_calendar_split_uses_first_row_at_boundary (test_basis_funding_carry_nested_holdout.BasisFundingCarryNestedHoldoutTests.test_calendar_split_uses_first_row_at_boundary) ... ok
+test_delta_neutral_flat_prices_receive_positive_funding_net_of_zero_costs (test_basis_funding_carry_nested_holdout.BasisFundingCarryNestedHoldoutTests.test_delta_neutral_flat_prices_receive_positive_funding_net_of_zero_costs) ... ok
+test_four_leg_side_fees_make_flat_no_funding_trade_negative (test_basis_funding_carry_nested_holdout.BasisFundingCarryNestedHoldoutTests.test_four_leg_side_fees_make_flat_no_funding_trade_negative) ... ok
+test_stress_must_remain_positive (test_basis_funding_carry_nested_holdout.BasisFundingCarryNestedHoldoutTests.test_stress_must_remain_positive) ... ok
+test_existing_api_row_wins_overlap (test_binance_vision_crowd_backfiller.BinanceVisionCrowdBackfillerTests.test_existing_api_row_wins_overlap) ... ok
+test_uses_earliest_snapshot_in_each_bar (test_binance_vision_crowd_backfiller.BinanceVisionCrowdBackfillerTests.test_uses_earliest_snapshot_in_each_bar) ... ok
+test_existing_api_row_wins_overlap (test_binance_vision_funding_backfiller.BinanceVisionFundingBackfillerTests.test_existing_api_row_wins_overlap) ... ok
+test_parses_funding_archive_header (test_binance_vision_funding_backfiller.BinanceVisionFundingBackfillerTests.test_parses_funding_archive_header) ... ok
+test_existing_api_row_wins_overlap (test_binance_vision_kline_backfiller.BinanceVisionKlineBackfillerTests.test_existing_api_row_wins_overlap) ... ok
+test_normalizes_microsecond_timestamp (test_binance_vision_kline_backfiller.BinanceVisionKlineBackfillerTests.test_normalizes_microsecond_timestamp) ... ok
+test_parses_headerless_kline_archive (test_binance_vision_kline_backfiller.BinanceVisionKlineBackfillerTests.test_parses_headerless_kline_archive) ... ok
+test_selects_official_archive_root_by_market (test_binance_vision_kline_backfiller.BinanceVisionKlineBackfillerTests.test_selects_official_archive_root_by_market) ... ok
+test_bitunix_wo105_status (unittest.loader._FailedTest.test_bitunix_wo105_status) ... ERROR
+test_bitunix_wo105_v2_status (unittest.loader._FailedTest.test_bitunix_wo105_v2_status) ... ERROR
+test_precomputed_features_match_legacy_path (test_crowd_diagnostic_precompute.CrowdDiagnosticPrecomputeTests.test_precomputed_features_match_legacy_path) ... ok
+test_rejects_insufficient_oos_sample (test_crowd_nested_holdout.CrowdNestedHoldoutTests.test_rejects_insufficient_oos_sample) ... ok
+test_rejects_negative_oos_expectancy (test_crowd_nested_holdout.CrowdNestedHoldoutTests.test_rejects_negative_oos_expectancy) ... ok
+test_review_never_implies_execution (test_crowd_nested_holdout.CrowdNestedHoldoutTests.test_review_never_implies_execution) ... ok
+test_loads_only_explicit_locked_candidate (test_crowd_observer_candidate_lock.CrowdObserverCandidateLockTests.test_loads_only_explicit_locked_candidate) ... ok
+test_missing_candidate_fails_closed (test_crowd_observer_candidate_lock.CrowdObserverCandidateLockTests.test_missing_candidate_fails_closed) ... ok
+test_no_promotable_family_stays_research_only (test_dialectic_synthesizer.DialecticSynthesizerTests.test_no_promotable_family_stays_research_only) ... ok
+test_p0_overrides_positive_case (test_dialectic_synthesizer.DialecticSynthesizerTests.test_p0_overrides_positive_case) ... ok
+test_stopped_observer_forces_runtime_repair (test_dialectic_synthesizer.DialecticSynthesizerTests.test_stopped_observer_forces_runtime_repair) ... ok
+test_evidence_gate_requires_oos_context_sample (test_edge_liquidation_context_historical_replay.EdgeLiquidationContextHistoricalReplayTests.test_evidence_gate_requires_oos_context_sample) ... ok
+test_strongest_prefers_non_none_event_inside_signal_bar (test_edge_liquidation_context_historical_replay.EdgeLiquidationContextHistoricalReplayTests.test_strongest_prefers_non_none_event_inside_signal_bar) ... ok
+test_classifies_symmetric_confirmed_impulses (test_edge_liquidation_context_shadow.EdgeLiquidationContextShadowTests.test_classifies_symmetric_confirmed_impulses) ... ok
+test_continuous_score_and_frozen_bin_are_deterministic (test_edge_liquidation_context_shadow.EdgeLiquidationContextShadowTests.test_continuous_score_and_frozen_bin_are_deterministic) ... ok
+test_nearest_context_prefers_newer_enriched_duplicate (test_edge_liquidation_context_shadow.EdgeLiquidationContextShadowTests.test_nearest_context_prefers_newer_enriched_duplicate) ... ok
+test_nearest_context_stays_inside_edge_bar (test_edge_liquidation_context_shadow.EdgeLiquidationContextShadowTests.test_nearest_context_stays_inside_edge_bar) ... ok
+test_requires_oi_and_volume_confluence (test_edge_liquidation_context_shadow.EdgeLiquidationContextShadowTests.test_requires_oi_and_volume_confluence) ... ok
+test_collects_before_total_sample (test_edge_liquidation_score_evidence_gate.EdgeLiquidationScoreEvidenceGateTests.test_collects_before_total_sample) ... ok
+test_strong_independent_bin_allows_research_review_only (test_edge_liquidation_score_evidence_gate.EdgeLiquidationScoreEvidenceGateTests.test_strong_independent_bin_allows_research_review_only) ... ok
+test_derivation_ignores_oos_rows (test_edge_liquidation_score_lock_builder.EdgeLiquidationScoreLockBuilderTests.test_derivation_ignores_oos_rows) ... ok
+test_quantile_uses_linear_interpolation (test_edge_liquidation_score_lock_builder.EdgeLiquidationScoreLockBuilderTests.test_quantile_uses_linear_interpolation) ... ok
+test_allows_review_but_never_execution (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_allows_review_but_never_execution) ... ok
+test_collects_before_precommitted_sample (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_collects_before_precommitted_sample) ... ok
+test_historical_invalidation_overrides_small_forward_sample (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_historical_invalidation_overrides_small_forward_sample) ... ok
+test_insufficient_historical_evidence_does_not_fake_rejection (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_insufficient_historical_evidence_does_not_fake_rejection) ... ok
+test_pauses_only_after_early_risk_checkpoint (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_pauses_only_after_early_risk_checkpoint) ... ok
+test_rejects_negative_edge_at_full_checkpoint (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_rejects_negative_edge_at_full_checkpoint) ... ok
+test_report_requires_exactly_four_families (test_forward_evidence_lifecycle.ForwardEvidenceLifecycleTests.test_report_requires_exactly_four_families) ... ok
+test_indexed_delta_context_respects_lookback (test_historical_oi_importer_index.HistoricalOiImporterIndexTests.test_indexed_delta_context_respects_lookback) ... ok
+test_indexed_lookup_matches_causal_latest_record (test_historical_oi_importer_index.HistoricalOiImporterIndexTests.test_indexed_lookup_matches_causal_latest_record) ... ok
+test_continuation_conditions_follow_impulse_direction (test_liquidation_impulse_reversal_nested_holdout.LiquidationImpulseReversalNestedHoldoutTests.test_continuation_conditions_follow_impulse_direction) ... ok
+test_derivatives_join_by_timestamp_when_input_is_reversed (test_liquidation_impulse_reversal_nested_holdout.LiquidationImpulseReversalNestedHoldoutTests.test_derivatives_join_by_timestamp_when_input_is_reversed) ... ok
+test_long_and_short_reclaim_conditions_are_symmetric (test_liquidation_impulse_reversal_nested_holdout.LiquidationImpulseReversalNestedHoldoutTests.test_long_and_short_reclaim_conditions_are_symmetric) ... ok
+test_split_uses_first_row_at_boundary (test_liquidation_impulse_reversal_nested_holdout.LiquidationImpulseReversalNestedHoldoutTests.test_split_uses_first_row_at_boundary) ... ok
+test_train_gate_requires_stress_and_bootstrap (test_liquidation_impulse_reversal_nested_holdout.LiquidationImpulseReversalNestedHoldoutTests.test_train_gate_requires_stress_and_bootstrap) ... ok
+test_builds_panel_for_complete_symbol_and_flags_missing_symbol (test_multi_symbol_basis_coverage.MultiSymbolBasisCoverageTests.test_builds_panel_for_complete_symbol_and_flags_missing_symbol) ... ok
+test_degraded_interval_blocks_matrix_promotion (test_oi_funding_data_quality_matrix.OiFundingDataQualityMatrixTests.test_degraded_interval_blocks_matrix_promotion) ... ok
+test_ready_intervals_are_grouped_by_interval (test_oi_funding_data_quality_matrix.OiFundingDataQualityMatrixTests.test_ready_intervals_are_grouped_by_interval) ... ok
+test_lanes_are_precommitted_and_disjoint (test_range_edge_nested_holdout.RangeEdgeNestedHoldoutTests.test_lanes_are_precommitted_and_disjoint) ... ok
+test_positive_but_small_oos_is_insufficient_not_rejected (test_range_edge_nested_holdout.RangeEdgeNestedHoldoutTests.test_positive_but_small_oos_is_insufficient_not_rejected) ... ok
+test_signal_overlap_reports_duplicate_family_risk (test_range_edge_nested_holdout.RangeEdgeNestedHoldoutTests.test_signal_overlap_reports_duplicate_family_risk) ... ok
+test_split_uses_first_bar_at_or_after_boundary (test_range_edge_nested_holdout.RangeEdgeNestedHoldoutTests.test_split_uses_first_bar_at_or_after_boundary) ... ok
+test_train_and_oos_gates_use_fixed_thresholds (test_range_edge_nested_holdout.RangeEdgeNestedHoldoutTests.test_train_and_oos_gates_use_fixed_thresholds) ... ok
+test_edge_lock_must_match_candidate_and_safe_boundaries (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_edge_lock_must_match_candidate_and_safe_boundaries) ... ok
+test_nested_edge_accepts_insufficient_positive_observer_candidate (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_nested_edge_accepts_insufficient_positive_observer_candidate) ... ok
+test_range_rejection_pauses_only_default_range_refiner (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_range_rejection_pauses_only_default_range_refiner) ... ok
+test_scheduler_detects_range_rejection (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_scheduler_detects_range_rejection) ... ok
+test_scheduler_does_not_pause_paper_shadow_trend_family (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_scheduler_does_not_pause_paper_shadow_trend_family) ... ok
+test_scheduler_pauses_historically_rejected_trend_family (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_scheduler_pauses_historically_rejected_trend_family) ... ok
+test_scheduler_recognizes_safe_edge_lock (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_scheduler_recognizes_safe_edge_lock) ... ok
+test_scoreboard_resolves_strategy_from_refiner (test_range_edge_runtime_gating.RangeEdgeRuntimeGatingTests.test_scoreboard_resolves_strategy_from_refiner) ... ok
+test_rejects_stale_source_observation (test_reindex_oi_cache.ReindexOiCacheTests.test_rejects_stale_source_observation) ... ok
+test_samples_latest_value_available_by_bar_close (test_reindex_oi_cache.ReindexOiCacheTests.test_samples_latest_value_available_by_bar_close) ... ok
+test_business_failures_still_run_incident_and_preserve_codes (test_runtime_hidden_child_contract.HiddenChildContractTests.test_business_failures_still_run_incident_and_preserve_codes) ... ok
+test_concurrent_loop_ownership_has_exactly_one_owner (test_runtime_hidden_child_contract.HiddenChildContractTests.test_concurrent_loop_ownership_has_exactly_one_owner) ... ok
+test_exited_parent_with_inherited_pipe_is_bounded_and_tree_is_cleaned (test_runtime_hidden_child_contract.HiddenChildContractTests.test_exited_parent_with_inherited_pipe_is_bounded_and_tree_is_cleaned) ... ok
+test_high_volume_stdout_and_stderr_do_not_deadlock (test_runtime_hidden_child_contract.HiddenChildContractTests.test_high_volume_stdout_and_stderr_do_not_deadlock) ... ok
+test_infrastructure_exit_125_fail_stops_before_incident (test_runtime_hidden_child_contract.HiddenChildContractTests.test_infrastructure_exit_125_fail_stops_before_incident) ... ok
+test_live_unrelated_pid_lock_is_not_accepted_or_replaced (test_runtime_hidden_child_contract.HiddenChildContractTests.test_live_unrelated_pid_lock_is_not_accepted_or_replaced) ... ok
+test_lock_write_failure_releases_mutex_for_retry (test_runtime_hidden_child_contract.HiddenChildContractTests.test_lock_write_failure_releases_mutex_for_retry) ... ok
+test_logs_append_instead_of_truncate (test_runtime_hidden_child_contract.HiddenChildContractTests.test_logs_append_instead_of_truncate) ... ok
+test_loop_ownership_lock_is_utf8_atomic_and_released_by_owner (test_runtime_hidden_child_contract.HiddenChildContractTests.test_loop_ownership_lock_is_utf8_atomic_and_released_by_owner) ... ok
+test_malformed_existing_lock_fails_closed_without_replacement (test_runtime_hidden_child_contract.HiddenChildContractTests.test_malformed_existing_lock_fails_closed_without_replacement) ... ok
+test_owner_does_not_delete_replaced_lock (test_runtime_hidden_child_contract.HiddenChildContractTests.test_owner_does_not_delete_replaced_lock) ... ok
+test_python_resolution_precedes_watchdog_lock_creation (test_runtime_hidden_child_contract.HiddenChildContractTests.test_python_resolution_precedes_watchdog_lock_creation) ... ok
+test_python_resolution_selects_one_concrete_executable (test_runtime_hidden_child_contract.HiddenChildContractTests.test_python_resolution_selects_one_concrete_executable) ... ok
+test_shutdown_after_health_skips_incident_and_releases_lock (test_runtime_hidden_child_contract.HiddenChildContractTests.test_shutdown_after_health_skips_incident_and_releases_lock) ... ok
+test_static_hidden_and_utf8_contract_cannot_be_overridden (test_runtime_hidden_child_contract.HiddenChildContractTests.test_static_hidden_and_utf8_contract_cannot_be_overridden) ... ok
+test_timeout_kills_child (test_runtime_hidden_child_contract.HiddenChildContractTests.test_timeout_kills_child) ... ok
+test_timeout_kills_grandchild_tree (test_runtime_hidden_child_contract.HiddenChildContractTests.test_timeout_kills_grandchild_tree) ... ok
+test_unicode_spaces_exit_code_and_separate_logs (test_runtime_hidden_child_contract.HiddenChildContractTests.test_unicode_spaces_exit_code_and_separate_logs) ... ok
+test_signal_occurs_after_completed_opening_range (test_session_opening_range_nested_holdout.SessionOpeningRangeNestedHoldoutTests.test_signal_occurs_after_completed_opening_range) ... ok
+test_validation_gate_requires_cost_stress (test_session_opening_range_nested_holdout.SessionOpeningRangeNestedHoldoutTests.test_validation_gate_requires_cost_stress) ... ok
+test_calendar_split_uses_first_row_at_boundary (test_short_continuation_nested_holdout.ShortContinuationNestedHoldoutTests.test_calendar_split_uses_first_row_at_boundary) ... ok
+test_derivatives_are_joined_by_timestamp_not_row_position (test_short_continuation_nested_holdout.ShortContinuationNestedHoldoutTests.test_derivatives_are_joined_by_timestamp_not_row_position) ... ok
+test_signal_modes_are_explicit (test_short_continuation_nested_holdout.ShortContinuationNestedHoldoutTests.test_signal_modes_are_explicit) ... ok
+test_train_and_oos_gates_are_fixed_and_cost_aware (test_short_continuation_nested_holdout.ShortContinuationNestedHoldoutTests.test_train_and_oos_gates_are_fixed_and_cost_aware) ... ok
+test_bybit_v5r2_outcome_blind_collection_is_observer_only (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_bybit_v5r2_outcome_blind_collection_is_observer_only) ... ok
+test_cross_asset_residual_train_failure_is_rejected (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_cross_asset_residual_train_failure_is_rejected) ... ok
+test_cross_venue_receipt_leadership_candidate_still_needs_new_forward_proof (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_cross_venue_receipt_leadership_candidate_still_needs_new_forward_proof) ... ok
+test_cross_venue_receipt_leadership_collecting_is_observer_only (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_cross_venue_receipt_leadership_collecting_is_observer_only) ... ok
+test_deribit_options_runtime_collecting_is_observer_only (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_deribit_options_runtime_collecting_is_observer_only) ... ok
+test_exogenous_liquidity_waiting_new_macro_date_is_observer_only (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_exogenous_liquidity_waiting_new_macro_date_is_observer_only) ... ok
+test_force_order_runtime_truth_prefers_data_quality_over_newer_child_pipeline (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_force_order_runtime_truth_prefers_data_quality_over_newer_child_pipeline) ... ok
+test_force_order_runtime_truth_prefers_preregistered_progress_over_data_quality (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_force_order_runtime_truth_prefers_preregistered_progress_over_data_quality) ... ok
+test_forward_collecting_decision_is_active_when_fresh (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_forward_collecting_decision_is_active_when_fresh) ... ok
+test_guard_matrix_is_not_mislabeled_as_an_independent_strategy (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_guard_matrix_is_not_mislabeled_as_an_independent_strategy) ... ok
+test_large_trade_tail_terminal_tombstone_is_rejected (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_large_trade_tail_terminal_tombstone_is_rejected) ... ok
+test_liquidation_book_independence_gate_is_preferred_runtime_truth (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_liquidation_book_independence_gate_is_preferred_runtime_truth) ... ok
+test_liquidation_book_replenishment_forward_lock_is_observer_only (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_liquidation_book_replenishment_forward_lock_is_observer_only) ... ok
+test_observer_only_family_routes_to_forward_outcomes (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_observer_only_family_routes_to_forward_outcomes) ... ok
+test_preregistered_microstructure_queue_is_not_promotable (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_preregistered_microstructure_queue_is_not_promotable) ... ok
+test_real_crowd_research_failure_is_rejected (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_real_crowd_research_failure_is_rejected) ... ok
+test_rejected_families_do_not_promote (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_rejected_families_do_not_promote) ... ok
+test_stale_observer_is_not_counted_as_collecting (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_stale_observer_is_not_counted_as_collecting) ... ok
+test_unsafe_boundary_is_prioritized (test_strategy_research_frontier_matrix.StrategyResearchFrontierMatrixTests.test_unsafe_boundary_is_prioritized) ... ok
+test_oos_gate_does_not_require_bootstrap (test_trend_mix_nested_holdout.TrendMixNestedHoldoutTests.test_oos_gate_does_not_require_bootstrap) ... ok
+test_split_uses_first_bar_at_boundary (test_trend_mix_nested_holdout.TrendMixNestedHoldoutTests.test_split_uses_first_bar_at_boundary) ... ok
+test_train_gate_requires_positive_cost_stress (test_trend_mix_nested_holdout.TrendMixNestedHoldoutTests.test_train_gate_requires_positive_cost_stress) ... ok
+
+======================================================================
+ERROR: test_bitunix_wo105_status (unittest.loader._FailedTest.test_bitunix_wo105_status)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_bitunix_wo105_status
+Traceback (most recent call last):
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "D:\codex02_m2b_20260801T154214Z\repo\tests\test_bitunix_wo105_status.py", line 13, in <module>
+    REPLAY = json.loads((ROOT / "docs" / "BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json").read_text(encoding="utf-8"))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\codex02_m2b_20260801T154214Z\\repo\\docs\\BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json'
+
+
+======================================================================
+ERROR: test_bitunix_wo105_v2_status (unittest.loader._FailedTest.test_bitunix_wo105_v2_status)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_bitunix_wo105_v2_status
+Traceback (most recent call last):
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "D:\codex02_m2b_20260801T154214Z\repo\tests\test_bitunix_wo105_v2_status.py", line 15, in <module>
+    (ROOT / "docs" / "BITUNIX_WO105_V1_PRE_FLOOR_UNIT_TOMBSTONE_2026-07-14.json").read_text(encoding="utf-8")
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\coins\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\codex02_m2b_20260801T154214Z\\repo\\docs\\BITUNIX_WO105_V1_PRE_FLOOR_UNIT_TOMBSTONE_2026-07-14.json'
+
+
+----------------------------------------------------------------------
+Ran 112 tests in 32.888s
+
+FAILED (errors=2)

@@ -1,0 +1,11 @@
+test_liquidation_score_uses_frozen_bins_and_fails_sample_gate (test_m2b_forward_evidence.ForwardEvidencePackTests.test_liquidation_score_uses_frozen_bins_and_fails_sample_gate) ... ok
+test_m2a_terminal_engine_agrees_with_domain_results (test_m2b_forward_evidence.ForwardEvidencePackTests.test_m2a_terminal_engine_agrees_with_domain_results) ... ok
+test_matrix_has_exactly_three_bound_tracks (test_m2b_forward_evidence.ForwardEvidencePackTests.test_matrix_has_exactly_three_bound_tracks) ... ok
+test_range_is_killed_by_untouched_oos_and_tombstone (test_m2b_forward_evidence.ForwardEvidencePackTests.test_range_is_killed_by_untouched_oos_and_tombstone) ... ok
+test_score_bin_boundaries_are_locked (test_m2b_forward_evidence.ForwardEvidencePackTests.test_score_bin_boundaries_are_locked) ... ok
+test_spot_led_counts_only_fresh_resolved_trades (test_m2b_forward_evidence.ForwardEvidencePackTests.test_spot_led_counts_only_fresh_resolved_trades) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.072s
+
+OK

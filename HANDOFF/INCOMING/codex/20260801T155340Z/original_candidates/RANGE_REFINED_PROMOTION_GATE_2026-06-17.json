@@ -1,0 +1,255 @@
+{
+  "generated_at": "2026-06-22T12:12:49+00:00",
+  "runtime_boundary": {
+    "classification": "range_refined_promotion_gate_evidence_only",
+    "can_trade": false,
+    "sends_orders": false,
+    "uses_private_credentials": false,
+    "creates_paper_entry_intents": false
+  },
+  "inputs": {
+    "refiner": "docs/RANGE_WATCHLIST_REFINER_2026-06-16.json",
+    "observer": "docs/RANGE_REFINED_FORWARD_OBSERVER_2026-06-16.json",
+    "scoreboard": "docs/RANGE_REFINED_OBSERVER_SCOREBOARD_2026-06-16.json",
+    "alert_drill": "docs/RANGE_REFINED_SIGNAL_ALERT_DRILL_2026-06-17.json"
+  },
+  "thresholds": {
+    "min_full_trades": 60,
+    "min_history_expectancy_r": 0.05,
+    "min_holdout_trades": 15,
+    "min_holdout_expectancy_r": 0.05,
+    "min_stable_folds": 3,
+    "min_segment_positive_ratio": 0.8,
+    "min_worst_segment_expectancy_r": 0.0,
+    "min_cost10_expectancy_r": 0.0,
+    "min_observer_signals": 30,
+    "min_resolved": 30,
+    "min_forward_expectancy_r": 0.05,
+    "max_drawdown_r": 8.0
+  },
+  "candidate": {
+    "base_strategy_id": "range_4h_short_near_high_lb40_edge0.2_rr1x2_h16",
+    "strategy_id": "range_4h_short_near_high_lb40_edge0.2_rr1x2_h16__refine_funding_spot_oi_expansion",
+    "filter_mode": "funding_spot_oi_expansion",
+    "verdict": "range_refined_candidate_for_forward_observation",
+    "side": "SHORT",
+    "interval": "4h",
+    "rr": "1:2",
+    "full_trades": 71,
+    "full_expectancy_r": 0.358554,
+    "holdout_trades": 18,
+    "holdout_expectancy_r": 0.626488,
+    "stable_folds": 3,
+    "segment_positive_ratio": 1.0,
+    "worst_segment_expectancy_r": 0.049807,
+    "cost10_expectancy_r": 0.214236
+  },
+  "observer": {
+    "latest_status": "range_refined_no_signal",
+    "latest_closed_bar_ts": "2026-06-22T08:00:00+00:00",
+    "latest_closed_close": 64624.3,
+    "data_degraded": false,
+    "missing_filter_inputs": []
+  },
+  "scoreboard": {
+    "classification": "no_observer_signals_yet",
+    "observer_signal_events": 0,
+    "resolved": 0,
+    "winrate_pct": null,
+    "breakeven_winrate_pct": null,
+    "expectancy_r": null,
+    "max_drawdown_r": null
+  },
+  "operational": {
+    "alert_drill_decision": "range_signal_alert_drill_passed",
+    "alert_drill_first_decision": "dry_run_ready",
+    "alert_drill_duplicate_decision": "skipped_duplicate"
+  },
+  "gates": {
+    "research": [
+      {
+        "name": "refiner_report_exists",
+        "passed": true,
+        "actual": "docs/RANGE_WATCHLIST_REFINER_2026-06-16.json",
+        "required": "readable JSON",
+        "severity": "hard"
+      },
+      {
+        "name": "selected_candidate_exists",
+        "passed": true,
+        "actual": "range_4h_short_near_high_lb40_edge0.2_rr1x2_h16__refine_funding_spot_oi_expansion",
+        "required": "selected_candidate",
+        "severity": "hard"
+      },
+      {
+        "name": "selected_candidate_verdict",
+        "passed": true,
+        "actual": "range_refined_candidate_for_forward_observation",
+        "required": "range_refined_candidate_for_forward_observation",
+        "severity": "hard"
+      },
+      {
+        "name": "history_min_full_trades",
+        "passed": true,
+        "actual": 71,
+        "required": 60,
+        "severity": "hard"
+      },
+      {
+        "name": "history_full_expectancy",
+        "passed": true,
+        "actual": 0.358554,
+        "required": 0.05,
+        "severity": "hard"
+      },
+      {
+        "name": "history_min_holdout_trades",
+        "passed": true,
+        "actual": 18,
+        "required": 15,
+        "severity": "hard"
+      },
+      {
+        "name": "history_holdout_expectancy",
+        "passed": true,
+        "actual": 0.626488,
+        "required": 0.05,
+        "severity": "hard"
+      },
+      {
+        "name": "history_stable_folds",
+        "passed": true,
+        "actual": 3,
+        "required": 3,
+        "severity": "hard"
+      },
+      {
+        "name": "history_segment_positive_ratio",
+        "passed": true,
+        "actual": 1.0,
+        "required": 0.8,
+        "severity": "hard"
+      },
+      {
+        "name": "history_worst_segment_floor",
+        "passed": true,
+        "actual": 0.049807,
+        "required": 0.0,
+        "severity": "hard"
+      },
+      {
+        "name": "history_cost10_expectancy",
+        "passed": true,
+        "actual": 0.214236,
+        "required": 0.0,
+        "severity": "hard"
+      }
+    ],
+    "observer": [
+      {
+        "name": "observer_report_exists",
+        "passed": true,
+        "actual": "docs/RANGE_REFINED_FORWARD_OBSERVER_2026-06-16.json",
+        "required": "readable JSON",
+        "severity": "hard"
+      },
+      {
+        "name": "scoreboard_report_exists",
+        "passed": true,
+        "actual": "docs/RANGE_REFINED_OBSERVER_SCOREBOARD_2026-06-16.json",
+        "required": "readable JSON",
+        "severity": "hard"
+      },
+      {
+        "name": "latest_observer_not_degraded",
+        "passed": true,
+        "actual": false,
+        "required": false,
+        "severity": "hard"
+      },
+      {
+        "name": "latest_missing_filter_inputs_empty",
+        "passed": true,
+        "actual": [],
+        "required": "[]",
+        "severity": "hard"
+      },
+      {
+        "name": "observer_signal_events",
+        "passed": false,
+        "actual": 0,
+        "required": 30,
+        "severity": "hard"
+      },
+      {
+        "name": "observer_resolved_outcomes",
+        "passed": false,
+        "actual": 0,
+        "required": 30,
+        "severity": "hard"
+      },
+      {
+        "name": "observer_expectancy",
+        "passed": false,
+        "actual": null,
+        "required": 0.05,
+        "severity": "hard"
+      },
+      {
+        "name": "observer_winrate_vs_breakeven",
+        "passed": false,
+        "actual": "None vs None",
+        "required": "winrate >= breakeven",
+        "severity": "hard"
+      },
+      {
+        "name": "observer_drawdown_cap",
+        "passed": false,
+        "actual": null,
+        "required": ">= -8.0R",
+        "severity": "hard"
+      }
+    ],
+    "operational": [
+      {
+        "name": "alert_drill_report_exists",
+        "passed": true,
+        "actual": "docs/RANGE_REFINED_SIGNAL_ALERT_DRILL_2026-06-17.json",
+        "required": "readable JSON",
+        "severity": "hard"
+      },
+      {
+        "name": "alert_drill_passed",
+        "passed": true,
+        "actual": "range_signal_alert_drill_passed",
+        "required": "range_signal_alert_drill_passed",
+        "severity": "hard"
+      },
+      {
+        "name": "alert_drill_first_ready",
+        "passed": true,
+        "actual": "dry_run_ready",
+        "required": "dry_run_ready",
+        "severity": "hard"
+      },
+      {
+        "name": "alert_drill_duplicate_skip",
+        "passed": true,
+        "actual": "skipped_duplicate",
+        "required": "skipped_duplicate",
+        "severity": "hard"
+      }
+    ]
+  },
+  "promotion": {
+    "observer_allowed": true,
+    "paper_design_review_allowed": false,
+    "paper_execution_allowed": false,
+    "live_execution_allowed": false,
+    "manual_review_required": true,
+    "can_trade": false
+  },
+  "decision": "blocked_waiting_range_observer_outcomes",
+  "next_action": "keep RANGE observer running until enough real resolved observer outcomes exist",
+  "can_trade": false
+}

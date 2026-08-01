@@ -1,0 +1,1692 @@
+{
+  "generated_at": "2026-06-23T22:14:37+00:00",
+  "hypothesis_id": "HYP-SPOT-LEAD-001",
+  "family": "SPOT_LED_CONTINUATION_1H",
+  "method": "prospective_train_search_then_validation_then_conditionally_open_oos",
+  "data": {
+    "cache_dir": "C:\\Users\\coins\\TradingOS\\Active\\data\\research_snapshots\\20260623T165650Z-d3d32fec3371",
+    "snapshot": {
+      "snapshot_id": "20260623T165650Z-d3d32fec3371",
+      "profile": "BTC_CORE_RESEARCH_V1",
+      "dataset_sha256": "d3d32fec337171f06040fd228acdec2f6820f34cfb0edc49818c67ad5b3a430a",
+      "manifest_path": "C:\\Users\\coins\\TradingOS\\Active\\data\\research_snapshots\\20260623T165650Z-d3d32fec3371\\SNAPSHOT_MANIFEST.json"
+    },
+    "bars": 47993,
+    "spot_aligned_bars": 47979,
+    "funding_events": 7000,
+    "first": "2021-01-01T00:00:00+00:00",
+    "last": "2026-06-23T16:00:00+00:00",
+    "train_end": "2024-01-01T00:00:00+00:00",
+    "validation_end": "2025-01-01T00:00:00+00:00"
+  },
+  "search": {
+    "tested": 96,
+    "unique_signal_sets": 48,
+    "train_qualified": 0,
+    "failed_check_counts": {
+      "cost_stress_positive": 95,
+      "max_drawdown_r": 69,
+      "min_expectancy_r": 91,
+      "min_positive_folds": 91,
+      "min_trades": 20,
+      "screening_bootstrap_probability": 96
+    },
+    "oos_used_for_selection": false
+  },
+  "protocol": {
+    "completed_bars_only": true,
+    "causal_z_excludes_signal_bar": true,
+    "entry_next_hour": true,
+    "max_hold_hours": 8,
+    "cost_bps_per_side": 7.0,
+    "stress_extra_bps_per_side": 10.0,
+    "bonferroni_required_probability": 0.9994791666666667
+  },
+  "top_train_candidates": [],
+  "top_train_results_regardless_of_gate": [
+    {
+      "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 336,
+        "entry_abs_z": 2.5,
+        "side": "SHORT_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 103,
+        "summary": {
+          "trades": 43,
+          "wins": 25,
+          "losses": 18,
+          "winrate_pct": 58.14,
+          "expectancy_r": 0.15985,
+          "net_r_total": 6.873558,
+          "avg_win_r": 0.799923,
+          "avg_loss_r": -0.72914,
+          "max_drawdown_r": -2.350334,
+          "max_losing_streak": 5
+        },
+        "stable_folds": 4,
+        "folds": [
+          {
+            "trades": 11,
+            "wins": 6,
+            "losses": 5,
+            "winrate_pct": 54.545,
+            "expectancy_r": 0.235164,
+            "net_r_total": 2.586803,
+            "avg_win_r": 1.012989,
+            "avg_loss_r": -0.698227,
+            "max_drawdown_r": -1.737325,
+            "max_losing_streak": 3,
+            "fold": 1,
+            "stable": true
+          },
+          {
+            "trades": 11,
+            "wins": 8,
+            "losses": 3,
+            "winrate_pct": 72.727,
+            "expectancy_r": 0.244915,
+            "net_r_total": 2.694066,
+            "avg_win_r": 0.657621,
+            "avg_loss_r": -0.855635,
+            "max_drawdown_r": -2.193545,
+            "max_losing_streak": 1,
+            "fold": 2,
+            "stable": true
+          },
+          {
+            "trades": 10,
+            "wins": 5,
+            "losses": 5,
+            "winrate_pct": 50.0,
+            "expectancy_r": 0.072822,
+            "net_r_total": 0.728219,
+            "avg_win_r": 0.801932,
+            "avg_loss_r": -0.656289,
+            "max_drawdown_r": -2.350334,
+            "max_losing_streak": 2,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 11,
+            "wins": 6,
+            "losses": 5,
+            "winrate_pct": 54.545,
+            "expectancy_r": 0.078588,
+            "net_r_total": 0.86447,
+            "avg_win_r": 0.774917,
+            "avg_loss_r": -0.757007,
+            "max_drawdown_r": -2.133918,
+            "max_losing_streak": 3,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 43,
+            "wins": 18,
+            "losses": 25,
+            "winrate_pct": 41.86,
+            "expectancy_r": 0.025022,
+            "net_r_total": 1.07593,
+            "avg_win_r": 0.965895,
+            "avg_loss_r": -0.652407,
+            "max_drawdown_r": -3.087118,
+            "max_losing_streak": 5
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-04T09:00:00+00:00",
+            "exit_ts": "2021-02-04T15:00:00+00:00",
+            "side": "SHORT",
+            "entry": 37435.19,
+            "exit": 36263.09,
+            "stop": 38314.265,
+            "take": 36263.09,
+            "atr": 586.05,
+            "r_net": 1.274648,
+            "exit_reason": "take_profit",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-04-04T01:00:00+00:00",
+            "exit_ts": "2021-04-04T03:00:00+00:00",
+            "side": "SHORT",
+            "entry": 56753.79,
+            "exit": 57643.33714286,
+            "stop": 57643.33714286,
+            "take": 55567.72714286,
+            "atr": 593.03142857,
+            "r_net": -1.090021,
+            "exit_reason": "stop_loss",
+            "bars_held": 3
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-04-19T10:00:00+00:00",
+            "exit_ts": "2021-04-19T14:00:00+00:00",
+            "side": "SHORT",
+            "entry": 56746.04,
+            "exit": 55446.76142857,
+            "stop": 57720.49892857,
+            "take": 55446.76142857,
+            "atr": 649.63928571,
+            "r_net": 1.25274,
+            "exit_reason": "take_profit",
+            "bars_held": 5
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": true,
+          "min_positive_folds": true,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": true
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 1,
+        "divergence_z_window_hours": 168,
+        "entry_abs_z": 2.5,
+        "side": "LONG_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 160,
+        "summary": {
+          "trades": 75,
+          "wins": 40,
+          "losses": 35,
+          "winrate_pct": 53.333,
+          "expectancy_r": 0.137154,
+          "net_r_total": 10.286543,
+          "avg_win_r": 0.872482,
+          "avg_loss_r": -0.703221,
+          "max_drawdown_r": -3.428397,
+          "max_losing_streak": 4
+        },
+        "stable_folds": 3,
+        "folds": [
+          {
+            "trades": 19,
+            "wins": 10,
+            "losses": 9,
+            "winrate_pct": 52.632,
+            "expectancy_r": 0.051024,
+            "net_r_total": 0.969461,
+            "avg_win_r": 0.860632,
+            "avg_loss_r": -0.84854,
+            "max_drawdown_r": -2.546814,
+            "max_losing_streak": 3,
+            "fold": 1,
+            "stable": true
+          },
+          {
+            "trades": 19,
+            "wins": 9,
+            "losses": 10,
+            "winrate_pct": 47.368,
+            "expectancy_r": 0.002992,
+            "net_r_total": 0.056855,
+            "avg_win_r": 0.730378,
+            "avg_loss_r": -0.651655,
+            "max_drawdown_r": -3.428397,
+            "max_losing_streak": 4,
+            "fold": 2,
+            "stable": false
+          },
+          {
+            "trades": 18,
+            "wins": 11,
+            "losses": 7,
+            "winrate_pct": 61.111,
+            "expectancy_r": 0.264858,
+            "net_r_total": 4.767448,
+            "avg_win_r": 0.87916,
+            "avg_loss_r": -0.700473,
+            "max_drawdown_r": -1.219468,
+            "max_losing_streak": 2,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 19,
+            "wins": 10,
+            "losses": 9,
+            "winrate_pct": 52.632,
+            "expectancy_r": 0.236462,
+            "net_r_total": 4.492779,
+            "avg_win_r": 1.004878,
+            "avg_loss_r": -0.617333,
+            "max_drawdown_r": -2.325406,
+            "max_losing_streak": 2,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 75,
+            "wins": 39,
+            "losses": 36,
+            "winrate_pct": 52.0,
+            "expectancy_r": -0.006816,
+            "net_r_total": -0.511175,
+            "avg_win_r": 0.749657,
+            "avg_loss_r": -0.826328,
+            "max_drawdown_r": -4.971318,
+            "max_losing_streak": 4
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-11T22:00:00+00:00",
+            "exit_ts": "2021-01-12T06:00:00+00:00",
+            "side": "LONG",
+            "entry": 33995.43,
+            "exit": 36026.66,
+            "stop": 31409.775,
+            "take": 37442.97,
+            "atr": 1723.77,
+            "r_net": 0.762087,
+            "exit_reason": "time_exit",
+            "bars_held": 9
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-14T15:00:00+00:00",
+            "exit_ts": "2021-01-14T21:00:00+00:00",
+            "side": "LONG",
+            "entry": 39588.0,
+            "exit": 38577.60535714,
+            "stop": 38577.60535714,
+            "take": 40935.19285714,
+            "atr": 673.59642857,
+            "r_net": -1.080814,
+            "exit_reason": "stop_loss",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-19T11:00:00+00:00",
+            "exit_ts": "2021-01-19T19:00:00+00:00",
+            "side": "LONG",
+            "entry": 37178.54,
+            "exit": 36384.97571429,
+            "stop": 36384.97571429,
+            "take": 38236.62571429,
+            "atr": 529.04285714,
+            "r_net": -1.139663,
+            "exit_reason": "stop_loss",
+            "bars_held": 9
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": true,
+          "min_positive_folds": true,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r1_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r1_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 1,
+        "divergence_z_window_hours": 336,
+        "entry_abs_z": 2.5,
+        "side": "LONG_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 139,
+        "summary": {
+          "trades": 62,
+          "wins": 31,
+          "losses": 31,
+          "winrate_pct": 50.0,
+          "expectancy_r": 0.037358,
+          "net_r_total": 2.316189,
+          "avg_win_r": 0.871191,
+          "avg_loss_r": -0.796475,
+          "max_drawdown_r": -4.654889,
+          "max_losing_streak": 5
+        },
+        "stable_folds": 3,
+        "folds": [
+          {
+            "trades": 16,
+            "wins": 8,
+            "losses": 8,
+            "winrate_pct": 50.0,
+            "expectancy_r": 0.015147,
+            "net_r_total": 0.242356,
+            "avg_win_r": 0.945074,
+            "avg_loss_r": -0.914779,
+            "max_drawdown_r": -3.981865,
+            "max_losing_streak": 5,
+            "fold": 1,
+            "stable": true
+          },
+          {
+            "trades": 15,
+            "wins": 7,
+            "losses": 8,
+            "winrate_pct": 46.667,
+            "expectancy_r": -0.040906,
+            "net_r_total": -0.613587,
+            "avg_win_r": 0.793801,
+            "avg_loss_r": -0.771274,
+            "max_drawdown_r": -3.126619,
+            "max_losing_streak": 3,
+            "fold": 2,
+            "stable": false
+          },
+          {
+            "trades": 15,
+            "wins": 8,
+            "losses": 7,
+            "winrate_pct": 53.333,
+            "expectancy_r": 0.175205,
+            "net_r_total": 2.628079,
+            "avg_win_r": 0.93337,
+            "avg_loss_r": -0.691269,
+            "max_drawdown_r": -3.417597,
+            "max_losing_streak": 3,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 16,
+            "wins": 8,
+            "losses": 8,
+            "winrate_pct": 50.0,
+            "expectancy_r": 0.003709,
+            "net_r_total": 0.059341,
+            "avg_win_r": 0.802845,
+            "avg_loss_r": -0.795427,
+            "max_drawdown_r": -2.16485,
+            "max_losing_streak": 2,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 62,
+            "wins": 30,
+            "losses": 32,
+            "winrate_pct": 48.387,
+            "expectancy_r": -0.102511,
+            "net_r_total": -6.355657,
+            "avg_win_r": 0.762901,
+            "avg_loss_r": -0.913834,
+            "max_drawdown_r": -8.036799,
+            "max_losing_streak": 5
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-19T11:00:00+00:00",
+            "exit_ts": "2021-01-19T19:00:00+00:00",
+            "side": "LONG",
+            "entry": 37178.54,
+            "exit": 36384.97571429,
+            "stop": 36384.97571429,
+            "take": 38236.62571429,
+            "atr": 529.04285714,
+            "r_net": -1.139663,
+            "exit_reason": "stop_loss",
+            "bars_held": 9
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-25T11:00:00+00:00",
+            "exit_ts": "2021-01-25T12:00:00+00:00",
+            "side": "LONG",
+            "entry": 33145.08,
+            "exit": 34195.30857143,
+            "stop": 32357.40857143,
+            "take": 34195.30857143,
+            "atr": 525.11428571,
+            "r_net": 1.273488,
+            "exit_reason": "take_profit",
+            "bars_held": 2
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-08T15:00:00+00:00",
+            "exit_ts": "2021-02-08T23:00:00+00:00",
+            "side": "LONG",
+            "entry": 43650.49,
+            "exit": 45620.00428571,
+            "stop": 42173.35428571,
+            "take": 45620.00428571,
+            "atr": 984.75714286,
+            "r_net": 1.218072,
+            "exit_reason": "take_profit",
+            "bars_held": 9
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": false,
+          "min_positive_folds": true,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 336,
+        "entry_abs_z": 2.5,
+        "side": "LONG_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 139,
+        "summary": {
+          "trades": 69,
+          "wins": 34,
+          "losses": 35,
+          "winrate_pct": 49.275,
+          "expectancy_r": 0.035299,
+          "net_r_total": 2.435616,
+          "avg_win_r": 0.87425,
+          "avg_loss_r": -0.779683,
+          "max_drawdown_r": -10.614423,
+          "max_losing_streak": 5
+        },
+        "stable_folds": 2,
+        "folds": [
+          {
+            "trades": 17,
+            "wins": 9,
+            "losses": 8,
+            "winrate_pct": 52.941,
+            "expectancy_r": 0.181046,
+            "net_r_total": 3.077782,
+            "avg_win_r": 1.027886,
+            "avg_loss_r": -0.771649,
+            "max_drawdown_r": -4.024179,
+            "max_losing_streak": 5,
+            "fold": 1,
+            "stable": true
+          },
+          {
+            "trades": 17,
+            "wins": 12,
+            "losses": 5,
+            "winrate_pct": 70.588,
+            "expectancy_r": 0.432718,
+            "net_r_total": 7.356205,
+            "avg_win_r": 0.931328,
+            "avg_loss_r": -0.763946,
+            "max_drawdown_r": -2.519808,
+            "max_losing_streak": 2,
+            "fold": 2,
+            "stable": true
+          },
+          {
+            "trades": 18,
+            "wins": 7,
+            "losses": 11,
+            "winrate_pct": 38.889,
+            "expectancy_r": -0.205325,
+            "net_r_total": -3.695842,
+            "avg_win_r": 0.808707,
+            "avg_loss_r": -0.850617,
+            "max_drawdown_r": -4.869337,
+            "max_losing_streak": 5,
+            "fold": 3,
+            "stable": false
+          },
+          {
+            "trades": 17,
+            "wins": 6,
+            "losses": 11,
+            "winrate_pct": 35.294,
+            "expectancy_r": -0.25309,
+            "net_r_total": -4.302529,
+            "avg_win_r": 0.606108,
+            "avg_loss_r": -0.721743,
+            "max_drawdown_r": -5.745086,
+            "max_losing_streak": 4,
+            "fold": 4,
+            "stable": false
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 69,
+            "wins": 33,
+            "losses": 36,
+            "winrate_pct": 47.826,
+            "expectancy_r": -0.103655,
+            "net_r_total": -7.152213,
+            "avg_win_r": 0.754293,
+            "avg_loss_r": -0.890108,
+            "max_drawdown_r": -15.819995,
+            "max_losing_streak": 11
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-29T12:00:00+00:00",
+            "exit_ts": "2021-01-29T18:00:00+00:00",
+            "side": "LONG",
+            "entry": 37069.44,
+            "exit": 35207.43857143,
+            "stop": 35207.43857143,
+            "take": 39552.10857143,
+            "atr": 1241.33428571,
+            "r_net": -1.059509,
+            "exit_reason": "stop_loss",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-08T16:00:00+00:00",
+            "exit_ts": "2021-02-08T23:00:00+00:00",
+            "side": "LONG",
+            "entry": 43785.81,
+            "exit": 45829.95714286,
+            "stop": 42252.69964286,
+            "take": 45829.95714286,
+            "atr": 1022.07357143,
+            "r_net": 1.292416,
+            "exit_reason": "take_profit",
+            "bars_held": 8
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-11T06:00:00+00:00",
+            "exit_ts": "2021-02-11T10:00:00+00:00",
+            "side": "LONG",
+            "entry": 44691.99,
+            "exit": 46166.20714286,
+            "stop": 43586.32714286,
+            "take": 46166.20714286,
+            "atr": 737.10857143,
+            "r_net": 1.241941,
+            "exit_reason": "take_profit",
+            "bars_held": 5
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": false,
+          "min_positive_folds": false,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+        "return_lookback_hours": 1,
+        "divergence_z_window_hours": 168,
+        "entry_abs_z": 2.5,
+        "side": "LONG_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.0,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 160,
+        "summary": {
+          "trades": 76,
+          "wins": 35,
+          "losses": 41,
+          "winrate_pct": 46.053,
+          "expectancy_r": 0.104222,
+          "net_r_total": 7.920887,
+          "avg_win_r": 1.415227,
+          "avg_loss_r": -1.014928,
+          "max_drawdown_r": -6.822974,
+          "max_losing_streak": 5
+        },
+        "stable_folds": 1,
+        "folds": [
+          {
+            "trades": 19,
+            "wins": 9,
+            "losses": 10,
+            "winrate_pct": 47.368,
+            "expectancy_r": 0.148586,
+            "net_r_total": 2.823133,
+            "avg_win_r": 1.385886,
+            "avg_loss_r": -0.964984,
+            "max_drawdown_r": -3.445927,
+            "max_losing_streak": 3,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 19,
+            "wins": 8,
+            "losses": 11,
+            "winrate_pct": 42.105,
+            "expectancy_r": -0.139321,
+            "net_r_total": -2.6471,
+            "avg_win_r": 1.119359,
+            "avg_loss_r": -1.054725,
+            "max_drawdown_r": -6.450542,
+            "max_losing_streak": 5,
+            "fold": 2,
+            "stable": false
+          },
+          {
+            "trades": 19,
+            "wins": 10,
+            "losses": 9,
+            "winrate_pct": 52.632,
+            "expectancy_r": 0.244619,
+            "net_r_total": 4.647766,
+            "avg_win_r": 1.409681,
+            "avg_loss_r": -1.049894,
+            "max_drawdown_r": -3.429154,
+            "max_losing_streak": 3,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 19,
+            "wins": 8,
+            "losses": 11,
+            "winrate_pct": 42.105,
+            "expectancy_r": 0.163005,
+            "net_r_total": 3.097088,
+            "avg_win_r": 1.751036,
+            "avg_loss_r": -0.991927,
+            "max_drawdown_r": -4.185526,
+            "max_losing_streak": 4,
+            "fold": 4,
+            "stable": false
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 76,
+            "wins": 34,
+            "losses": 42,
+            "winrate_pct": 44.737,
+            "expectancy_r": -0.111924,
+            "net_r_total": -8.506225,
+            "avg_win_r": 1.238805,
+            "avg_loss_r": -1.205371,
+            "max_drawdown_r": -12.254725,
+            "max_losing_streak": 5
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+            "entry_ts": "2021-01-11T22:00:00+00:00",
+            "exit_ts": "2021-01-12T06:00:00+00:00",
+            "side": "LONG",
+            "entry": 33995.43,
+            "exit": 36026.66,
+            "stop": 32271.66,
+            "take": 37442.97,
+            "atr": 1723.77,
+            "r_net": 1.143131,
+            "exit_reason": "time_exit",
+            "bars_held": 9
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+            "entry_ts": "2021-01-14T15:00:00+00:00",
+            "exit_ts": "2021-01-14T21:00:00+00:00",
+            "side": "LONG",
+            "entry": 39588.0,
+            "exit": 38914.40357143,
+            "stop": 38914.40357143,
+            "take": 40935.19285714,
+            "atr": 673.59642857,
+            "r_net": -1.121571,
+            "exit_reason": "stop_loss",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r1_z168_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+            "entry_ts": "2021-01-19T11:00:00+00:00",
+            "exit_ts": "2021-01-19T18:00:00+00:00",
+            "side": "LONG",
+            "entry": 37178.54,
+            "exit": 36649.49714286,
+            "stop": 36649.49714286,
+            "take": 38236.62571429,
+            "atr": 529.04285714,
+            "r_net": -1.209844,
+            "exit_reason": "stop_loss",
+            "bars_held": 8
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": true,
+          "min_positive_folds": false,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_none_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_none_sl1.5_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 336,
+        "entry_abs_z": 2.5,
+        "side": "SHORT_SPOT_LEADS",
+        "volume_filter": "none",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 160,
+        "summary": {
+          "trades": 65,
+          "wins": 32,
+          "losses": 33,
+          "winrate_pct": 49.231,
+          "expectancy_r": 0.011389,
+          "net_r_total": 0.740275,
+          "avg_win_r": 0.821128,
+          "avg_loss_r": -0.773813,
+          "max_drawdown_r": -4.5903,
+          "max_losing_streak": 7
+        },
+        "stable_folds": 2,
+        "folds": [
+          {
+            "trades": 16,
+            "wins": 7,
+            "losses": 9,
+            "winrate_pct": 43.75,
+            "expectancy_r": 0.025754,
+            "net_r_total": 0.412061,
+            "avg_win_r": 1.048869,
+            "avg_loss_r": -0.770002,
+            "max_drawdown_r": -3.183813,
+            "max_losing_streak": 3,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 16,
+            "wins": 10,
+            "losses": 6,
+            "winrate_pct": 62.5,
+            "expectancy_r": 0.120913,
+            "net_r_total": 1.934613,
+            "avg_win_r": 0.769396,
+            "avg_loss_r": -0.95989,
+            "max_drawdown_r": -3.318161,
+            "max_losing_streak": 2,
+            "fold": 2,
+            "stable": true
+          },
+          {
+            "trades": 17,
+            "wins": 6,
+            "losses": 11,
+            "winrate_pct": 35.294,
+            "expectancy_r": -0.171299,
+            "net_r_total": -2.912077,
+            "avg_win_r": 0.697569,
+            "avg_loss_r": -0.645226,
+            "max_drawdown_r": -3.561925,
+            "max_losing_streak": 6,
+            "fold": 3,
+            "stable": false
+          },
+          {
+            "trades": 16,
+            "wins": 9,
+            "losses": 7,
+            "winrate_pct": 56.25,
+            "expectancy_r": 0.081605,
+            "net_r_total": 1.305678,
+            "avg_win_r": 0.783849,
+            "avg_loss_r": -0.82128,
+            "max_drawdown_r": -3.19999,
+            "max_losing_streak": 3,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 65,
+            "wins": 24,
+            "losses": 41,
+            "winrate_pct": 36.923,
+            "expectancy_r": -0.123933,
+            "net_r_total": -8.055629,
+            "avg_win_r": 0.944765,
+            "avg_loss_r": -0.749512,
+            "max_drawdown_r": -9.246441,
+            "max_losing_streak": 9
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_none_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-04T09:00:00+00:00",
+            "exit_ts": "2021-02-04T15:00:00+00:00",
+            "side": "SHORT",
+            "entry": 37435.19,
+            "exit": 36263.09,
+            "stop": 38314.265,
+            "take": 36263.09,
+            "atr": 586.05,
+            "r_net": 1.274648,
+            "exit_reason": "take_profit",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_none_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-11T03:00:00+00:00",
+            "exit_ts": "2021-02-11T10:00:00+00:00",
+            "side": "SHORT",
+            "entry": 44806.25,
+            "exit": 46001.54,
+            "stop": 46001.54,
+            "take": 43212.53,
+            "atr": 796.86,
+            "r_net": -1.02185,
+            "exit_reason": "stop_loss",
+            "bars_held": 8
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_short_spot_leads_none_sl1.5_tp2_h8",
+            "entry_ts": "2021-03-15T01:00:00+00:00",
+            "exit_ts": "2021-03-15T04:00:00+00:00",
+            "side": "SHORT",
+            "entry": 59534.78,
+            "exit": 60704.72,
+            "stop": 60704.72,
+            "take": 57974.86,
+            "atr": 779.96,
+            "r_net": -1.071942,
+            "exit_reason": "stop_loss",
+            "bars_held": 4
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": false,
+          "min_positive_folds": false,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r3_z336_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z336_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 336,
+        "entry_abs_z": 2.0,
+        "side": "SHORT_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 289,
+        "summary": {
+          "trades": 133,
+          "wins": 68,
+          "losses": 65,
+          "winrate_pct": 51.128,
+          "expectancy_r": 0.074893,
+          "net_r_total": 9.960799,
+          "avg_win_r": 0.868086,
+          "avg_loss_r": -0.754908,
+          "max_drawdown_r": -7.318903,
+          "max_losing_streak": 9
+        },
+        "stable_folds": 2,
+        "folds": [
+          {
+            "trades": 33,
+            "wins": 16,
+            "losses": 17,
+            "winrate_pct": 48.485,
+            "expectancy_r": 0.036322,
+            "net_r_total": 1.198623,
+            "avg_win_r": 0.940541,
+            "avg_loss_r": -0.814708,
+            "max_drawdown_r": -3.260926,
+            "max_losing_streak": 4,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 33,
+            "wins": 17,
+            "losses": 16,
+            "winrate_pct": 51.515,
+            "expectancy_r": 0.008983,
+            "net_r_total": 0.296434,
+            "avg_win_r": 0.684141,
+            "avg_loss_r": -0.708372,
+            "max_drawdown_r": -4.751232,
+            "max_losing_streak": 2,
+            "fold": 2,
+            "stable": true
+          },
+          {
+            "trades": 34,
+            "wins": 15,
+            "losses": 19,
+            "winrate_pct": 44.118,
+            "expectancy_r": 0.013116,
+            "net_r_total": 0.445935,
+            "avg_win_r": 0.960688,
+            "avg_loss_r": -0.734967,
+            "max_drawdown_r": -4.952507,
+            "max_losing_streak": 6,
+            "fold": 3,
+            "stable": false
+          },
+          {
+            "trades": 33,
+            "wins": 20,
+            "losses": 13,
+            "winrate_pct": 60.606,
+            "expectancy_r": 0.243024,
+            "net_r_total": 8.019807,
+            "avg_win_r": 0.897024,
+            "avg_loss_r": -0.763129,
+            "max_drawdown_r": -2.366396,
+            "max_losing_streak": 3,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 133,
+            "wins": 56,
+            "losses": 77,
+            "winrate_pct": 42.105,
+            "expectancy_r": -0.090891,
+            "net_r_total": -12.088439,
+            "avg_win_r": 0.888473,
+            "avg_loss_r": -0.803155,
+            "max_drawdown_r": -18.294944,
+            "max_losing_streak": 9
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-29T07:00:00+00:00",
+            "exit_ts": "2021-01-29T08:00:00+00:00",
+            "side": "SHORT",
+            "entry": 32545.13,
+            "exit": 33442.56714286,
+            "stop": 33442.56714286,
+            "take": 31348.54714286,
+            "atr": 598.29142857,
+            "r_net": -1.025188,
+            "exit_reason": "stop_loss",
+            "bars_held": 2
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-04T09:00:00+00:00",
+            "exit_ts": "2021-02-04T15:00:00+00:00",
+            "side": "SHORT",
+            "entry": 37435.19,
+            "exit": 36263.09,
+            "stop": 38314.265,
+            "take": 36263.09,
+            "atr": 586.05,
+            "r_net": 1.274648,
+            "exit_reason": "take_profit",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-03-23T21:00:00+00:00",
+            "exit_ts": "2021-03-24T05:00:00+00:00",
+            "side": "SHORT",
+            "entry": 54535.93,
+            "exit": 54155.01,
+            "stop": 55485.30464286,
+            "take": 53270.09714286,
+            "atr": 632.91642857,
+            "r_net": 0.351362,
+            "exit_reason": "time_exit",
+            "bars_held": 9
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": true,
+          "min_expectancy_r": false,
+          "min_positive_folds": false,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r3_z168_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z168_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 168,
+        "entry_abs_z": 2.0,
+        "side": "SHORT_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 306,
+        "summary": {
+          "trades": 146,
+          "wins": 75,
+          "losses": 71,
+          "winrate_pct": 51.37,
+          "expectancy_r": 0.088278,
+          "net_r_total": 12.888658,
+          "avg_win_r": 0.898264,
+          "avg_loss_r": -0.76734,
+          "max_drawdown_r": -6.777218,
+          "max_losing_streak": 6
+        },
+        "stable_folds": 4,
+        "folds": [
+          {
+            "trades": 36,
+            "wins": 18,
+            "losses": 18,
+            "winrate_pct": 50.0,
+            "expectancy_r": 0.016182,
+            "net_r_total": 0.582558,
+            "avg_win_r": 0.917262,
+            "avg_loss_r": -0.884898,
+            "max_drawdown_r": -3.957439,
+            "max_losing_streak": 3,
+            "fold": 1,
+            "stable": true
+          },
+          {
+            "trades": 37,
+            "wins": 19,
+            "losses": 18,
+            "winrate_pct": 51.351,
+            "expectancy_r": 0.012546,
+            "net_r_total": 0.464195,
+            "avg_win_r": 0.702898,
+            "avg_loss_r": -0.71616,
+            "max_drawdown_r": -6.075885,
+            "max_losing_streak": 4,
+            "fold": 2,
+            "stable": true
+          },
+          {
+            "trades": 37,
+            "wins": 19,
+            "losses": 18,
+            "winrate_pct": 51.351,
+            "expectancy_r": 0.140641,
+            "net_r_total": 5.203702,
+            "avg_win_r": 0.972362,
+            "avg_loss_r": -0.737287,
+            "max_drawdown_r": -4.752247,
+            "max_losing_streak": 4,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 36,
+            "wins": 19,
+            "losses": 17,
+            "winrate_pct": 52.778,
+            "expectancy_r": 0.184395,
+            "net_r_total": 6.638203,
+            "avg_win_r": 1.001532,
+            "avg_loss_r": -0.728877,
+            "max_drawdown_r": -2.248268,
+            "max_losing_streak": 4,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 146,
+            "wins": 66,
+            "losses": 80,
+            "winrate_pct": 45.205,
+            "expectancy_r": -0.087205,
+            "net_r_total": -12.731988,
+            "avg_win_r": 0.853823,
+            "avg_loss_r": -0.863554,
+            "max_drawdown_r": -15.912866,
+            "max_losing_streak": 6
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z168_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-29T07:00:00+00:00",
+            "exit_ts": "2021-01-29T08:00:00+00:00",
+            "side": "SHORT",
+            "entry": 32545.13,
+            "exit": 33442.56714286,
+            "stop": 33442.56714286,
+            "take": 31348.54714286,
+            "atr": 598.29142857,
+            "r_net": -1.025188,
+            "exit_reason": "stop_loss",
+            "bars_held": 2
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z168_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-02-04T09:00:00+00:00",
+            "exit_ts": "2021-02-04T15:00:00+00:00",
+            "side": "SHORT",
+            "entry": 37435.19,
+            "exit": 36263.09,
+            "stop": 38314.265,
+            "take": 36263.09,
+            "atr": 586.05,
+            "r_net": 1.274648,
+            "exit_reason": "take_profit",
+            "bars_held": 7
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z168_e2_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-03-23T21:00:00+00:00",
+            "exit_ts": "2021-03-24T05:00:00+00:00",
+            "side": "SHORT",
+            "entry": 54535.93,
+            "exit": 54155.01,
+            "stop": 55485.30464286,
+            "take": 53270.09714286,
+            "atr": 632.91642857,
+            "r_net": 0.351362,
+            "exit_reason": "time_exit",
+            "bars_held": 9
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": true,
+          "min_expectancy_r": true,
+          "min_positive_folds": true,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r3_z168_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z168_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 168,
+        "entry_abs_z": 2.5,
+        "side": "SHORT_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.5,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 116,
+        "summary": {
+          "trades": 53,
+          "wins": 28,
+          "losses": 25,
+          "winrate_pct": 52.83,
+          "expectancy_r": -0.014279,
+          "net_r_total": -0.756792,
+          "avg_win_r": 0.73463,
+          "avg_loss_r": -0.853057,
+          "max_drawdown_r": -4.7356,
+          "max_losing_streak": 5
+        },
+        "stable_folds": 2,
+        "folds": [
+          {
+            "trades": 13,
+            "wins": 6,
+            "losses": 7,
+            "winrate_pct": 46.154,
+            "expectancy_r": -0.110561,
+            "net_r_total": -1.437287,
+            "avg_win_r": 0.866662,
+            "avg_loss_r": -0.94818,
+            "max_drawdown_r": -2.831748,
+            "max_losing_streak": 2,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 13,
+            "wins": 7,
+            "losses": 6,
+            "winrate_pct": 53.846,
+            "expectancy_r": -0.025054,
+            "net_r_total": -0.325697,
+            "avg_win_r": 0.732676,
+            "avg_loss_r": -0.909072,
+            "max_drawdown_r": -3.110791,
+            "max_losing_streak": 3,
+            "fold": 2,
+            "stable": false
+          },
+          {
+            "trades": 14,
+            "wins": 8,
+            "losses": 6,
+            "winrate_pct": 57.143,
+            "expectancy_r": 0.036309,
+            "net_r_total": 0.508332,
+            "avg_win_r": 0.662109,
+            "avg_loss_r": -0.79809,
+            "max_drawdown_r": -2.072945,
+            "max_losing_streak": 2,
+            "fold": 3,
+            "stable": true
+          },
+          {
+            "trades": 13,
+            "wins": 7,
+            "losses": 6,
+            "winrate_pct": 53.846,
+            "expectancy_r": 0.038297,
+            "net_r_total": 0.49786,
+            "avg_win_r": 0.706294,
+            "avg_loss_r": -0.741033,
+            "max_drawdown_r": -3.30578,
+            "max_losing_streak": 5,
+            "fold": 4,
+            "stable": true
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 53,
+            "wins": 19,
+            "losses": 34,
+            "winrate_pct": 35.849,
+            "expectancy_r": -0.154558,
+            "net_r_total": -8.191587,
+            "avg_win_r": 0.913775,
+            "avg_loss_r": -0.751568,
+            "max_drawdown_r": -10.258677,
+            "max_losing_streak": 5
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z168_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-01-29T07:00:00+00:00",
+            "exit_ts": "2021-01-29T08:00:00+00:00",
+            "side": "SHORT",
+            "entry": 32545.13,
+            "exit": 33442.56714286,
+            "stop": 33442.56714286,
+            "take": 31348.54714286,
+            "atr": 598.29142857,
+            "r_net": -1.025188,
+            "exit_reason": "stop_loss",
+            "bars_held": 2
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z168_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-03-23T21:00:00+00:00",
+            "exit_ts": "2021-03-24T05:00:00+00:00",
+            "side": "SHORT",
+            "entry": 54535.93,
+            "exit": 54155.01,
+            "stop": 55485.30464286,
+            "take": 53270.09714286,
+            "atr": 632.91642857,
+            "r_net": 0.351362,
+            "exit_reason": "time_exit",
+            "bars_held": 9
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z168_e2.5_short_spot_leads_spot_relative_volume_leads_sl1.5_tp2_h8",
+            "entry_ts": "2021-03-26T12:00:00+00:00",
+            "exit_ts": "2021-03-26T16:00:00+00:00",
+            "side": "SHORT",
+            "entry": 52759.33,
+            "exit": 53858.46035714,
+            "stop": 53858.46035714,
+            "take": 51293.82285714,
+            "atr": 732.75357143,
+            "r_net": -1.067901,
+            "exit_reason": "stop_loss",
+            "bars_held": 5
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": false,
+          "min_positive_folds": false,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    },
+    {
+      "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+      "config": {
+        "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+        "return_lookback_hours": 3,
+        "divergence_z_window_hours": 336,
+        "entry_abs_z": 2.5,
+        "side": "LONG_SPOT_LEADS",
+        "volume_filter": "spot_relative_volume_leads",
+        "stop_atr": 1.0,
+        "take_atr": 2.0,
+        "max_hold_hours": 8,
+        "volume_z_window_hours": 168
+      },
+      "train": {
+        "signals": 139,
+        "summary": {
+          "trades": 69,
+          "wins": 31,
+          "losses": 38,
+          "winrate_pct": 44.928,
+          "expectancy_r": 0.045584,
+          "net_r_total": 3.145317,
+          "avg_win_r": 1.298123,
+          "avg_loss_r": -0.976224,
+          "max_drawdown_r": -13.284184,
+          "max_losing_streak": 5
+        },
+        "stable_folds": 1,
+        "folds": [
+          {
+            "trades": 17,
+            "wins": 8,
+            "losses": 9,
+            "winrate_pct": 47.059,
+            "expectancy_r": 0.184521,
+            "net_r_total": 3.136861,
+            "avg_win_r": 1.49223,
+            "avg_loss_r": -0.977886,
+            "max_drawdown_r": -5.51748,
+            "max_losing_streak": 5,
+            "fold": 1,
+            "stable": false
+          },
+          {
+            "trades": 17,
+            "wins": 11,
+            "losses": 6,
+            "winrate_pct": 64.706,
+            "expectancy_r": 0.537203,
+            "net_r_total": 9.132456,
+            "avg_win_r": 1.355596,
+            "avg_loss_r": -0.963184,
+            "max_drawdown_r": -2.693441,
+            "max_losing_streak": 2,
+            "fold": 2,
+            "stable": true
+          },
+          {
+            "trades": 18,
+            "wins": 7,
+            "losses": 11,
+            "winrate_pct": 38.889,
+            "expectancy_r": -0.108522,
+            "net_r_total": -1.953388,
+            "avg_win_r": 1.21306,
+            "avg_loss_r": -0.949528,
+            "max_drawdown_r": -4.358639,
+            "max_losing_streak": 5,
+            "fold": 3,
+            "stable": false
+          },
+          {
+            "trades": 17,
+            "wins": 5,
+            "losses": 12,
+            "winrate_pct": 29.412,
+            "expectancy_r": -0.421801,
+            "net_r_total": -7.170612,
+            "avg_win_r": 0.980203,
+            "avg_loss_r": -1.005969,
+            "max_drawdown_r": -8.925545,
+            "max_losing_streak": 4,
+            "fold": 4,
+            "stable": false
+          }
+        ],
+        "bootstrap_probability_expectancy_gt_0": null,
+        "cost_stress": {
+          "extra_bps_per_side": 10.0,
+          "summary": {
+            "trades": 69,
+            "wins": 30,
+            "losses": 39,
+            "winrate_pct": 43.478,
+            "expectancy_r": -0.162838,
+            "net_r_total": -11.235806,
+            "avg_win_r": 1.118053,
+            "avg_loss_r": -1.148139,
+            "max_drawdown_r": -20.859286,
+            "max_losing_streak": 11
+          }
+        },
+        "sample_trades": [
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+            "entry_ts": "2021-01-29T12:00:00+00:00",
+            "exit_ts": "2021-01-29T17:00:00+00:00",
+            "side": "LONG",
+            "entry": 37069.44,
+            "exit": 35828.10571429,
+            "stop": 35828.10571429,
+            "take": 39552.10857143,
+            "atr": 1241.33428571,
+            "r_net": -1.089613,
+            "exit_reason": "stop_loss",
+            "bars_held": 6
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+            "entry_ts": "2021-02-08T16:00:00+00:00",
+            "exit_ts": "2021-02-08T17:00:00+00:00",
+            "side": "LONG",
+            "entry": 43785.81,
+            "exit": 42763.73642857,
+            "stop": 42763.73642857,
+            "take": 45829.95714286,
+            "atr": 1022.07357143,
+            "r_net": -1.059276,
+            "exit_reason": "stop_loss",
+            "bars_held": 2
+          },
+          {
+            "dataset_id": "spot_led_continuation_BTCUSDT_1h",
+            "strategy_id": "spot_lead_r3_z336_e2.5_long_spot_leads_spot_relative_volume_leads_sl1_tp2_h8",
+            "entry_ts": "2021-02-11T06:00:00+00:00",
+            "exit_ts": "2021-02-11T10:00:00+00:00",
+            "side": "LONG",
+            "entry": 44691.99,
+            "exit": 46166.20714286,
+            "stop": 43954.88142857,
+            "take": 46166.20714286,
+            "atr": 737.10857143,
+            "r_net": 1.862911,
+            "exit_reason": "take_profit",
+            "bars_held": 5
+          }
+        ]
+      },
+      "train_gate": {
+        "pass": false,
+        "checks": {
+          "min_trades": false,
+          "min_expectancy_r": false,
+          "min_positive_folds": false,
+          "max_drawdown_r": true,
+          "screening_bootstrap_probability": false,
+          "cost_stress_positive": false
+        }
+      }
+    }
+  ],
+  "selected_on_train": null,
+  "validation": null,
+  "validation_gate": null,
+  "oos_opened": false,
+  "oos": null,
+  "oos_gate": null,
+  "runtime_boundary": {
+    "research_only": true,
+    "observer_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "decision": "reject_no_train_qualified_spot_lead_candidate",
+  "can_trade": false
+}

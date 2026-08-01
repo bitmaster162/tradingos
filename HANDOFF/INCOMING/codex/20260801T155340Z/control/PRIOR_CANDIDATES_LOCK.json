@@ -1,0 +1,50 @@
+{
+  "schema": "codex02.forward_edge_evidence_m2b.prior_candidates_lock.v1",
+  "source_note": "Values must be re-read and verified against the exact repository documents before execution.",
+  "candidates": [
+    {
+      "id": "RANGE_REFINED_FORWARD",
+      "existing_config": "range_4h_short_near_high_lb40_edge0.2_rr1x2_h16",
+      "filters": "funding_aligned+spot_confirms+oi_expansion",
+      "prior_evidence": {
+        "full_expectancy_R": 0.358554,
+        "holdout_expectancy_R": 0.626488,
+        "cost_stress_plus_10bps_expectancy_R": 0.214236,
+        "segments": "all tested segments positive",
+        "status": "observer_only_needs_forward_observation"
+      },
+      "rule": "No threshold or feature changes. Evaluate only data strictly after the original freeze/cutoff documented in the repository."
+    },
+    {
+      "id": "HYP-SPOT-LEAD-001",
+      "prior_evidence": {
+        "best_rejected_slice": "SHORT",
+        "trades": 43,
+        "winrate_pct": 58.14,
+        "expectancy_R": 0.15985,
+        "stress_expectancy_R": 0.025022,
+        "stable_folds": 4,
+        "preregistered_minimum_trades": 80,
+        "status": "future_fresh_data_lead"
+      },
+      "rule": "Preserve exact fixed specification and original minimum sample. No retuning."
+    },
+    {
+      "id": "LIQUIDATION_CONTINUOUS_SCORE",
+      "prior_evidence": {
+        "q25": 0.426128,
+        "q50": 1.414128,
+        "q75": 5.109507,
+        "minimum_total_resolved": 30,
+        "minimum_inactive": 8,
+        "minimum_noninactive_bin": 8,
+        "minimum_bin_expectancy_R": 0.05,
+        "minimum_delta_vs_inactive_R": 0.1,
+        "bootstrap_10th_percentile_delta": "positive",
+        "previous_resolved": "0/30",
+        "status": "collecting_forward_outcomes"
+      },
+      "rule": "Use only outcomes produced after the frozen score lock. Never rebuild bins from outcomes."
+    }
+  ]
+}

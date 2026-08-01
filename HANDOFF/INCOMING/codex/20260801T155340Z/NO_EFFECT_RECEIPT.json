@@ -1,0 +1,21 @@
+{
+  "NO_FURTHER_AGENT_WORK": true,
+  "can_trade": false,
+  "capital_effect": false,
+  "capital_permission": "DENY",
+  "credentials_accessed": false,
+  "dependency_install": false,
+  "deploy_permission": "DENY",
+  "git_porcelain_before_commit": [
+    "?? HANDOFF/INCOMING/codex/20260801T155340Z/"
+  ],
+  "network_market_download": false,
+  "orders_sent": false,
+  "proposal_scope_only": true,
+  "runtime_or_registry_mutation": false,
+  "scheduler_or_service_mutation": false,
+  "schema": "codex02.m2b.no_effect.v1",
+  "self_application": false,
+  "signals_emitted": false,
+  "source_roots_written": false
+}

@@ -1,0 +1,75 @@
+{
+  "all_hashes_match": true,
+  "can_trade": false,
+  "file_sets_match": true,
+  "files": [
+    {
+      "file": "FORWARD_EDGE_DECISION_MATRIX.json",
+      "match": true,
+      "run1_sha256": "47902031b9e30ad72e667b114996a4451aa91c1b182b1c6ec4efec814493f061",
+      "run2_sha256": "47902031b9e30ad72e667b114996a4451aa91c1b182b1c6ec4efec814493f061"
+    },
+    {
+      "file": "HYP-SPOT-LEAD-001_M2A_EVIDENCE.json",
+      "match": true,
+      "run1_sha256": "044e1931c40eddcf4c2af14ef59c9d752729a71ece5939e5f76e139533623c46",
+      "run2_sha256": "044e1931c40eddcf4c2af14ef59c9d752729a71ece5939e5f76e139533623c46"
+    },
+    {
+      "file": "HYP-SPOT-LEAD-001_M2A_TERMINAL.json",
+      "match": true,
+      "run1_sha256": "b97eb5666daebd930d355210e6ba36408b18191188929a9fd102f9ba1e77df4d",
+      "run2_sha256": "b97eb5666daebd930d355210e6ba36408b18191188929a9fd102f9ba1e77df4d"
+    },
+    {
+      "file": "HYP-SPOT-LEAD-001_RESULT.json",
+      "match": true,
+      "run1_sha256": "99e1b03639e3337bcb5248976258820bf2d44ee8a7db597785b81a01bbaced43",
+      "run2_sha256": "99e1b03639e3337bcb5248976258820bf2d44ee8a7db597785b81a01bbaced43"
+    },
+    {
+      "file": "LIQUIDATION_CONTINUOUS_SCORE_M2A_EVIDENCE.json",
+      "match": true,
+      "run1_sha256": "2d5255cefeb53a4dc590565d72f834aeba0951a2b2d6fd722d7cc68a346f7060",
+      "run2_sha256": "2d5255cefeb53a4dc590565d72f834aeba0951a2b2d6fd722d7cc68a346f7060"
+    },
+    {
+      "file": "LIQUIDATION_CONTINUOUS_SCORE_M2A_TERMINAL.json",
+      "match": true,
+      "run1_sha256": "b97eb5666daebd930d355210e6ba36408b18191188929a9fd102f9ba1e77df4d",
+      "run2_sha256": "b97eb5666daebd930d355210e6ba36408b18191188929a9fd102f9ba1e77df4d"
+    },
+    {
+      "file": "LIQUIDATION_CONTINUOUS_SCORE_RESULT.json",
+      "match": true,
+      "run1_sha256": "8148953f92ac2535dfe95cd939990d5f5bbfe4bd5118417ded3689f997aa6aa2",
+      "run2_sha256": "8148953f92ac2535dfe95cd939990d5f5bbfe4bd5118417ded3689f997aa6aa2"
+    },
+    {
+      "file": "RANGE_REFINED_FORWARD_M2A_EVIDENCE.json",
+      "match": true,
+      "run1_sha256": "64e34b7228c777bf27efb35f48aeed1138e53e17db6a73fa3f07cf4e2efd0263",
+      "run2_sha256": "64e34b7228c777bf27efb35f48aeed1138e53e17db6a73fa3f07cf4e2efd0263"
+    },
+    {
+      "file": "RANGE_REFINED_FORWARD_M2A_TERMINAL.json",
+      "match": true,
+      "run1_sha256": "c59c2fbec378d4375bea6b372d49c1c03857b847dbcef59a53bdbdf3edeff6c6",
+      "run2_sha256": "c59c2fbec378d4375bea6b372d49c1c03857b847dbcef59a53bdbdf3edeff6c6"
+    },
+    {
+      "file": "RANGE_REFINED_FORWARD_RESULT.json",
+      "match": true,
+      "run1_sha256": "3e17c40191de2a9cd804d7055c26347b43caa4244c5d2feb60fcc655c811812d",
+      "run2_sha256": "3e17c40191de2a9cd804d7055c26347b43caa4244c5d2feb60fcc655c811812d"
+    },
+    {
+      "file": "SOURCE_INVENTORY.json",
+      "match": true,
+      "run1_sha256": "eda0cb387dd51504c23a6521f27fd21d42d04000a4f271a2794feb02ae3aa01a",
+      "run2_sha256": "eda0cb387dd51504c23a6521f27fd21d42d04000a4f271a2794feb02ae3aa01a"
+    }
+  ],
+  "run_count": 2,
+  "schema": "codex02.m2b.determinism.v1"
+}

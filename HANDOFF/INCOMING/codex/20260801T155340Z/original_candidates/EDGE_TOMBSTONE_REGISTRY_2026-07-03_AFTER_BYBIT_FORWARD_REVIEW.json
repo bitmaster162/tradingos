@@ -1,0 +1,254 @@
+{
+  "generated_at": "2026-07-03T06:10:28Z",
+  "tool": "tools/edge_tombstone_registry.py",
+  "decision": "edge_tombstone_registry_active",
+  "can_trade": false,
+  "entries": [
+    {
+      "id": "trend_mix_4h_oos_failed",
+      "family": "TREND_MIX_4H",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Train winner failed untouched calendar OOS.",
+      "evidence": {
+        "decision": "reject_oos_gate_failed",
+        "current_lock_status": "paper_shadow_collecting_2026-06-29",
+        "current_lock_can_trade": false,
+        "train": {
+          "trades": 77,
+          "wins": 37,
+          "losses": 40,
+          "winrate_pct": 48.052,
+          "expectancy_r": 0.576985,
+          "net_r_total": 44.427877,
+          "avg_win_r": 2.396052,
+          "avg_loss_r": -1.105651,
+          "max_drawdown_r": -7.101038,
+          "max_losing_streak": 6
+        },
+        "oos": {
+          "trades": 26,
+          "wins": 7,
+          "losses": 19,
+          "winrate_pct": 26.923,
+          "expectancy_r": -0.387527,
+          "net_r_total": -10.075693,
+          "avg_win_r": 1.583268,
+          "avg_loss_r": -1.113609,
+          "max_drawdown_r": -12.188754,
+          "max_losing_streak": 7
+        },
+        "oos_gate": {
+          "pass": false,
+          "checks": {
+            "min_trades": true,
+            "min_expectancy_r": false,
+            "winrate_above_cost_free_breakeven": false,
+            "min_stable_folds": false,
+            "max_drawdown_r": false,
+            "cost_stress_positive": false
+          }
+        }
+      },
+      "reuse_rule": "Do not retune on opened OOS. Only materially new preregistered trend mechanism may be tested."
+    },
+    {
+      "id": "range_refined_4h_oos_failed",
+      "family": "RANGE_REFINED_4H",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Range train edge failed untouched calendar OOS.",
+      "evidence": {
+        "decision": "reject_oos_gate_failed",
+        "train": {
+          "trades": 50,
+          "wins": 27,
+          "losses": 23,
+          "winrate_pct": 54.0,
+          "expectancy_r": 0.283264,
+          "net_r_total": 14.163217,
+          "avg_win_r": 1.415983,
+          "avg_loss_r": -1.046448,
+          "max_drawdown_r": -7.040687,
+          "max_losing_streak": 5
+        },
+        "oos": {
+          "trades": 29,
+          "wins": 11,
+          "losses": 18,
+          "winrate_pct": 37.931,
+          "expectancy_r": -0.240632,
+          "net_r_total": -6.978334,
+          "avg_win_r": 1.194203,
+          "avg_loss_r": -1.117476,
+          "max_drawdown_r": -7.312613,
+          "max_losing_streak": 4
+        }
+      },
+      "reuse_rule": "Do not revive same family/parameters. Only new preregistered range mechanism with untouched validation."
+    },
+    {
+      "id": "crowd_fade_1h_negative",
+      "family": "CROWD_FADE_1H",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Crowd fade failed broader historical validation and first independent forward evidence.",
+      "evidence": {
+        "historical": {
+          "trades": 2502,
+          "winrate_pct": 37.49,
+          "expectancy_r": -0.112448,
+          "holdout_expectancy_r": -0.203513,
+          "stable_folds": 0,
+          "source_report": "docs/CROWD_FADE_POSITIONING_DIAGNOSTIC_2026-06-19.json"
+        },
+        "forward": {
+          "resolved": 1,
+          "expectancy_r": -1.0,
+          "winrate_pct": 0.0
+        }
+      },
+      "reuse_rule": "Keep rejected unless materially better independent positioning data is acquired and preregistered."
+    },
+    {
+      "id": "basis_shock_validation_failed",
+      "family": "BASIS_SHOCK_REVERSION",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Multi-symbol validation failed after train selection.",
+      "evidence": {
+        "decision": "reject_validation_gate_failed_oos_unopened",
+        "selected": null
+      },
+      "reuse_rule": "No validation retune. Only new mechanism allowed."
+    },
+    {
+      "id": "basis_shock_funding_alignment_validation_failed",
+      "family": "BASIS_SHOCK_FUNDING_ALIGNMENT",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Positive basis-shock plus funding-alignment candidate failed validation gate after train selection.",
+      "evidence": {
+        "decision": "reject_validation_gate_failed_oos_unopened",
+        "selected": "basis_shock_funding_align_z720_e2.5_x0_b20_fund3x2_fx0_h72",
+        "search": {
+          "tested": 432,
+          "train_qualified": 13
+        },
+        "validation_gate": {
+          "pass": false,
+          "checks": {
+            "min_trades": false,
+            "min_mean_net_bps": true,
+            "min_positive_pct": true,
+            "max_drawdown_bps": true,
+            "min_positive_folds": true,
+            "cost_stress_positive": false
+          }
+        }
+      },
+      "reuse_rule": "Do not loosen validation min-trades or cost-stress gates. Only a materially new preregistered basis/funding mechanism may be tested."
+    },
+    {
+      "id": "basis_funding_carry_validation_empty",
+      "family": "BASIS_FUNDING_CARRY",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Selected carry rule produced no validation trades.",
+      "evidence": {
+        "decision": "reject_validation_gate_failed_oos_unopened",
+        "selected": null
+      },
+      "reuse_rule": "No threshold loosening on opened validation."
+    },
+    {
+      "id": "basis_dispersion_train_failed",
+      "family": "BASIS_DISPERSION_REVERSION",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Preregistered dispersion grid had zero train-qualified configs.",
+      "evidence": {
+        "decision": "reject_train_gate_failed_validation_and_oos_unopened",
+        "configs_tested": 324,
+        "train_qualified": 0,
+        "train_stage": {
+          "trades": 111,
+          "mean_net_bps": -4.829106,
+          "median_net_bps": -8.410495,
+          "positive_pct": 26.126126,
+          "total_net_bps": -536.030723,
+          "max_drawdown_bps": -609.84887
+        }
+      },
+      "reuse_rule": "Reject this dispersion formulation. Do not mine around it without a new preregistration."
+    },
+    {
+      "id": "bybit_liquidation_forward_lock_failed",
+      "family": "BYBIT_LIQUIDATION_FORWARD_OBSERVER",
+      "status": "tombstoned_no_retune",
+      "can_trade": false,
+      "reason": "Locked Bybit liquidation observer met sample/resolution gates but failed required positive-horizon evidence.",
+      "evidence": {
+        "runner_decision": "bybit_forward_gate_runner_manual_tombstone_review_required",
+        "review_decision": "bybit_forward_review_pack_tombstone_candidate_manual_review_required",
+        "review_action": "manual_tombstone_review",
+        "sample_progress": {
+          "event_bars_current": 20,
+          "event_bars_required": 15,
+          "event_bars_deficit": 0,
+          "liquidation_events_current": 259,
+          "liquidation_events_required": 30,
+          "resolved_records": 57,
+          "sample_ready": true,
+          "resolution_ready": true
+        },
+        "horizon_progress": {
+          "1": {
+            "current": 20,
+            "required": 15,
+            "deficit": 0,
+            "ready": true,
+            "mean_after_cost_bps": -18.447885,
+            "passes_cost_buffer": false,
+            "winrate_positive_pct": 35.0
+          },
+          "2": {
+            "current": 20,
+            "required": 15,
+            "deficit": 0,
+            "ready": true,
+            "mean_after_cost_bps": -14.074168,
+            "passes_cost_buffer": false,
+            "winrate_positive_pct": 55.0
+          },
+          "4": {
+            "current": 17,
+            "required": 15,
+            "deficit": 0,
+            "ready": true,
+            "mean_after_cost_bps": 2.193423,
+            "passes_cost_buffer": true,
+            "winrate_positive_pct": 52.941
+          }
+        },
+        "data_quality_decision": "bybit_liquidation_data_ready_for_preregistered_research",
+        "data_quality_hard_failures": []
+      },
+      "reuse_rule": "Do not retune horizons, thresholds or context on the opened forward sample. Keep only materially different preregistered liquidation mechanisms, such as timing/volatility continuation."
+    }
+  ],
+  "summary": {
+    "tombstoned": 8,
+    "families": [
+      "BASIS_DISPERSION_REVERSION",
+      "BASIS_FUNDING_CARRY",
+      "BASIS_SHOCK_FUNDING_ALIGNMENT",
+      "BASIS_SHOCK_REVERSION",
+      "BYBIT_LIQUIDATION_FORWARD_OBSERVER",
+      "CROWD_FADE_1H",
+      "RANGE_REFINED_4H",
+      "TREND_MIX_4H"
+    ]
+  },
+  "policy": "Tombstoned families cannot be promoted, retuned on opened OOS/validation, or reintroduced without a materially new preregistered mechanism."
+}

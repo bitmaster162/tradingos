@@ -1,0 +1,53 @@
+{
+  "c_free_gib_at_start": 15.226,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "control_manifest_files": [
+    {
+      "actual_sha256": "3a2b9b42dce716a90eca001837434a332c70da5f37c9c184b3cef88d3ed8ea8d",
+      "bytes": 356,
+      "file": "00_READ_FIRST.md",
+      "match": true,
+      "sha256": "3a2b9b42dce716a90eca001837434a332c70da5f37c9c184b3cef88d3ed8ea8d"
+    },
+    {
+      "actual_sha256": "c6c75e0dee89d69b2ef5927d196f741d9e27d4c74c2a280636182bfed1cdd1ba",
+      "bytes": 6392,
+      "file": "CODEX02_FORWARD_EDGE_EVIDENCE_M2B.md",
+      "match": true,
+      "sha256": "c6c75e0dee89d69b2ef5927d196f741d9e27d4c74c2a280636182bfed1cdd1ba"
+    },
+    {
+      "actual_sha256": "7690657baeeaddb6cd65f32f5e8667c8f46e8f726a4d81a90efaa1f9a767b993",
+      "bytes": 599,
+      "file": "COPY_PASTE_PROMPT.md",
+      "match": true,
+      "sha256": "7690657baeeaddb6cd65f32f5e8667c8f46e8f726a4d81a90efaa1f9a767b993"
+    },
+    {
+      "actual_sha256": "3cb566dcff1214fd77e730c44d768a3401de1144054de48bf80983167db6d2d4",
+      "bytes": 1002,
+      "file": "CURRENT_BINDING.json",
+      "match": true,
+      "sha256": "3cb566dcff1214fd77e730c44d768a3401de1144054de48bf80983167db6d2d4"
+    },
+    {
+      "actual_sha256": "2077641b54fa0899d651ec1a4a239c38e399baef93816482784cfadb7d15432b",
+      "bytes": 1886,
+      "file": "PRIOR_CANDIDATES_LOCK.json",
+      "match": true,
+      "sha256": "2077641b54fa0899d651ec1a4a239c38e399baef93816482784cfadb7d15432b"
+    }
+  ],
+  "control_manifest_pass": true,
+  "d_free_gib_at_start": 322.917,
+  "dependency_install_performed": false,
+  "deploy_permission": "DENY",
+  "dispatch_zip": "C:\\Users\\coins\\Downloads\\CODEX02_FORWARD_EDGE_EVIDENCE_M2B_20260801.zip",
+  "dispatch_zip_sha256": "6b689def396cf2166641910e87ee35b81c24466955df54549abb3c3367c8d949",
+  "large_build_performed": false,
+  "predecessor_verified": true,
+  "scratch": "D:\\codex02_m2b_20260801T154214Z",
+  "slot": "CODEX-02",
+  "task": "TRADING_EDGE_FORWARD_EVIDENCE_M2B"
+}
