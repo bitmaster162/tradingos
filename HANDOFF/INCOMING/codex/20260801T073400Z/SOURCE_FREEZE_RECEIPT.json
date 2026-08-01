@@ -1,0 +1,15 @@
+{
+  "schema": "TRADINGOS_EDGE_RESEARCH_M1_SOURCE_FREEZE_RECEIPT_V1",
+  "frozen_at_utc": "2026-08-01T07:49:25.2746053Z",
+  "preregistration_commit": "d8d560020e91a0c082e11e1f227ee5be42caedb0",
+  "source_manifest": "SOURCE_MANIFEST.json",
+  "source_manifest_sha256": "000b41f8eea0ef52e223350b5f412b2216eb75e8a04e3f6c10715f8eeeb1a0c7",
+  "archive_count": 307,
+  "archive_bytes": 2933566,
+  "zip_integrity": "PASS",
+  "bad_zip_members": [],
+  "evaluation_started_before_freeze": false,
+  "source": "public Binance Vision read-only archives",
+  "can_trade": false,
+  "capital_permission": "DENY"
+}

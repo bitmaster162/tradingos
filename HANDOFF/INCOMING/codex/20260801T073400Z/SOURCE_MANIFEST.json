@@ -1,0 +1,3077 @@
+{
+  "files": [
+    {
+      "archive_granularity": "daily",
+      "bytes": 5163,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.348467+00:00",
+      "sha256": "e48450f1b481c021a65ae427db397af7437601e7c6c9231c372dd65617045a6f",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5089,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.547461+00:00",
+      "sha256": "0d4ee175bb8808cccafc352b9d8d6a97601ca1ab40734f9d4e18a54541619c20",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5048,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.365469+00:00",
+      "sha256": "7633036756c5300460295d128698ad0f00188599e1b6b74fdaed284f3a36fd49",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4954,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.580509+00:00",
+      "sha256": "2a8b0e810681b404c18c9d30ee2b66c1f4bfa5d6da334419092a0e7d01bd144a",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4950,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.656622+00:00",
+      "sha256": "ba8acee0788d890f4a2dc56d422c91753c04486252734969ca7070b85dcc1864",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5154,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.351467+00:00",
+      "sha256": "bf6219bf95b6914cad76d83a80e5f252e08091fb2ee8c30ce14f99b1e7c70b97",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5078,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.350463+00:00",
+      "sha256": "473e5d9a484096b4b074b97a40ceee68bf8690a092bcbd3c68c53f8ca07ea23d",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5113,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:02.976439+00:00",
+      "sha256": "690796bafc653c7dd45c9ef3caf925afbbf18b76b68f6d5f727d8286b2549a1d",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5087,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.094038+00:00",
+      "sha256": "26a9625a416372f230be6597f9420ce9c2204866550a4179d038e2c81c221326",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5054,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.601008+00:00",
+      "sha256": "d811d5804edce5c54ef9a1adf8116b6622945f55d817e2f1c981adb61c2613b3",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4825,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.221046+00:00",
+      "sha256": "e13c513b56dfab5d3905ba897fac0384ddc90ac89aac9fcbd357eec007dd4b55",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4919,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.326367+00:00",
+      "sha256": "4bd08216f8f5b7c3b37b2a2ceba068e399f0e7092bdee87168d18295b9de1641",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5115,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.555378+00:00",
+      "sha256": "f8dee2f06bbf2b6f55b3d7dc6bb0b53492c465fbf2e13823a5a74a5e1f7da35d",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5031,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.327366+00:00",
+      "sha256": "1ec7147f51f46ae2576a0dc1631dbd3d034c5f31492f58a25fdc86055538c072",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5010,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.601008+00:00",
+      "sha256": "1b36b3db92e4fe9c570905553f811dc7ab4e8151ec988e34b88a22261bff2807",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5031,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.925071+00:00",
+      "sha256": "7741fd3464043895f98f9c458df9ab8438baa0df27f4c93c0cf9d08901b8f6ba",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5068,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.198138+00:00",
+      "sha256": "3f8fc7a17bb69ed99a4d6a7164817f8e47032691050a54a874d5c48684e5798a",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4833,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:03.927084+00:00",
+      "sha256": "388b7e83a82232b816b566b8694597768e39a9f43665a38faaeee784a3fad610",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4888,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.441676+00:00",
+      "sha256": "f4bbb9e225d5130551d73b58a4440062f8e70963b537bec3f759c795212a0b53",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5093,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.197136+00:00",
+      "sha256": "00b375cdf7f5184e93a55bfbe10403919dc2362219d52f7aaabb83fe7e469b81",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5044,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.566602+00:00",
+      "sha256": "959dfab41f2203c18956407eb96654f9a8f556becfbedd47fa82d851dda96746",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5016,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.567688+00:00",
+      "sha256": "bd0aa9554c2dfbe8228f65dfef77a4d04f15ea7833b00fbb7abab88cf6b10b90",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5009,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.567688+00:00",
+      "sha256": "b2b14c83e8d049ee76007b4d950246807d61086bbd71524be351fbbb1881dad5",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5028,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.957701+00:00",
+      "sha256": "0313518779ff3fdbc0b4ffc0759b5eb058636a522126b273c5c81ce5ba907c78",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4812,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:04.957701+00:00",
+      "sha256": "2e3ad1ca330f81217feb8a8c01e66bc00d1d63c21d84993a5cfbaff5317dd8f8",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4855,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:05.256613+00:00",
+      "sha256": "4e21d0f062b39e18a370250d9bed4db822c2e5f44b1b920db4804a560328e93b",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5048,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:05.256613+00:00",
+      "sha256": "4759738e5a4ef953e75bf34968f46e0f30da1cd6c46f42c0b66e0f5cc58ffc89",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5049,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:05.542895+00:00",
+      "sha256": "38fa6c3d4bada850dc2daadd7de75f5b0757ac8c3e9d6e15439f1b6a57ccfebf",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5103,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:05.802179+00:00",
+      "sha256": "8ab15eb4e5943f6b7d03936e91af4835bf1702006db1976ef48e42f9c522b13a",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5018,
+      "path": "futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:05.802179+00:00",
+      "sha256": "50ff22e8ac23af7ee94a420f0da12c32faab8ec9f9f4fd218be52522b8dbf93e",
+      "source_class": "btc_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/15m/BTCUSDT-15m-2026-07-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1586,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:05.542895+00:00",
+      "sha256": "8a6a35d42ce6c21a576620532db16c7747493544d6e286a39614532fc49c553f",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1562,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.072361+00:00",
+      "sha256": "8aa5e2b0cf0725064b92421c20ff477e7af849ea27a13b977401ae4c8584dc47",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1563,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.073361+00:00",
+      "sha256": "e27b6e94099fe025a8db5e1ef0477f03d2a81ae6a6e8222f8c965a4387338739",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1524,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.559304+00:00",
+      "sha256": "8359aeccb289a68834829a1ff0944a5b122a9315a000f434e2e4d03552c315bb",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1527,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.557293+00:00",
+      "sha256": "255b7b3937a23e88a82b0bac3c06bc575373a0d833801a6fea5e9e87f562aa02",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1566,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.359431+00:00",
+      "sha256": "9df60dc16702754f32f7f3f156b20a92632451b06daca60e8ce9422049a4036a",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1559,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.559304+00:00",
+      "sha256": "7c5749911e5a04c8327d8d4a69e4122c428201d00ab1bb59f7285550e796ddce",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1563,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.559304+00:00",
+      "sha256": "8caf1305356ed707c00f67bb22c9502c57612ad30911c68104b4f48c740b7415",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1572,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:06.839260+00:00",
+      "sha256": "296a66dfa5d77b179535a1d320615f48d1c3f455de8d300bf6c74b5e3558810e",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1560,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:07.365139+00:00",
+      "sha256": "100112478099517ce8d857d4ad8fddede98bcfafbe9b3f851e857ec367edb578",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1501,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:07.368367+00:00",
+      "sha256": "0c686960c03e936a4393213736a78e50b8256ad2a82e81946448fe4ce681434a",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1527,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:07.620134+00:00",
+      "sha256": "984ca9241d3869a4edebdf8aad3cacd59ed3fff18661b5df4b13e1fbe68b5e6d",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1569,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.018558+00:00",
+      "sha256": "f28e4242271edd2ea3519c3c3100587b93d79fb11319535f5b0a8035629bf2cc",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1554,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:07.747926+00:00",
+      "sha256": "473d34fa58d2940236d9b1625fc8f780235c913fb12a7f40ed61f23d87c378e2",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1543,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:07.873024+00:00",
+      "sha256": "91d91e06d3200a764ab1abd338613b4e9d5638d83a2ac5dce45e1d54249c7429",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1552,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.155934+00:00",
+      "sha256": "a9928f9dfaf8d83cf1b14aebdedc56fc7568a0324bca78a0693b654814507389",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1564,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.155934+00:00",
+      "sha256": "9f17f20d4fbec017291e0b8c5c769d2db8ea80ab10a05c08d14f10a606a58463",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1494,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.602296+00:00",
+      "sha256": "599c5c4ea1d65a5e2a9b5730bbef64e2feb23ff2de15392804b6f081d8fe68f5",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1508,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.305670+00:00",
+      "sha256": "f660f2a6a1a3b4ec3523e774c7817ed4f2e01924ad8ddc318f8b76ae2bbb59ef",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1561,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.155934+00:00",
+      "sha256": "30186aaf73d5b5de1f7ca35b169c0a7bca56baa8fa0fcc4ad3b99351507c585f",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1546,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.604305+00:00",
+      "sha256": "8950645a8076e347b8d178ddf48a6203022a4952cc62c4514483fb34dea3b643",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1539,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.806907+00:00",
+      "sha256": "1f59659bb4c2ff8aefa27e5458f29dc68a6e4441f6fc74e2cc02875b51a2eef8",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1541,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:08.916181+00:00",
+      "sha256": "516c042f041877a64f511d4dc3192eff732af420d632b8563a93ac7ed1ca0f69",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1547,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.140217+00:00",
+      "sha256": "f146081913c76ad5e867eaa9ac2eb34a8f0ac91ce813095c07a255b577a44b6f",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1505,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.397088+00:00",
+      "sha256": "d5468ede5991e1a5d4bea5f69563a07ba6f8e0f00528eeb8f087ac1d67c8d209",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1516,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.022290+00:00",
+      "sha256": "f98e1e97690b6df1242ca226f630c6dbd900a10760b510e8f8b0ab635f1adce6",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1538,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.140217+00:00",
+      "sha256": "9d6a60bfc34e77582f42a2a37b9f0250bb08d512f516cd5933170b49d45b854d",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1546,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.397088+00:00",
+      "sha256": "61d96f46fa9c2de8ee05d471ee63050a657efaddde01dce42ce49d18b46152fd",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1559,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.397088+00:00",
+      "sha256": "aa2c32e780ca8d0e8b3d9f209d3228532f19cfe01c4344524f620f53d6db0fe4",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 1548,
+      "path": "futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.855453+00:00",
+      "sha256": "b873aca480dd0878d50b7ab49eb43a4bdc00bdea63d8fb63359f7b34d50f852a",
+      "source_class": "btc_1h_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/BTCUSDT/1h/BTCUSDT-1h-2026-07-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5236,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:09.853453+00:00",
+      "sha256": "f7227583f381d881491e2de3bb876dfce7e7783eef35866093b48800c877123a",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5221,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.191523+00:00",
+      "sha256": "c854c5cda168d005e9222ccd467ba0509662efeee036dd95eefbe512a3578fe8",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5209,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.194527+00:00",
+      "sha256": "0e83789b2a4e5e2632a9540436952682528623dffb320ddb5cfac742165afd8e",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5085,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.342244+00:00",
+      "sha256": "fd1d6871fc659b100e957e2bd2e33f5d9538cad80bf4279e3393e3baab38fdda",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5116,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.700654+00:00",
+      "sha256": "11fb7b71016b265796d34fdc0f44f25d265bbf96a446e1651d93eea6ce30e1f3",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5239,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.701655+00:00",
+      "sha256": "7fc93a6e43c2160cf8056001583f8f5b08567e3159d94f459c06c63e40f93f1e",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5196,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.703658+00:00",
+      "sha256": "b5511693075394f06b06d2c35275886a84d690c1796cc903b170a8fd0a7e51c6",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5176,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:11.237853+00:00",
+      "sha256": "6d4015d4c3f633a44d51bdfe137d5a82cfaaeafed13402f282656141d7f03c2a",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5139,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:10.901274+00:00",
+      "sha256": "0b7704a3c45859a7833f26629876a0cac73b796f9f33b3524ff18a2887f6c5d1",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5116,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:11.534499+00:00",
+      "sha256": "ef96b89b67ab104c919c88091acdc485ee930205fe56b5839bfa97bd684e2592",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5029,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:11.375817+00:00",
+      "sha256": "d51cb0ec0f396709476dd2dade7d16fedcdcd19d317b742a76e34cb61fdc7df2",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5064,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:11.540286+00:00",
+      "sha256": "8e8f4aeeb1161b87de0f7a6c2214c94a9f2ab67789863f4d92ffa68759de188c",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5207,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:11.867948+00:00",
+      "sha256": "8abf4f441f3f044336765d78f2b7aadd29536a88d46ca1891801ef33fa5d4bd4",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5156,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:12.155985+00:00",
+      "sha256": "235ad234baca431d86d1d349202ea0841a8314985fb17fc215c5429889a14787",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5179,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:11.968755+00:00",
+      "sha256": "4af539cd8da1c0ce723b91fe061969f9b9df3e085903e089917be702495c2ae7",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5143,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:12.155985+00:00",
+      "sha256": "5b332236276b30813799f5fce2f4062080293494e84c7efc4fa05932e8b7c88a",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5177,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:12.499918+00:00",
+      "sha256": "071936dcac5a2bfaae954b22fd338f020fcc9fcaf9b522d4d73c0db6a2d890e4",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4919,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:12.801141+00:00",
+      "sha256": "dbfdd070e6bafa709049c674e66651f442f3e58a6ff2b14c7bf4250db4952a79",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4992,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:12.803334+00:00",
+      "sha256": "591009f5458489bf5f4aeb4b906f3aa20caec902372e9993f2ddb246f30a4b76",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5212,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:13.137311+00:00",
+      "sha256": "061b20a8998aeef3786ec4769a4c09afc79a017c58dc353ccc98dadca7ce3262",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5120,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:13.139312+00:00",
+      "sha256": "269d1d79b22524c8fe60e40e23259bc3aaf8e2bcebe95040cdc50e513a179ec6",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5158,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:13.320255+00:00",
+      "sha256": "1edf0febc3fb98a6607b41b11bfb533e96e6a69d530f58ca72550fcbc75c5bfd",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5130,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:13.476445+00:00",
+      "sha256": "a78c8de7e0926d522dac1497175bfa01df9d70766cf0fcc1d13ea4956a33c50d",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5092,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:13.618796+00:00",
+      "sha256": "5fe4f6e97b111367d81edcaba2e10b2a2c213e90eaa85727fad1182299d6735f",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 4939,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:13.618796+00:00",
+      "sha256": "6a999579c5dea36c9b16c169a7c5bc4be498ba9345ae5de04c399d0c363707e0",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5033,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.234762+00:00",
+      "sha256": "7539666799e14b6e2718336602f8c60316116a6f656bdf9c94f38de652ef442c",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5211,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.068401+00:00",
+      "sha256": "6f2c9449526d498c8e60d72a98b64e6c00f3064be9ea53d634d83a4da54c2b6c",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5188,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.233384+00:00",
+      "sha256": "1ffb5743000a14eeacb7231318acbf741890de207ed1817579a852a193afd305",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5201,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.236774+00:00",
+      "sha256": "cb95410a145a65d3196822f00ffb07816c4a8c6d0f574b25573718e1fdcd074f",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 5099,
+      "path": "futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.234762+00:00",
+      "sha256": "a3516216b9b52681d343c4c1133670ac0663e5cc06fad8385decdbc4d46cf6cd",
+      "source_class": "eth_15m_oos",
+      "source_id": "binance-vision:futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/klines/ETHUSDT/15m/ETHUSDT-15m-2026-07-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11122,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.795790+00:00",
+      "sha256": "3008a0830c105f901b4f82dbe92bbd6468d53968d3f868c7b6130040e54e9835",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11420,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:15.089999+00:00",
+      "sha256": "012aa28e09b2878795adaa3f4e8810d5c48384aae9dd814d9358b79c6afdffdc",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11067,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:14.797929+00:00",
+      "sha256": "00270771cd9feaeaeac340893a7a987c3ad2477d1764083486faf14249b91a75",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10952,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:15.424181+00:00",
+      "sha256": "b40aeed3e31a925bedfd9d6457505f72b3791eff1498e374eba4465380b0b34a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11397,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:15.266705+00:00",
+      "sha256": "4da73104577508fbbe800774dc4b40da7a981c4c8e2182f58af58e6a410b26e0",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11319,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:15.899023+00:00",
+      "sha256": "45fda697703b230e61ea7af885491f2b7eac48ecba22be265eb3f74f00cce3c6",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11405,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:15.263692+00:00",
+      "sha256": "afe83c864a8cb280cc3dcd1e8b3e64d86f5fcf1fe2132a4ba0bc299f47973ca9",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11489,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:16.100886+00:00",
+      "sha256": "ef1d02349b8bf19c69071a63d66decc183c1fe0080e61d361f5c9b419e248558",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11194,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:16.101887+00:00",
+      "sha256": "8c841c0ffb75e2bf4f3ffdc8ebf31e3b5201a3fc531e9e74e6d356789df190bd",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10913,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:16.101887+00:00",
+      "sha256": "cd9efc8a68729c91f2aa5ddcab8c28bdcd1b4f25512c7c24c1cf325cc8574814",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10996,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:16.101887+00:00",
+      "sha256": "452ad0788b5e6919408c246fdfc41a5b446c4f6bf999e2f1cf33d55b71e83bbe",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11426,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.068450+00:00",
+      "sha256": "2034436aaaedff72ef031e562d37fcd7930ad899e83a9228accf06735577c60c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11395,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.071450+00:00",
+      "sha256": "00a51e532465e1ec482f132efcbe6e10c33861657938c1d87b80031aad893f8a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11199,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.754106+00:00",
+      "sha256": "49bc5bec89b03cecd572c30e2b1ca48f36e893c81bbba176c03f57233373ddd2",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11248,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.754106+00:00",
+      "sha256": "b078887aba8f420e3ac97771940f73a8d6c1e7f3a3994e2ba79aa521e75a4c9b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10991,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:18.920029+00:00",
+      "sha256": "9dcb273645c3a97d3557398d9d454979a635fafab844463d87362f3d1851f1e1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10903,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.543635+00:00",
+      "sha256": "465e731d146bcd4831be902602f65e0185fc2d989621cb3963b3865f24182e88",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10928,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.754106+00:00",
+      "sha256": "140e2c39979aa93c5ee02ffa1eea29cc99ecbdd8f6ebc7eaa4cae2a9f640e068",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11221,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:17.750714+00:00",
+      "sha256": "5095790c1ecab53165e11fa3479d8d6673d06cbe2bb763bee2f0fd361dbfcbed",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11360,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:18.540097+00:00",
+      "sha256": "f22360ce08acc6e103397be363471f390b6480ff4586742d17bfb2d0792aa9dd",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11408,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:18.537103+00:00",
+      "sha256": "dcffd4792c4e77ce639953c3d98332bcdad4432f61b67df1f17864c65ad53399",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11237,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:18.828677+00:00",
+      "sha256": "e3fcc6118e611b4f1744a9253cafa57d32e569ee868177e82167ee3e41fbe250",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11284,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:19.327654+00:00",
+      "sha256": "50ec0b495e8a37873a02d1571c428065769028912fddfd55ef8cce4216eddfc7",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11009,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:19.330346+00:00",
+      "sha256": "56311cdbec78381b3dd49615c7f86a4916845594a270588fcfca5d1f92fea287",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11267,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:19.734763+00:00",
+      "sha256": "857305695119d49b8ae4a8bdeaaea870fee08110c61cf6f586b271aab794fe80",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11359,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:19.330346+00:00",
+      "sha256": "e199d01c9e3a342016ae25b768d3c2dd4862033863754c7c48da16be765c877b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11337,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:20.153171+00:00",
+      "sha256": "41a2adda053d7a08fc44b2b4e3804aaf1d32fe6ee271707ac3ca046db9b8e7aa",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11154,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:20.153687+00:00",
+      "sha256": "f0c2056db1b2d3ff8eaa350df85c31c653ca121bd05ea978e7d17ab9505acb41",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11426,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:20.546744+00:00",
+      "sha256": "d9a63bd4a5dd04643c273a85b7b1d73455728a7f14d89a32db791bdb1ead8c46",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11460,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:20.543938+00:00",
+      "sha256": "7a5b55d55079e8ca3246de4e3cefbea20cfefc0e92625597c6ec617bfc565e85",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11375,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-31.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:20.547253+00:00",
+      "sha256": "4372a02b27771ee95f9fc9ec7298b3c0f1e053d955ead3a93e47d51246d5be44",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-31.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-01-31.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11309,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:20.785341+00:00",
+      "sha256": "9564ba27bca3ff8b9ee1f51781dece8a5c6187416abf95c97051497942fd589a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11390,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:21.258533+00:00",
+      "sha256": "df52a703338ebc960e77df82cd0fcdf8204d64b1a416f9e41521395ca84927d5",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11464,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:21.259544+00:00",
+      "sha256": "1da30a2eeaf51125957f8271814576d4cd08885ea7456e5c9c8ad8fa0d61803e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11449,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:21.630317+00:00",
+      "sha256": "8ccd91644b802c4598c04e66c79082c29d7b573552e346236a90c8cbc89baa77",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11508,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:21.630317+00:00",
+      "sha256": "7ebe9d57e5a6f1de7ab51b06197768a7513aa45ae91f71d0afbbdb4fbea13815",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11555,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:21.781596+00:00",
+      "sha256": "6f6544637bef2220772397b2326f511c18f9b851b93be9a663365bf6559d96a3",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11331,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:22.161920+00:00",
+      "sha256": "fbbf29064c9624d42875c93c9aa1671b2da002761c90e3b091750b0e34c12129",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11180,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:22.160918+00:00",
+      "sha256": "99c3d5a86bc9cc7d4d3ae02c2a1eab434f7c42af2d618cbc06948f9fe47fd473",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11270,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:22.161920+00:00",
+      "sha256": "9c3bf0de19ab0147c26d9b1518910ea20f4bec06cabb6577fd1f0ed719c72037",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11285,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:22.744898+00:00",
+      "sha256": "22f7953d4a817832a5b442b1daed55ee9b2363b5116fc726153a1646a1eca31d",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11349,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:22.744898+00:00",
+      "sha256": "2475e2845663023b184b33c68dc95f7c4e8c14027272db44602baf465d886968",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11224,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:23.643214+00:00",
+      "sha256": "7c018f7e558a24cffd9241d7e21f3fd561ad452bf8c8a2359701ba1524774456",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11260,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:23.149838+00:00",
+      "sha256": "fc6ceabe3c050cef71c610a67ff1d9e21b8771c61122ddc79f9634e1e098f737",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11152,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:23.148837+00:00",
+      "sha256": "979592b867705ae4279501a1fed6643353d7aa2c6de00a7a59ca2f42a655030f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11302,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:23.723257+00:00",
+      "sha256": "ee181179eab225dbd013e01cd63c8770d8217bf6519e4759e74dbd4f3b087f3f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11170,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:23.559226+00:00",
+      "sha256": "9e6f564191394d4c025a111f83eb7099e9ed067b70fdf5dafe2c40c26f275faa",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11190,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:23.721242+00:00",
+      "sha256": "c44d8b673c2d759496368ccf5f133c6fbf235d75be6e1b248143ab5db3803a4e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11288,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:24.769827+00:00",
+      "sha256": "166d4a0958897d1137b77effb6f851515e840c20f87d437ad0e9153a8b238e03",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11322,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:24.964211+00:00",
+      "sha256": "a333f8662ef5193c37cb0d37a504ec3f7185a3973011a10aea9073b76e655cad",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11312,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:24.968232+00:00",
+      "sha256": "9e137081b37c6db978c9b4dbd55594c31ad4a27c49a0f5ebe66d966f6861a672",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11213,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:24.968232+00:00",
+      "sha256": "079b5ace1c6f4fe2bbf9db3f897c1ce3ae1d124acafdfe5ca2717cc41dafcd8b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11156,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:25.467200+00:00",
+      "sha256": "ac4c6762fe9bb4665dcc99d2c635d1089e6238fb073b41cf4969442d5c29c20d",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11429,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:25.629205+00:00",
+      "sha256": "e8f16cf20a5f284a74724b39ccaacce68f45f8858d8c6d7c43b3374f98dacdaf",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11345,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:25.970317+00:00",
+      "sha256": "b8b0ec6aa0a56a19e117eca0f0436177afeb02027f0aa20ff9a222c878a2de6e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11433,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:25.630282+00:00",
+      "sha256": "37371d3e29b07b680461a13b7841cfe3ac3e4441080fc50ed5bd20a9f76c3ab4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11107,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:25.969002+00:00",
+      "sha256": "2e11aaddc41c3b1b7c9f79b666d2f022eac7f91647968b5ac9e672e2319250d7",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11255,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:26.252320+00:00",
+      "sha256": "3a3e2ab09fa9613fb8991b5e1f09e6c4e31dcb33d093c146615cc579d201985b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11310,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:26.566567+00:00",
+      "sha256": "11e272aa7f5a3976eb36a056bcf1db91ae9b9265aea18ee5e9fe1bb4a1a08ad3",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-02-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11339,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:26.562360+00:00",
+      "sha256": "0041e3e7b908915616e84e8178cea66111bfe37017e36b6f04378f06de35a0b0",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11367,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:26.569567+00:00",
+      "sha256": "668663ea25daa43d60884c64b7ade39137c1e7f55000e29286d1ec89a161fe73",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11406,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:27.215107+00:00",
+      "sha256": "628546553cfbf5f2632cb09d420a3a13fa185d32edc22fc962eebdecac8f932e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11437,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:26.567567+00:00",
+      "sha256": "d43696374f87e94ee5b2cd77aa5723358048e538489173c08e17705198ec8249",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11227,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:27.377649+00:00",
+      "sha256": "7ea4ba30913d829bd6301c73bfb790b89d78fce6630e43fd6583e3448bb15244",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11228,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:27.377649+00:00",
+      "sha256": "1833d2ddda4f8592dd7ef0901f7b457c9d25d8f85b009e943b4e7f43251fa337",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11080,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:27.705355+00:00",
+      "sha256": "443f1324918271829299c843078dbc621536799f712a622c6f56a6cd66e84bb0",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11137,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:28.049239+00:00",
+      "sha256": "0888ba70ca73451088994fde2fead1788a7ef53a35cf1aa45c9e283e74d0775f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11254,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:28.049239+00:00",
+      "sha256": "8d79ec52ce061b6021b92eea50bb5024a4102cfab4c5513ce98395f8a6c1cae2",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11323,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:28.050241+00:00",
+      "sha256": "2d7907c1c27b7f2205c9a00b3de5291d1c62060bcd8623762685e695be1e7555",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11149,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:27.863622+00:00",
+      "sha256": "1ac5d3ac3441cd3e521bd8825c1ac0a3c716dad06005b875ace1886815ac0c30",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11225,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:28.051239+00:00",
+      "sha256": "4c45baf035d34f417ce82059bdc526cc25677043d210d48d2412bc8aed2f3fbb",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11314,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:28.922790+00:00",
+      "sha256": "f9f1bc21d31bd5f8de95c0cd664276b3532625b717097e87daf1acab089c6e72",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10981,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:28.924372+00:00",
+      "sha256": "6a1530d3bac40dc2201d132f8691306290588420505d9b9bb6aa203eddb1bf7c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11047,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.307227+00:00",
+      "sha256": "34bba7aa8f10e6a029963c7eafa1249ddc93e5c2cabb25f601fca61cd07ade1f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11310,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.329972+00:00",
+      "sha256": "10ca5e9eb55706839003a44ffe2ee829c0644bcedc453e938de736abaa36c71b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11257,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.722529+00:00",
+      "sha256": "7b3c1a49dbeeffd33e9eda0b8c787d98b28367670fe05a91dd14a3d3985e334e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11244,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.721516+00:00",
+      "sha256": "1b6b0aef8a5626ce7b9a54b57d35204ad59b6c2fdfa4498f2c9996e68e684a2c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11219,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.721516+00:00",
+      "sha256": "2d94c8f5f756e0476bf9e37ac1bf231e43d80e590f9d514566926dcf6b8fdcef",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11157,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.722529+00:00",
+      "sha256": "142b9665a0f8bd2e0fdc11b2956845b04309c092c68d3362b258fe23f3391c27",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10833,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:29.727330+00:00",
+      "sha256": "5eee113d1d1b0f9f95a8d63d36ed88aa20920e9143eac2de21b881ff57f857fe",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11115,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:30.580417+00:00",
+      "sha256": "8c7270dab829cfa4d2df3f36376e00f2234741308175932f3bdb2728b8d8240b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11291,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:30.976698+00:00",
+      "sha256": "e4fb05228cfbdb62108f26f1705032c7ebaa7d7a33759389bdca042a679bb7f2",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11131,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:30.786145+00:00",
+      "sha256": "a45b605ab25579d418206916c09acdcd4f7fba2d4fb444027d7edebe96b2d94b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11185,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:30.976698+00:00",
+      "sha256": "3cb76ca23278ccf225725062f3ddc9b9d6b017a9b0fb5224362b51789aeed3cd",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11150,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:31.514716+00:00",
+      "sha256": "ac24b74ff5629d3b10235dbbc81e07d53bb7bc66b87538ab2d75b9bafbeb8caa",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11297,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:31.569197+00:00",
+      "sha256": "dfef9a8efaa14408b0fbc3e6ccdda37bbdf9359153a50b2db9ecaef2ad45bb5f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11108,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:30.974698+00:00",
+      "sha256": "0941ec3985eabaf567b703028b3fdcd15f0e1dae0d5714f2c3804b670d20f15b",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11125,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:31.519240+00:00",
+      "sha256": "45f721b437c67548267369335bdbfb9535793ec95423ee359071c1e2f3fd594f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11245,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:31.518242+00:00",
+      "sha256": "decc66c3a57774497b5b29ade2d34155db6c33f35f712ad970c0d888c41727d7",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11384,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-31.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:32.219001+00:00",
+      "sha256": "24f57c10f135daced5f53a07b35870468f7fbe7cc45c8f4316a2f5f71756dde5",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-31.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-03-31.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11177,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:32.724506+00:00",
+      "sha256": "46f8a5e19bf9927ef9023477cd3453561a53632fb848f6c40e1d30edfffcdc20",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11308,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:32.327614+00:00",
+      "sha256": "a1847bb37a37898c20057101364d16de939c9e269db091496b27d5ad8d6967a8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11025,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:32.219001+00:00",
+      "sha256": "ded605af60e985eda7e44890ff4e8b436a1c6946ab44b6c61e7d1135010b6ba8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10874,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:32.906249+00:00",
+      "sha256": "4e9ae79eab8b97f04185b92b42827e65d9b460ed3d3b780e4be1336216b58b6f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11033,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:33.099082+00:00",
+      "sha256": "177acbb580804867502797a665d35d23de8330b9229bcb75cd95b55a1f45690d",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11179,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:33.098080+00:00",
+      "sha256": "91950dbaa051c94f9399d89b94f25af73122330f2efe5eeb5c0448c042632016",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11292,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:33.097080+00:00",
+      "sha256": "1eb45840b70f8f2a4dcfc198686190a1f9f7bd144df94132852cf1c79bf25701",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11220,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:33.666267+00:00",
+      "sha256": "4159f4be82e6b38cd68f29fa92063f3c482d76bc3ea491a667e8a86ad960d63f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11156,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:33.666267+00:00",
+      "sha256": "8d4b6ded0abc05e5bd8acd6638554f239462712a1a8c3e9f2c7f09f499f68bc1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11110,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:33.668279+00:00",
+      "sha256": "c638781f08e0c0c493a65e0bff245775867ac372ed74d4df46b44c56df676b54",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10984,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:34.184710+00:00",
+      "sha256": "1afe69f2657588bf7de3a191148e8eec124ce97a14a8f42911279eb2c23512e9",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11163,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:34.180714+00:00",
+      "sha256": "b7a3d9cdabb4f2070f986862c8c0dafea7b74b7da2d2af61e60a42e0964b4b34",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11191,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:34.361584+00:00",
+      "sha256": "cec0bc53785cbe121e2d2bf0ea89ddd8bc0a3b972f0b7fed973b64b3ee706f52",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11161,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:34.609032+00:00",
+      "sha256": "5cf35a2b7aad17abe4fcfe50fd82eabd211b8fceefdb6312c86051746de34911",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11006,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:34.874763+00:00",
+      "sha256": "3ad4b7c33cc0ef7629cdf10e4a2fdc96905e91a0e21999175a93224cdc81ab8a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11027,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:35.208269+00:00",
+      "sha256": "f33624e86b6e17356afe426a1896e42f1bb4e39b4821a6d8a63d1fc7b444d072",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11210,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:34.960296+00:00",
+      "sha256": "f49418264a151dbcbb16c3bfbb7872fe247ff42a15f00696b0d6cfff35367dd8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11151,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:35.105769+00:00",
+      "sha256": "f47e97c5a09dd4881d9bbf6aa3a9da41e55657cf3625eb664c680251f82d342e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11033,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:35.799030+00:00",
+      "sha256": "f2fd585ea40570e1df3161da1d1562cb1c89dcc48fb9b911f56e17703044410a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11078,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:35.382437+00:00",
+      "sha256": "7fabcd4ba5bc6901f559608e7afd0f8aefa5b159e0505341fcd124ae38b3dd5c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11088,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:35.798033+00:00",
+      "sha256": "4e00ffe3fbf1e5549049a01b965f977b50271dd67ac270004692ba6c6a9f2221",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11255,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:35.644921+00:00",
+      "sha256": "db2a12a325fe5fed026275d691dfb7ba7112de445507be18938e6dbe76765773",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11192,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.242323+00:00",
+      "sha256": "f5423a82397a840148c8b060c3c362a8b94d0e77a2dea7afcd68b70f3acaaf3f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11055,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.397208+00:00",
+      "sha256": "c821578612f0cc5dfd1d71d61bdf5019724e8f09fc879808219e0dac8e84823a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10774,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.546285+00:00",
+      "sha256": "74c2b86ea5aff5f3a1df28f07ed55803ccd364bf45776ac7a78ba44f58375759",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10840,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.843788+00:00",
+      "sha256": "4953fbdb0edbc3d9726a9ea1e82baa3b34d6b9c1925788fab92f2071fbc6d85c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11126,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.544775+00:00",
+      "sha256": "2a9b0fd9f8e1342a7bc7f41eb1e34a76e201b6970445d524197f1e073d6d34da",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11036,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.846191+00:00",
+      "sha256": "051a9686b26195e75b02b4d628d7dc60db91b3e7d3836301d4232cd3063fcbeb",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11234,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:36.843788+00:00",
+      "sha256": "ef5c3eae538901589a461e10bd2ec3acf72e39425695a7a7bae5621d97eb2c61",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11009,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.253838+00:00",
+      "sha256": "ae50fa5b96f59dd56fdc85ca7c6ae976b58f078b75cfd57220e08fb98fc2aebe",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-04-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11137,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.253838+00:00",
+      "sha256": "8d9c62941ce39ac077b0c8baafad04deb0acaeb299c121108e9b61a2e66dc595",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10832,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.477592+00:00",
+      "sha256": "b7d76c4006eb74eeaf61cd8a6c2a677b239ff0cdcc98f74b525d832565ef79fc",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10882,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.562704+00:00",
+      "sha256": "b2dfce7838aa0097b4c752d611798ecf3c5d0139de1bb6dba1137cba030f8c75",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11221,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.658780+00:00",
+      "sha256": "4180eb8d0d1ffbb2df1e8c31c409a324ed5de4a634d9016f669454af0ab87ba1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11092,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.657780+00:00",
+      "sha256": "791cbb823a6c26e888b225a7f9d8ad45707442a8c1207fd5ade4de1b7dd82999",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11021,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:37.656778+00:00",
+      "sha256": "4c6b811041af7246383c103f34ed22ff2b144ffb5039d0a7149da77884755281",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11058,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.051240+00:00",
+      "sha256": "7bc1d6a1c647fa58abb9a5ba595ca55370c6f62820c9e0b36ad19806a3818c18",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10969,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.051240+00:00",
+      "sha256": "c61d2c550d9b2894070f44a05b1c6cc906955abdb83112f3186034b035f0faf1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10872,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.051240+00:00",
+      "sha256": "345392f8c8c62000931cb3f6df9bbd3bd9beedb25e56fbfd2200e8d40d5e1d2e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10873,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.597355+00:00",
+      "sha256": "43b48b74ca3e642b2d88729ad37896d7228a710a26458291f84fbb0d0d6adab4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11130,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.598356+00:00",
+      "sha256": "dea7c76990f1346e907f868d7368a697af045be494e9db3dc850c81658531a7a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11093,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.974105+00:00",
+      "sha256": "c076edb11d6cecaafbf0e79c29a8e2b18fcf76881195331961113f019f6174fe",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11115,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.976103+00:00",
+      "sha256": "5cee6e4df28aa735f6f111d14b48211624d52189504d5b927f0135d471291960",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11093,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:38.976103+00:00",
+      "sha256": "9e3e3a7195cd41a3d93e00c41653ebb4d72b536214bf40ea1a100aaa5676d94c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11126,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:39.508674+00:00",
+      "sha256": "9a2c471432d0ecab4caafcc80642f6e7109afa188ae9e3a0a5bb9b8a1d5ce044",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11004,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:39.579651+00:00",
+      "sha256": "29c0c599959136f62268e505882f4c2288c31046065936d55faab3f947c03fdf",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10945,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:39.490803+00:00",
+      "sha256": "35b6530fdab168e224ad12ad0cac55bcd63990cfb145f1c1e8bc364d4a2d1699",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11203,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:39.843102+00:00",
+      "sha256": "6f1aaab633fb7bdb4b194cc84845a9cb4e38e4d8bf862248f22aabf300040ba1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11005,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:40.260717+00:00",
+      "sha256": "b5ece22397e5d4f00e05c39eb07518ce711cd852f32d60721b65c7a040f91e24",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11057,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:40.619828+00:00",
+      "sha256": "8714985438e5dd7b516de92be1ea45e4a7fc6b9e8ba8936f0ac7b5df142ca358",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11102,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:40.617830+00:00",
+      "sha256": "fdb046f72202274fc28ec536307e60e3d4010951d71d4c9614b3d95356dca940",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11097,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:40.260717+00:00",
+      "sha256": "f7797d5482147d6c14c368056687eb247beab10cf21779902e9acb766a474595",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11193,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:40.846001+00:00",
+      "sha256": "aa015fb00eed264eba466c716d4d8a7f2a930aa567a813ae07ca3dc73987c5a3",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11027,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:40.847002+00:00",
+      "sha256": "473502e64f7e538823f7d7be4979ee2f127703c3f6ed7ca2b7d324136aa0aef7",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10960,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:41.328728+00:00",
+      "sha256": "a0b2dddc7472c411030923c394fb3b9c1121ccbc4c5aceabe75fcddd7adee95f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11110,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:41.331588+00:00",
+      "sha256": "54dd0c1227a2e8f92a6d5926113118e0f19662557d5dd222697f088382d3bf04",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11210,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:41.680033+00:00",
+      "sha256": "e4c45b78d8c8329c3255d53524fa397ee1c4fd25819f46c2e6cc3f4b0bd2329f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11197,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:41.512322+00:00",
+      "sha256": "150606a17e53655fca58d5c12f095b2e90a6640f71e795a03a1f0b56e67bbe58",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11175,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:42.064028+00:00",
+      "sha256": "393b64291dd77054cf1e1167f4ae0640cb4481a5210a3d3778a2a194379db1c1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10984,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:42.079601+00:00",
+      "sha256": "087715cf166d6a92f3bf06d294506c0268cbcc3e6f11720d35543903bb79f77d",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10893,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-31.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:42.244025+00:00",
+      "sha256": "9aa1866ee0def3fae16869b2a4ff96520bd6245eee88b30be9a6a97a14b17af8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-31.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-05-31.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11287,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:42.059388+00:00",
+      "sha256": "9134c7a7828bfaa45215b24230029c656215f118cf265936f904503cfa798a23",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11314,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:43.264400+00:00",
+      "sha256": "4a98d6f87a4b2a8372c5a085901eff3dff81543d794612778ef110e66f23b196",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11423,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:42.849781+00:00",
+      "sha256": "34f8be57e329d98ea832996f696e156b235b60ef4390e5af0c667dddc755c33c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11413,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:43.467544+00:00",
+      "sha256": "540158d610f763875b893e1f7102394f8decce8a68c986e510079f87a786a57c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11427,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:42.851782+00:00",
+      "sha256": "02f0d798ed7bc60d70ceb88194657c2a594b6cb5cdefbdd06f2e54ba613ee9f6",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11207,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:43.852582+00:00",
+      "sha256": "aff69e9e6de755fadcefb4bf74813d3311769fe2cc4e7c2f1d3e0c4381cdb071",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11195,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:43.749583+00:00",
+      "sha256": "6cb2e94afce6f64e8d5c752b822c28539f4bedc2c3748632fbf1e27a5dd52e24",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11169,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:44.576480+00:00",
+      "sha256": "618ab609795f68ced1b828b8d35940b8f789dbc2a0f5a8945ad2f88341a83fc0",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11235,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:43.991589+00:00",
+      "sha256": "4b2fe9a532db3b874954030710336d152ca46b3076c1f9b8b834154690846bc4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11173,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:44.151294+00:00",
+      "sha256": "60585756ced0291f5d2976414ce7d6fe676bc0bfc901a4333f52d64d6d3267e4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11341,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:44.578479+00:00",
+      "sha256": "6433a3ce4e682e9eb841f50343d5fc6309e219113ba3556b50354c80283a75d4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11070,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:45.067448+00:00",
+      "sha256": "6e5805d1f6f886dd263bb32c15f9a7e879a9f88ec71ab8e9e6cfe090fcb3fe15",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11074,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:44.837398+00:00",
+      "sha256": "c018428571271c0c758eeed00ebbb99b4fbfd2a39c6f3c8c6337f2f79656a826",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10969,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:46.006877+00:00",
+      "sha256": "ba41ab25d52fcf510f8095f8525ca77823260947d6f8aefc1a2bffefd0728b1c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11128,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:45.432959+00:00",
+      "sha256": "3b5aa75a8a7a33fd00e7d34a5583ebedc5de20fb27632b871598377f6eb88548",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11087,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:45.672571+00:00",
+      "sha256": "4136072028166d5f85897fad0ea356053cfd1a3c18724b8fad963306e829429e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11223,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:46.134597+00:00",
+      "sha256": "326b31801520e14dd94b94da7e0c6a06d4fc7e7d1d63fb545b243f491990fbe8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11186,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:46.359330+00:00",
+      "sha256": "78f98bbbcc78cc29787e13e1e9675a41a2b6258235d95389fe6486379783c9e9",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11014,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:46.396518+00:00",
+      "sha256": "8ae32bfc960ceaeca59769f4e1b2aa99ac2e3a9a8b2399786426eb16f6899df8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11101,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:47.573230+00:00",
+      "sha256": "dc11d66a0b075866abf469106d8510b20657ee0ed445c3124e5d6e1cba737c99",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11107,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:47.902439+00:00",
+      "sha256": "59a8ce6caef388fa1802a282bf9b74a5b859385af3c2ca41f3af59e7fa36f630",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11189,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:47.122676+00:00",
+      "sha256": "da5bdc742fc273ec69e5f4480c5ae297db50db14c5af384ba6fd8806878ddb67",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11247,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:47.120422+00:00",
+      "sha256": "df14d71acd73d1349eaeae6e281d8eacc7187dfca966c599ff051de0a76f6820",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11317,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:48.155990+00:00",
+      "sha256": "6bb5ab473189fa7c935b4d9a58d34b2c96cc329cd74fd6f9f17f8abc48ece649",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11316,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:48.155990+00:00",
+      "sha256": "56e0751dabd8108d61d1f9de86931ac68e901dad202d4dbac03173e2768be68e",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11288,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:48.019956+00:00",
+      "sha256": "c06c1de4e3ab250acff83e71feb56344ae5b3cf31cd420f3ea9cfcf492976b0c",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11075,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:48.161120+00:00",
+      "sha256": "ab979a9e005f2b0de2e437efd6a2d94fe9ce88a32a70a8c741bc265e6d6cbc91",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11149,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:48.844750+00:00",
+      "sha256": "1d691c342f5680305a7e9bfd9cc14d62777bb056e3a1b4d3e09a977c635ccac5",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11304,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:48.843753+00:00",
+      "sha256": "eee03d532b47764dc7ae6694764349dd74f594942be3ca36800720040076fcfa",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11336,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:49.505152+00:00",
+      "sha256": "c7d744cb21cfaed8cce5bf5323b1ffeb13e9ac8c60d76f59cd97257ffc83cde4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-06-30.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11342,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:49.509165+00:00",
+      "sha256": "4a16be30dbbbb1042a9085c4e896b0aa57c5718314c5d0c19e689c1d175a5cd8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-01.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11378,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:49.506168+00:00",
+      "sha256": "655ffce8f0e2cd88482094b1511c7097468930d596a804d1faab9b06d72957a1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-02.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11144,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:50.497088+00:00",
+      "sha256": "5f9b4a9f4b225e7b08edda353b08bdae3016fa52486bd7d594be0165d0181f12",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-03.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10918,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:49.608413+00:00",
+      "sha256": "710145c97cd53a6804765181f48ebc1d79df9b80f42ab434499c97124f699120",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-04.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11008,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:50.493092+00:00",
+      "sha256": "023602346543aed1f88e2e27b44a24aecde20f56db76188a797a58b58f443fe8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-05.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11296,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:50.491091+00:00",
+      "sha256": "0854c0160582a00bacc969b69e808a5b1f1e26da51283b31e3ffe46647a61632",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-06.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11254,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-07.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:50.496090+00:00",
+      "sha256": "b04baa0d09af319e7f02f14f28c5938b7854fab2a5d861e841ddc9c4dd10d174",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-07.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-07.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11250,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-08.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:51.605626+00:00",
+      "sha256": "d1f6be32f3e6397c4a1394d03383bdd9b56121af3291be26af358f58b7a9f465",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-08.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-08.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11253,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-09.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:51.551647+00:00",
+      "sha256": "a9bbdc0967d7fa16d74c383de39da053f5398f20ac199d8efcf0f9c9e44126a8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-09.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-09.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11149,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-10.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:51.340300+00:00",
+      "sha256": "34d7e99f95c9afbd919379b01b87a4655d10777b6226bac031f8205a37bfefce",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-10.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-10.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10832,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-11.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:52.283163+00:00",
+      "sha256": "48652ef068848ba380646e728aea21da01b4ac5f8120c83feaa12e733266470a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-11.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-11.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10985,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-12.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:52.685277+00:00",
+      "sha256": "7801e226959602f7a41c3e14369f85d92a18b68f40c6671193b0c7259f734e63",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-12.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-12.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11422,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-13.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:52.470571+00:00",
+      "sha256": "0bfa60f7e3e6885041942815b493cd8c2984e828aa28b3a23f7324912578fae8",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-13.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-13.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11189,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-14.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:52.687290+00:00",
+      "sha256": "eca9e375381f9f7f32bd974a2cd470624ee1e87f35b6d00b11f3f5db5344ed53",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-14.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-14.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11114,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-15.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:52.689302+00:00",
+      "sha256": "a1c5525260429fe75bb26eac635f279c8f70db9a38dd5bf0c572cfc47d9685e4",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-15.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-15.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11062,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-16.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:53.009949+00:00",
+      "sha256": "6b1d7cc9d6e212d09068cff94cec848c034cc9fb86d80fe102e3199f29333388",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-16.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-16.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11297,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-17.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:53.008946+00:00",
+      "sha256": "05fb1d17be4914928f5fdc958b2194326c742414d764ef023afbc7dad90f3cb0",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-17.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-17.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10949,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-18.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:53.601639+00:00",
+      "sha256": "363dcac85b7b91abca094ab7d669069fdff3a4f5f95aeb9b4dac2761b533785d",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-18.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-18.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10920,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-19.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:54.853038+00:00",
+      "sha256": "37f3c4c064d49c769870caa9b65684736a50115363e4b1da829a899d673459cc",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-19.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-19.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11210,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-20.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:55.808702+00:00",
+      "sha256": "eb1367ea2ee7d476cda2f031ddbff3990153fb910cf007aa08d9d9b6caaecab0",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-20.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-20.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11241,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-21.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:55.811705+00:00",
+      "sha256": "07338071d9d0a732c0da6f0ed7e5bf0573bc8d0c3c2d250ecc053c2e7b28665f",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-21.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-21.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11075,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-22.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:56.209481+00:00",
+      "sha256": "1bd5f7abf816c5bc50daddc483e1e98851e1f5ee09b23db69d4f2449306ee164",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-22.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-22.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11151,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-23.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:56.947122+00:00",
+      "sha256": "abdbb90268778a2a83c6149355044e852cd3588d66c30bc3771d25a0d1f4e2fe",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-23.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-23.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11179,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-24.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:56.210995+00:00",
+      "sha256": "d03577829e3099e0b2eab3cc42633a01df4d0ccd2124b40f207db96b3addde6d",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-24.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-24.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10910,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-25.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:56.973275+00:00",
+      "sha256": "e03a34117eee56365d86f7b4d2311c7713434e944ac7fe99ef77a4d9463944c6",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-25.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-25.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 10988,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-26.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:56.491336+00:00",
+      "sha256": "e0597f49021ea5e3d3213e6541bb83c42e6d56be9022d32bf4a816239b766dd1",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-26.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-26.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11128,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-27.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:57.847210+00:00",
+      "sha256": "0ac4229d96bf575de4fbdb0857528be53157b68c3da53e410160f021bf1c5dc5",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-27.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-27.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11233,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-28.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:56.951508+00:00",
+      "sha256": "baf44282daea657f88ff343f4e67e491ecb639e152342944d5e122f28cb1482a",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-28.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-28.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11228,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-29.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:57.533144+00:00",
+      "sha256": "e49bb2b5b7813eea9b5bd336d17950364ac13895ccd55442519e6997c2b099c5",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-29.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-29.zip"
+    },
+    {
+      "archive_granularity": "daily",
+      "bytes": 11094,
+      "path": "futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-30.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:57.449283+00:00",
+      "sha256": "ea1768aa4a1820a6602cef01ebacc0393e44339178cffcd1e69008bf44e9aa07",
+      "source_class": "btc_metrics_calibration_and_oos",
+      "source_id": "binance-vision:futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-30.zip",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2026-07-30.zip"
+    },
+    {
+      "archive_granularity": "monthly",
+      "bytes": 38152,
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-01.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:57.858660+00:00",
+      "sha256": "6c15ac5fd895f26bf8e12b99df6ab9aff637dc94b37128e92c75c19887d0e3b3",
+      "source_class": "btc_1h_calibration",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-01.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-01.zip"
+    },
+    {
+      "archive_granularity": "monthly",
+      "bytes": 35154,
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-02.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:58.086204+00:00",
+      "sha256": "886fca9764139a1d71d97ca28e0a2cb30fe7d6f44df9be2539452c02e3c4e775",
+      "source_class": "btc_1h_calibration",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-02.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-02.zip"
+    },
+    {
+      "archive_granularity": "monthly",
+      "bytes": 38671,
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-03.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:58.325782+00:00",
+      "sha256": "41199df2dd62c333ea306d28de331bfffbbfed03609d100c63b2de1d173f7414",
+      "source_class": "btc_1h_calibration",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-03.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-03.zip"
+    },
+    {
+      "archive_granularity": "monthly",
+      "bytes": 36965,
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-04.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:58.269050+00:00",
+      "sha256": "c822801b16eb317f4672e376a73664f2e5f9180409c57b6c7517707f4f873e8c",
+      "source_class": "btc_1h_calibration",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-04.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-04.zip"
+    },
+    {
+      "archive_granularity": "monthly",
+      "bytes": 37968,
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-05.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:58.305881+00:00",
+      "sha256": "9a367708c90de999a7a9d3114fd111ff28203b13c8daef77d154b5216fb571f7",
+      "source_class": "btc_1h_calibration",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-05.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-05.zip"
+    },
+    {
+      "archive_granularity": "monthly",
+      "bytes": 37239,
+      "path": "futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-06.zip",
+      "retrieved_at_utc": "2026-08-01T07:48:58.309905+00:00",
+      "sha256": "30bba473837a672a6a00a181a447446852414e6927bbda6684f873571788e9aa",
+      "source_class": "btc_1h_calibration",
+      "source_id": "binance-vision:futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-06.zip",
+      "url": "https://data.binance.vision/data/futures/um/monthly/klines/BTCUSDT/1h/BTCUSDT-1h-2026-06.zip"
+    }
+  ],
+  "plan_sha256": "3c80e858bbf8e39d1a3c92727e3c5236fa621bc80495e5dfb57f22e0774b1dbf",
+  "public_read_only": true,
+  "schema": "TRADINGOS_M1_SOURCE_MANIFEST_V1"
+}
