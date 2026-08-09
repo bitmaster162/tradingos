@@ -24,6 +24,7 @@ snapshot_tool = load_module("tradingos_binance_public_snapshot", ROOT / "tools" 
 brief_tool = load_module("tradingos_decision_brief_v2_daily", ROOT / "tools" / "tradingos_decision_brief_v2.py")
 cockpit_tool = load_module("tradingos_decision_cockpit_daily", ROOT / "tools" / "tradingos_decision_cockpit.py")
 alert_tool = load_module("tradingos_decision_alerts_daily", ROOT / "tools" / "tradingos_decision_alerts.py")
+memory_tool = load_module("tradingos_market_memory_daily", ROOT / "tools" / "tradingos_market_memory.py")
 
 
 def parse_now(value: str | None) -> datetime:
@@ -37,6 +38,7 @@ def main() -> int:
     parser.add_argument("--capture", required=True, type=Path)
     parser.add_argument("--out-root", required=True, type=Path)
     parser.add_argument("--now")
+    parser.add_argument("--memory-ledger", type=Path, help="Optional persistent market-memory ledger path; defaults to <out-root>/market_memory.ndjson")
     args = parser.parse_args()
     now = parse_now(args.now)
     day = now.astimezone(ZoneInfo("Asia/Bangkok")).date().isoformat()
@@ -77,6 +79,10 @@ def main() -> int:
         )
         alert_paths = alert_tool.generate(cockpit_paths["json"], day_dir, previous_cockpit)
         alert_payload = json.loads(alert_paths["json"].read_text(encoding="utf-8-sig"))
+        memory_ledger = args.memory_ledger.resolve() if args.memory_ledger else args.out_root.resolve() / "market_memory.ndjson"
+        memory_status, memory_paths, memory_replay = memory_tool.generate(
+            memory_ledger, day_dir / "memory", cockpit_path=cockpit_paths["json"], alert_path=alert_paths["json"]
+        )
         receipt_payload = {
             "schema_version": 1,
             "result": "PASS" if brief["status"] == "READY" else "FAIL_CLOSED",
@@ -90,10 +96,15 @@ def main() -> int:
             "alert_decision": alert_payload["decision"],
             "alert_priority": alert_payload["priority"],
             "alert_dedupe_key": alert_payload["dedupe_key"],
+            "memory_append_status": memory_status,
+            "memory_sequence": memory_replay["current_sequence"],
+            "memory_windows": {key: value["status"] for key, value in memory_replay["windows"].items()},
             "outputs": {
                 **{key: path.name for key, path in paths.items()},
                 **{f"cockpit_{key}": path.name for key, path in cockpit_paths.items()},
                 **{f"alert_{key}": path.name for key, path in alert_paths.items()},
+                **{f"memory_{key}": str(path.relative_to(day_dir)) for key, path in memory_paths.items()},
+                "memory_ledger": str(memory_ledger),
             },
         }
         receipt.write_text(json.dumps(receipt_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
