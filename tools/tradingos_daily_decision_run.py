@@ -23,6 +23,7 @@ def load_module(name: str, path: Path):
 snapshot_tool = load_module("tradingos_binance_public_snapshot", ROOT / "tools" / "tradingos_binance_public_snapshot.py")
 brief_tool = load_module("tradingos_decision_brief_v2_daily", ROOT / "tools" / "tradingos_decision_brief_v2.py")
 cockpit_tool = load_module("tradingos_decision_cockpit_daily", ROOT / "tools" / "tradingos_decision_cockpit.py")
+alert_tool = load_module("tradingos_decision_alerts_daily", ROOT / "tools" / "tradingos_decision_alerts.py")
 
 
 def parse_now(value: str | None) -> datetime:
@@ -56,6 +57,7 @@ def main() -> int:
 
         previous_brief = None
         previous_snapshot = None
+        previous_cockpit = None
         prior_days = sorted(
             [p for p in args.out_root.resolve().iterdir() if p.is_dir() and p.name < day],
             key=lambda p: p.name,
@@ -67,10 +69,14 @@ def main() -> int:
             if candidate_brief.is_file() and candidate_snapshot.is_file():
                 previous_brief = candidate_brief
                 previous_snapshot = candidate_snapshot
+                candidate_cockpit = prior / "cockpit.json"
+                previous_cockpit = candidate_cockpit if candidate_cockpit.is_file() else None
                 break
         cockpit_paths = cockpit_tool.generate(
             paths["json"], snapshot_path, day_dir, previous_brief, previous_snapshot
         )
+        alert_paths = alert_tool.generate(cockpit_paths["json"], day_dir, previous_cockpit)
+        alert_payload = json.loads(alert_paths["json"].read_text(encoding="utf-8-sig"))
         receipt_payload = {
             "schema_version": 1,
             "result": "PASS" if brief["status"] == "READY" else "FAIL_CLOSED",
@@ -81,9 +87,13 @@ def main() -> int:
             "stance": brief["decision"]["stance"],
             "can_trade": False,
             "capital_permission": "DENY",
+            "alert_decision": alert_payload["decision"],
+            "alert_priority": alert_payload["priority"],
+            "alert_dedupe_key": alert_payload["dedupe_key"],
             "outputs": {
                 **{key: path.name for key, path in paths.items()},
                 **{f"cockpit_{key}": path.name for key, path in cockpit_paths.items()},
+                **{f"alert_{key}": path.name for key, path in alert_paths.items()},
             },
         }
         receipt.write_text(json.dumps(receipt_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
