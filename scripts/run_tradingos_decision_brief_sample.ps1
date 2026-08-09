@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $output = Join-Path $root "_dl\decision_brief_sample"
-$tool = Join-Path $root "tools\tradingos_decision_brief.py"
+$tool = Join-Path $root "tools\tradingos_decision_brief_v2.py"
 $sample = Join-Path $root "examples\tradingos_decision_brief\market_snapshot.sample.json"
 $pilot = Join-Path $output "pilot_log.jsonl"
 $html = Join-Path $output "brief.html"
@@ -38,10 +38,13 @@ if (-not (Test-Path -LiteralPath $html)) {
 
 $brief = Get-Content -LiteralPath (Join-Path $output "brief.json") -Raw | ConvertFrom-Json
 $receipt = [ordered]@{
-    schema_version = 1
+    schema_version = 2
     result = "PASS"
     generated_at_utc = (Get-Date).ToUniversalTime().ToString("o")
     launcher = "RUN_DECISION_BRIEF_SAMPLE.cmd"
+    generator = "tools/tradingos_decision_brief_v2.py"
+    generator_version = $brief.provenance.generator_version
+    generator_sha256 = $brief.provenance.generator_sha256
     output_directory = $output
     brief_id = $brief.brief_id
     status = $brief.status
@@ -54,7 +57,7 @@ $receipt | ConvertTo-Json -Depth 5 |
     Set-Content -LiteralPath (Join-Path $output "RUN_RECEIPT.json") -Encoding utf8
 
 Write-Host ""
-Write-Host "Decision Brief created:" -ForegroundColor Green
+Write-Host "Decision Brief v2 created:" -ForegroundColor Green
 Write-Host "  $html"
 Write-Host "Decision: $($brief.decision.stance) (read-only; not an order)"
 
