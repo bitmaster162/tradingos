@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import binascii
 import csv
 import hashlib
 import json
@@ -12,6 +14,7 @@ from typing import Any, Iterable
 
 
 DEFAULT_LOCK = "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R4_2026-07-15.json"
+DEFAULT_ACCEPTED_REF_FIXTURE = "tests/fixtures/wo008/accepted_ref/MANIFEST.json"
 
 
 def utc_now() -> str:
@@ -78,6 +81,86 @@ def git_blob(repo: Path, ref: str, relative_path: str) -> bytes | None:
         check=False,
     )
     return completed.stdout if completed.returncode == 0 else None
+
+
+def accepted_ref_blob(
+    source_root: Path,
+    git_root: Path,
+    ref: str,
+    relative_path: str,
+    fixture_relative_path: str = DEFAULT_ACCEPTED_REF_FIXTURE,
+) -> bytes | None:
+    """Return bytes from the historical accepted ref, with a SHA-bound portable fallback.
+
+    The fallback is used only when the Git object is unavailable. It is not a
+    replacement ref: the fixture names the exact accepted commit and stores the
+    SHA-256 of every bound historical blob. For the eight historical EOL-only
+    mismatches it embeds the exact accepted bytes extracted from the authoritative
+    WO008 bundle. For the other bindings it may reuse source_root bytes only after
+    their SHA-256 equals the recorded historical accepted hash. Any fixture drift
+    fails closed by returning None.
+    """
+    direct = git_blob(git_root, ref, relative_path)
+    if direct is not None:
+        return direct
+
+    fixture_path = source_root / fixture_relative_path
+    if not fixture_path.is_file():
+        return None
+    try:
+        fixture = read_json_bytes(fixture_path.read_bytes())
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return None
+    if fixture.get("schema") not in {"tradingos.wo008.accepted_ref_fixture.v1", "tradingos.wo008.accepted_ref_fixture.v2"}:
+        return None
+    if fixture.get("accepted_ref") != ref:
+        return None
+    entries = fixture.get("entries")
+    if not isinstance(entries, list) or fixture.get("binding_count") != len(entries):
+        return None
+    matches = [item for item in entries if isinstance(item, dict) and item.get("path") == relative_path]
+    if not matches:
+        return None
+    entry = matches[0]
+    if any(item != entry for item in matches[1:]):
+        return None
+    accepted_sha = entry.get("accepted_sha256")
+    lock_sha = entry.get("lock_sha256")
+    if not isinstance(accepted_sha, str) or len(accepted_sha) != 64:
+        return None
+    encoded = entry.get("accepted_bytes_b64")
+    encoded_path = entry.get("accepted_bytes_b64_path")
+    if encoded is not None and encoded_path is not None:
+        return None
+    if encoded_path is not None:
+        if not isinstance(encoded_path, str):
+            return None
+        shard_path = source_root / encoded_path
+        if not shard_path.is_file():
+            return None
+        shard_bytes = shard_path.read_bytes()
+        expected_shard_sha = entry.get("accepted_bytes_b64_sha256")
+        if not isinstance(expected_shard_sha, str) or sha256_bytes(shard_bytes) != expected_shard_sha:
+            return None
+        try:
+            encoded = shard_bytes.decode("ascii").strip()
+        except UnicodeDecodeError:
+            return None
+    if encoded is not None:
+        if not isinstance(encoded, str):
+            return None
+        try:
+            payload = base64.b64decode(encoded, validate=True)
+        except (ValueError, binascii.Error):
+            return None
+    else:
+        if accepted_sha != lock_sha:
+            return None
+        candidate = source_root / relative_path
+        if not candidate.is_file():
+            return None
+        payload = candidate.read_bytes()
+    return payload if sha256_bytes(payload) == accepted_sha else None
 
 
 def semantic_json_equal(left: bytes | None, right: bytes | None) -> bool:

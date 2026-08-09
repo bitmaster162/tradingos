@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T18:40:58Z",
+  "tool": "tools/bitunix_wo105_v3r3_rollover.py",
+  "decision": "bitunix_wo105_v3r2_zero_event_adapter_interface_gap_confirmed",
+  "failures": [],
+  "predecessor_cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R2_20260714",
+  "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+  "capture": {
+    "frames_total": 10079,
+    "error_taxonomy": {
+      "NETWORK": 0,
+      "PARSER": 0,
+      "LOCAL": 0,
+      "STORAGE": 0
+    },
+    "subscription_accepted": true,
+    "started_utc": "2026-07-14T18:00:01.227488+00:00",
+    "ended_utc": "2026-07-14T18:30:14.522046+00:00"
+  },
+  "ws_intake": {
+    "decision": "bitunix_wo105_ws_intake_ready",
+    "accepted_runs": 1,
+    "records": {
+      "books": 5139,
+      "trades": 5144,
+      "cvd": 1
+    }
+  },
+  "interface_contract": {
+    "assembler_required_method": "load_rows",
+    "v2_adapter_has_load_rows": false,
+    "v3_adapter_has_load_rows": true,
+    "v3_context_semantics": "delegates_validate_row_and_build_context_to_v2",
+    "native_stderr_failure": "AttributeError: module tools.bitunix_wo105_liquidation_context_v2 has no attribute load_rows"
+  },
+  "events_admitted": 0,
+  "outcomes_observed": 0,
+  "outcome_metrics_inspected": false,
+  "strategy_failure": false,
+  "operational_failure": true,
+  "edge_evaluated": false,
+  "signals_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}

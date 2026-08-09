@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-13T20:40:36.144Z",
+  "tool": "tools/bitunix_wo105_public_rest_collector.py",
+  "decision": "bitunix_wo105_public_rest_snapshot_collected",
+  "symbol": "BTCUSDT",
+  "funding_raw": {
+    "source_id": "bitunix:futures:funding_raw:BTCUSDT:1783975235274",
+    "observed_at": 1783975235274,
+    "received_at": 1783975235274,
+    "source_hash": "39175c7a81e48261f109fca03fe2a404c75e13cb6b8cc6f64d04ec581a99c76e",
+    "schema_version": "bitunix-funding-rest-v1",
+    "payload": {
+      "symbol": "BTCUSDT",
+      "funding_rate_api": 0.01,
+      "api_unit": "percentage_points",
+      "normalized_decimal_rate": 0.0001,
+      "normalized_unit": "decimal_fraction",
+      "normalization_rule": "api_percentage_points_divide_by_100",
+      "next_funding_ms": 1783987200000,
+      "funding_interval_h": 8,
+      "mark_price": 62224.5,
+      "last_price": 62224.3,
+      "index_price": 62249.3
+    }
+  },
+  "crowd_funding": {
+    "source_id": "bitunix:futures:funding_crowd:BTCUSDT:1783975235274",
+    "observed_at": 1783975235274,
+    "received_at": 1783975235274,
+    "source_hash": "57d0ae452422a617017fb81e4f97ef71bba9fac70af6e8ec60a1f7720b61a144",
+    "schema_version": "crowd-point-v1",
+    "payload": {
+      "kind": "funding_rate_8h",
+      "value": 0.0001,
+      "unit": "decimal_fraction",
+      "raw_value": 0.01,
+      "raw_unit": "percentage_points",
+      "normalization_rule": "api_percentage_points_divide_by_100",
+      "funding_ms": 1783987200000
+    }
+  },
+  "funding_event": {
+    "source_id": "bitunix:futures:funding_event:BTCUSDT:1783987200000:1783975235274",
+    "observed_at": 1783975235274,
+    "received_at": 1783975235274,
+    "source_hash": "084564949fa0dec12542c71192e9c780257638907e05d7df65d69de216d13d96",
+    "schema_version": "funding-event-v1",
+    "payload": {
+      "funding_ms": 1783987200000,
+      "rate": 0.0001,
+      "unit": "decimal_fraction",
+      "raw_value": 0.01,
+      "raw_unit": "percentage_points",
+      "normalization_rule": "api_percentage_points_divide_by_100"
+    }
+  },
+  "depth_diagnostic": {
+    "source_id": "bitunix:futures:depth_rest_diagnostic:BTCUSDT:1783975236144",
+    "observed_at": 1783975236144,
+    "received_at": 1783975236144,
+    "source_hash": "7658b386e0367b6d1db7562eac93f7630991c84e981a11417b2af404d40baf82",
+    "schema_version": "bitunix-depth-rest-diagnostic-v1",
+    "payload": {
+      "symbol": "BTCUSDT",
+      "bids": [
+        [
+          62221.6,
+          4.3771
+        ],
+        [
+          62221.5,
+          1.6461
+        ],
+        [
+          62221.4,
+          4.0289
+        ],
+        [
+          62221.2,
+          2.8567
+        ],
+        [
+          62221.1,
+          3.852
+        ],
+        [
+          62220.9,
+          1.2488
+        ],
+        [
+          62220.8,
+          1.1655
+        ],
+        [
+          62220.7,
+          1.1122
+        ],
+        [
+          62220.5,
+          2.7291
+        ],
+        [
+          62220.4,
+          2.9076
+        ],
+        [
+          62220.3,
+          3.482
+        ],
+        [
+          62220.1,
+          1.6159
+        ],
+        [
+          62220.0,
+          1.5262
+        ],
+        [
+          62219.8,
+          3.8084
+        ],
+        [
+          62219.7,
+          1.1813
+        ]
+      ],
+      "asks": [
+        [
+          62221.7,
+          2.6576
+        ],
+        [
+          62221.8,
+          3.5795
+        ],
+        [
+          62221.9,
+          4.4801
+        ],
+        [
+          62222.1,
+          3.697
+        ],
+        [
+          62222.2,
+          2.8444
+        ],
+        [
+          62222.4,
+          2.925
+        ],
+        [
+          62222.5,
+          2.6012
+        ],
+        [
+          62222.6,
+          0.8802
+        ],
+        [
+          62222.8,
+          2.7994
+        ],
+        [
+          62222.9,
+          1.9861
+        ],
+        [
+          62223.0,
+          0.9904
+        ],
+        [
+          62223.2,
+          2.8472
+        ],
+        [
+          62223.3,
+          2.1515
+        ],
+        [
+          62223.5,
+          3.7748
+        ],
+        [
+          62223.6,
+          2.1822
+        ]
+      ],
+      "time_basis": "local_http_receive_only_no_venue_timestamp",
+      "evaluator_admission_allowed": false
+    }
+  },
+  "http_receipts": [
+    {
+      "endpoint": "kline",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/kline?symbol=BTCUSDT&interval=5m&limit=200&type=LAST_PRICE",
+      "http_status": 200,
+      "started_at": 1783975232341,
+      "received_at": 1783975232808,
+      "latency_ms": 467,
+      "body_sha256": "c7bae1ec90817afff48ef55cfae3e501410761778c37747004b92c73abd5836a",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "kline",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/kline?symbol=BTCUSDT&interval=5m&limit=101&type=LAST_PRICE&endTime=1783915199999",
+      "http_status": 200,
+      "started_at": 1783975232821,
+      "received_at": 1783975233203,
+      "latency_ms": 382,
+      "body_sha256": "978be6af580b07910dcbcf1336bca082983693113c7f2b5cc84df113a0f2e401",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "kline",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/kline?symbol=BTCUSDT&interval=5m&limit=2&type=LAST_PRICE&endTime=1783884599999",
+      "http_status": 200,
+      "started_at": 1783975233210,
+      "received_at": 1783975233538,
+      "latency_ms": 328,
+      "body_sha256": "e2a0ce2487e841025d47fca241fa143d651e23546d02020cbf7e32ce2df43898",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "kline",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/kline?symbol=BTCUSDT&interval=1h&limit=100&type=LAST_PRICE",
+      "http_status": 200,
+      "started_at": 1783975233538,
+      "received_at": 1783975233988,
+      "latency_ms": 450,
+      "body_sha256": "3acd79c1399d2803ef75757cd3b2af7f67b6a41b4e2f36b16644133a45312110",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "kline",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/kline?symbol=BTCUSDT&interval=4h&limit=200&type=LAST_PRICE",
+      "http_status": 200,
+      "started_at": 1783975233994,
+      "received_at": 1783975234327,
+      "latency_ms": 333,
+      "body_sha256": "850f9092e7017f856416655574492f5ab6dd5161ee163caff5d60f7a8d67c8bf",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "kline",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/kline?symbol=BTCUSDT&interval=4h&limit=22&type=LAST_PRICE&endTime=1781092799999",
+      "http_status": 200,
+      "started_at": 1783975234338,
+      "received_at": 1783975234853,
+      "latency_ms": 515,
+      "body_sha256": "1fafdeed3e10ef7f1c61ecfa66bf09291fd82285f33f8166eff84fdf20675ab8",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "funding",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/funding_rate?symbol=BTCUSDT",
+      "http_status": 200,
+      "started_at": 1783975234857,
+      "received_at": 1783975235274,
+      "latency_ms": 417,
+      "body_sha256": "0df3aed1290863d93a9275957f1dffbf0d4895ea4a2146a5a673e6480f778538",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    },
+    {
+      "endpoint": "depth",
+      "method": "GET",
+      "url": "https://fapi.bitunix.com/api/v1/futures/market/depth?symbol=BTCUSDT&limit=15",
+      "http_status": 200,
+      "started_at": 1783975235274,
+      "received_at": 1783975236144,
+      "latency_ms": 870,
+      "body_sha256": "360ded46dddf0d38b68a6a2694c76c12e52f1dbe95c68952293341859ed13261",
+      "credentials_used": 0,
+      "private_calls": 0,
+      "order_calls": 0
+    }
+  ],
+  "failures": [],
+  "forward_floor_ms": 1784030400000,
+  "snapshot_received_at": 1783975236144,
+  "snapshot_phase": "COMMISSIONING_PRE_FLOOR",
+  "source_contract": {
+    "native_bitunix_klines": true,
+    "funding_api_unit": "percentage_points",
+    "funding_normalized_unit": "decimal_fraction",
+    "funding_normalization_rule": "divide_by_100",
+    "rest_depth_diagnostic_only": true,
+    "rest_depth_evaluator_admission_allowed": false,
+    "native_public_oi_available": false,
+    "credentials_used": 0,
+    "private_calls": 0,
+    "order_calls": 0
+  },
+  "evaluator_packet_ready": false,
+  "missing_for_packet": [
+    "accepted_public_ws_books",
+    "accepted_public_ws_trades",
+    "cvd_norm_receipt",
+    "at_least_one_additional_fresh_crowd_receipt_for_quorum"
+  ],
+  "runtime_boundary": {
+    "public_read_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false,
+  "bar_counts": {
+    "5m": 300,
+    "1h": 100,
+    "4h": 220
+  },
+  "run_dir": "C:\\Users\\coins\\TradingOS\\Active\\data\\forward\\bitunix_wo105_rest\\run_20260713T204036_144964Z"
+}

@@ -1,0 +1,126 @@
+{
+  "schema": "bitunix-public-capture-v4",
+  "run_dir": "C:\\Users\\coins\\TradingOS\\Active\\data\\forward\\bitunix_wo105_v3r2_ws\\run_20260714T180001_227487Z",
+  "started_utc": "2026-07-14T18:00:01.227488+00:00",
+  "ended_utc": "2026-07-14T18:30:14.522046+00:00",
+  "ws_url": "wss://fapi.bitunix.com/public/",
+  "symbols": [
+    "BTCUSDT"
+  ],
+  "channels": [
+    "depth_book15",
+    "trade"
+  ],
+  "minutes_requested": 30.2,
+  "duration_requested_s": 1812.0,
+  "duration_actual_s": 1813.3,
+  "frames_total": 10079,
+  "reconnects": 0,
+  "reconnect_downtime_ms": 0.0,
+  "parse_kinds": {
+    "ControlAck": 1,
+    "DepthUpdate": 5139,
+    "TradeBatch": 4849,
+    "Heartbeat": 90
+  },
+  "error_taxonomy": {
+    "NETWORK": 0,
+    "PARSER": 0,
+    "LOCAL": 0,
+    "STORAGE": 0
+  },
+  "trade_prints_total": 5144,
+  "depth_books_snapshots": {},
+  "duplicates": {},
+  "out_of_order_depth": {},
+  "out_of_order_total": 0,
+  "max_depth_gap_ms": {
+    "BTCUSDT": 434
+  },
+  "max_recv_silence_ms": 562.0,
+  "final_depth_age_ms": {
+    "BTCUSDT": 1156.0
+  },
+  "final_trade_age_ms": {
+    "BTCUSDT": 1515.0
+  },
+  "stale_events": {},
+  "future_skew_frames": 0,
+  "unknown_schema_ledger": {},
+  "unknown_schema_samples": [],
+  "subscription_acceptance": {
+    "method": "first_valid_frame_per_requested_symbol_channel",
+    "requested": [
+      "BTCUSDT:depth",
+      "BTCUSDT:trade"
+    ],
+    "covered": [
+      "BTCUSDT:depth",
+      "BTCUSDT:trade"
+    ],
+    "missing": [],
+    "accepted": true,
+    "control_acks": [
+      {
+        "op": "connect",
+        "success": null,
+        "sha256": "eab7c7e9eedd87920c118e0e5c3645c680271380655379209c0e0c078bb0577b",
+        "sample": "{\"op\":\"connect\",\"data\":{\"result\":true}}"
+      }
+    ],
+    "note": "a failed/unknown control ack does NOT count as success; coverage is the proof"
+  },
+  "readiness_thresholds": {
+    "min_frames": 100,
+    "max_silence_ms": 15000,
+    "final_age_max_ms": 10000,
+    "max_reconnect_downtime_ms": 30000,
+    "duration_min_fraction": 0.95,
+    "future_skew_ms": 5000,
+    "max_past_age_ms": 60000
+  },
+  "credentials_used": 0,
+  "private_calls": 0,
+  "order_calls": 0,
+  "can_trade": false,
+  "remote_effect_permission": "PUBLIC_READ_ONLY_CAPTURE_ONLY",
+  "terminal_hold": false,
+  "hold": false,
+  "hold_reasons": [],
+  "receipts": {
+    "code_sha256": {
+      "public_ws_venue.py": "85159345675fb89a636e8169d9fbc5756e4886e50a4ab6033cfff5bde0ec9a19",
+      "bitunix_public_capture.py": "147175459e76d496da3aa8f7e7d4e2aeafd433fa8a4ffc53ab0aa9c2d066fd8b"
+    },
+    "docs": [
+      "https://www.bitunix.com/api-docs/futures/websocket/prepare/WebSocket.html",
+      "https://www.bitunix.com/api-docs/futures/websocket/public/depth%20channel.html",
+      "https://www.bitunix.com/api-docs/futures/websocket/public/Trade%20Channel.html"
+    ],
+    "official_doc_receipts_dir": "official_doc_receipts/ (normalized extracts + content SHA)",
+    "dependencies": {
+      "python": "3.11.9",
+      "websockets": "15.0.1"
+    },
+    "subscription_sent": {
+      "op": "subscribe",
+      "args": [
+        {
+          "symbol": "BTCUSDT",
+          "ch": "depth_book15"
+        },
+        {
+          "symbol": "BTCUSDT",
+          "ch": "trade"
+        }
+      ]
+    },
+    "subscription_sent_sha256": "7c38fa6cb1e11c149d933a285d31b7f5cc9077579c195dab0ad1c50f52c157b6",
+    "streaming_output_sha256": {
+      "RAW_FRAME_INDEX.jsonl": "0029d2a04b4f08ef61fac7e00d56189c4e696e261fbd736b03733e9686b1fd64",
+      "RAW_FRAMES.jsonl": "5c76cda8d89612e18509cfe84b53cb19e7d0afeab91ba32d796ae0ddceb1eb8d",
+      "TRADES.jsonl": "09fe72ec74597f9c475b1d613a62edc03e4eebbdd22346dab86c1d8f45a49702"
+    },
+    "fsync_closed": true
+  }
+}

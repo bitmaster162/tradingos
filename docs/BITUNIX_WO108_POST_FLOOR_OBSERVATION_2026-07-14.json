@@ -1,0 +1,471 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T14:57:32Z",
+  "decision": "bitunix_wo108_v3_zero_event_operational_rollover_required",
+  "inbound": {
+    "path": "C:\\Users\\coins\\Downloads\\TRADINGOS_BITUNIX_108_POST_FLOOR_OBSERVATION_SNAPSHOT.md",
+    "present": true,
+    "size": 1492,
+    "sha256": "4edeccced3221bb11b1ec128a67c3ba98ffb21c632cfcda550869ab3c107b15a",
+    "requests_v2": true,
+    "requested_floor_bangkok": "2026-07-14 19:00 Asia/Bangkok",
+    "current_schema": "bitunix-wo105-causal-shadow-prereg-v3",
+    "current_cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+    "current_forward_start_at": "2026-07-14T14:00:00Z",
+    "request_matches_current_runtime": false
+  },
+  "current_clock": {
+    "utc": "2026-07-14T14:57:32Z",
+    "bangkok_offset": "+07:00"
+  },
+  "cohort": {
+    "lock_path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3_2026-07-14.json",
+    "lock_sha256": "6f8f42ea8b0184850d713abb90ee4c5f85cfa439d1f2a16e80dba6993c58d24b",
+    "schema": "bitunix-wo105-causal-shadow-prereg-v3",
+    "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+    "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+    "forward_start_at": "2026-07-14T14:00:00Z",
+    "evaluator": "tools/bitunix_wo105_causal_shadow_evaluator_v3.py",
+    "evaluator_sha256": "dc764082ffc531a94d009bdbfdf68e7ab2a8216d297638f3ec111e70cafdeb72",
+    "evaluator_hash_matches": true
+  },
+  "process": {
+    "component": "bitunix_wo105_v3_forward",
+    "pid": 22376,
+    "parent_pid": 14476,
+    "process_start_utc": "2026-07-14T14:05:39.8081625Z",
+    "alive": true,
+    "command_line": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\coins\\TradingOS\\Active\\ops\\autostart\\Run-BitunixWO105V3ForwardLoop.ps1\" -RestCadenceSeconds 300 -LaunchAttemptId \"402991a3-b0e5-4f4c-964c-89614e9de589\"",
+    "command_sha256": "a4fbda9826201f1e77a197d761207fd9cd2dcbdcaad6b06f06f2c5558f6e3c78",
+    "loop_script": "C:\\Users\\coins\\TradingOS\\Active\\ops\\autostart\\Run-BitunixWO105V3ForwardLoop.ps1",
+    "loop_script_sha256": "2fd268e21f68d596069788a8e4fb7adbd2d35948a4976c9f1bdee606aae2d296",
+    "heartbeat": "2026-07-14T14:55:02Z",
+    "heartbeat_status": "collecting_earliest_causal_rest_snapshot",
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "sources": {
+    "latest_rest": {
+      "present": true,
+      "path": "data/forward/bitunix_wo105_v3_rest/run_20260714T145506_814071Z/PUBLIC_REST_SNAPSHOT_MANIFEST.json",
+      "sha256": "f6500a9ef547ac280a99b4e0fd985d12aad4e5ed7bbf8be1232b389e19491370",
+      "generated_at": "2026-07-14T14:55:06.814Z",
+      "generated_at_ms": 1784040906814,
+      "decision": "bitunix_wo105_public_rest_snapshot_collected",
+      "snapshot_phase": "FORWARD",
+      "failures": [],
+      "can_trade": false
+    },
+    "ws_intake": {
+      "path": "_dl/bitunix_wo105_v3_ws_intake/WS_INTAKE_MANIFEST.json",
+      "sha256": "d76819e27638d1eeed338196658a91ce52de089779eec1d749936a1dcb570403",
+      "decision": "bitunix_wo105_ws_intake_ready",
+      "accepted_runs": 1,
+      "records": {
+        "books": 5132,
+        "trades": 13475,
+        "cvd": 1
+      },
+      "missing_for_packet": [
+        "at_least_one_additional_independent_fresh_crowd_receipt_for_3_of_n_quorum"
+      ]
+    },
+    "milestones": {
+      "path": "logs/bitunix_wo105_v3/bitunix_wo105_v3_first_cycle_milestones.jsonl",
+      "sha256": "fd5f77ea0dfc5632ecf0475b9fd86b61831ce4c6c0dc8bad5a5aaef1def7a36d",
+      "rows": [
+        {
+          "schema_version": 1,
+          "observed_at": "2026-07-14T14:05:45.509Z",
+          "milestone": "loop_transitioned_after_floor",
+          "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+          "forward_start_at": "2026-07-14T14:00:00Z",
+          "evidence": {
+            "status": "forward_floor_reached"
+          },
+          "public_data_only": true,
+          "credentials_allowed": false,
+          "signals_allowed": false,
+          "paper_entries_allowed": false,
+          "orders_allowed": false,
+          "capital_permission": "DENY",
+          "can_trade": false
+        },
+        {
+          "schema_version": 1,
+          "observed_at": "2026-07-14T14:10:06.524Z",
+          "milestone": "post_floor_rest_snapshot",
+          "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+          "forward_start_at": "2026-07-14T14:00:00Z",
+          "evidence": {
+            "scheduled_at": "2026-07-14T14:10:02.0000000+00:00",
+            "cycle_id": "20260714T140546Z"
+          },
+          "public_data_only": true,
+          "credentials_allowed": false,
+          "signals_allowed": false,
+          "paper_entries_allowed": false,
+          "orders_allowed": false,
+          "capital_permission": "DENY",
+          "can_trade": false
+        },
+        {
+          "schema_version": 1,
+          "observed_at": "2026-07-14T14:36:07.020Z",
+          "milestone": "post_floor_ws_independently_accepted",
+          "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+          "forward_start_at": "2026-07-14T14:00:00Z",
+          "evidence": {
+            "accepted_runs": 1,
+            "cycle_id": "20260714T140546Z"
+          },
+          "public_data_only": true,
+          "credentials_allowed": false,
+          "signals_allowed": false,
+          "paper_entries_allowed": false,
+          "orders_allowed": false,
+          "capital_permission": "DENY",
+          "can_trade": false
+        },
+        {
+          "schema_version": 1,
+          "observed_at": "2026-07-14T14:36:07.034Z",
+          "milestone": "post_floor_packet_assembler_ran",
+          "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+          "forward_start_at": "2026-07-14T14:00:00Z",
+          "evidence": {
+            "decision": "bitunix_wo105_v3_packet_no_current_causal_setup",
+            "cycle_id": "20260714T140546Z"
+          },
+          "public_data_only": true,
+          "credentials_allowed": false,
+          "signals_allowed": false,
+          "paper_entries_allowed": false,
+          "orders_allowed": false,
+          "capital_permission": "DENY",
+          "can_trade": false
+        }
+      ],
+      "parse_failures": []
+    }
+  },
+  "packet": {
+    "present": false,
+    "evaluation_run": false,
+    "reason": "no_complete_packet"
+  },
+  "ledger": {
+    "path": "_dl/bitunix_wo105_shadow_v3/EVENT_LEDGER.jsonl",
+    "present": false,
+    "sha256": null,
+    "rows": 0,
+    "state_counts": {},
+    "parse_failures": []
+  },
+  "forward": {
+    "status_decision": "bitunix_wo105_v3_collecting_causal_forward_sample",
+    "forward_events": 0,
+    "terminal_forward_events": 0,
+    "minimum_terminal_forward_events": 30,
+    "progress": "0/30",
+    "blind_gate_decision": "bitunix_wo105_v3_blind_review_gate_collecting_terminal_sample",
+    "interim_outcome_values_accessed": false,
+    "interim_outcome_metrics_disclosed": false,
+    "first_cycle_decision": "bitunix_wo105_v3_first_cycle_operational_blocked",
+    "first_cycle_checks": {
+      "loop_transitioned_after_floor": false,
+      "post_floor_rest_snapshot": false,
+      "post_floor_ws_independently_accepted": true,
+      "post_floor_packet_assembler_ran": true
+    },
+    "first_cycle_overdue": [
+      "loop_transitioned_after_floor",
+      "post_floor_rest_snapshot"
+    ],
+    "packet_decision": "bitunix_wo105_v3_packet_no_current_causal_setup",
+    "packet_written": false,
+    "evaluation_run": false,
+    "setup_status": "NO_SETUP",
+    "edge_evaluated": false
+  },
+  "runtime_components": {
+    "expected": 19,
+    "verified": 19,
+    "rows": [
+      {
+        "id": "forward_paper",
+        "pid": 17836,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "forward_runtime_watchdog",
+        "pid": 18032,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "crowd_fade_observer",
+        "pid": 10476,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "daily_runtime_backup",
+        "pid": 17776,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cross_venue_data",
+        "pid": 2964,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cross_venue_microstructure",
+        "pid": 1352,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cross_venue_microstructure_book",
+        "pid": 32032,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cross_venue_microstructure_watchdog",
+        "pid": 18768,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "microstructure_unblock_status",
+        "pid": 13148,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "bybit_all_liquidation_watchdog",
+        "pid": 3352,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "bybit_all_liquidation_collector",
+        "pid": 6780,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "liquidation_force_order_collector",
+        "pid": 16996,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "liquidation_force_order_watchdog",
+        "pid": 3328,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cross_stack_replication_transition",
+        "pid": 19216,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "real_edge_observer",
+        "pid": 19164,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cex_dex_funding_collector",
+        "pid": 21324,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "cex_funding_freshness_watchdog",
+        "pid": 16660,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "bitunix_wo105_v3_forward",
+        "pid": 22376,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      },
+      {
+        "id": "post_fill_markout_forward",
+        "pid": 13888,
+        "checks": {
+          "receipt_present": true,
+          "lock_present": true,
+          "pid_alive": true,
+          "lock_pid_matches": true,
+          "script_matches": true,
+          "can_trade_false": true
+        },
+        "verified": true
+      }
+    ],
+    "all_verified": true
+  },
+  "blockers": [
+    "forward_sample_incomplete",
+    "inbound_floor_does_not_match_current_v3_floor",
+    "inbound_request_targets_tombstoned_v2",
+    "loop_transitioned_after_floor",
+    "no_current_causal_setup",
+    "post_floor_rest_snapshot"
+  ],
+  "rollover_eligible": true,
+  "next_action": "tombstone_v3_without_outcome_review_and_open_parameter_identical_future_floor_rollover",
+  "mutation_audit": {
+    "restart": false,
+    "retune": false,
+    "backfill": false,
+    "provider_change": false,
+    "evaluator_run": false,
+    "order_or_signal_effect": false
+  },
+  "runtime_boundary": {
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

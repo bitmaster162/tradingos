@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T17:31:20Z",
+  "status": "TOMBSTONED_POST_FLOOR_ZERO_EVENT_CAUSAL_CLOCK_CONTRACT_FAILURE",
+  "decision": "bitunix_wo105_v3r1_tombstoned_without_strategy_or_outcome_review",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R1_20260714",
+  "forward_start_at": "2026-07-14T17:00:00Z",
+  "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+  "events_observed": 0,
+  "terminal_events_observed": 0,
+  "outcomes_observed": 0,
+  "interim_outcome_metrics_inspected": false,
+  "strategy_failure": false,
+  "clock_contract_failure": true,
+  "clock_contract_audit": {
+    "schema_version": 1,
+    "generated_at": "2026-07-14T17:31:20Z",
+    "tool": "tools/bitunix_wo105_v3r2_rollover.py",
+    "decision": "bitunix_wo105_v3r1_zero_skew_contract_defect_confirmed",
+    "forward_floor_ms": 1784048400000,
+    "cutoff_ms": 1784050280378,
+    "post_floor_schema_v2_btc_rows": 20,
+    "receive_minus_event_ms": {
+      "minimum": -67,
+      "median": -59.0,
+      "maximum": -48,
+      "negative_rows": 20,
+      "nonnegative_rows": 0
+    },
+    "legacy_adapter": {
+      "accepted_events": 0,
+      "rejection_counts": {
+        "event_after_receipt": 934,
+        "ingest_schema_invalid": 446,
+        "pre_floor": 55
+      },
+      "blockers": [
+        "minimum_events_not_met:0<3",
+        "minimum_notional_not_met:0.00000000<1000.00000000"
+      ]
+    },
+    "versioned_adapter": {
+      "accepted_events": 20,
+      "total_liquidated_notional_usd": 187631.50989999995,
+      "maximum_observed_clock_lead_ms": 67,
+      "max_clock_skew_ms": 5000,
+      "causal_availability_rule": "max(event_time_ms,raw_received_at_ms)",
+      "blockers": []
+    },
+    "strategy_parameters_inspected": false,
+    "outcome_metrics_inspected": false,
+    "edge_evaluated": false,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "source_bindings": {
+    "predecessor_v3r1_lock": {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R1_2026-07-14.json",
+      "sha256": "e1a21fd85ce341bb4508ccee7876c57519c77d4706cad86c69c78021859075ce"
+    },
+    "predecessor_v3r1_first_cycle_gate": {
+      "path": "docs/BITUNIX_WO105_V3R1_FIRST_CYCLE_GATE_2026-07-14.json",
+      "sha256": "2c65379624e1d898e0792e0bab18b8c9cce9bbcd6a68526ed61fbd6dd14f6600"
+    },
+    "predecessor_v3r1_status": {
+      "path": "docs/BITUNIX_WO105_V3R1_STATUS_2026-07-14.json",
+      "sha256": "9ebc8edccdbb76188616b41c04fc03fccae10dc2427495b2a2f1de67af579a4f"
+    },
+    "predecessor_v3r1_runtime_stop_receipt": {
+      "path": "docs/BITUNIX_WO105_V3R1_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+      "sha256": "26cff3af09ef9a9d6b2773d9e65fc19080890d6522c65412011960827f6f10cb"
+    },
+    "liquidation_context_v2": {
+      "path": "tools/bitunix_wo105_liquidation_context_v2.py",
+      "sha256": "514913d8c2c21e928d599014ee9f221911c1fefd442b4712a7523b5ad80470b4"
+    },
+    "packet_assembler_v4": {
+      "path": "tools/bitunix_wo105_packet_assembler_v4.py",
+      "sha256": "dbfbb1eaa001ab2f188500732dfc14135cc4c53fbdb7f4d1f2f67a359761c9ca"
+    },
+    "predecessor_v3r1_clock_contract_audit": {
+      "path": "docs/BITUNIX_WO105_V3R1_LIQUIDATION_CLOCK_CONTRACT_AUDIT_2026-07-14.json",
+      "sha256": "16cfe0c4efa6e412d1b569c1e41aa1171e0c6e708b77c319fdea2613290d5a88"
+    }
+  },
+  "restart_allowed": false,
+  "backfill_allowed": false,
+  "retune_allowed": false,
+  "resume_allowed": false,
+  "signals_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}

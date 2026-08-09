@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T15:09:45Z",
+  "status": "TOMBSTONED_POST_FLOOR_OPERATIONAL_STARTUP_DEADLINE_FAILURE",
+  "decision": "bitunix_wo105_v3_tombstoned_zero_event_without_outcome_review",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+  "forward_start_at": "2026-07-14T14:00:00Z",
+  "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+  "events_observed": 0,
+  "terminal_events_observed": 0,
+  "outcomes_observed": 0,
+  "interim_outcome_values_accessed": false,
+  "interim_outcome_metrics_disclosed": false,
+  "operational_failure": {
+    "decision": "bitunix_wo105_v3_first_cycle_operational_blocked",
+    "overdue": [
+      "loop_transitioned_after_floor",
+      "post_floor_rest_snapshot"
+    ],
+    "strategy_failure": false,
+    "data_result_failure": false,
+    "startup_deadline_failure": true
+  },
+  "source_bindings": {
+    "predecessor_v3_first_cycle_gate": {
+      "path": "docs/BITUNIX_WO105_V3_FIRST_CYCLE_GATE_2026-07-14.json",
+      "sha256": "e13573272f1a6235db1d3d7f479a4c4040e23eb0590eb1bb8f2fbec3ab026439"
+    },
+    "predecessor_v3_lock": {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3_2026-07-14.json",
+      "sha256": "6f8f42ea8b0184850d713abb90ee4c5f85cfa439d1f2a16e80dba6993c58d24b"
+    },
+    "predecessor_v3_runtime_stop_receipt": {
+      "path": "docs/BITUNIX_WO105_V3_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+      "sha256": "74bc6349cdf1627a2da774749b3f168550ab8ad325d1ea65403a49d6a2b1166b"
+    },
+    "wo108_post_floor_snapshot": {
+      "path": "docs/BITUNIX_WO108_POST_FLOOR_OBSERVATION_2026-07-14.json",
+      "sha256": "ef14e42b5dc025ac90a7eecb2e1b93786ba021591cf99a9b5b4a11b15d209bcf"
+    }
+  },
+  "restart_allowed": false,
+  "backfill_allowed": false,
+  "retune_allowed": false,
+  "resume_allowed": false,
+  "signals_allowed": false,
+  "paper_entries_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}

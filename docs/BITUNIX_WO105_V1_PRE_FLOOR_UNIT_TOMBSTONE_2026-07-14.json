@@ -1,0 +1,30 @@
+{
+  "schema": "bitunix-wo105-preregistered-cohort-tombstone-v1",
+  "tombstoned_at": "2026-07-13T20:47:22Z",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V1_20260714",
+  "status": "TOMBSTONED_PRE_FLOOR_UNIT_CONTRACT_GAP",
+  "original_forward_start_at": "2026-07-14T06:00:00Z",
+  "original_lock": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_2026-07-14.json",
+  "original_lock_sha256": "11e84fab49e23e42fd5da7d9f1378869aba3f8b99e06ea8026dabf76a67ab907",
+  "original_evaluator": "tools/bitunix_wo105_causal_shadow_evaluator.py",
+  "original_evaluator_sha256": "48bdd6132af8649ca791f662ec70dce92aea12f5d9842e7cd18664cebdaadc45",
+  "events_observed": 0,
+  "outcomes_observed": 0,
+  "edge_evaluated": false,
+  "reason": "The V1 crowd/funding threshold was expressed as a decimal fraction, but the preregistration did not declare the native Bitunix REST funding unit or its normalization rule. Official API commissioning showed a percentage-points input contract. V1 is therefore retired before its floor rather than reinterpreted after freeze.",
+  "prohibited": [
+    "resume_v1",
+    "reinterpret_v1_funding_values",
+    "backfill_v1",
+    "copy_v1_outcomes_into_v2"
+  ],
+  "superseded_by": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V2_20260714",
+  "scope": {
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

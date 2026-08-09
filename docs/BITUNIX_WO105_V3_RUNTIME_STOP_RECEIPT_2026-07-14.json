@@ -1,0 +1,18 @@
+﻿{
+    "schema_version":  1,
+    "generated_at":  "2026-07-14T15:09:38.508Z",
+    "decision":  "bitunix_wo105_v3_runtime_stopped_verified",
+    "component":  "bitunix_wo105_v3_forward",
+    "old_pid":  22376,
+    "attempt_id":  "",
+    "expected_script":  "C:\\Users\\coins\\TradingOS\\Active\\ops\\autostart\\Run-BitunixWO105V3ForwardLoop.ps1",
+    "job_stop_decision":  "receipt_already_absent_after_previous_verified_job_stop",
+    "exact_script_pids_remaining":  [
+
+                                    ],
+    "receipt_removed":  true,
+    "lock_removed":  true,
+    "start_mutex_held":  true,
+    "live_trading_locked":  true,
+    "can_trade":  false
+}

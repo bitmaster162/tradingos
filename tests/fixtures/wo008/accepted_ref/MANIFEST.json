@@ -1,0 +1,254 @@
+{
+  "schema": "tradingos.wo008.accepted_ref_fixture.v2",
+  "accepted_ref": "bc2c54b0cc089a89eeee3d5a4a3a44502505f767",
+  "accepted_ref_tree": "c8837433458dffc3e8dc63ce61e61c91f04a8a63",
+  "repair_head": "6a6583585117300c553d68aaff846d82024c7f9b",
+  "repair_tree": "f5ff623290ba3d546b7fa3dcf73b638860f38ef1",
+  "authoritative_bundle_sha256": "5e271b748d3ac0865d03480b6c6b088c8a7eb2d0a31a47db2e6e1cb3c5b8c97a",
+  "binding_count": 45,
+  "embedded_mismatch_count": 8,
+  "derivation": "accepted_sha256 values and embedded mismatch bytes extracted directly with git show from the authoritative historical WO008 bundle; matching entries reuse current bytes only after exact accepted SHA-256 verification",
+  "entries": [
+    {
+      "path": "docs/BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json",
+      "accepted_sha256": "cd8b40ea116f92c0c6a88be5d3c6c6de9582229762f0aca6dc16a1313ce50c53",
+      "lock_sha256": "2ee80e579f39c17437a23738070a7ac5592d8de3126e770029eedd0ca8f3965e",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/00_BITUNIX_WO105_EXACT_REPLAY_2026-07-14.json.b64",
+      "accepted_bytes_b64_sha256": "08fd2243494abdab54773211ddabeb35bab59b9cb064391361839a7362f8a6c2"
+    },
+    {
+      "path": "tools/bitunix_wo105_causal_shadow_evaluator_v4.py",
+      "accepted_sha256": "407d19adf5e992e0ea53d42ac613b52235f7c406dc5c51712fdb13865f31dff1",
+      "lock_sha256": "407d19adf5e992e0ea53d42ac613b52235f7c406dc5c51712fdb13865f31dff1"
+    },
+    {
+      "path": "tools/bitunix_wo105_causal_shadow_evaluator.py",
+      "accepted_sha256": "48bdd6132af8649ca791f662ec70dce92aea12f5d9842e7cd18664cebdaadc45",
+      "lock_sha256": "48bdd6132af8649ca791f662ec70dce92aea12f5d9842e7cd18664cebdaadc45"
+    },
+    {
+      "path": "HANDOFF/INCOMING/claude/20260713_bitunix_wo104_canonical/SETUP_A_PREREG_V3.json",
+      "accepted_sha256": "fb7b78878f889391d9cbe7378de1b7df6fcdfda24b737a890137aefdddb0d159",
+      "lock_sha256": "fb7b78878f889391d9cbe7378de1b7df6fcdfda24b737a890137aefdddb0d159"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V1_PRE_FLOOR_UNIT_TOMBSTONE_2026-07-14.json",
+      "accepted_sha256": "6e835eb232435b9c35506f5abf6607012e7370c610fe0a6be842f4ef563fe647",
+      "lock_sha256": "6e835eb232435b9c35506f5abf6607012e7370c610fe0a6be842f4ef563fe647"
+    },
+    {
+      "path": "tools/bitunix_wo105_public_rest_collector.py",
+      "accepted_sha256": "77a8cd8592780aa97b3a4b8e77ea4fe721c568d2a98868cc4d3f6decba9b335f",
+      "lock_sha256": "77a8cd8592780aa97b3a4b8e77ea4fe721c568d2a98868cc4d3f6decba9b335f"
+    },
+    {
+      "path": "tools/bitunix_wo105_ws_intake.py",
+      "accepted_sha256": "402330df7d6bb586a9ea864c35bcee8b2eddcf4d27a7a3b064a2b8dd10b7e125",
+      "lock_sha256": "402330df7d6bb586a9ea864c35bcee8b2eddcf4d27a7a3b064a2b8dd10b7e125"
+    },
+    {
+      "path": "tools/bitunix_wo105_packet_assembler_v6.py",
+      "accepted_sha256": "1cdb060e78756c2b01ecd75a4f3cc6753f41bc820ece3ed7ac6f339fe700ccda",
+      "lock_sha256": "1cdb060e78756c2b01ecd75a4f3cc6753f41bc820ece3ed7ac6f339fe700ccda"
+    },
+    {
+      "path": "tools/bitunix_wo105_liquidation_context_v3.py",
+      "accepted_sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177",
+      "lock_sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177"
+    },
+    {
+      "path": "tools/binance_force_order_real_feed_collector.py",
+      "accepted_sha256": "4f30656ac379fe06b12c813eab32ca8d699dfff77838695942ab0c44fad6ff8d",
+      "lock_sha256": "4f30656ac379fe06b12c813eab32ca8d699dfff77838695942ab0c44fad6ff8d"
+    },
+    {
+      "path": "tools/liquidation_side_semantics.py",
+      "accepted_sha256": "8f5045d9d12f8feef256282493bc45e81af48f48189d50e498c18f79fbd72b50",
+      "lock_sha256": "8f5045d9d12f8feef256282493bc45e81af48f48189d50e498c18f79fbd72b50"
+    },
+    {
+      "path": "configs/LIQUIDATION_REAL_FEED_CONTRACT.json",
+      "accepted_sha256": "498ce65335b17b5e94e680cd71e4942e552a9c5224592fbc4b8bcc78ca4259a2",
+      "lock_sha256": "498ce65335b17b5e94e680cd71e4942e552a9c5224592fbc4b8bcc78ca4259a2"
+    },
+    {
+      "path": "data/forward/bitunix_wo105_rest/run_20260713T204036_144964Z/PUBLIC_REST_SNAPSHOT_MANIFEST.json",
+      "accepted_sha256": "24f0f9e977be8848419d3faa03ed99b9517162e71b1ca11aeaeba25638c98c17",
+      "lock_sha256": "24f0f9e977be8848419d3faa03ed99b9517162e71b1ca11aeaeba25638c98c17"
+    },
+    {
+      "path": "tools/bitunix_wo105_causal_shadow_evaluator_v2.py",
+      "accepted_sha256": "6f2689035e6f15d17470217abefd80e5ccc475731010b97cedd2e9adbe039c6f",
+      "lock_sha256": "6f2689035e6f15d17470217abefd80e5ccc475731010b97cedd2e9adbe039c6f"
+    },
+    {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V2_2026-07-14.json",
+      "accepted_sha256": "ec4765f785ddf2ebff7c3c98dfb27aded6e5df439794918832e4a1f57a8b7f7a",
+      "lock_sha256": "ec4765f785ddf2ebff7c3c98dfb27aded6e5df439794918832e4a1f57a8b7f7a"
+    },
+    {
+      "path": "tools/bitunix_wo105_packet_assembler.py",
+      "accepted_sha256": "4ad9e2306dd63b669276313e6d0fe0f407eb74f3eb19db5133ae94f773e762eb",
+      "lock_sha256": "4ad9e2306dd63b669276313e6d0fe0f407eb74f3eb19db5133ae94f773e762eb"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V2_PRE_FLOOR_RUNTIME_TOMBSTONE_2026-07-14.json",
+      "accepted_sha256": "ed292b73c3d8dcfa72e401923e9b4d524597a1914baaeb55bfd08724f9713224",
+      "lock_sha256": "ed292b73c3d8dcfa72e401923e9b4d524597a1914baaeb55bfd08724f9713224"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V2_CAUSAL_LIFECYCLE_AUDIT_2026-07-14.json",
+      "accepted_sha256": "e771258c6d4702cb253d04915c3b7b45476a717ee13632663a70c22b9e96e592",
+      "lock_sha256": "e771258c6d4702cb253d04915c3b7b45476a717ee13632663a70c22b9e96e592"
+    },
+    {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3_2026-07-14.json",
+      "accepted_sha256": "6f8f42ea8b0184850d713abb90ee4c5f85cfa439d1f2a16e80dba6993c58d24b",
+      "lock_sha256": "6f8f42ea8b0184850d713abb90ee4c5f85cfa439d1f2a16e80dba6993c58d24b"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+      "accepted_sha256": "1d55f408d1b50352a9e71b692cb7cbbbcdce728a6b215f96dcc18d75644a7eb5",
+      "lock_sha256": "74bc6349cdf1627a2da774749b3f168550ab8ad325d1ea65403a49d6a2b1166b",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/19_BITUNIX_WO105_V3_RUNTIME_STOP_RECEIPT_2026-07-14.json.b64",
+      "accepted_bytes_b64_sha256": "f719ac737e8f7e261dc337e64e6f041389cdddb93c33af282bf3faaef8ce46cc"
+    },
+    {
+      "path": "docs/BITUNIX_WO108_POST_FLOOR_OBSERVATION_2026-07-14.json",
+      "accepted_sha256": "ef14e42b5dc025ac90a7eecb2e1b93786ba021591cf99a9b5b4a11b15d209bcf",
+      "lock_sha256": "ef14e42b5dc025ac90a7eecb2e1b93786ba021591cf99a9b5b4a11b15d209bcf"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3_FIRST_CYCLE_OPERATIONAL_TOMBSTONE_2026-07-14.json",
+      "accepted_sha256": "65b4e7d06aa05156867dd963dc928daf0ca8d5f932fdb696f71e8feeeb714369",
+      "lock_sha256": "65b4e7d06aa05156867dd963dc928daf0ca8d5f932fdb696f71e8feeeb714369"
+    },
+    {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R1_2026-07-14.json",
+      "accepted_sha256": "e1a21fd85ce341bb4508ccee7876c57519c77d4706cad86c69c78021859075ce",
+      "lock_sha256": "e1a21fd85ce341bb4508ccee7876c57519c77d4706cad86c69c78021859075ce"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R1_FIRST_CYCLE_GATE_2026-07-14.json",
+      "accepted_sha256": "c0b7e0e80705d73e18fe219eb20fdb7a0bc3442353daf23b49664783bf37c5c5",
+      "lock_sha256": "2c65379624e1d898e0792e0bab18b8c9cce9bbcd6a68526ed61fbd6dd14f6600",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/23_BITUNIX_WO105_V3R1_FIRST_CYCLE_GATE_2026-07-14.json.b64",
+      "accepted_bytes_b64_sha256": "9f4b5db1210d5c02d222aca05c3cee41a66935ff77d491df1f764cf0dfd29520"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R1_STATUS_2026-07-14.json",
+      "accepted_sha256": "09d7438ccdd026ceb79c22ae5769f1dc6256d39dfa0e8ab01a7c96cfc2a23463",
+      "lock_sha256": "9ebc8edccdbb76188616b41c04fc03fccae10dc2427495b2a2f1de67af579a4f",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/24_BITUNIX_WO105_V3R1_STATUS_2026-07-14.json.b64",
+      "accepted_bytes_b64_sha256": "01140603c1d802ba0972ef4a789a05ba9cccdce08afff53d208b4822deed2978"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R1_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+      "accepted_sha256": "56c99dc089b9e1fc0daab1e77cec98f762f3a21de99ff4c3d743173b4864e85f",
+      "lock_sha256": "26cff3af09ef9a9d6b2773d9e65fc19080890d6522c65412011960827f6f10cb",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/25_BITUNIX_WO105_V3R1_RUNTIME_STOP_RECEIPT_2026-07-14.json.b64",
+      "accepted_bytes_b64_sha256": "d5ed54d17ee34af283618d81914820d7dcc65080d354fe9b3e7be7a9ea1b47cc"
+    },
+    {
+      "path": "tools/bitunix_wo105_liquidation_context_v2.py",
+      "accepted_sha256": "514913d8c2c21e928d599014ee9f221911c1fefd442b4712a7523b5ad80470b4",
+      "lock_sha256": "514913d8c2c21e928d599014ee9f221911c1fefd442b4712a7523b5ad80470b4"
+    },
+    {
+      "path": "tools/bitunix_wo105_packet_assembler_v4.py",
+      "accepted_sha256": "dbfbb1eaa001ab2f188500732dfc14135cc4c53fbdb7f4d1f2f67a359761c9ca",
+      "lock_sha256": "dbfbb1eaa001ab2f188500732dfc14135cc4c53fbdb7f4d1f2f67a359761c9ca"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R1_LIQUIDATION_CLOCK_CONTRACT_AUDIT_2026-07-14.json",
+      "accepted_sha256": "16cfe0c4efa6e412d1b569c1e41aa1171e0c6e708b77c319fdea2613290d5a88",
+      "lock_sha256": "16cfe0c4efa6e412d1b569c1e41aa1171e0c6e708b77c319fdea2613290d5a88"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R1_CLOCK_CONTRACT_TOMBSTONE_2026-07-14.json",
+      "accepted_sha256": "b41fac67356e8fde6d35b28df32f4337f2c0d9969d2c7a2b2c4aab3abd6e96e7",
+      "lock_sha256": "b41fac67356e8fde6d35b28df32f4337f2c0d9969d2c7a2b2c4aab3abd6e96e7"
+    },
+    {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R2_2026-07-14.json",
+      "accepted_sha256": "45d758acdb1021d070d1b76424f4c4d7359dfa644abb9761a20a014d96dc539b",
+      "lock_sha256": "45d758acdb1021d070d1b76424f4c4d7359dfa644abb9761a20a014d96dc539b"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R2_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+      "accepted_sha256": "854eab80abddb07fe31902004ba8595d64d09d8f45f1f5a84c1570df5f3c92a5",
+      "lock_sha256": "41bc574171a1a28502f52e32c59d36f2591c3fb6828e5cd5d3cb2f808fa7fd7a",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/31_BITUNIX_WO105_V3R2_RUNTIME_STOP_RECEIPT_2026-07-14.json.b64",
+      "accepted_bytes_b64_sha256": "773b3f7472b328c9a7284976dd912319f3657df563ee943df425eac5027eac51"
+    },
+    {
+      "path": "data/forward/bitunix_wo105_v3r2_ws/run_20260714T180001_227487Z/PUBLIC_CAPTURE_MANIFEST.json",
+      "accepted_sha256": "271142ca1e6483e48883b725cc002253e66cbf0ce8ded23e5db50a576cc2a0ec",
+      "lock_sha256": "caee9db423015caa431edd2677ce80d4d80ae533421b5def59dc6b3d901868e4",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/32_PUBLIC_CAPTURE_MANIFEST.json.b64",
+      "accepted_bytes_b64_sha256": "fb8533cef67a494a0842d4da059216f5609e68e20cd742e91554eff5b2b0539d"
+    },
+    {
+      "path": "_dl/bitunix_wo105_v3r2_ws_intake/WS_INTAKE_MANIFEST.json",
+      "accepted_sha256": "0502afea0ac36b8643b9c773a6f2349fc007935c1ca8ebf64f9b29accb05f317",
+      "lock_sha256": "0502afea0ac36b8643b9c773a6f2349fc007935c1ca8ebf64f9b29accb05f317"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R2_ADAPTER_INTERFACE_AUDIT_2026-07-14.json",
+      "accepted_sha256": "48795a15d88ef1dd613a325b6d17baf07d6cc4a15cd062ed97314d31f18ff3ee",
+      "lock_sha256": "48795a15d88ef1dd613a325b6d17baf07d6cc4a15cd062ed97314d31f18ff3ee"
+    },
+    {
+      "path": "tools/bitunix_wo105_liquidation_context_v3.py",
+      "accepted_sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177",
+      "lock_sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177"
+    },
+    {
+      "path": "tools/bitunix_wo105_packet_assembler_v5.py",
+      "accepted_sha256": "6f700f9b99585337d340bf3267a3d81814f05196045ca0af64deae532ba68e55",
+      "lock_sha256": "6f700f9b99585337d340bf3267a3d81814f05196045ca0af64deae532ba68e55"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R2_FIRST_CYCLE_OPERATIONAL_TOMBSTONE_2026-07-14.json",
+      "accepted_sha256": "a3ef452bc5ba1fb6248049fad5128a6fe0266b292e4cf140ffabdc13bfac9e9f",
+      "lock_sha256": "a3ef452bc5ba1fb6248049fad5128a6fe0266b292e4cf140ffabdc13bfac9e9f"
+    },
+    {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R3_2026-07-14.json",
+      "accepted_sha256": "54f5434309aef0a2c8c62313820855a69cc628a43473733cadfcb91dcc023589",
+      "lock_sha256": "54f5434309aef0a2c8c62313820855a69cc628a43473733cadfcb91dcc023589"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R3_RUNTIME_STOP_RECEIPT_2026-07-15.json",
+      "accepted_sha256": "3d135343d00d67ffb4e9c9524fd0890bec86897aed6b09257da628257fce3157",
+      "lock_sha256": "6fc717cecd366fc5077ab57368db26566fe8a67a8692833962b07f4c12a6b773",
+      "accepted_bytes_b64_path": "tests/fixtures/wo008/accepted_ref/39_BITUNIX_WO105_V3R3_RUNTIME_STOP_RECEIPT_2026-07-15.json.b64",
+      "accepted_bytes_b64_sha256": "26c24f73e7718c2b752560568beeef5a81cbd0b4ec25e75100a7e0f56e9205aa"
+    },
+    {
+      "path": "_dl/bitunix_wo105_shadow_v3r3/LAST_EVALUATION.json",
+      "accepted_sha256": "484a545a570274520bc77d5b0cf8918bf89e8fa397dce220efaf02f6b4253a9d",
+      "lock_sha256": "484a545a570274520bc77d5b0cf8918bf89e8fa397dce220efaf02f6b4253a9d"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R3_RECEIPT_ORDER_AUDIT_2026-07-15.json",
+      "accepted_sha256": "a3e929d51892043d73181201eed950772737ccdc9624825f86e27d40ac468dee",
+      "lock_sha256": "a3e929d51892043d73181201eed950772737ccdc9624825f86e27d40ac468dee"
+    },
+    {
+      "path": "tools/bitunix_wo105_causal_shadow_evaluator_v4.py",
+      "accepted_sha256": "407d19adf5e992e0ea53d42ac613b52235f7c406dc5c51712fdb13865f31dff1",
+      "lock_sha256": "407d19adf5e992e0ea53d42ac613b52235f7c406dc5c51712fdb13865f31dff1"
+    },
+    {
+      "path": "tools/bitunix_wo105_packet_assembler_v6.py",
+      "accepted_sha256": "1cdb060e78756c2b01ecd75a4f3cc6753f41bc820ece3ed7ac6f339fe700ccda",
+      "lock_sha256": "1cdb060e78756c2b01ecd75a4f3cc6753f41bc820ece3ed7ac6f339fe700ccda"
+    },
+    {
+      "path": "docs/BITUNIX_WO105_V3R3_RECEIPT_ORDER_TOMBSTONE_2026-07-15.json",
+      "accepted_sha256": "5c35e662bd4b8fd4288b4537dcdad522ce75b31e688d8860fc4e47cef43b04bd",
+      "lock_sha256": "5c35e662bd4b8fd4288b4537dcdad522ce75b31e688d8860fc4e47cef43b04bd"
+    }
+  ]
+}

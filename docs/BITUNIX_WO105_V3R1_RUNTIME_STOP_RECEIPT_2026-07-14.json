@@ -1,0 +1,21 @@
+﻿{
+    "schema_version":  1,
+    "generated_at":  "2026-07-14T17:30:42.331Z",
+    "decision":  "bitunix_wo105_v3r1_runtime_stopped_verified",
+    "component":  "bitunix_wo105_v3r1_forward",
+    "old_pid":  17712,
+    "attempt_id":  "d0aa368a-f970-49f2-acd4-5af934ef52e3",
+    "expected_script":  "C:\\Users\\coins\\TradingOS\\Active\\ops\\autostart\\Run-BitunixWO105V3R1ForwardLoop.ps1",
+    "job_stop_decision":  "verified_job_terminated",
+    "exact_script_pids_remaining":  [
+
+                                    ],
+    "job_receipt_removed":  true,
+    "lock_removed":  true,
+    "first_cycle_decision":  "bitunix_wo105_v3_first_cycle_accepted_shadow_only",
+    "outcome_metrics_inspected":  false,
+    "signals_allowed":  false,
+    "orders_allowed":  false,
+    "capital_permission":  "DENY",
+    "can_trade":  false
+}

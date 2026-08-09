@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T17:30:19Z",
+  "tool": "tools/bitunix_wo105_v2_first_cycle_gate.py",
+  "decision": "bitunix_wo105_v3_first_cycle_accepted_shadow_only",
+  "cohort_version": "v3",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R1_20260714",
+  "forward_start_at": "2026-07-14T17:00:00Z",
+  "elapsed_since_floor_ms": 1819910,
+  "grace_ms": {
+    "loop_transition": 180000,
+    "rest_snapshot": 420000,
+    "accepted_ws": 2400000,
+    "packet_assembly": 2700000
+  },
+  "checks": {
+    "loop_transitioned_after_floor": true,
+    "post_floor_rest_snapshot": true,
+    "post_floor_ws_independently_accepted": true,
+    "post_floor_packet_assembler_ran": true
+  },
+  "pending_within_grace": [],
+  "overdue": [],
+  "failures": [],
+  "diagnostics": {
+    "loop_status": "assembling_and_continuing_shadow_events",
+    "latest_forward_rest": {
+      "path": "C:\\Users\\coins\\TradingOS\\Active\\data\\forward\\bitunix_wo105_v3r1_rest\\run_20260714T173005_825800Z\\PUBLIC_REST_SNAPSHOT_MANIFEST.json",
+      "generated_at_ms": 1784050205825,
+      "decision": "bitunix_wo105_public_rest_snapshot_collected"
+    },
+    "malformed_rest_manifests": [],
+    "first_milestone_ms": {
+      "loop_transitioned_after_floor": 1784048400908,
+      "post_floor_rest_snapshot": 1784048705834,
+      "post_floor_ws_independently_accepted": 1784050219217,
+      "post_floor_packet_assembler_ran": 1784050219226
+    },
+    "ws_intake_decision": "bitunix_wo105_ws_intake_ready",
+    "ws_accepted_runs": 1,
+    "packet_decision": "bitunix_wo105_v3_packet_no_current_causal_setup",
+    "packet_written": false,
+    "evaluation_run": false
+  },
+  "automatic_restart_attempted": false,
+  "edge_evaluated": false,
+  "promotion": "HOLD",
+  "runtime_boundary": {
+    "operational_gate_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

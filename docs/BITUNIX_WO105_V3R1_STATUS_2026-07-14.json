@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T17:30:19Z",
+  "tool": "tools/bitunix_wo105_v2_status.py",
+  "decision": "bitunix_wo105_v3_collecting_causal_forward_sample",
+  "cohort_version": "v3",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R1_20260714",
+  "phase": "FORWARD_COLLECTION",
+  "forward_start_at": "2026-07-14T17:00:00Z",
+  "v1_tombstoned_pre_floor": true,
+  "v1_events_admitted": 0,
+  "predecessor_tombstoned_pre_floor": true,
+  "predecessor_cohort_version": "v2",
+  "v2_tombstoned_pre_floor": true,
+  "evaluator": "READY",
+  "source_pipeline": {
+    "packet_assembly": "bitunix_wo105_v3_packet_no_current_causal_setup",
+    "ws_intake": "bitunix_wo105_ws_intake_ready",
+    "liquidation_context": "bitunix_wo105_liquidation_context_hold",
+    "crowd_quorum_required": 3,
+    "sources": [
+      "bitunix_funding",
+      "bitunix_trade_cvd",
+      "binance_force_order_liquidation_skew"
+    ]
+  },
+  "forward_events": 0,
+  "minimum_forward_events": 30,
+  "forward_progress": "0/30",
+  "terminal_forward_events": 0,
+  "minimum_terminal_forward_events": 30,
+  "terminal_forward_progress": "0/30",
+  "latest_state_counts": {},
+  "all_row_state_counts": {},
+  "independent_edge_review_ready": false,
+  "edge_evaluated": false,
+  "promotion": "HOLD",
+  "failures": [],
+  "next_action": "collect_without_retuning_until_30_terminal_forward_events",
+  "runtime_boundary": {
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

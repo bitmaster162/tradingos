@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T18:40:58Z",
+  "status": "TOMBSTONED_POST_FLOOR_ZERO_EVENT_ADAPTER_INTERFACE_FAILURE",
+  "decision": "bitunix_wo105_v3r2_tombstoned_without_strategy_or_outcome_review",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R2_20260714",
+  "forward_start_at": "2026-07-14T18:00:00Z",
+  "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+  "events_observed": 0,
+  "terminal_events_observed": 0,
+  "outcomes_observed": 0,
+  "outcome_metrics_inspected": false,
+  "strategy_failure": false,
+  "operational_failure": true,
+  "failure_class": "adapter_interface_missing_load_rows",
+  "interface_audit": {
+    "schema_version": 1,
+    "generated_at": "2026-07-14T18:40:58Z",
+    "tool": "tools/bitunix_wo105_v3r3_rollover.py",
+    "decision": "bitunix_wo105_v3r2_zero_event_adapter_interface_gap_confirmed",
+    "failures": [],
+    "predecessor_cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R2_20260714",
+    "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+    "capture": {
+      "frames_total": 10079,
+      "error_taxonomy": {
+        "NETWORK": 0,
+        "PARSER": 0,
+        "LOCAL": 0,
+        "STORAGE": 0
+      },
+      "subscription_accepted": true,
+      "started_utc": "2026-07-14T18:00:01.227488+00:00",
+      "ended_utc": "2026-07-14T18:30:14.522046+00:00"
+    },
+    "ws_intake": {
+      "decision": "bitunix_wo105_ws_intake_ready",
+      "accepted_runs": 1,
+      "records": {
+        "books": 5139,
+        "trades": 5144,
+        "cvd": 1
+      }
+    },
+    "interface_contract": {
+      "assembler_required_method": "load_rows",
+      "v2_adapter_has_load_rows": false,
+      "v3_adapter_has_load_rows": true,
+      "v3_context_semantics": "delegates_validate_row_and_build_context_to_v2",
+      "native_stderr_failure": "AttributeError: module tools.bitunix_wo105_liquidation_context_v2 has no attribute load_rows"
+    },
+    "events_admitted": 0,
+    "outcomes_observed": 0,
+    "outcome_metrics_inspected": false,
+    "strategy_failure": false,
+    "operational_failure": true,
+    "edge_evaluated": false,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "source_bindings": {
+    "predecessor_v3r2_lock": {
+      "path": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V3R2_2026-07-14.json",
+      "sha256": "45d758acdb1021d070d1b76424f4c4d7359dfa644abb9761a20a014d96dc539b"
+    },
+    "predecessor_v3r2_runtime_stop_receipt": {
+      "path": "docs/BITUNIX_WO105_V3R2_RUNTIME_STOP_RECEIPT_2026-07-14.json",
+      "sha256": "41bc574171a1a28502f52e32c59d36f2591c3fb6828e5cd5d3cb2f808fa7fd7a"
+    },
+    "predecessor_v3r2_capture_manifest": {
+      "path": "data/forward/bitunix_wo105_v3r2_ws/run_20260714T180001_227487Z/PUBLIC_CAPTURE_MANIFEST.json",
+      "sha256": "caee9db423015caa431edd2677ce80d4d80ae533421b5def59dc6b3d901868e4"
+    },
+    "predecessor_v3r2_ws_intake": {
+      "path": "_dl/bitunix_wo105_v3r2_ws_intake/WS_INTAKE_MANIFEST.json",
+      "sha256": "0502afea0ac36b8643b9c773a6f2349fc007935c1ca8ebf64f9b29accb05f317"
+    },
+    "predecessor_v3r2_interface_audit": {
+      "path": "docs/BITUNIX_WO105_V3R2_ADAPTER_INTERFACE_AUDIT_2026-07-14.json",
+      "sha256": "48795a15d88ef1dd613a325b6d17baf07d6cc4a15cd062ed97314d31f18ff3ee"
+    },
+    "liquidation_context_v3": {
+      "path": "tools/bitunix_wo105_liquidation_context_v3.py",
+      "sha256": "04354b8b9960a7224d92675036cb0e7b01acbd852f08c338477ddde77c196177"
+    },
+    "packet_assembler_v5": {
+      "path": "tools/bitunix_wo105_packet_assembler_v5.py",
+      "sha256": "6f700f9b99585337d340bf3267a3d81814f05196045ca0af64deae532ba68e55"
+    }
+  },
+  "restart_allowed": false,
+  "backfill_allowed": false,
+  "retune_allowed": false,
+  "resume_allowed": false,
+  "signals_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}

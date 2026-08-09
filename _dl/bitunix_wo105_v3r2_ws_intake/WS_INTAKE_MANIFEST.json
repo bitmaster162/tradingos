@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T18:34:31Z",
+  "tool": "tools/bitunix_wo105_ws_intake.py",
+  "decision": "bitunix_wo105_ws_intake_ready",
+  "forward_floor_ms": 1784052000000,
+  "capture_root": "C:\\Users\\coins\\TradingOS\\Active\\data\\forward\\bitunix_wo105_v3r2_ws",
+  "candidate_runs": 1,
+  "accepted_runs": 1,
+  "runs": [
+    {
+      "run_dir": "C:\\Users\\coins\\TradingOS\\Active\\data\\forward\\bitunix_wo105_v3r2_ws\\run_20260714T180001_227487Z",
+      "accepted": true,
+      "failures": [],
+      "capture_manifest_sha256": "caee9db423015caa431edd2677ce80d4d80ae533421b5def59dc6b3d901868e4",
+      "cvd_failures": [],
+      "counts": {
+        "books": 5139,
+        "trades": 5144,
+        "cvd": 1
+      }
+    }
+  ],
+  "records": {
+    "books": 5139,
+    "trades": 5144,
+    "cvd": 1
+  },
+  "evaluator_packet_ready": false,
+  "missing_for_packet": [
+    "at_least_one_additional_independent_fresh_crowd_receipt_for_3_of_n_quorum"
+  ],
+  "runtime_boundary": {
+    "public_read_only": true,
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

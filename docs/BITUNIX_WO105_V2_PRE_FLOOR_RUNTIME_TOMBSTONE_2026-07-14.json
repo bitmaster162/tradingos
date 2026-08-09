@@ -1,0 +1,38 @@
+{
+  "schema": "bitunix-wo105-preregistered-cohort-tombstone-v2",
+  "tombstoned_at": "2026-07-14T05:47:57Z",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V2_20260714",
+  "status": "TOMBSTONED_PRE_FLOOR_CAUSAL_LIFECYCLE_GAP",
+  "original_forward_start_at": "2026-07-14T12:00:00Z",
+  "original_lock": "configs/BITUNIX_WO105_CAUSAL_SHADOW_PREREG_V2_2026-07-14.json",
+  "original_lock_sha256": "ec4765f785ddf2ebff7c3c98dfb27aded6e5df439794918832e4a1f57a8b7f7a",
+  "original_evaluator": "tools/bitunix_wo105_causal_shadow_evaluator_v2.py",
+  "original_evaluator_sha256": "6f2689035e6f15d17470217abefd80e5ccc475731010b97cedd2e9adbe039c6f",
+  "original_packet_assembler": "tools/bitunix_wo105_packet_assembler.py",
+  "original_packet_assembler_sha256": "4ad9e2306dd63b669276313e6d0fe0f407eb74f3eb19db5133ae94f773e762eb",
+  "original_runtime_wrapper": "ops/autostart/Run-BitunixWO105V2ForwardLoop.ps1",
+  "original_runtime_wrapper_sha256": "b540071b9697037f2d8f96fa3e7f6944e793ec44c1bc6c1dfd11e722ffd10ec6",
+  "audit": "docs/BITUNIX_WO105_V2_CAUSAL_LIFECYCLE_AUDIT_2026-07-14.json",
+  "events_observed": 0,
+  "outcomes_observed": 0,
+  "interim_outcome_metrics_inspected": false,
+  "edge_evaluated": false,
+  "reason": "Before the forward floor, a bounded lifecycle audit proved that the bound assembler replaces earliest candle receipts with the latest REST re-fetch and cannot continue an earlier open event after a newer 1h bar. The cohort is retired with zero events rather than weakening causality or changing frozen files.",
+  "prohibited": [
+    "resume_v2",
+    "mutate_v2_bound_artifacts",
+    "backfill_v2",
+    "reinterpret_late_receipts",
+    "copy_v2_events_or_outcomes_into_v3",
+    "retune_from_v2"
+  ],
+  "superseded_by": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3_20260714",
+  "scope": {
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false
+}

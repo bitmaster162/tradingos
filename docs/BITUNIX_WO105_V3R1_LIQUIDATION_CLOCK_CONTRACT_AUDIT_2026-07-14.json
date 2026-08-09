@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-14T17:31:20Z",
+  "tool": "tools/bitunix_wo105_v3r2_rollover.py",
+  "decision": "bitunix_wo105_v3r1_zero_skew_contract_defect_confirmed",
+  "forward_floor_ms": 1784048400000,
+  "cutoff_ms": 1784050280378,
+  "post_floor_schema_v2_btc_rows": 20,
+  "receive_minus_event_ms": {
+    "minimum": -67,
+    "median": -59.0,
+    "maximum": -48,
+    "negative_rows": 20,
+    "nonnegative_rows": 0
+  },
+  "legacy_adapter": {
+    "accepted_events": 0,
+    "rejection_counts": {
+      "event_after_receipt": 934,
+      "ingest_schema_invalid": 446,
+      "pre_floor": 55
+    },
+    "blockers": [
+      "minimum_events_not_met:0<3",
+      "minimum_notional_not_met:0.00000000<1000.00000000"
+    ]
+  },
+  "versioned_adapter": {
+    "accepted_events": 20,
+    "total_liquidated_notional_usd": 187631.50989999995,
+    "maximum_observed_clock_lead_ms": 67,
+    "max_clock_skew_ms": 5000,
+    "causal_availability_rule": "max(event_time_ms,raw_received_at_ms)",
+    "blockers": []
+  },
+  "strategy_parameters_inspected": false,
+  "outcome_metrics_inspected": false,
+  "edge_evaluated": false,
+  "signals_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}

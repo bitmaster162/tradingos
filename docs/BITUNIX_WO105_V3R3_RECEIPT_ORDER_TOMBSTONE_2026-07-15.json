@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T03:09:41Z",
+  "status": "TOMBSTONED_POST_FLOOR_ZERO_EVENT_RECEIPT_ORDER_FAILURE",
+  "decision": "bitunix_wo105_v3r3_tombstoned_without_edge_or_outcome_review",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R3_20260714",
+  "forward_start_at": "2026-07-14T19:30:00Z",
+  "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+  "candidate_setups_observed": 1,
+  "events_admitted": 0,
+  "outcomes_observed": 0,
+  "outcome_metrics_inspected": false,
+  "edge_evaluated": false,
+  "strategy_failure": false,
+  "operational_failure": true,
+  "failure_class": "candle_receipt_order_contradicted_event_order",
+  "audit": {
+    "schema_version": 1,
+    "generated_at": "2026-07-15T03:09:41Z",
+    "tool": "tools/bitunix_wo105_v3r4_rollover.py",
+    "decision": "bitunix_wo105_v3r3_zero_event_candle_receipt_order_contradiction_confirmed",
+    "failures": [],
+    "predecessor_cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V3R3_20260714",
+    "parameter_cohort_sha256": "09858b02763c637a0a315ea085142681c4fae390b2c2deb848bcc0a1bfaa685d",
+    "candidate_setup": {
+      "direction": "SHORT",
+      "signal_close_ms": 1784070000000,
+      "pivot_price": 64943.0,
+      "reclaim_close": 64837.2
+    },
+    "receipt_inversions": {
+      "signal_bars": {
+        "count": 0,
+        "sample": []
+      },
+      "htf_bars": {
+        "count": 1,
+        "sample": [
+          {
+            "previous_index": 21,
+            "current_index": 22,
+            "previous_close_ms": 1781164800000,
+            "current_close_ms": 1781179200000,
+            "previous_received_at": 1784057704214,
+            "current_received_at": 1784057703919
+          }
+        ]
+      },
+      "outcome_bars": {
+        "count": 3,
+        "sample": [
+          {
+            "previous_index": 0,
+            "current_index": 1,
+            "previous_close_ms": 1783964700000,
+            "current_close_ms": 1783965000000,
+            "previous_received_at": 1784057703391,
+            "current_received_at": 1784057703148
+          },
+          {
+            "previous_index": 4,
+            "current_index": 5,
+            "previous_close_ms": 1783965900000,
+            "current_close_ms": 1783966200000,
+            "previous_received_at": 1784058303584,
+            "current_received_at": 1784057703148
+          },
+          {
+            "previous_index": 110,
+            "current_index": 111,
+            "previous_close_ms": 1783997700000,
+            "current_close_ms": 1783998000000,
+            "previous_received_at": 1784057703148,
+            "current_received_at": 1784057702802
+          }
+        ]
+      }
+    },
+    "contract_diagnosis": {
+      "event_order": "close_ms_ascending_unique_is_required",
+      "receipt_order": "may_differ_from_event_order_due_to_independent_snapshot_receipt_jitter",
+      "causal_guard": "each_receipt_must_be_available_by_evaluation_and_frozen_action_cutoff",
+      "strategy_parameters_affected": false
+    },
+    "candidate_setups_observed": 1,
+    "events_admitted": 0,
+    "outcomes_observed": 0,
+    "outcome_metrics_inspected": false,
+    "edge_evaluated": false,
+    "strategy_failure": false,
+    "operational_failure": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false
+  },
+  "restart_allowed": false,
+  "backfill_allowed": false,
+  "retune_allowed": false,
+  "resume_allowed": false,
+  "signals_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}

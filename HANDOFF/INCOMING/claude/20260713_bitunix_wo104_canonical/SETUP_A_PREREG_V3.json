@@ -1,0 +1,173 @@
+{
+  "schema": "bitunix-setup-a-prereg-v3",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_v3_20260713",
+  "frozen_at_utc": "2026-07-13",
+  "status": "FROZEN_SHADOW_POLICY_ORACLE",
+  "not_executable_strategy": true,
+  "scope": {
+    "can_trade": false,
+    "credentials_allowed": false,
+    "private_api_allowed": false,
+    "order_calls_allowed": false,
+    "shadow_only": true,
+    "signals_externalized": false,
+    "remote_effect_permission": "PUBLIC_READ_ONLY_CAPTURE_ONLY",
+    "capital_permission": "DENY"
+  },
+  "parameter_cohort_sha256": "08725bf38291334c6127de1a06f6c13564664ac4a078bc78a0da332b4618dfc0",
+  "cohort_hash_method": {
+    "recipe": "sha256( json.dumps(params, sort_keys=true, separators=(',',':'), ensure_ascii=false).encode('utf-8') )",
+    "reproduced_by": "build_prereg_v3.py"
+  },
+  "supersedes": {
+    "v2_cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_v2_20260713",
+    "v2_hash": "a9108884d41ccb509d32319499a0f8ba9027c54abae0aabecaf6e91af751cffc",
+    "v2_reclassified_as": [
+      "FROZEN_POLICY_PROPOSAL",
+      "NOT_EXECUTABLE_STRATEGY",
+      "SUPERSEDED_FOR_EVALUATION_BY_V3"
+    ],
+    "v2_file": "SETUP_A_PREREG_V2.json (kept immutable; its embedded 'FROZEN_EXECUTABLE_COHORT' label is superseded by this note, file NOT mutated)"
+  },
+  "params": {
+    "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_v3_20260713",
+    "policy_class": "frozen_shadow_policy_oracle",
+    "venue": "bitunix_usdt_perp",
+    "symbol": "BTCUSDT",
+    "signal_timeframe": "1h",
+    "signal_tf_minutes": 60,
+    "trigger_timeframe": "5m",
+    "htf_timeframe": "4h",
+    "pivot": {
+      "algorithm": "fractal_swing",
+      "lookback_bars": 20,
+      "tie_handling": "earliest_bar_wins",
+      "confirmation_delay_bars": 2,
+      "causal": true,
+      "no_future_lookahead": true
+    },
+    "sweep_threshold_ticks": 1,
+    "reclaim_window_bars": 3,
+    "reclaim_confirmation": "signal_tf_close_back_inside_reference",
+    "entry": {
+      "order_rule": "limit_maker_at_reclaim_close_price",
+      "timing_rule": "first_public_book_state_at_or_after_signal_close_plus_latency",
+      "latency_ms": 250
+    },
+    "invalidation_buffer_ticks": 1,
+    "horizon": {
+      "expiry_bars_signal_tf": 6,
+      "signal_tf_minutes": 60,
+      "max_holding_min": 240,
+      "effective_horizon_rule": "min(expiry_bars_signal_tf*signal_tf_minutes, max_holding_min)",
+      "effective_horizon_min": 240
+    },
+    "htf_conflict": {
+      "source": "local_unified_verdict",
+      "permitted_for_short": [
+        "down_mild",
+        "down_strong",
+        "flat"
+      ],
+      "permitted_for_long": [
+        "up_mild",
+        "up_strong",
+        "flat"
+      ],
+      "hard_veto": "no_entry_against_strong_opposing_htf",
+      "source_freshness_max_age_s": 900
+    },
+    "book": {
+      "book_age_max_ms": 3000
+    },
+    "crowd_funding": {
+      "quorum_fresh_inputs_required": 3,
+      "sources": {
+        "funding_rate_8h": {
+          "abs_max": 0.0005,
+          "sign_positive_means": "long",
+          "freshness_max_age_ms": 28800000
+        },
+        "oi_delta_pct": {
+          "abs_max": 5.0,
+          "sign_positive_means": "long",
+          "freshness_max_age_ms": 3600000
+        },
+        "cvd_norm": {
+          "abs_max": 2.0,
+          "sign_positive_means": "long",
+          "freshness_max_age_ms": 3600000
+        },
+        "liquidation_skew": {
+          "abs_max": 2.0,
+          "sign_positive_means": "short",
+          "freshness_max_age_ms": 3600000
+        },
+        "btc_ls_composite": {
+          "abs_max": 2.0,
+          "sign_positive_means": "long",
+          "freshness_max_age_ms": 86400000
+        }
+      },
+      "veto_rule": "any_fresh_source_over_abs_max_on_intended_side__HOLD; fewer_than_quorum_fresh__HOLD"
+    },
+    "fee": {
+      "tier": "VIP0",
+      "maker_bps": 2.0,
+      "taker_bps": 6.0,
+      "source": "https://www.bitunix.com/service/handling-fee",
+      "as_of": "2026-07-13",
+      "verified": true
+    },
+    "funding_treatment": {
+      "interval_h": 8,
+      "interval_source": "https://fapi.bitunix.com/api/v1/futures/market/funding_rate?symbol=BTCUSDT",
+      "max_funding_rate": 0.3,
+      "min_funding_rate": -0.3,
+      "rule": "shadow_pays_or_receives_if_holding_across_funding_ts_signed_by_side",
+      "as_of": "2026-07-13"
+    },
+    "contract_metadata": {
+      "min_qty": "0.0001",
+      "min_qty_verified": true,
+      "tick_size": "0.1",
+      "lot_step": "0.0001",
+      "tick_lot_label": "INFERRED_from_quotePrecision(1)_basePrecision(4)__NOT_explicit_order_rule",
+      "min_notional_usdt": "min_qty*mark_price",
+      "source": "https://fapi.bitunix.com/api/v1/futures/market/trading_pairs",
+      "as_of": "2026-07-13"
+    },
+    "execution_model": {
+      "fill_model": "conservative_queue_partial_nofill",
+      "maker_immediate_top_level_fill_assumed": false,
+      "fill_requires": "trade_prints_through_level_by_>=1_tick_after_entry_eligible_ts",
+      "edge_evaluation": "HOLD_until_fill_model_validated",
+      "slippage": "walk_captured_book_depth_size_dependent"
+    },
+    "shadow_sizing": {
+      "notional_usdt": 100.0,
+      "risk_basis": "distance_to_invalidation",
+      "compounding": false
+    },
+    "evaluation": {
+      "edge_is_pre_entry_input": false,
+      "edge_source": "independent_evaluator_receipt",
+      "min_forward_sample": 30,
+      "min_expected_net_edge_R": 0.25
+    },
+    "lifecycle": {
+      "capture_invalid_reasons": [
+        "schema",
+        "freshness",
+        "storage"
+      ],
+      "tombstone_rule": "COHORT_TOMBSTONED only after a valid min_forward_sample fails frozen outcome metrics"
+    },
+    "train_forward_split": {
+      "train": "none_prereg_frozen",
+      "forward": "entire_capture",
+      "policy": "quality_validation_only__no_parameter_fitting"
+    }
+  },
+  "note": "Preregistration ONLY. Shadow oracle. No outcomes read pre-entry; edge is an independent OUTCOME receipt. If any single value changes, declare a NEW cohort_id."
+}

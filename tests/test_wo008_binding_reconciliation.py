@@ -33,7 +33,7 @@ def test_all_current_worktree_bindings_match_frozen_raw_hashes() -> None:
 def test_accepted_ref_has_exactly_eight_eol_only_mismatches() -> None:
     mismatches: list[str] = []
     for item in pairs():
-        accepted = module.git_blob(GIT_ROOT, ACCEPTED_REF, item["path"])
+        accepted = module.accepted_ref_blob(ROOT, GIT_ROOT, ACCEPTED_REF, item["path"])
         current = (ROOT / item["path"]).read_bytes()
         if module.sha256_bytes(accepted or b"") == item["expected_sha256"]:
             continue
@@ -55,7 +55,7 @@ def test_eol_bound_files_are_exempt_from_git_text_normalization() -> None:
     mismatched_paths = {
         item["path"]
         for item in pairs()
-        if module.sha256_bytes(module.git_blob(GIT_ROOT, ACCEPTED_REF, item["path"]) or b"")
+        if module.sha256_bytes(module.accepted_ref_blob(ROOT, GIT_ROOT, ACCEPTED_REF, item["path"]) or b"")
         != item["expected_sha256"]
     }
 

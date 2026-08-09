@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T00:05:33Z",
+  "tool": "tools/bitunix_wo105_causal_shadow_evaluator.py",
+  "state": "CAPTURE_INVALID",
+  "decision": "bitunix_wo105_hold_input_invalid",
+  "event_id": null,
+  "failures": [
+    "htf_bars:receipt_time_reordered",
+    "outcome_bars:receipt_time_reordered"
+  ],
+  "details": {},
+  "edge_evaluated": false,
+  "runtime_boundary": {
+    "signals_allowed": false,
+    "paper_entries_allowed": false,
+    "orders_allowed": false,
+    "capital_permission": "DENY",
+    "can_trade": false
+  },
+  "can_trade": false,
+  "evaluator_contract": "WO105_V3_EARLIEST_RECEIPT_AND_EVENT_CONTINUATION"
+}

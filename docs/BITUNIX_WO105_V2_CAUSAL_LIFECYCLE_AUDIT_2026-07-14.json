@@ -1,0 +1,55 @@
+{
+  "schema": "bitunix-wo105-causal-lifecycle-audit-v1",
+  "audited_at": "2026-07-14T05:47:57Z",
+  "cohort_id": "SETUP_A_SFP_FAILED_BREAKOUT_WO105_V2_20260714",
+  "decision": "bitunix_wo105_v2_pre_floor_runtime_contract_not_executable_as_bound",
+  "forward_floor": "2026-07-14T12:00:00Z",
+  "audit_completed_before_floor": true,
+  "events_observed": 0,
+  "outcomes_observed": 0,
+  "interim_outcome_metrics_inspected": false,
+  "findings": [
+    {
+      "id": "LATEST_REST_RECEIPT_REPLACES_CAUSAL_RECEIPT",
+      "severity": "BLOCKER",
+      "evidence": {
+        "assembler_rule": "max(eligible_rest, key=snapshot_received_at)",
+        "runtime_capture_minutes": 30,
+        "runtime_rest_cadence_seconds": 300,
+        "runtime_rest_offset_seconds": 2,
+        "frozen_maximum_action_latency_ms": 5000,
+        "v2_validation": "signal_bar.received_at <= signal_close_ms + 5000"
+      },
+      "impact": "The assembler uses the last REST re-fetch made during a 30-minute capture instead of the first post-close receipt. A current 1h signal is therefore represented by a receipt many minutes after its frozen five-second cutoff and is rejected fail-closed."
+    },
+    {
+      "id": "OPEN_EVENT_NOT_REPLAYABLE_AFTER_NEXT_SIGNAL_BAR",
+      "severity": "BLOCKER",
+      "evidence": {
+        "setup_rule": "detect_setup requires the reclaim bar to be the final signal bar",
+        "assembler_rule": "only the current detected setup is evaluated",
+        "max_holding_ms": 14400000,
+        "signal_timeframe": "1h"
+      },
+      "impact": "After the next 1h bar arrives, an earlier HOLD or SHADOW_OPEN event is no longer selected, so its four-hour lifecycle can remain non-terminal indefinitely."
+    }
+  ],
+  "allowed_remediation": [
+    "preserve V2 artifacts byte-for-byte",
+    "tombstone V2 before its floor with zero events and zero outcomes",
+    "reuse the unchanged strategy parameter object in a new cohort",
+    "select the earliest observed receipt for each closed candle",
+    "archive the exact pre-entry packet and continue each open event by event_id"
+  ],
+  "prohibited_remediation": [
+    "mutate the V2 lock or bound evaluator",
+    "reinterpret late receipts as causal",
+    "backfill V2 events",
+    "inspect outcomes to choose a fix",
+    "retune strategy thresholds, target, fees, fill model, or holding horizon"
+  ],
+  "signals_allowed": false,
+  "orders_allowed": false,
+  "capital_permission": "DENY",
+  "can_trade": false
+}
