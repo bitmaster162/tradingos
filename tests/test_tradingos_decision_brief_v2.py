@@ -5,8 +5,6 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-import pytest
-
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULE_PATH = ROOT / "tools" / "tradingos_decision_brief_v2.py"
@@ -47,31 +45,33 @@ def test_safe_sample_remains_ready_and_binds_v2_generator(tmp_path: Path) -> Non
     assert all(path.is_file() for path in paths.values())
 
 
-@pytest.mark.parametrize(
-    ("key", "unsafe"),
-    [
+def test_any_unsafe_policy_permission_fails_closed_before_generation(tmp_path: Path) -> None:
+    cases = [
         ("signals_allowed", True),
         ("orders_allowed", True),
         ("credentials_allowed", True),
         ("can_trade", True),
         ("capital_permission", "ALLOW"),
         ("watch_stances_allowed", False),
-    ],
-)
-def test_any_unsafe_policy_permission_fails_closed_before_generation(
-    tmp_path: Path, key: str, unsafe: object
-) -> None:
-    unsafe_policy = policy()
-    unsafe_policy["output_permissions"][key] = unsafe
-    policy_path = tmp_path / "unsafe_policy.json"
-    policy_path.write_text(json.dumps(unsafe_policy), encoding="utf-8")
-    input_path = tmp_path / "market_snapshot.json"
-    input_path.write_text(json.dumps(sample()), encoding="utf-8")
+    ]
+    for index, (key, unsafe) in enumerate(cases):
+        unsafe_policy = policy()
+        unsafe_policy["output_permissions"][key] = unsafe
+        case_dir = tmp_path / str(index)
+        case_dir.mkdir()
+        policy_path = case_dir / "unsafe_policy.json"
+        policy_path.write_text(json.dumps(unsafe_policy), encoding="utf-8")
+        input_path = case_dir / "market_snapshot.json"
+        input_path.write_text(json.dumps(sample()), encoding="utf-8")
 
-    with pytest.raises(ValueError, match="unsafe policy permissions"):
-        brief_tool.generate(input_path, tmp_path / "out", policy_path, NOW)
+        try:
+            brief_tool.generate(input_path, case_dir / "out", policy_path, NOW)
+        except ValueError as exc:
+            assert "unsafe policy permissions" in str(exc)
+        else:
+            raise AssertionError(f"unsafe policy permission was accepted: {key}={unsafe!r}")
 
-    assert not (tmp_path / "out" / "brief.json").exists()
+        assert not (case_dir / "out" / "brief.json").exists()
 
 
 def test_missing_source_timestamp_blocks_brief(tmp_path: Path) -> None:
