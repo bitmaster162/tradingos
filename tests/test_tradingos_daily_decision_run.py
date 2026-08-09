@@ -18,7 +18,12 @@ def test_one_packet_per_bangkok_day(tmp_path: Path):
     assert payload["memory_append_status"]=="APPENDED" and payload["memory_sequence"]==1
     assert set(payload["memory_windows"].values())=={"INSUFFICIENT_HISTORY"}
     ledger=out/"market_memory.ndjson"; assert ledger.is_file() and len(ledger.read_text(encoding="utf-8").splitlines())==1
+    attribution=out/"value_attribution.ndjson"; assert attribution.is_file() and len(attribution.read_text(encoding="utf-8").splitlines())==1
+    assert payload["attribution_summary"]["events"]==1 and payload["attribution_summary"]["unresolved"]==1
+    assert payload["directional_proof"]["events"]==1 and payload["directional_proof"]["resolved"]==0
     assert (out/"2026-08-09"/"memory"/"market_replay.html").is_file()
+    assert (out/"2026-08-09"/"attribution"/"value_attribution.html").is_file()
     second=subprocess.run(cmd,cwd=ROOT,text=True,capture_output=True); assert second.returncode==4
     assert json.loads(second.stdout)["result"]=="DUPLICATE_DAY_SUPPRESSED"
     assert len(ledger.read_text(encoding="utf-8").splitlines())==1
+    assert len(attribution.read_text(encoding="utf-8").splitlines())==1

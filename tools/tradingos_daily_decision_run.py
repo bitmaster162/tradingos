@@ -25,6 +25,7 @@ brief_tool = load_module("tradingos_decision_brief_v2_daily", ROOT / "tools" / "
 cockpit_tool = load_module("tradingos_decision_cockpit_daily", ROOT / "tools" / "tradingos_decision_cockpit.py")
 alert_tool = load_module("tradingos_decision_alerts_daily", ROOT / "tools" / "tradingos_decision_alerts.py")
 memory_tool = load_module("tradingos_market_memory_daily", ROOT / "tools" / "tradingos_market_memory.py")
+attribution_tool = load_module("tradingos_value_attribution_daily", ROOT / "tools" / "tradingos_value_attribution.py")
 
 
 def parse_now(value: str | None) -> datetime:
@@ -39,6 +40,7 @@ def main() -> int:
     parser.add_argument("--out-root", required=True, type=Path)
     parser.add_argument("--now")
     parser.add_argument("--memory-ledger", type=Path, help="Optional persistent market-memory ledger path; defaults to <out-root>/market_memory.ndjson")
+    parser.add_argument("--attribution-ledger", type=Path, help="Optional persistent event-attribution ledger; defaults to <out-root>/value_attribution.ndjson")
     args = parser.parse_args()
     now = parse_now(args.now)
     day = now.astimezone(ZoneInfo("Asia/Bangkok")).date().isoformat()
@@ -83,6 +85,10 @@ def main() -> int:
         memory_status, memory_paths, memory_replay = memory_tool.generate(
             memory_ledger, day_dir / "memory", cockpit_path=cockpit_paths["json"], alert_path=alert_paths["json"]
         )
+        attribution_ledger = args.attribution_ledger.resolve() if args.attribution_ledger else args.out_root.resolve() / "value_attribution.ndjson"
+        attribution_payload, attribution_paths = attribution_tool.generate(
+            attribution_ledger, day_dir / "attribution", cockpit_paths["json"], alert_paths["json"]
+        )
         receipt_payload = {
             "schema_version": 1,
             "result": "PASS" if brief["status"] == "READY" else "FAIL_CLOSED",
@@ -99,12 +105,16 @@ def main() -> int:
             "memory_append_status": memory_status,
             "memory_sequence": memory_replay["current_sequence"],
             "memory_windows": {key: value["status"] for key, value in memory_replay["windows"].items()},
+            "attribution_summary": attribution_payload["summary"],
+            "directional_proof": attribution_payload["directional_proof"],
             "outputs": {
                 **{key: path.name for key, path in paths.items()},
                 **{f"cockpit_{key}": path.name for key, path in cockpit_paths.items()},
                 **{f"alert_{key}": path.name for key, path in alert_paths.items()},
                 **{f"memory_{key}": str(path.relative_to(day_dir)) for key, path in memory_paths.items()},
+                **{f"attribution_{key}": str(path.relative_to(day_dir)) for key, path in attribution_paths.items()},
                 "memory_ledger": str(memory_ledger),
+                "attribution_ledger": str(attribution_ledger),
             },
         }
         receipt.write_text(json.dumps(receipt_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
