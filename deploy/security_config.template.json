@@ -1,0 +1,17 @@
+{
+  "schema": "tradingos.delivery.security_config.v1",
+  "version": 1,
+  "mode": "DISABLED",
+  "deploy_permission": "DENY",
+  "adapter_id": "telegram-primary",
+  "credentials": {
+    "telegram_bot_token_env": "TRADINGOS_TELEGRAM_BOT_TOKEN",
+    "callback_hmac_secret_env": "TRADINGOS_CALLBACK_HMAC_SECRET"
+  },
+  "destination_bindings": {},
+  "rate_limits": {
+    "delivery_attempts_per_minute": 3,
+    "callbacks_per_minute": 10
+  },
+  "callback_max_age_seconds": 300
+}
