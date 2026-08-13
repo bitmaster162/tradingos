@@ -1,0 +1,19 @@
+# Deny the repository by default. The runtime image is built from an explicit
+# seven-module source closure only; local secrets, git history, tests, evidence,
+# and unrelated TradingOS tooling must not enter the Docker build context.
+**
+
+!tools/
+tools/**
+!tools/tradingos_delivery_guard.py
+!tools/tradingos_preflight_bridge.py
+!tools/tradingos_send_authorization_review.py
+!tools/tradingos_send_executor_state.py
+!tools/tradingos_telegram_request_compiler.py
+!tools/tradingos_telegram_transport.py
+!tools/tradingos_runtime_service.py
+
+!deploy/
+deploy/**
+!deploy/Dockerfile
+!deploy/Dockerfile.dockerignore
