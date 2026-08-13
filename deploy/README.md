@@ -20,10 +20,12 @@ This directory is the deploy surface. Evidence ZIPs are not runtime inputs.
 
 ## First VPS deployment — SAFE IDLE
 
+This section is operational documentation only. A draft PR, branch push, or merge approval does **not** authorize deployment. Use only the exact runtime commit or tag separately approved for deployment.
+
 ```bash
 git clone <your-repo-url> tradingos
 cd tradingos
-git checkout chatgpt/decision-brief-daily-r1
+git checkout <approved-runtime-commit-or-tag>
 cd deploy
 cp .env.example .env
 mkdir -p runtime/config runtime/jobs
