@@ -1,0 +1,47 @@
+name: Decision Brief v2 forward-port validation
+
+on:
+  push:
+    branches:
+      - agent/decision-brief-v2-forward-port-validation-r1
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/decision-brief-v2-forward-port-r1
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Verify lineage, scope, and WP001 identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "8e6c583289bf8421326c84b5cfd17f36f27046b1"
+          test "$(git rev-parse HEAD^{tree})" = "428027d3f886e24fb93ccd4e35830d98bcfee0c0"
+          test "$(git merge-base 74cfece71f7432d521c646ef6bbe46a0c908884e HEAD)" = "74cfece71f7432d521c646ef6bbe46a0c908884e"
+          test "$(git hash-object tools/tradingos_decision_brief_v2.py)" = "0aaa37a74ffa85ae6b52ecc821acbc46b5d521d0"
+          actual="$(git diff --name-only 74cfece71f7432d521c646ef6bbe46a0c908884e..HEAD | sort)"
+          expected="$(printf '%s\n' 'scripts/run_tradingos_decision_brief_sample.ps1' 'tests/test_tradingos_decision_brief_v2.py' | sort)"
+          test "$actual" = "$expected"
+          git diff --check 74cfece71f7432d521c646ef6bbe46a0c908884e..HEAD
+          grep -F 'tools\tradingos_decision_brief_v2.py' scripts/run_tradingos_decision_brief_sample.ps1
+          grep -F 'schema_version = 2' scripts/run_tradingos_decision_brief_sample.ps1
+
+      - name: Python compile
+        run: python -m py_compile tools/tradingos_decision_brief.py tools/tradingos_decision_brief_v2.py tests/test_tradingos_decision_brief.py tests/test_tradingos_decision_brief_v2.py
+
+      - name: Fresh targeted Decision Brief tests
+        run: python -m pytest -q tests/test_tradingos_decision_brief.py tests/test_tradingos_decision_brief_v2.py
