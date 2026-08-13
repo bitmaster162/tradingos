@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 3
 
       - uses: actions/setup-python@v5
         with:
@@ -28,8 +28,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "4dcc9a03410a75d545840183f219569b17bd8e3c"
-          test "$(git rev-parse HEAD^\{tree\})" = "1dd82188be29d944158c7aedb22ddac156620d1e"
+          SOURCE_COMMIT="$(git rev-list --first-parent HEAD | grep -m1 '^4dcc9a03410a75d545840183f219569b17bd8e3c$')"
+          test "$SOURCE_COMMIT" = "4dcc9a03410a75d545840183f219569b17bd8e3c"
+          test "$(git rev-parse 4dcc9a03410a75d545840183f219569b17bd8e3c^{tree})" = "1dd82188be29d944158c7aedb22ddac156620d1e"
           test "$(git hash-object tools/tradingos_decision_brief_v2.py)" = "0aaa37a74ffa85ae6b52ecc821acbc46b5d521d0"
           test ! -e deploy/.env
           grep -Fx 'TRADINGOS_LIVE_SEND_ENABLED=0' deploy/.env.example
