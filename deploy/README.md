@@ -18,6 +18,21 @@ This directory is the deploy surface. Evidence ZIPs are not runtime inputs.
   7. explicit CLI `--execution-mode LIVE_NETWORK_SEND`.
 - Live send uses an atomic per-authorization claim before HTTP. If the process crashes after the claim, it fails closed and the authorization is not automatically retried.
 
+## Claim / ledger reconciliation contract
+
+- A claim file is evidence that an authorization entered execution. Its age alone is **not** proof that no network side effect occurred.
+- Never auto-delete a stale or uncertain claim and never automatically retry the same authorization.
+- If execution state is uncertain, preserve the claim and ledger exactly as found and require manual reconciliation against available transport/runtime evidence.
+- If delivery cannot be proven false, treat the authorization as consumed. Any later attempt requires a new review, new exact authorization, and fresh preflight.
+- Claim and ledger coordination assumes a single host/process domain using one local filesystem with atomic exclusive-create semantics. Distributed workers, shared/network filesystems, or multiple independent state directories are outside this runtime contract and require separate review before use.
+
+## Secret lifecycle
+
+- Telegram bot token, raw destination/chat ID, and callback HMAC secret are runtime values only; Git stores environment-variable names and destination hashes, not populated secret values.
+- Keep the populated `.env` outside Git and restrict its filesystem permissions to the runtime operator/service account.
+- Rotate credentials outside Git when exposure is suspected or when operational policy requires it; update the runtime `.env` and destination binding as applicable, then perform a fresh preflight before any separately authorized send.
+- Do not print, persist in receipts, or paste raw runtime secrets into GitHub, logs, evidence packages, or chat.
+
 ## First VPS deployment — SAFE IDLE
 
 This section is operational documentation only. A draft PR, branch push, or merge approval does **not** authorize deployment. Use only the exact runtime commit or tag separately approved for deployment.
