@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import os
 import subprocess
@@ -47,7 +48,7 @@ def watch(rows=None, at=NOW):
         "symbols": [row["symbol"] for row in rows],
         "matrix": rows,
         "cross_asset": {"state": "ALIGNED", "watch_long": [], "watch_short": [], "top_attention": rows[0]["symbol"]},
-        "provenance": {"producer": "tools/tradingos_watchtower.py", "producer_sha256": HEX_A, "capture_sha256": HEX_B, "contract": "x"},
+        "provenance": {"producer": "tools/tradingos_watchtower.py", "producer_sha256": m.EXPECTED_WATCHTOWER_PRODUCER_SHA256, "capture_sha256": HEX_B, "contract": "x"},
         "safety": dict(m.WATCHTOWER_SAFETY),
     }
 
@@ -210,6 +211,15 @@ def test_liquidity_quality_state_contract_fails_closed() -> None:
     try: m.build_radar(watch(), l)
     except ValueError as exc: assert "PASS" in str(exc)
     else: raise AssertionError("PASS insufficient state accepted")
+
+
+def test_watchtower_producer_sha256_is_bound_to_canonical_source_bytes() -> None:
+    expected = hashlib.sha256((TOOLS / "tradingos_watchtower.py").read_bytes()).hexdigest()
+    assert m.EXPECTED_WATCHTOWER_PRODUCER_SHA256 == expected
+    bad = watch(); bad["provenance"]["producer_sha256"] = HEX_A
+    try: m.build_radar(bad, liq())
+    except ValueError as exc: assert "producer sha256 mismatch" in str(exc)
+    else: raise AssertionError("well-formed non-canonical producer sha accepted")
 
 
 def test_provenance_fingerprints_are_required_and_input_sensitive() -> None:
