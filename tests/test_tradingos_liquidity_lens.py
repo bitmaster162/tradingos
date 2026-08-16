@@ -37,6 +37,7 @@ def capture(btc=None, eth=None):
     eth = eth or book()
     return {
         "schema": m.CAPTURE_SCHEMA,
+        "version": m.CAPTURE_VERSION,
         "captured_at": "2026-08-16T15:00:00Z",
         "symbols": ["BTCUSDT", "ETHUSDT"],
         "limit": 500,
@@ -46,6 +47,17 @@ def capture(btc=None, eth=None):
         "books": {
             "BTCUSDT": {"source_url": "https://fapi.binance.com/fapi/v1/depth?symbol=BTCUSDT&limit=500", "snapshot": btc},
             "ETHUSDT": {"source_url": "https://fapi.binance.com/fapi/v1/depth?symbol=ETHUSDT&limit=500", "snapshot": eth},
+        },
+        "transport_policy": dict(m.EXPECTED_TRANSPORT_POLICY),
+        "safety": {
+            "public_market_data_only": True,
+            "credentials_used": False,
+            "private_api_used": False,
+            "telegram_send": False,
+            "signals_allowed": False,
+            "orders_allowed": False,
+            "can_trade": False,
+            "capital_permission": "DENY",
         },
     }
 
@@ -216,6 +228,26 @@ def test_capture_fingerprint_is_key_order_stable_and_input_sensitive() -> None:
     rc = m.build_lens(c)
     assert rc["provenance"]["capture_sha256"] != ra["provenance"]["capture_sha256"]
 
+
+
+def test_exact_capture_boundary_rejects_contract_drift() -> None:
+    cases = []
+
+    payload = capture(); payload["version"] = "9.9.9"; cases.append(payload)
+    payload = capture(); payload["books"]["BTCUSDT"]["source_url"] = "https://evil.example/depth"; cases.append(payload)
+    payload = capture(); payload["transport_policy"]["redirects_allowed"] = True; cases.append(payload)
+    payload = capture(); payload["safety"]["can_trade"] = True; cases.append(payload)
+    payload = capture(); del payload["books"]["BTCUSDT"]["source_url"]; cases.append(payload)
+    payload = capture(); payload["books"]["BTCUSDT"]["extra"] = "x"; cases.append(payload)
+    payload = capture(); payload["books"]["BTCUSDT"]["snapshot"]["bids"][0].append("EXTRA"); cases.append(payload)
+
+    for payload in cases:
+        try:
+            m.build_lens(payload)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("contract drift accepted")
 
 def test_renderer_rejects_unsafe_report_and_repeats_boundary() -> None:
     sys.path.insert(0, str(TOOLS))

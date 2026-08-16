@@ -9,12 +9,37 @@ from datetime import datetime, timezone
 from typing import Any
 
 CAPTURE_SCHEMA = "tradingos.binance_liquidity_capture.v1"
+CAPTURE_VERSION = "1.1.0"
+CAPTURE_SOURCE = "binance_usds_futures_public_depth"
+CAPTURE_FIELDS = {
+    "schema",
+    "version",
+    "captured_at",
+    "symbols",
+    "limit",
+    "credentials_used",
+    "private_api_used",
+    "source",
+    "books",
+    "transport_policy",
+    "safety",
+}
+EXPECTED_TRANSPORT_POLICY = {
+    "scheme": "https",
+    "host": "fapi.binance.com",
+    "path": "/fapi/v1/depth",
+    "redirects_allowed": False,
+    "retries": 0,
+    "default_timeout_seconds": 5.0,
+    "max_timeout_seconds": 10.0,
+    "max_response_bytes": 2_000_000,
+    "credentials_allowed": False,
+}
 SCHEMA = "tradingos.liquidity_lens.v1"
 VERSION = "1.1.0"
 BANDS_BPS = (10, 25, 50)
 WALL_MULTIPLIER = 3.0
 MIN_LEVELS = 5
-CAPTURE_SOURCE = "binance_usds_futures_public_depth"
 _ALLOWED_LIMITS = {5, 10, 20, 50, 100, 500, 1000}
 _SYMBOL_RE = re.compile(r"^[A-Z0-9]{5,20}$")
 
@@ -64,7 +89,7 @@ def _levels(raw: Any, side: str) -> list[tuple[float, float]]:
         raise ValueError(f"{side}: at least {MIN_LEVELS} levels required")
     out: list[tuple[float, float]] = []
     for i, row in enumerate(raw):
-        if not isinstance(row, (list, tuple)) or len(row) < 2:
+        if not isinstance(row, (list, tuple)) or len(row) != 2:
             raise ValueError(f"{side}[{i}]: malformed level")
         out.append((_num(row[0], f"{side}[{i}].price"), _num(row[1], f"{side}[{i}].qty")))
     prices = [p for p, _ in out]
@@ -135,6 +160,8 @@ def analyze_book(symbol: str, snapshot: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("symbol must be a non-empty string")
     if not isinstance(snapshot, dict):
         raise ValueError(f"{symbol}: snapshot must be an object")
+    if set(snapshot) != {"lastUpdateId", "bids", "asks"}:
+        raise ValueError(f"{symbol}: unexpected depth payload fields")
     update_id = snapshot.get("lastUpdateId")
     if not isinstance(update_id, int) or isinstance(update_id, bool) or update_id < 0:
         raise ValueError(f"{symbol}: lastUpdateId must be a non-negative integer")
@@ -219,10 +246,28 @@ def analyze_book(symbol: str, snapshot: dict[str, Any]) -> dict[str, Any]:
 def build_lens(capture: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(capture, dict):
         raise ValueError("capture must be an object")
+    if set(capture) != CAPTURE_FIELDS:
+        raise ValueError("liquidity capture fields do not match v1.1.0 contract")
     if capture.get("schema") != CAPTURE_SCHEMA:
         raise ValueError("unsupported liquidity capture schema")
+    if capture.get("version") != CAPTURE_VERSION:
+        raise ValueError("unsupported liquidity capture version")
     if capture.get("credentials_used") is not False or capture.get("private_api_used") is not False:
         raise ValueError("liquidity capture must be public and credential-free")
+    if capture.get("transport_policy") != EXPECTED_TRANSPORT_POLICY:
+        raise ValueError("liquidity capture transport policy mismatch")
+    capture_safety = capture.get("safety")
+    if (
+        not isinstance(capture_safety, dict)
+        or capture_safety.get("public_market_data_only") is not True
+        or capture_safety.get("credentials_used") is not False
+        or capture_safety.get("private_api_used") is not False
+        or capture_safety.get("signals_allowed") is not False
+        or capture_safety.get("orders_allowed") is not False
+        or capture_safety.get("can_trade") is not False
+        or capture_safety.get("capital_permission") != "DENY"
+    ):
+        raise ValueError("liquidity capture safety contract mismatch")
 
     captured_at = _time(capture.get("captured_at"), "captured_at")
     if capture.get("source") != CAPTURE_SOURCE:
@@ -240,8 +285,11 @@ def build_lens(capture: dict[str, Any]) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     for symbol in symbols:
         book = books.get(symbol)
-        if not isinstance(book, dict):
-            raise ValueError(f"{symbol}: book wrapper must be an object")
+        if not isinstance(book, dict) or set(book) != {"source_url", "snapshot"}:
+            raise ValueError(f"{symbol}: book wrapper must exactly contain source_url and snapshot")
+        expected_url = f"https://fapi.binance.com/fapi/v1/depth?symbol={symbol}&limit={limit}"
+        if book.get("source_url") != expected_url:
+            raise ValueError(f"{symbol}: source_url does not match canonical capture URL")
         rows.append(analyze_book(symbol, book.get("snapshot")))
     if not rows:
         raise ValueError("liquidity capture has no analyzable symbols")
