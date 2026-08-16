@@ -18,6 +18,7 @@ LIQUIDITY_VERSION = "1.1.0"
 SCHEMA = "tradingos.market_radar.v1"
 VERSION = "1.1.0"
 MAX_CAPTURE_SKEW_SECONDS = 120
+EXPECTED_WATCHTOWER_PRODUCER_SHA256 = "83a2963ad321edc5ccdde8a5d12ae07149391fa6531d8654be53d41c55d29a3b"
 
 _TFS = ("1h", "4h", "1d")
 _ALLOWED_BIASES = {"WATCH_LONG", "WATCH_SHORT", "NO_ACTION"}
@@ -145,7 +146,9 @@ def _validate_watchtower(report: Any) -> tuple[datetime, list[str], dict[str, di
         raise ValueError("watchtower provenance missing")
     if provenance.get("producer") != "tools/tradingos_watchtower.py":
         raise ValueError("watchtower producer mismatch")
-    require_sha256(provenance.get("producer_sha256"), "watchtower.producer_sha256")
+    producer_sha256 = require_sha256(provenance.get("producer_sha256"), "watchtower.producer_sha256")
+    if producer_sha256 != EXPECTED_WATCHTOWER_PRODUCER_SHA256:
+        raise ValueError("watchtower producer sha256 mismatch")
     require_sha256(provenance.get("capture_sha256"), "watchtower.capture_sha256")
 
     for symbol, row in rows.items():
