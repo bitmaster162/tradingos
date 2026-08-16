@@ -264,7 +264,7 @@ def _latest_oi_reference(rows: Any, captured_ms: int, symbol: str) -> float:
 
 def _nonfuture_time(container: dict[str, Any], key: str, captured_ms: int, field: str) -> None:
     if key not in container:
-        return
+        raise ValueError(f"{field}.{key}: timestamp missing")
     ts = _int(container[key], f"{field}.{key}")
     if ts < 0 or ts > captured_ms:
         raise ValueError(f"{field}.{key}: timestamp is after captured_at")
