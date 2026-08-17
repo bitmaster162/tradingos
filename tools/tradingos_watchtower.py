@@ -105,8 +105,8 @@ def taker_direction(volume: float, buy: float) -> str:
 
 
 def _validate_kline_row(row: Any, field: str, index: int, interval_ms: int) -> list[Any]:
-    if not isinstance(row, (list, tuple)) or len(row) < 10:
-        raise ValueError(f"{field}[{index}]: malformed kline")
+    if not isinstance(row, (list, tuple)) or len(row) != 12:
+        raise ValueError(f"{field}[{index}]: malformed kline; expected exactly 12 fields")
     open_ms = _int(row[0], f"{field}[{index}].open_time")
     close_ms = _int(row[6], f"{field}[{index}].close_time")
     if open_ms < 0 or close_ms < open_ms:
