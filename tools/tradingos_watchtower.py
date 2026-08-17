@@ -230,14 +230,25 @@ def timeframe_features(rows: Any, captured_ms: int, timeframe: str) -> dict[str,
     }
 
 
-def _history_rates(rows: Any, field: str) -> list[float]:
+def _history_rates(rows: Any, field: str, captured_ms: int) -> list[float]:
     if not isinstance(rows, list) or len(rows) < 10:
         raise ValueError(f"{field}: at least 10 rows required")
     out: list[float] = []
+    last_ts = -1
     for i, row in enumerate(rows):
-        if not isinstance(row, dict) or "fundingRate" not in row:
+        if not isinstance(row, dict) or "fundingRate" not in row or "fundingTime" not in row:
             raise ValueError(f"{field}[{i}]: malformed funding row")
-        out.append(finite(row["fundingRate"], f"{field}[{i}].fundingRate"))
+        ts = _int(row["fundingTime"], f"{field}[{i}].fundingTime")
+        if ts < 0:
+            raise ValueError(f"{field}[{i}].fundingTime: negative timestamp")
+        if ts <= last_ts:
+            raise ValueError(f"{field}: timestamps must be strictly increasing")
+        last_ts = ts
+        rate = finite(row["fundingRate"], f"{field}[{i}].fundingRate")
+        if ts <= captured_ms:
+            out.append(rate)
+    if len(out) < 10:
+        raise ValueError(f"{field}: at least 10 nonfuture rows required")
     return out
 
 
@@ -309,7 +320,7 @@ def asset_context(symbol: str, asset: Any, captured_ms: int) -> dict[str, Any]:
     mark_price = positive(mark.get("markPrice"), f"{symbol}.mark")
     index_price = positive(mark.get("indexPrice"), f"{symbol}.index")
     funding = finite(mark.get("lastFundingRate"), f"{symbol}.funding")
-    funding_hist = _history_rates(asset.get("funding_history"), f"{symbol}.funding_history")
+    funding_hist = _history_rates(asset.get("funding_history"), f"{symbol}.funding_history", captured_ms)
     funding_z = zscore(funding, funding_hist)
 
     basis = mark_price / index_price - 1.0
