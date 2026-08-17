@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import math
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -21,29 +22,144 @@ base.GENERATOR_VERSION = GENERATOR_VERSION
 _BASE_VALIDATE_SNAPSHOT = base.validate_snapshot
 _BASE_GENERATE = base.generate
 
+POLICY_SCHEMA_VERSION = 1
+POLICY_ID = "TRADINGOS_DECISION_BRIEF_POLICY_V1"
+SUPPORTED_SYMBOL = "BTCUSDT"
+REQUIRED_SOURCES = ("ohlcv", "open_interest", "funding", "spot_flow")
+SAFE_PERMISSIONS = {
+    "watch_stances_allowed": True,
+    "signals_allowed": False,
+    "orders_allowed": False,
+    "credentials_allowed": False,
+    "can_trade": False,
+    "capital_permission": "DENY",
+}
+EDGE_GATE_FIELDS = {
+    "minimum_direction_score",
+    "minimum_score_margin",
+    "minimum_independent_dimensions",
+}
+
+
+def _policy_error(code: str) -> ValueError:
+    return ValueError(f"invalid_policy:{code}")
+
+
+def _string_list(policy: dict[str, Any], field: str) -> list[str]:
+    value = policy.get(field)
+    if not isinstance(value, list) or not value:
+        raise _policy_error(f"{field}_must_be_non_empty_list")
+    if any(not isinstance(item, str) or not item.strip() or item != item.strip() for item in value):
+        raise _policy_error(f"{field}_contains_invalid_item")
+    if len(value) != len(set(value)):
+        raise _policy_error(f"{field}_contains_duplicate")
+    return value
+
+
+def _finite_number(
+    policy: dict[str, Any],
+    field: str,
+    *,
+    minimum: float = 0.0,
+    strictly_greater: bool = False,
+) -> float:
+    value = policy.get(field)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise _policy_error(f"{field}_must_be_finite_number")
+    number = float(value)
+    if not math.isfinite(number):
+        raise _policy_error(f"{field}_must_be_finite_number")
+    if strictly_greater:
+        if number <= minimum:
+            raise _policy_error(f"{field}_out_of_range")
+    elif number < minimum:
+        raise _policy_error(f"{field}_out_of_range")
+    return number
+
 
 def validate_policy(policy: dict[str, Any]) -> None:
-    """Fail closed unless every execution-sensitive permission is frozen safe."""
+    """Validate the complete v1 decision-control policy before generation.
+
+    The base generator consumes policy values directly. This wrapper therefore
+    treats the policy as untrusted control data and rejects malformed, non-finite,
+    unknown, or semantically weakened values before `_BASE_GENERATE` can create
+    any output.
+    """
+
+    if not isinstance(policy, dict):
+        raise _policy_error("root_not_object")
+
+    schema_version = policy.get("schema_version")
+    if isinstance(schema_version, bool) or not isinstance(schema_version, int) or schema_version != POLICY_SCHEMA_VERSION:
+        raise _policy_error("unsupported_schema_version")
+    if policy.get("policy_id") != POLICY_ID:
+        raise _policy_error("unsupported_policy_id")
+    if policy.get("supported_symbol") != SUPPORTED_SYMBOL:
+        raise _policy_error("unsupported_symbol")
+
+    required_sources = _string_list(policy, "required_sources")
+    if set(required_sources) != set(REQUIRED_SOURCES) or len(required_sources) != len(REQUIRED_SOURCES):
+        raise _policy_error("required_sources_contract_mismatch")
+
+    _string_list(policy, "allowed_timeframes")
 
     permissions = policy.get("output_permissions")
     if not isinstance(permissions, dict):
         raise ValueError("policy output_permissions must be an object")
 
-    required_exact = {
-        "watch_stances_allowed": True,
-        "signals_allowed": False,
-        "orders_allowed": False,
-        "credentials_allowed": False,
-        "can_trade": False,
-        "capital_permission": "DENY",
-    }
+    permission_keys = set(permissions)
+    expected_keys = set(SAFE_PERMISSIONS)
+    missing = sorted(expected_keys - permission_keys)
+    if missing:
+        raise _policy_error("missing_permission:" + ",".join(missing))
+    unknown = sorted(permission_keys - expected_keys)
+    if unknown:
+        raise _policy_error("unsupported_permission:" + ",".join(unknown))
+
     violations = [
-        f"{key}={permissions.get(key)!r} expected {expected!r}"
-        for key, expected in required_exact.items()
-        if permissions.get(key) != expected
+        key
+        for key, expected in SAFE_PERMISSIONS.items()
+        if type(permissions.get(key)) is not type(expected) or permissions.get(key) != expected
     ]
     if violations:
-        raise ValueError("unsafe policy permissions: " + "; ".join(violations))
+        raise ValueError(
+            "unsafe policy permissions: invalid_policy:unsafe_permission_vector:"
+            + ",".join(sorted(violations))
+        )
+
+    _finite_number(policy, "max_snapshot_age_minutes", minimum=0.0)
+    _finite_number(policy, "max_future_clock_skew_minutes", minimum=0.0)
+    _finite_number(policy, "funding_z_extreme", minimum=0.0, strictly_greater=True)
+    _finite_number(policy, "basis_z_extreme", minimum=0.0, strictly_greater=True)
+    relative_confirm = _finite_number(
+        policy, "relative_volume_confirm", minimum=0.0, strictly_greater=True
+    )
+    relative_weak = _finite_number(policy, "relative_volume_weak", minimum=0.0)
+    if relative_weak >= relative_confirm:
+        raise _policy_error("relative_volume_threshold_order")
+
+    edge_gate = policy.get("edge_gate")
+    if not isinstance(edge_gate, dict):
+        raise _policy_error("edge_gate_must_be_object")
+    edge_keys = set(edge_gate)
+    missing_edge = sorted(EDGE_GATE_FIELDS - edge_keys)
+    if missing_edge:
+        raise _policy_error("edge_gate_missing_field:" + ",".join(missing_edge))
+    unknown_edge = sorted(edge_keys - EDGE_GATE_FIELDS)
+    if unknown_edge:
+        raise _policy_error("edge_gate_unknown_field:" + ",".join(unknown_edge))
+
+    for field in ("minimum_direction_score", "minimum_score_margin"):
+        value = edge_gate.get(field)
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise _policy_error(f"edge_gate.{field}_must_be_finite_number")
+        number = float(value)
+        if not math.isfinite(number) or number < 0.0:
+            raise _policy_error(f"edge_gate.{field}_out_of_range")
+
+    dimensions = edge_gate.get("minimum_independent_dimensions")
+    if isinstance(dimensions, bool) or not isinstance(dimensions, int) or dimensions < 1:
+        raise _policy_error("edge_gate.minimum_independent_dimensions_out_of_range")
 
 
 def _source_rows(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
