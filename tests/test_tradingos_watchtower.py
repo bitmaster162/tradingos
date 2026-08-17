@@ -54,7 +54,7 @@ def asset(direction_map: dict[str, int], symbol: str):
             {"sumOpenInterest": "990", "timestamp": NOW_MS - 8 * 3_600_000},
             {"sumOpenInterest": "1000", "timestamp": NOW_MS - 4 * 3_600_000},
         ],
-        "funding_history": [{"fundingRate": str(0.00005 + i * 0.000001)} for i in range(30)],
+        "funding_history": [{"fundingRate": str(0.00005 + i * 0.000001), "fundingTime": NOW_MS - (30 - i) * 8 * 3_600_000} for i in range(30)],
         "premium_index_4h": premium,
         "spot_klines_4h": spot,
         "futures_klines": {
@@ -207,6 +207,51 @@ def test_derivative_timestamps_and_histories_fail_closed() -> None:
     try: m.build_watchtower(payload)
     except ValueError as exc: assert "at least 10" in str(exc)
     else: raise AssertionError("short funding history accepted")
+
+
+def test_funding_history_requires_timestamp_binding_and_excludes_future_rows() -> None:
+    baseline = capture()
+    expected = by_symbol(m.build_watchtower(baseline), "BTCUSDT")
+
+    payload = capture()
+    payload["assets"]["BTCUSDT"]["funding_history"].append(
+        {"fundingRate": "99", "fundingTime": NOW_MS + 1}
+    )
+    actual = by_symbol(m.build_watchtower(payload), "BTCUSDT")
+    assert actual["derivatives"]["funding_z"] == expected["derivatives"]["funding_z"]
+    assert actual["attention_score"] == expected["attention_score"]
+
+    payload = capture(); payload["assets"]["BTCUSDT"]["funding_history"][0].pop("fundingTime")
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "malformed funding row" in str(exc)
+    else: raise AssertionError("missing fundingTime accepted")
+
+    payload = capture(); payload["assets"]["BTCUSDT"]["funding_history"][0]["fundingTime"] = "not-an-int"
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "invalid integer" in str(exc)
+    else: raise AssertionError("malformed fundingTime accepted")
+
+    payload = capture(); payload["assets"]["BTCUSDT"]["funding_history"][0]["fundingTime"] = -1
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "negative timestamp" in str(exc)
+    else: raise AssertionError("negative fundingTime accepted")
+
+
+def test_funding_history_requires_ten_nonfuture_strictly_ordered_rows() -> None:
+    payload = capture()
+    hist = payload["assets"]["BTCUSDT"]["funding_history"]
+    for i, row in enumerate(hist):
+        row["fundingTime"] = NOW_MS - (9 - i) if i < 9 else NOW_MS + (i - 8)
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "at least 10 nonfuture rows" in str(exc)
+    else: raise AssertionError("insufficient nonfuture funding history accepted")
+
+    payload = capture()
+    hist = payload["assets"]["BTCUSDT"]["funding_history"]
+    hist[10]["fundingTime"] = hist[9]["fundingTime"]
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "strictly increasing" in str(exc)
+    else: raise AssertionError("unordered funding history accepted")
 
 
 def test_open_interest_reference_uses_latest_nonfuture_observation() -> None:
