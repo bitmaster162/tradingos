@@ -19,6 +19,7 @@ SCHEMA = "tradingos.market_radar.v1"
 VERSION = "1.1.0"
 MAX_CAPTURE_SKEW_SECONDS = 120
 EXPECTED_WATCHTOWER_PRODUCER_SHA256 = "92fd705634e33d098907a72199314f01fb73318c733f302abeb1cb6d6e9be4a1"
+EXPECTED_LIQUIDITY_PRODUCER_SHA256 = "870f2734de73af0974433a0dccd7750fc932117ace1ab2819ca952840780e699"
 
 _TFS = ("1h", "4h", "1d")
 _ALLOWED_BIASES = {"WATCH_LONG", "WATCH_SHORT", "NO_ACTION"}
@@ -212,6 +213,11 @@ def _validate_liquidity(report: Any) -> tuple[datetime, list[str], dict[str, dic
     provenance = report.get("provenance")
     if not isinstance(provenance, dict):
         raise ValueError("liquidity provenance missing")
+    if provenance.get("producer") != "tools/tradingos_liquidity_lens_core.py":
+        raise ValueError("liquidity producer mismatch")
+    producer_sha256 = require_sha256(provenance.get("producer_sha256"), "liquidity.producer_sha256")
+    if producer_sha256 != EXPECTED_LIQUIDITY_PRODUCER_SHA256:
+        raise ValueError("liquidity producer sha256 mismatch")
     require_sha256(provenance.get("capture_sha256"), "liquidity.capture_sha256")
     if provenance.get("books_exactly_bound_to_symbols") is not True or provenance.get("timestamp_timezone_required") is not True:
         raise ValueError("liquidity provenance binding missing")
@@ -324,6 +330,7 @@ def build_radar(watchtower: dict[str, Any], liquidity: dict[str, Any]) -> dict[s
             "liquidity_schema": LIQUIDITY_SCHEMA,
             "liquidity_version": LIQUIDITY_VERSION,
             "liquidity_report_sha256": stable_sha256(liquidity),
+            "liquidity_producer_sha256": liquidity["provenance"]["producer_sha256"],
             "liquidity_capture_sha256": liquidity["provenance"]["capture_sha256"],
             "symbol_sets_exactly_bound": True,
             "max_capture_skew_seconds": MAX_CAPTURE_SKEW_SECONDS,
@@ -365,6 +372,7 @@ def validate_report_for_render(report: Any) -> dict[str, Any]:
         "watchtower_capture_sha256",
         "watchtower_producer_sha256",
         "liquidity_report_sha256",
+        "liquidity_producer_sha256",
         "liquidity_capture_sha256",
     ):
         require_sha256(provenance.get(key), f"market_radar.{key}")
