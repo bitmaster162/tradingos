@@ -230,7 +230,12 @@ def timeframe_features(rows: Any, captured_ms: int, timeframe: str) -> dict[str,
     }
 
 
-def _history_rates(rows: Any, field: str, captured_ms: int) -> list[float]:
+def _require_symbol(container: dict[str, Any], expected: str, field: str) -> None:
+    if container.get("symbol") != expected:
+        raise ValueError(f"{field}.symbol: expected {expected}")
+
+
+def _history_rates(rows: Any, field: str, captured_ms: int, symbol: str) -> list[float]:
     if not isinstance(rows, list) or len(rows) < 10:
         raise ValueError(f"{field}: at least 10 rows required")
     out: list[float] = []
@@ -238,6 +243,7 @@ def _history_rates(rows: Any, field: str, captured_ms: int) -> list[float]:
     for i, row in enumerate(rows):
         if not isinstance(row, dict) or "fundingRate" not in row or "fundingTime" not in row:
             raise ValueError(f"{field}[{i}]: malformed funding row")
+        _require_symbol(row, symbol, f"{field}[{i}]")
         ts = _int(row["fundingTime"], f"{field}[{i}].fundingTime")
         if ts < 0:
             raise ValueError(f"{field}[{i}].fundingTime: negative timestamp")
@@ -261,6 +267,7 @@ def _latest_oi_reference(rows: Any, captured_ms: int, symbol: str) -> float:
     for i, row in enumerate(rows):
         if not isinstance(row, dict):
             raise ValueError(f"{field}[{i}]: malformed")
+        _require_symbol(row, symbol, f"{field}[{i}]")
         ts = _int(row.get("timestamp"), f"{field}[{i}].timestamp")
         if ts <= last_ts:
             raise ValueError(f"{field}: timestamps must be strictly increasing")
@@ -308,6 +315,7 @@ def asset_context(symbol: str, asset: Any, captured_ms: int) -> dict[str, Any]:
     oi = asset.get("open_interest")
     if not isinstance(oi, dict):
         raise ValueError(f"{symbol}: open_interest missing")
+    _require_symbol(oi, symbol, f"{symbol}.open_interest")
     _nonfuture_time(oi, "time", captured_ms, f"{symbol}.open_interest")
     oi_current = positive(oi.get("openInterest"), f"{symbol}.open_interest.openInterest")
     oi_ref = _latest_oi_reference(asset.get("open_interest_stats_4h"), captured_ms, symbol)
@@ -316,11 +324,12 @@ def asset_context(symbol: str, asset: Any, captured_ms: int) -> dict[str, Any]:
     mark = asset.get("mark_price")
     if not isinstance(mark, dict):
         raise ValueError(f"{symbol}: mark_price missing")
+    _require_symbol(mark, symbol, f"{symbol}.mark_price")
     _nonfuture_time(mark, "time", captured_ms, f"{symbol}.mark_price")
     mark_price = positive(mark.get("markPrice"), f"{symbol}.mark")
     index_price = positive(mark.get("indexPrice"), f"{symbol}.index")
     funding = finite(mark.get("lastFundingRate"), f"{symbol}.funding")
-    funding_hist = _history_rates(asset.get("funding_history"), f"{symbol}.funding_history", captured_ms)
+    funding_hist = _history_rates(asset.get("funding_history"), f"{symbol}.funding_history", captured_ms, symbol)
     funding_z = zscore(funding, funding_hist)
 
     basis = mark_price / index_price - 1.0
