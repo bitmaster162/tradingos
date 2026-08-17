@@ -164,3 +164,178 @@ def test_wp001_invalid_timestamp_cannot_hide_source_reuse(tmp_path: Path) -> Non
     assert "missing_or_invalid_provenance_timestamp:open_interest" in brief["uncertainty"]["blockers"]
     assert f"reused_provenance_source_id:{shared}" in brief["uncertainty"]["blockers"]
     assert f"source_id_shared_across_kinds:{shared}" in brief["uncertainty"]["conflicts"]
+
+
+def assert_policy_rejected_before_generation(
+    tmp_path: Path,
+    case_name: str,
+    policy_payload: dict,
+    expected_fragment: str,
+) -> None:
+    case_dir = tmp_path / case_name
+    case_dir.mkdir()
+    policy_path = case_dir / "policy.json"
+    policy_path.write_text(json.dumps(policy_payload), encoding="utf-8")
+    input_path = case_dir / "market_snapshot.json"
+    input_path.write_text(json.dumps(sample()), encoding="utf-8")
+    out_dir = case_dir / "out"
+
+    try:
+        brief_tool.generate(input_path, out_dir, policy_path, NOW)
+    except ValueError as exc:
+        assert expected_fragment in str(exc)
+    else:
+        raise AssertionError(f"invalid policy was accepted: {case_name}")
+
+    assert not out_dir.exists()
+
+
+def test_policy_v1_rejects_unknown_permissions_even_when_false(tmp_path: Path) -> None:
+    for index, value in enumerate((True, False)):
+        payload = policy()
+        payload["output_permissions"][f"future_permission_{index}"] = value
+        assert_policy_rejected_before_generation(
+            tmp_path,
+            f"unknown-permission-{index}",
+            payload,
+            "invalid_policy:unsupported_permission:",
+        )
+
+
+def test_policy_v1_requires_every_known_permission_and_exact_types(tmp_path: Path) -> None:
+    missing = policy()
+    missing["output_permissions"].pop("orders_allowed")
+    assert_policy_rejected_before_generation(
+        tmp_path, "missing-permission", missing, "invalid_policy:missing_permission:orders_allowed"
+    )
+
+    type_confused = policy()
+    type_confused["output_permissions"]["orders_allowed"] = 0
+    assert_policy_rejected_before_generation(
+        tmp_path,
+        "type-confused-permission",
+        type_confused,
+        "invalid_policy:unsafe_permission_vector:orders_allowed",
+    )
+
+
+def test_temporal_policy_thresholds_must_be_finite_numeric_and_non_negative(tmp_path: Path) -> None:
+    cases = (
+        ("age-nan", "max_snapshot_age_minutes", float("nan"), "must_be_finite_number"),
+        ("age-inf", "max_snapshot_age_minutes", float("inf"), "must_be_finite_number"),
+        ("age-string", "max_snapshot_age_minutes", "nan", "must_be_finite_number"),
+        ("age-negative", "max_snapshot_age_minutes", -1, "out_of_range"),
+        ("skew-nan", "max_future_clock_skew_minutes", float("nan"), "must_be_finite_number"),
+        ("skew-inf", "max_future_clock_skew_minutes", float("inf"), "must_be_finite_number"),
+        ("skew-bool", "max_future_clock_skew_minutes", False, "must_be_finite_number"),
+        ("skew-negative", "max_future_clock_skew_minutes", -1, "out_of_range"),
+    )
+    for name, field, value, expected in cases:
+        payload = policy()
+        payload[field] = value
+        assert_policy_rejected_before_generation(tmp_path, name, payload, expected)
+
+
+def test_required_sources_v1_contract_cannot_be_weakened_or_extended(tmp_path: Path) -> None:
+    cases = (
+        ("empty", []),
+        ("missing-kind", ["ohlcv", "open_interest", "funding"]),
+        ("duplicate", ["ohlcv", "ohlcv", "funding", "spot_flow"]),
+        ("bad-item", ["ohlcv", "open_interest", 3, "spot_flow"]),
+        ("unknown-kind", ["ohlcv", "open_interest", "funding", "spot_flow", "liquidations"]),
+        ("whitespace", ["ohlcv", "open_interest", "funding", " spot_flow "]),
+    )
+    for name, required in cases:
+        payload = policy()
+        payload["required_sources"] = required
+        assert_policy_rejected_before_generation(
+            tmp_path, f"required-{name}", payload, "invalid_policy:required_sources"
+        )
+
+
+def test_other_numeric_policy_controls_reject_non_finite_values(tmp_path: Path) -> None:
+    cases = (
+        ("funding-nan", "funding_z_extreme", float("nan")),
+        ("basis-inf", "basis_z_extreme", float("inf")),
+        ("volume-confirm-nan", "relative_volume_confirm", float("nan")),
+        ("volume-weak-inf", "relative_volume_weak", float("inf")),
+    )
+    for name, field, value in cases:
+        payload = policy()
+        payload[field] = value
+        assert_policy_rejected_before_generation(
+            tmp_path, name, payload, f"invalid_policy:{field}_must_be_finite_number"
+        )
+
+
+def test_relative_volume_threshold_order_is_validated(tmp_path: Path) -> None:
+    payload = policy()
+    payload["relative_volume_weak"] = payload["relative_volume_confirm"]
+    assert_policy_rejected_before_generation(
+        tmp_path, "volume-order", payload, "invalid_policy:relative_volume_threshold_order"
+    )
+
+
+def test_edge_gate_is_closed_and_numeric(tmp_path: Path) -> None:
+    malformed = policy()
+    malformed["edge_gate"] = []
+    assert_policy_rejected_before_generation(
+        tmp_path, "edge-not-object", malformed, "invalid_policy:edge_gate_must_be_object"
+    )
+
+    missing = policy()
+    missing["edge_gate"].pop("minimum_score_margin")
+    assert_policy_rejected_before_generation(
+        tmp_path, "edge-missing", missing, "invalid_policy:edge_gate_missing_field:"
+    )
+
+    unknown = policy()
+    unknown["edge_gate"]["future_gate"] = 1
+    assert_policy_rejected_before_generation(
+        tmp_path, "edge-unknown", unknown, "invalid_policy:edge_gate_unknown_field:"
+    )
+
+    nan_score = policy()
+    nan_score["edge_gate"]["minimum_direction_score"] = float("nan")
+    assert_policy_rejected_before_generation(
+        tmp_path,
+        "edge-nan",
+        nan_score,
+        "invalid_policy:edge_gate.minimum_direction_score_out_of_range",
+    )
+
+    bad_dimensions = policy()
+    bad_dimensions["edge_gate"]["minimum_independent_dimensions"] = True
+    assert_policy_rejected_before_generation(
+        tmp_path,
+        "edge-dimensions",
+        bad_dimensions,
+        "invalid_policy:edge_gate.minimum_independent_dimensions_out_of_range",
+    )
+
+
+def test_policy_identity_and_list_structure_fail_closed(tmp_path: Path) -> None:
+    wrong_schema = policy()
+    wrong_schema["schema_version"] = 2
+    assert_policy_rejected_before_generation(
+        tmp_path, "schema", wrong_schema, "invalid_policy:unsupported_schema_version"
+    )
+
+    wrong_symbol = policy()
+    wrong_symbol["supported_symbol"] = "ETHUSDT"
+    assert_policy_rejected_before_generation(
+        tmp_path, "symbol", wrong_symbol, "invalid_policy:unsupported_symbol"
+    )
+
+    duplicate_timeframes = policy()
+    duplicate_timeframes["allowed_timeframes"] = ["1h", "1h"]
+    assert_policy_rejected_before_generation(
+        tmp_path,
+        "timeframes",
+        duplicate_timeframes,
+        "invalid_policy:allowed_timeframes_contains_duplicate",
+    )
+
+
+def test_current_canonical_policy_passes_complete_preflight() -> None:
+    brief_tool.validate_policy(policy())
