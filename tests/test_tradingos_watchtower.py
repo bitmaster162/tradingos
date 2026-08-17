@@ -137,6 +137,21 @@ def test_intervals_are_exact_and_timestamp_is_timezone_aware() -> None:
     else: raise AssertionError("naive timestamp accepted")
 
 
+def test_kline_exact_arity_fails_closed() -> None:
+    payload = capture(); row = payload["assets"]["BTCUSDT"]["futures_klines"]["1h"][0]
+    assert len(row) == 12
+
+    payload = capture(); payload["assets"]["BTCUSDT"]["futures_klines"]["1h"][0] = row[:10]
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "exactly 12 fields" in str(exc)
+    else: raise AssertionError("10-field kline accepted")
+
+    payload = capture(); payload["assets"]["BTCUSDT"]["futures_klines"]["1h"][0] = row + ["EXTRA"]
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "exactly 12 fields" in str(exc)
+    else: raise AssertionError("overlong kline accepted")
+
+
 def test_kline_order_interval_and_ohlc_are_strict() -> None:
     payload = capture(); kl = payload["assets"]["BTCUSDT"]["futures_klines"]["1h"]
     kl[10], kl[11] = kl[11], kl[10]
