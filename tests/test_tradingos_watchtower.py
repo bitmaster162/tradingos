@@ -48,13 +48,13 @@ def asset(direction_map: dict[str, int], symbol: str):
         row[1] = row[2] = row[3] = row[4] = str(1.0001 + i * 0.000001)
     return {
         "futures_24h": {"priceChangePercent": "1.0"},
-        "mark_price": {"markPrice": "130", "indexPrice": "129.9", "lastFundingRate": "0.0001", "time": NOW_MS},
-        "open_interest": {"openInterest": "1010", "time": NOW_MS},
+        "mark_price": {"symbol": symbol, "markPrice": "130", "indexPrice": "129.9", "lastFundingRate": "0.0001", "time": NOW_MS},
+        "open_interest": {"symbol": symbol, "openInterest": "1010", "time": NOW_MS},
         "open_interest_stats_4h": [
-            {"sumOpenInterest": "990", "timestamp": NOW_MS - 8 * 3_600_000},
-            {"sumOpenInterest": "1000", "timestamp": NOW_MS - 4 * 3_600_000},
+            {"symbol": symbol, "sumOpenInterest": "990", "timestamp": NOW_MS - 8 * 3_600_000},
+            {"symbol": symbol, "sumOpenInterest": "1000", "timestamp": NOW_MS - 4 * 3_600_000},
         ],
-        "funding_history": [{"fundingRate": str(0.00005 + i * 0.000001), "fundingTime": NOW_MS - (30 - i) * 8 * 3_600_000} for i in range(30)],
+        "funding_history": [{"symbol": symbol, "fundingRate": str(0.00005 + i * 0.000001), "fundingTime": NOW_MS - (30 - i) * 8 * 3_600_000} for i in range(30)],
         "premium_index_4h": premium,
         "spot_klines_4h": spot,
         "futures_klines": {
@@ -190,6 +190,30 @@ def test_future_bar_is_excluded_and_minimum_closed_bars_enforced() -> None:
     else: raise AssertionError("insufficient closed history accepted")
 
 
+def test_derivative_symbols_are_required_and_bound_to_asset_key() -> None:
+    for surface in ("mark_price", "open_interest"):
+        payload = capture(); payload["assets"]["BTCUSDT"][surface].pop("symbol")
+        try: m.build_watchtower(payload)
+        except ValueError as exc: assert "symbol: expected BTCUSDT" in str(exc)
+        else: raise AssertionError(f"missing {surface} symbol accepted")
+
+        payload = capture(); payload["assets"]["BTCUSDT"][surface]["symbol"] = "ETHUSDT"
+        try: m.build_watchtower(payload)
+        except ValueError as exc: assert "symbol: expected BTCUSDT" in str(exc)
+        else: raise AssertionError(f"cross-symbol {surface} accepted")
+
+    for surface in ("open_interest_stats_4h", "funding_history"):
+        payload = capture(); payload["assets"]["BTCUSDT"][surface][0].pop("symbol")
+        try: m.build_watchtower(payload)
+        except ValueError as exc: assert "symbol: expected BTCUSDT" in str(exc)
+        else: raise AssertionError(f"missing {surface} symbol accepted")
+
+        payload = capture(); payload["assets"]["BTCUSDT"][surface][0]["symbol"] = "ETHUSDT"
+        try: m.build_watchtower(payload)
+        except ValueError as exc: assert "symbol: expected BTCUSDT" in str(exc)
+        else: raise AssertionError(f"cross-symbol {surface} accepted")
+
+
 def test_derivative_timestamps_and_histories_fail_closed() -> None:
     payload = capture(); payload["assets"]["BTCUSDT"]["mark_price"]["time"] = NOW_MS + 1
     try: m.build_watchtower(payload)
@@ -215,7 +239,7 @@ def test_funding_history_requires_timestamp_binding_and_excludes_future_rows() -
 
     payload = capture()
     payload["assets"]["BTCUSDT"]["funding_history"].append(
-        {"fundingRate": "99", "fundingTime": NOW_MS + 1}
+        {"symbol": "BTCUSDT", "fundingRate": "99", "fundingTime": NOW_MS + 1}
     )
     actual = by_symbol(m.build_watchtower(payload), "BTCUSDT")
     assert actual["derivatives"]["funding_z"] == expected["derivatives"]["funding_z"]
@@ -257,7 +281,7 @@ def test_funding_history_requires_ten_nonfuture_strictly_ordered_rows() -> None:
 def test_open_interest_reference_uses_latest_nonfuture_observation() -> None:
     payload = capture()
     stats = payload["assets"]["BTCUSDT"]["open_interest_stats_4h"]
-    stats.append({"sumOpenInterest": "5000", "timestamp": NOW_MS + 1})
+    stats.append({"symbol": "BTCUSDT", "sumOpenInterest": "5000", "timestamp": NOW_MS + 1})
     report = m.build_watchtower(payload)
     assert by_symbol(report, "BTCUSDT")["derivatives"]["open_interest_change_pct"] == 1.0
 
