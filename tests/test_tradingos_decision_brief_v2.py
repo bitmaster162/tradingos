@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -339,3 +342,58 @@ def test_policy_identity_and_list_structure_fail_closed(tmp_path: Path) -> None:
 
 def test_current_canonical_policy_passes_complete_preflight() -> None:
     brief_tool.validate_policy(policy())
+
+
+def test_policy_errors_expose_stable_machine_code() -> None:
+    payload = policy()
+    payload["required_sources"] = []
+    with pytest.raises(brief_tool.PolicyValidationError) as caught:
+        brief_tool.validate_policy(payload)
+    assert caught.value.code == "required_sources_must_be_non_empty_list"
+    assert str(caught.value).startswith("invalid_policy:")
+
+
+def test_policy_toctou_mutation_fails_before_any_output(tmp_path: Path, monkeypatch) -> None:
+    """Mutation after validation cannot weaken the policy consumed by generation."""
+
+    case_dir = tmp_path / "toctou"
+    case_dir.mkdir()
+    policy_path = case_dir / "policy.json"
+    valid_raw = json.dumps(policy(), sort_keys=True).encode("utf-8")
+    policy_path.write_bytes(valid_raw)
+    input_path = case_dir / "market_snapshot.json"
+    input_path.write_text(json.dumps(sample()), encoding="utf-8")
+    out_dir = case_dir / "out"
+
+    invalid = policy()
+    invalid["required_sources"] = []
+    original_build = brief_tool.base.build_brief
+
+    def mutate_then_build(snapshot_payload, input_arg, validated_policy, policy_arg, now_arg):
+        assert validated_policy["required_sources"] == list(brief_tool.REQUIRED_SOURCES)
+        policy_arg.write_text(json.dumps(invalid), encoding="utf-8")
+        return original_build(snapshot_payload, input_arg, validated_policy, policy_arg, now_arg)
+
+    monkeypatch.setattr(brief_tool.base, "build_brief", mutate_then_build)
+
+    with pytest.raises(brief_tool.PolicyValidationError) as caught:
+        brief_tool.generate(input_path, out_dir, policy_path, NOW)
+
+    assert caught.value.code == "policy_changed_during_generation"
+    assert not out_dir.exists()
+    assert not (out_dir / "brief.json").exists()
+    assert not (out_dir / "brief.md").exists()
+    assert not (out_dir / "brief.html").exists()
+
+
+def test_policy_provenance_hash_is_bound_to_validated_bytes(tmp_path: Path) -> None:
+    case_dir = tmp_path / "policy-hash"
+    case_dir.mkdir()
+    policy_path = case_dir / "policy.json"
+    raw = json.dumps(policy(), indent=2).encode("utf-8")
+    policy_path.write_bytes(raw)
+    input_path = case_dir / "market_snapshot.json"
+    input_path.write_text(json.dumps(sample()), encoding="utf-8")
+
+    brief, _, _ = brief_tool.generate(input_path, case_dir / "out", policy_path, NOW)
+    assert brief["provenance"]["policy_sha256"] == hashlib.sha256(raw).hexdigest()
