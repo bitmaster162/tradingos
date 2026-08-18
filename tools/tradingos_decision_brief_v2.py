@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import importlib.util
+import json
+import math
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -19,31 +22,152 @@ GENERATOR_PATH = "tools/tradingos_decision_brief_v2.py"
 base.GENERATOR_VERSION = GENERATOR_VERSION
 
 _BASE_VALIDATE_SNAPSHOT = base.validate_snapshot
-_BASE_GENERATE = base.generate
+
+POLICY_SCHEMA_VERSION = 1
+POLICY_ID = "TRADINGOS_DECISION_BRIEF_POLICY_V1"
+SUPPORTED_SYMBOL = "BTCUSDT"
+REQUIRED_SOURCES = ("ohlcv", "open_interest", "funding", "spot_flow")
+SAFE_PERMISSIONS = {
+    "watch_stances_allowed": True,
+    "signals_allowed": False,
+    "orders_allowed": False,
+    "credentials_allowed": False,
+    "can_trade": False,
+    "capital_permission": "DENY",
+}
+EDGE_GATE_FIELDS = {
+    "minimum_direction_score",
+    "minimum_score_margin",
+    "minimum_independent_dimensions",
+}
+
+
+class PolicyValidationError(ValueError):
+    """Policy failure with stable machine identity independent of message prose."""
+
+    def __init__(self, code: str, message: str | None = None) -> None:
+        self.code = code
+        super().__init__(message or f"invalid_policy:{code}")
+
+
+def _policy_error(code: str, message: str | None = None) -> PolicyValidationError:
+    return PolicyValidationError(code, message)
+
+
+def _string_list(policy: dict[str, Any], field: str) -> list[str]:
+    value = policy.get(field)
+    if not isinstance(value, list) or not value:
+        raise _policy_error(f"{field}_must_be_non_empty_list")
+    if any(not isinstance(item, str) or not item.strip() or item != item.strip() for item in value):
+        raise _policy_error(f"{field}_contains_invalid_item")
+    if len(value) != len(set(value)):
+        raise _policy_error(f"{field}_contains_duplicate")
+    return value
+
+
+def _finite_number(
+    policy: dict[str, Any],
+    field: str,
+    *,
+    minimum: float = 0.0,
+    strictly_greater: bool = False,
+) -> float:
+    value = policy.get(field)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise _policy_error(f"{field}_must_be_finite_number")
+    number = float(value)
+    if not math.isfinite(number):
+        raise _policy_error(f"{field}_must_be_finite_number")
+    if strictly_greater:
+        if number <= minimum:
+            raise _policy_error(f"{field}_out_of_range")
+    elif number < minimum:
+        raise _policy_error(f"{field}_out_of_range")
+    return number
 
 
 def validate_policy(policy: dict[str, Any]) -> None:
-    """Fail closed unless every execution-sensitive permission is frozen safe."""
+    """Validate the complete v1 decision-control policy before generation."""
+
+    if not isinstance(policy, dict):
+        raise _policy_error("root_not_object")
+
+    schema_version = policy.get("schema_version")
+    if (
+        isinstance(schema_version, bool)
+        or not isinstance(schema_version, int)
+        or schema_version != POLICY_SCHEMA_VERSION
+    ):
+        raise _policy_error("unsupported_schema_version")
+    if policy.get("policy_id") != POLICY_ID:
+        raise _policy_error("unsupported_policy_id")
+    if policy.get("supported_symbol") != SUPPORTED_SYMBOL:
+        raise _policy_error("unsupported_symbol")
+
+    required_sources = _string_list(policy, "required_sources")
+    if set(required_sources) != set(REQUIRED_SOURCES) or len(required_sources) != len(REQUIRED_SOURCES):
+        raise _policy_error("required_sources_contract_mismatch")
+
+    _string_list(policy, "allowed_timeframes")
 
     permissions = policy.get("output_permissions")
     if not isinstance(permissions, dict):
-        raise ValueError("policy output_permissions must be an object")
+        raise _policy_error(
+            "output_permissions_must_be_object",
+            "policy output_permissions must be an object",
+        )
 
-    required_exact = {
-        "watch_stances_allowed": True,
-        "signals_allowed": False,
-        "orders_allowed": False,
-        "credentials_allowed": False,
-        "can_trade": False,
-        "capital_permission": "DENY",
-    }
+    permission_keys = set(permissions)
+    expected_keys = set(SAFE_PERMISSIONS)
+    missing = sorted(expected_keys - permission_keys)
+    if missing:
+        raise _policy_error("missing_permission:" + ",".join(missing))
+    unknown = sorted(permission_keys - expected_keys)
+    if unknown:
+        raise _policy_error("unsupported_permission:" + ",".join(unknown))
+
     violations = [
-        f"{key}={permissions.get(key)!r} expected {expected!r}"
-        for key, expected in required_exact.items()
-        if permissions.get(key) != expected
+        key
+        for key, expected in SAFE_PERMISSIONS.items()
+        if type(permissions.get(key)) is not type(expected) or permissions.get(key) != expected
     ]
     if violations:
-        raise ValueError("unsafe policy permissions: " + "; ".join(violations))
+        code = "unsafe_permission_vector:" + ",".join(sorted(violations))
+        raise _policy_error(code, "unsafe policy permissions: invalid_policy:" + code)
+
+    _finite_number(policy, "max_snapshot_age_minutes", minimum=0.0)
+    _finite_number(policy, "max_future_clock_skew_minutes", minimum=0.0)
+    _finite_number(policy, "funding_z_extreme", minimum=0.0, strictly_greater=True)
+    _finite_number(policy, "basis_z_extreme", minimum=0.0, strictly_greater=True)
+    relative_confirm = _finite_number(
+        policy, "relative_volume_confirm", minimum=0.0, strictly_greater=True
+    )
+    relative_weak = _finite_number(policy, "relative_volume_weak", minimum=0.0)
+    if relative_weak >= relative_confirm:
+        raise _policy_error("relative_volume_threshold_order")
+
+    edge_gate = policy.get("edge_gate")
+    if not isinstance(edge_gate, dict):
+        raise _policy_error("edge_gate_must_be_object")
+    edge_keys = set(edge_gate)
+    missing_edge = sorted(EDGE_GATE_FIELDS - edge_keys)
+    if missing_edge:
+        raise _policy_error("edge_gate_missing_field:" + ",".join(missing_edge))
+    unknown_edge = sorted(edge_keys - EDGE_GATE_FIELDS)
+    if unknown_edge:
+        raise _policy_error("edge_gate_unknown_field:" + ",".join(unknown_edge))
+
+    for field in ("minimum_direction_score", "minimum_score_margin"):
+        value = edge_gate.get(field)
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            raise _policy_error(f"edge_gate.{field}_must_be_finite_number")
+        number = float(value)
+        if not math.isfinite(number) or number < 0.0:
+            raise _policy_error(f"edge_gate.{field}_out_of_range")
+
+    dimensions = edge_gate.get("minimum_independent_dimensions")
+    if isinstance(dimensions, bool) or not isinstance(dimensions, int) or dimensions < 1:
+        raise _policy_error("edge_gate.minimum_independent_dimensions_out_of_range")
 
 
 def _source_rows(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
@@ -74,16 +198,12 @@ def provenance_gate(
     except (TypeError, ValueError):
         snapshot_as_of = None
 
-    # Reviewed WP001 invariant: across different required provenance kinds,
-    # one normalized non-empty source_id may identify at most one kind.
-    # Register it before timestamp parsing so malformed timestamps cannot hide
-    # cross-kind source reuse.
     kinds_by_source_id: dict[str, set[str]] = {}
 
     for kind in required:
         matches = [item for item in rows if str(item.get("kind", "")) == kind]
         if not matches:
-            continue  # base validator already records missing provenance kind
+            continue
         if len(matches) != 1:
             blockers.append(f"ambiguous_provenance:{kind}")
             conflicts.append(f"duplicate_provenance_kind:{kind}")
@@ -147,6 +267,17 @@ def validate_snapshot(
     return result
 
 
+def _read_validated_policy_snapshot(policy_path: Path) -> tuple[dict[str, Any], str]:
+    """Read policy bytes exactly once and bind validation plus provenance to them."""
+
+    raw = policy_path.read_bytes()
+    policy = json.loads(raw.decode("utf-8-sig"))
+    if not isinstance(policy, dict):
+        raise _policy_error("root_not_object")
+    validate_policy(policy)
+    return policy, hashlib.sha256(raw).hexdigest()
+
+
 def generate(
     input_path: Path,
     out_dir: Path,
@@ -155,31 +286,43 @@ def generate(
     pilot_log: Path | None = None,
     pilot_day: str | None = None,
 ):
-    policy = base.read_json(policy_path)
-    validate_policy(policy)
+    """Generate from one validated policy snapshot; never re-read policy for semantics."""
 
-    brief, paths, pilot_status = _BASE_GENERATE(
-        input_path,
-        out_dir,
-        policy_path,
-        now,
-        pilot_log,
-        pilot_day,
-    )
+    policy, validated_policy_sha256 = _read_validated_policy_snapshot(policy_path)
+    snapshot = base.read_json(input_path)
+
+    # Use the already validated object directly. Calling base.generate here would
+    # re-read the mutable path and reopen the validation/use race.
+    brief = base.build_brief(snapshot, input_path, policy, policy_path, now)
+
+    # No artifact may be written when the source path changed after validation.
+    # Semantics are already bound to the validated object, and this check also
+    # keeps the recorded path/hash pair honest.
+    if base.sha256_file(policy_path) != validated_policy_sha256:
+        raise _policy_error("policy_changed_during_generation")
+
+    brief["provenance"]["policy_sha256"] = validated_policy_sha256
     brief["provenance"]["generator"] = GENERATOR_PATH
     brief["provenance"]["generator_version"] = GENERATOR_VERSION
     brief["provenance"]["generator_sha256"] = base.sha256_file(Path(__file__))
     brief["provenance"]["base_generator"] = "tools/tradingos_decision_brief.py"
     brief["provenance"]["base_generator_sha256"] = base.sha256_file(BASE_PATH)
 
+    paths = {
+        "json": out_dir / "brief.json",
+        "markdown": out_dir / "brief.md",
+        "html": out_dir / "brief.html",
+    }
     base.write_json(paths["json"], brief)
     base.write_text(paths["markdown"], base.render_markdown(brief))
     base.write_text(paths["html"], base.render_html(brief))
+    pilot_status = (
+        base.append_pilot(pilot_log, base.pilot_row(brief, pilot_day)) if pilot_log else None
+    )
     return brief, paths, pilot_status
 
 
-# The base builder resolves these globals at runtime, so patch them only after
-# retaining immutable references to the v1 implementations above.
+# The base builder resolves these globals at runtime.
 base.validate_snapshot = validate_snapshot
 base.generate = generate
 
