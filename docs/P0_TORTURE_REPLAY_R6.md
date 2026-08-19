@@ -39,6 +39,6 @@ Even valid asymmetric custody remains evidence only:
 
 `authenticated reveal != current truth != execution approval != trade permission`.
 
-Fresh exact R6 code/workflow head `0bbdf1c8c7dbdca2bd16c11ec173247f9112c808` produced P0 Shadow Verify run `32301131751`, which completed before executable steps were exposed (`steps=null`, no job logs). Classification: `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`. No R6 TradingOS CI PASS is claimed and no manual rerun was requested.
+Fresh R6 code/workflow head `0bbdf1c8c7dbdca2bd16c11ec173247f9112c808` produced P0 Shadow Verify run `32301131751`, which ended before executable steps were exposed (`steps=null`, no job logs). The later documentation-only head `bbea433f5205f7c27d324c97ab5727fa001b1e95` retains the same code/workflow surface. Classification remains `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`; no R6 TradingOS CI PASS is claimed and no manual rerun was requested.
 
 Fixed ceiling: `merge=false`, `deploy=false`, `runtime=false`, `human_gate_write=false`, `credential_registry_write=false`, `nonce_registry_write=false`, `current_truth_apply=false`, `executor=false`, `signal=false`, `order=false`, `can_trade=false`, `capital_permission=DENY`.
