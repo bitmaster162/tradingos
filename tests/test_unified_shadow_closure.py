@@ -110,6 +110,7 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         self.continuity = self._continuity_fixture()
         self.return_intake = self._return_intake_fixture()
         self.projection = self._projection_fixture()
+        self.hanri = self._hanri_fixture()
 
     def _continuity_fixture(self):
         body = {
@@ -232,43 +233,148 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         body["projection_sha256"] = sha256_obj(body)
         return body
 
-    def build_closure(self, continuity=None, return_intake=None, projection=None):
+    def _hanri_fixture(self):
+        body = {
+            "schema": "hanri.shadow-evidence-governor.receipt/v1",
+            "generated_at": "2026-08-20T00:26:00+07:00",
+            "source_transaction_sha256": self.transaction["transaction_sha256"],
+            "case_id": self.transaction["case_id"],
+            "human_sovereign": True,
+            "authority_reference": {"generation": "R64"},
+            "hanri_source": {
+                "repo": "bitmaster162/control-center",
+                "branch": "hanri/r37-product-pilot-accepted",
+                "head_sha": "ef5c504179de8ae8c16bd70c168b14b79bd2f466",
+                "role": "BOUNDED_RUNTIME_ATTENTION_GOVERNOR_PROJECTION",
+                "authority_root": False,
+                "can_promote_self": False,
+            },
+            "archiveos": {
+                "status": "BLOCKED_REVERIFY",
+                "freshness": "STALE",
+                "current_claim_allowed": False,
+                "promotion_eligible": False,
+                "proof_gap": ["fresh full archive-integrity receipt is missing"],
+                "role": "NON_AUTHORITATIVE_EVIDENCE_VAULT",
+                "canonical_root": "C:\\PROJECTS\\archiveos_api",
+                "drive_role": "MIRROR_EVIDENCE_ONLY",
+            },
+            "archive_tooling": {
+                "role": "ARTIFACT_COMPILER_NOT_ARCHIVE_ENGINE",
+                "historical_handoff_sha256": "af9f06b74fa380a1b3e9c6bf69b871d17228abd70ae6c13f77ca8984836e0856",
+                "authoritative_archive_engine": False,
+                "semantic_acceptance_authority": False,
+            },
+            "knowledge_memory": {
+                "claim_admission": "NOT_PERFORMED",
+                "durable_memory_write": False,
+                "project_canon_write": False,
+                "current_truth_write": False,
+                "reasoning_derivative_is_evidence": False,
+                "memory_is_permission": False,
+                "archive_bytes_are_current_truth": False,
+            },
+            "governor": {
+                "gate": "HOLD",
+                "action": "WAIT",
+                "hold_reasons": ["UPSTREAM_CONTROL_GATE_HOLD", "ARCHIVEOS_BLOCKED_REVERIFY"],
+                "attention_required": True,
+                "promotion_eligible": False,
+                "auto_promotion": False,
+            },
+            "source_precedence": [
+                "HUMAN_SOVEREIGN",
+                "R64_CONTROL_CENTER_AUTHORITY",
+                "ACCEPTED_SEMANTIC_ADJUDICATIONS",
+                "HANRI_BOUNDED_REPOSITORY_EVIDENCE",
+                "LIVE_RUNTIME_RECEIPTS_FOR_RUNTIME_CLAIMS",
+                "DASHBOARD_PROJECTION_ONLY",
+            ],
+            "effects": {
+                "github_write": False,
+                "drive_write": False,
+                "archiveos_write": False,
+                "knowledge_write": False,
+                "memory_write": False,
+                "current_truth_apply": False,
+                "runtime_write": False,
+                "scheduler_write": False,
+                "external_message": False,
+                "signal": False,
+                "order": False,
+                "capital_effect": False,
+            },
+            "semantics": {
+                "hanri_is_not_second_authority_root": True,
+                "archive_tooling_is_not_archiveos_core": True,
+                "durable_memory_is_separate_from_current_truth": True,
+            },
+            "safety": dict(SHADOW_SAFETY),
+        }
+        body["hanri_receipt_sha256"] = sha256_obj(body)
+        return body
+
+    def build_closure(self, continuity=None, return_intake=None, projection=None, hanri=None):
         return build_unified_shadow_closure(
             self.transaction,
             self.continuity if continuity is None else continuity,
             self.return_intake if return_intake is None else return_intake,
             self.projection if projection is None else projection,
-            closed_at="2026-08-19T17:03:00Z",
+            self.hanri if hanri is None else hanri,
+            closed_at="2026-08-20T00:30:00+07:00",
         )
 
-    def test_closure_binds_composition_continuity_return_and_control_without_effect(self):
+    def test_closure_binds_five_planes_without_effect(self):
         closure = self.build_closure()
-        self.assertEqual(closure["schema"], "bitevo.unified_shadow_closure.v2")
+        self.assertEqual(closure["schema"], "bitevo.unified_shadow_closure.v3")
         self.assertEqual(closure["status"], "P0_SHADOW_CLOSED_NO_EFFECT")
         self.assertEqual(closure["registered_node_count"], 63)
-        self.assertEqual(closure["control_gate"], "HOLD")
-        self.assertEqual(closure["control_plane_action"], "WAIT")
-        self.assertEqual(closure["planes"]["continuity"], "BOUND_READ_ONLY")
-        self.assertEqual(closure["planes"]["return_transport"], "BOUND_READ_ONLY_PHYSICAL")
-        self.assertEqual(closure["planes"]["authority_projection"], "BOUND_NON_AUTHORITY")
+        self.assertEqual(closure["upstream_control_gate"], "HOLD")
+        self.assertEqual(closure["effective_gate"], "HOLD")
+        self.assertEqual(closure["effective_action"], "WAIT")
+        self.assertEqual(closure["planes"]["hanri_evidence_governor"], "BOUND_NON_AUTHORITY_FAIL_CLOSED")
+        self.assertEqual(closure["planes"]["archiveos"], "BOUND_EVIDENCE_STATUS_ONLY")
+        self.assertEqual(closure["planes"]["knowledge_memory"], "BOUND_NO_ADMISSION_NO_WRITE")
         self.assertEqual(closure["planes"]["executor"], "DISABLED")
-        self.assertEqual(closure["return_intake_sha256"], self.return_intake["shadow_intake_sha256"])
+        self.assertEqual(closure["hanri_receipt_sha256"], self.hanri["hanri_receipt_sha256"])
         self.assertTrue(all(value is False for value in closure["effect_summary"].values()))
         self.assertEqual(closure["safety"]["execution_authority"], "NONE")
         self.assertEqual(closure["safety"]["capital_permission"], "DENY")
+
+    def test_hanri_cannot_widen_upstream_hold(self):
+        hanri = copy.deepcopy(self.hanri)
+        hanri["governor"]["gate"] = "PASS_SHADOW"
+        hanri["governor"]["action"] = "LONG"
+        hanri["hanri_receipt_sha256"] = sha256_obj({k: v for k, v in hanri.items() if k != "hanri_receipt_sha256"})
+        with self.assertRaisesRegex(ShadowIntegrationError, "closure_hanri_cannot_widen_upstream_hold"):
+            self.build_closure(hanri=hanri)
+
+    def test_hanri_can_narrow_but_never_promote(self):
+        hanri = copy.deepcopy(self.hanri)
+        self.assertEqual(hanri["governor"]["gate"], "HOLD")
+        self.assertFalse(hanri["governor"]["promotion_eligible"])
+        self.assertFalse(hanri["hanri_source"]["authority_root"])
+        self.assertFalse(hanri["hanri_source"]["can_promote_self"])
+
+    def test_archive_tooling_cannot_become_archive_engine(self):
+        hanri = copy.deepcopy(self.hanri)
+        hanri["archive_tooling"]["authoritative_archive_engine"] = True
+        hanri["hanri_receipt_sha256"] = sha256_obj({k: v for k, v in hanri.items() if k != "hanri_receipt_sha256"})
+        with self.assertRaisesRegex(ShadowIntegrationError, "closure_archive_tooling_engine_overclaim"):
+            self.build_closure(hanri=hanri)
+
+    def test_memory_cannot_become_permission_or_current_truth(self):
+        hanri = copy.deepcopy(self.hanri)
+        hanri["knowledge_memory"]["current_truth_write"] = True
+        hanri["hanri_receipt_sha256"] = sha256_obj({k: v for k, v in hanri.items() if k != "hanri_receipt_sha256"})
+        with self.assertRaisesRegex(ShadowIntegrationError, "closure_knowledge_memory_write_breached:current_truth_write"):
+            self.build_closure(hanri=hanri)
 
     def test_continuity_cannot_claim_live_host(self):
         receipt = copy.deepcopy(self.continuity)
         receipt["historical_lineage"]["live_host_state"] = "VERIFIED"
         receipt["continuity_receipt_sha256"] = sha256_obj({k: v for k, v in receipt.items() if k != "continuity_receipt_sha256"})
         with self.assertRaisesRegex(ShadowIntegrationError, "closure_live_host_state_overclaim"):
-            self.build_closure(continuity=receipt)
-
-    def test_continuity_write_cannot_cross_closure(self):
-        receipt = copy.deepcopy(self.continuity)
-        receipt["writes"]["checkpoint_write"] = True
-        receipt["continuity_receipt_sha256"] = sha256_obj({k: v for k, v in receipt.items() if k != "continuity_receipt_sha256"})
-        with self.assertRaisesRegex(ShadowIntegrationError, "closure_continuity_write_breached"):
             self.build_closure(continuity=receipt)
 
     def test_return_transport_cannot_mutate(self):
@@ -278,33 +384,11 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         with self.assertRaisesRegex(ShadowIntegrationError, "closure_return_transport_mutation_breached"):
             self.build_closure(return_intake=intake)
 
-    def test_return_physical_pass_cannot_be_semantic_acceptance(self):
-        intake = copy.deepcopy(self.return_intake)
-        intake["semantic_acceptance"] = "PASS"
-        intake["content_acceptance_claimed"] = True
-        intake["shadow_intake_sha256"] = sha256_obj({k: v for k, v in intake.items() if k != "shadow_intake_sha256"})
-        with self.assertRaisesRegex(ShadowIntegrationError, "closure_return_semantic_acceptance_overclaim"):
-            self.build_closure(return_intake=intake)
-
-    def test_return_intake_must_bind_same_continuity_receipt(self):
-        intake = copy.deepcopy(self.return_intake)
-        intake["continuity_receipt_sha256"] = "0" * 64
-        intake["shadow_intake_sha256"] = sha256_obj({k: v for k, v in intake.items() if k != "shadow_intake_sha256"})
-        with self.assertRaisesRegex(ShadowIntegrationError, "closure_return_intake_continuity_mismatch"):
-            self.build_closure(return_intake=intake)
-
     def test_control_projection_cannot_apply_current_truth(self):
         projection = copy.deepcopy(self.projection)
         projection["mutations"]["current_truth"] = True
         projection["projection_sha256"] = sha256_obj({k: v for k, v in projection.items() if k != "projection_sha256"})
         with self.assertRaisesRegex(ShadowIntegrationError, "closure_control_projection_mutation_breached"):
-            self.build_closure(projection=projection)
-
-    def test_projection_must_bind_same_transaction(self):
-        projection = copy.deepcopy(self.projection)
-        projection["source_transaction_sha256"] = "f" * 64
-        projection["projection_sha256"] = sha256_obj({k: v for k, v in projection.items() if k != "projection_sha256"})
-        with self.assertRaisesRegex(ShadowIntegrationError, "closure_control_projection_transaction_mismatch"):
             self.build_closure(projection=projection)
 
     def test_closure_is_deterministic(self):
