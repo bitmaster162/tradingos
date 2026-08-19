@@ -17,13 +17,13 @@ VisionAssist market observation
   -> tradingos.visual_market_evidence.v1
 TradingOS market snapshot
   -> tradingos.shadow_trade_case.v1
-SCT
-  -> sct.prediction/v2 (arm=sct, execution_authority=NONE)
+SCT R13
+  -> sct.prediction/v3 (arm=sct, execution_authority=NONE)
 TradingOS thesis
   -> tradingos.trade_thesis.v1
 TRIAXIS audit request compiler
   -> triaxis.trade_audit_request.v1
-Independent TRIAXIS audit
+Independent TRIAXIS evidence-first audit
   -> triaxis.trade_adjudication.v1
 Risk veto
   -> fail-closed shadow risk vector
@@ -35,14 +35,36 @@ Human reveal + later market outcome
 
 ## TRIAXIS request
 
-The P0 compiler binds the exact `TradeCase`, exact thesis hash and exact market evidence refs into one independent audit request. The request carries the operational TRIAXIS method:
+The P0 compiler binds the exact `TradeCase`, exact thesis hash and exact market evidence refs into one independent audit request.
 
-- ANGEL: strongest evidence-bound case for the thesis;
-- DEVIL: attack hidden assumptions, stale evidence, regime mismatch, liquidity traps, contradictory flow, invalidation, sizing logic and operator-bias risk;
-- TRIALECTIC: preserve only what survives both attacks;
-- EVIDENCE AUDIT: bind every surviving material claim to supplied evidence or mark it unsupported.
+Current TRIAXIS evidence does **not** justify mandatory persona debate. The operational request therefore uses:
 
-The compiler performs no model call, tool call, order, signal or runtime effect.
+- strongest evidence-bound support for the thesis;
+- direct falsification of hidden assumptions, stale evidence, regime mismatch, liquidity traps, contradictory flow, invalidation, sizing logic and operator-bias risk;
+- countermodel default **OFF**, eligible only when direct evidence leaves competing explanations live;
+- trialectic closure containing only surviving claims with uncertainty preserved;
+- evidence audit binding every surviving material claim to supplied evidence or marking it unsupported.
+
+The compiler performs no model call, tool call, order, signal or runtime effect. TRIAXIS remains a contestant/auditor, not an oracle.
+
+## SCT R13 compatibility
+
+P0 consumes the current SCT prediction contract:
+
+`sct.prediction/v3`
+
+A top-probability tie is **not** lexicographically resolved. In a tie:
+
+```text
+predicted_choice=None
+prediction_status=TIE
+divergence=None
+divergence_status=UNDEFINED_TWIN_TIE
+```
+
+After human reveal, Twin fidelity for that case is `UNSCORABLE_TIE`, not a forced win/loss.
+
+This preserves SCT R13 semantics and prevents TradingOS from inventing a human prediction that SCT itself did not make.
 
 ## Invariants
 
@@ -53,8 +75,9 @@ The compiler performs no model call, tool call, order, signal or runtime effect.
 - Any risk veto forces `WAIT` in the shadow packet.
 - `HOLD`, `REJECT`, or `REVISE` from TRIAXIS forces `WAIT` in the shadow packet.
 - Human reveal must belong to the exact frozen case option set.
-- Twin fidelity and trade quality remain separate outcome dimensions.
-- Every object carries a deterministic SHA-256 identity over canonical JSON.
+- Twin fidelity, human/advisor divergence and trade quality/PnL remain separate outcome dimensions.
+- `TradeCase`, `TradeThesis`, TRIAXIS adjudication and `TradeDecisionPacket` are hash-bound at their consumption boundaries.
+- Stale SCT v2 predictions fail closed rather than being silently upgraded.
 
 ## Fixed safety vector
 
@@ -71,5 +94,8 @@ signals_allowed=false
 
 - `tools/tradingos_shadow_integration.py`
 - `tests/test_tradingos_shadow_integration.py`
+- `tools/unified_shadow_federation.py`
+- `tests/test_unified_shadow_federation.py`
+- `docs/UNIFIED_SHADOW_FEDERATION_P0_R1.md`
 
-This slice deliberately does not import SCT or VisionAssist code directly. Cross-repository coupling is by typed, hash-bound records so each subsystem retains its own ownership and release lifecycle.
+Cross-repository coupling is by typed, hash-bound records so SCT, VisionAssist, TRIAXIS and all other federation nodes retain their own ownership and release lifecycle.
