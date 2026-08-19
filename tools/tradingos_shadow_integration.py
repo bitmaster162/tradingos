@@ -11,6 +11,7 @@ TRADE_THESIS_SCHEMA = "tradingos.trade_thesis.v1"
 DECISION_PACKET_SCHEMA = "tradingos.trade_decision_packet.v1"
 OUTCOME_RECEIPT_SCHEMA = "tradingos.trade_outcome_receipt.v1"
 TRIAXIS_SCHEMA = "triaxis.trade_adjudication.v1"
+TRIAXIS_REQUEST_SCHEMA = "triaxis.trade_audit_request.v1"
 
 ALLOWED_OPTIONS = ("LONG", "SHORT", "WAIT", "EXIT", "REDUCE", "ADD", "HEDGE")
 ALLOWED_TRIAXIS_VERDICTS = {"PASS", "HOLD", "REJECT", "REVISE"}
@@ -180,6 +181,60 @@ def build_trade_thesis(case: Mapping[str, Any], decision_brief: Mapping[str, Any
     }
     thesis["thesis_sha256"] = sha256_obj(thesis)
     return thesis
+
+
+def build_triaxis_trade_audit_request(
+    case: Mapping[str, Any],
+    thesis: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Compile an evidence-bound independent TRIAXIS audit request; perform no model/tool call."""
+    validated = validate_trade_case(case)
+    if not isinstance(thesis, Mapping) or thesis.get("schema") != TRADE_THESIS_SCHEMA:
+        raise ShadowIntegrationError("wrong_trade_thesis_schema")
+    if thesis.get("case_id") != validated["case_id"]:
+        raise ShadowIntegrationError("thesis_case_mismatch")
+    _safe_vector(thesis.get("safety", {}), "thesis_safety")
+    if thesis.get("thesis_sha256") != sha256_obj({k: v for k, v in thesis.items() if k != "thesis_sha256"}):
+        raise ShadowIntegrationError("trade_thesis_hash_mismatch")
+
+    refs = [validated["market_evidence"]["snapshot"]]
+    if validated["market_evidence"].get("vision") is not None:
+        refs.append(validated["market_evidence"]["vision"])
+    body = {
+        "schema": TRIAXIS_REQUEST_SCHEMA,
+        "case_id": validated["case_id"],
+        "case_sha256": validated["case_sha256"],
+        "thesis_sha256": thesis["thesis_sha256"],
+        "candidate_action": thesis["proposed_action"],
+        "evidence_refs": tuple(refs),
+        "protocol": {
+            "angel": "Construct the strongest evidence-bound case FOR the candidate trade thesis.",
+            "devil": "Attack hidden assumptions, stale evidence, regime mismatch, liquidity traps, contradictory flow, invalidation, sizing logic, and operator-bias risk.",
+            "trialectic": "State what survives both attacks without erasing uncertainty.",
+            "evidence_audit": "Bind every surviving material claim to supplied evidence or mark it unsupported.",
+        },
+        "required_output": {
+            "schema": TRIAXIS_SCHEMA,
+            "verdict": tuple(sorted(ALLOWED_TRIAXIS_VERDICTS)),
+            "fields": (
+                "strongest_case",
+                "falsifiers",
+                "surviving_claims",
+                "evidence_refs",
+            ),
+        },
+        "constraints": {
+            "independent_audit": True,
+            "no_execution": True,
+            "no_order": True,
+            "no_signal": True,
+            "do_not_convert_prediction_to_permission": True,
+        },
+        "execution_authority": "NONE",
+        "can_execute": False,
+    }
+    body["request_sha256"] = sha256_obj(body)
+    return body
 
 
 def normalize_triaxis_adjudication(
