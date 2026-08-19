@@ -4,7 +4,7 @@ Status: DRAFT CANDIDATE / SHADOW ONLY / NO EFFECT
 
 ## Scope
 
-Every node in the `TRADING_ADVISORY_ACCOUNTED` class now has an explicit typed contract. Registry presence alone still creates no influence.
+Every node in the `TRADING_ADVISORY_ACCOUNTED` class now has an explicit typed contract. Registry presence alone creates no influence.
 
 ```text
 Edge Research
@@ -43,6 +43,8 @@ registry membership != influence
 ```
 
 Missing either universal field means `gate_effect=NONE`.
+
+A project can satisfy an architecture/component proof gate yet still have no legitimate market-gate influence. MAX+BitEvo is the explicit example: toolkit archaeology may inform consolidation, but it is not market evidence and cannot change the frozen trade gate.
 
 ## Existing five contracts
 
