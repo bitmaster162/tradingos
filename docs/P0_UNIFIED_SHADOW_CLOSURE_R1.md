@@ -4,7 +4,7 @@ Status: DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT
 
 ## What is now closed
 
-The P0 proof no longer stops at a TradingOS decision packet. It now closes one decision across composition, continuity, transport, authority projection and HANRI evidence-governor planes:
+The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance and a bounded research/simulation side plane:
 
 ```text
 63-node BitEvo federation + route
@@ -28,9 +28,15 @@ HANRI bounded evidence governor
 hanri.shadow-evidence-governor.receipt/v1
         ↓
 bitevo.unified_shadow_closure.v3
+        ↓
+MAWorld / Pandora / Sovereign Arena bounded research side plane
+        ↓
+bitevo.shadow_research_simulation_receipt.v1
+        ↓
+bitevo.unified_shadow_closure.v4
 ```
 
-The closure hash-binds every receipt to the same transaction.
+Every receipt is hash-bound to the same transaction or to the immediately preceding closure. The research side plane cannot vote or alter the effective decision.
 
 ## Source identities remain separate
 
@@ -39,12 +45,15 @@ The closure preserves these different facts instead of flattening them:
 - modern ContinuityOS source: `master@9dfb9e5b847a27113ca7c709a0adee900e3ff63f`;
 - SCT R13 Trader Twin adapter: PR #91 head `a0a244d40f0a2aa500df45b1f846f0d863a77749`;
 - accepted HANRI integration trunk: `hanri/r37-product-pilot-accepted@ef5c504179de8ae8c16bd70c168b14b79bd2f466`;
+- Sovereign Arena source: `bitmaster162/sovereign-arena-site/main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`;
+- MAWorld current source/runtime identity: `UNBOUND` in this P0 proof;
+- Pandora current source/runtime identity: `UNBOUND` in this P0 proof;
 - historical R52 local adoption: local HEAD `b5436f373dcb19873a3b0908b26f8d0e22cb8125`;
 - historical R57 runtime preflight: terminal `REVISE`;
 - current live ContinuityOS host state: `UNVERIFIED`;
 - Control Center R64 remains the authority reference.
 
-None of these identities can substitute for another.
+A Git repository source identity is not deployment proof. An architectural role from research or ontology is not current code/runtime proof.
 
 ## HANRI / ArchiveOS result
 
@@ -77,8 +86,6 @@ HANRI effective gate = HOLD
 HANRI effective action = WAIT
 ```
 
-This is successful fail-closed behavior, not an error and not a current-truth mutation.
-
 ## Knowledge / Memory result
 
 The evidence-governor receipt explicitly keeps admission and memory separate from custody:
@@ -99,29 +106,66 @@ project_canon_write=false
 current_truth_write=false
 ```
 
+## Research / simulation result
+
+The side plane binds only what current evidence supports.
+
+### MAWorld
+
+Role bound from internal architecture/research only:
+
+`ISOLATED_REPRODUCIBLE_EXPERIMENT_CHAMBER_CANDIDATE`
+
+Current source and runtime identity are not bound. The adapter rejects any silent upgrade to `source_bound=true` or `runtime_bound=true`.
+
+### Pandora
+
+Role bound from internal architecture only:
+
+`VISUAL_PROGRAMMABLE_RUNTIME_AND_SIMULATION_CANDIDATE`
+
+Current source and runtime identity are not bound. The same fail-closed rule applies.
+
+### Sovereign Arena
+
+Exact GitHub source identity is bound:
+
+`bitmaster162/sovereign-arena-site/main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`
+
+But:
+
+```text
+deployment_proven=false
+runtime_proven=false
+runtime_invoked=false
+trading_execution_surface=false
+```
+
+The P0 research contract requires provenance, replay status, an all-trial denominator and explicit preservation of failed/stopped/degraded experiments as a design requirement. It forbids signal-service and live-trading semantics.
+
+The entire research plane is:
+
+```text
+decision_dependency=NON_BLOCKING_SIDE_PLANE
+trading_voter=false
+can_change_decision=false
+```
+
+An optional research surface being unbound does not block the core BTC decision; it also does not make that surface trusted.
+
 ## Continuity result
 
 ContinuityOS can derive deterministic checkpoint/replay/return candidates only. All writes remain false. Historical R52/R57 evidence cannot be promoted into modern source identity or live-runtime authority.
 
 ## Return Broker result
 
-The real Return Broker strict triplet verifier is reused in a read-only P0 adapter. A valid ZIP/SHA/READY envelope may produce:
-
-`physical_status=VERIFIED_READ_ONLY`
-
-while all transport mutations remain false.
-
-Critically:
+The real Return Broker strict triplet verifier is reused in a read-only P0 adapter. A valid ZIP/SHA/READY envelope may produce `physical_status=VERIFIED_READ_ONLY` while all transport mutations remain false.
 
 `physical verification PASS != semantic acceptance`
 
 ## Control Center projection result
 
-The Control Center adapter renders the unified transaction only as:
-
-`NON_AUTHORITY_SHADOW_PROJECTION`
-
-It cannot apply current truth, mutate Command Queue / Decision Ledger / Return Registry / Human Gate, activate runtime, trade or authorize capital.
+The Control Center adapter renders the unified transaction only as `NON_AUTHORITY_SHADOW_PROJECTION`. It cannot apply current truth, mutate Command Queue / Decision Ledger / Return Registry / Human Gate, activate runtime, trade or authorize capital.
 
 ## Closure invariant
 
@@ -135,6 +179,8 @@ model output
 != memory candidate
 != physical transport verification
 != semantic acceptance
+!= research publication
+!= simulation result
 != current truth
 != authority
 != permission
@@ -150,6 +196,9 @@ merge=false
 deploy=false
 runtime_activation=false
 runtime_registration=false
+experiment_launch=false
+research_publication=false
+simulation_runtime=false
 current_truth_apply=false
 knowledge_write=false
 memory_write=false
