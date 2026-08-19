@@ -79,6 +79,13 @@ R8 proves only the **protocol semantics** of future writer fencing and crash rec
 - current truth;
 - permission to execute.
 
+R8 v1 also remains `PASS WITH CONDITIONS` for two explicit cross-plane hardening gaps:
+
+1. Control Center's receipt index carries commit ids and idempotency keys in parallel sequences. The current verifier detects missing/duplicate identities, but exact first-class `(commit_id, idempotency_key, receipt)` pair binding is not yet independently represented.
+2. Lease/index objects carry an authority-root digest, but R8 v1 TradingOS closure does not yet consume that authority root as a separate independently retained cross-plane trust anchor.
+
+These gaps do not grant effect authority because the complete path remains `HOLD / WAIT`, but they prevent a production durability claim.
+
 The resulting closure is always:
 
 ```text
