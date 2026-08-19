@@ -66,7 +66,12 @@ class UnifiedShadowControlPlaneTests(unittest.TestCase):
             "draft": True,
             "merged": False,
         }
-        self.continuity_ref = {
+        self.continuity_source_ref = {
+            "repo": "bitmaster162/continuityos",
+            "branch": "master",
+            "head_sha": "9dfb9e5b847a27113ca7c709a0adee900e3ff63f",
+        }
+        self.sct_adapter_ref = {
             "repo": "bitmaster162/continuityos",
             "pr_number": 91,
             "head_sha": "a0a244d40f0a2aa500df45b1f846f0d863a77749",
@@ -78,7 +83,8 @@ class UnifiedShadowControlPlaneTests(unittest.TestCase):
     def build_receipt(self, **overrides):
         kwargs = {
             "control_center_ref": self.control_ref,
-            "continuityos_ref": self.continuity_ref,
+            "continuityos_source_ref": self.continuity_source_ref,
+            "sct_adapter_ref": self.sct_adapter_ref,
             "provider_capture_at": "2026-08-12T04:59:00+07:00",
             "lease_expires_at": "2026-08-12T10:59:00+07:00",
             "evaluated_at": "2026-08-19T23:50:00+07:00",
@@ -91,6 +97,7 @@ class UnifiedShadowControlPlaneTests(unittest.TestCase):
 
     def test_stale_control_authority_evidence_forces_hold_and_wait(self):
         receipt = self.build_receipt()
+        self.assertEqual(receipt["schema"], "bitevo.shadow_control_plane_receipt.v2")
         self.assertEqual(receipt["hanri"]["freshness"], "STALE")
         self.assertTrue(receipt["hanri"]["attention_required"])
         self.assertEqual(receipt["control_gate"], "HOLD")
@@ -99,6 +106,24 @@ class UnifiedShadowControlPlaneTests(unittest.TestCase):
         self.assertFalse(receipt["continuity_and_return"]["checkpoint_write"])
         self.assertFalse(receipt["executor_boundary"]["enabled"])
         self.assertEqual(receipt["safety"]["capital_permission"], "DENY")
+
+    def test_source_identity_and_sct_adapter_are_explicitly_separate(self):
+        receipt = self.build_receipt()
+        modern = receipt["source_refs"]["continuityos_modern_source"]
+        sct = receipt["source_refs"]["sct_trader_twin_adapter"]
+        self.assertEqual(modern["head_sha"], "9dfb9e5b847a27113ca7c709a0adee900e3ff63f")
+        self.assertEqual(modern["claim_ceiling"], "MODERN_GITHUB_SOURCE_ONLY")
+        self.assertFalse(modern["proves_live_runtime"])
+        self.assertEqual(sct["head_sha"], "a0a244d40f0a2aa500df45b1f846f0d863a77749")
+        self.assertEqual(sct["role"], "SCT_R13_TRADER_TWIN_ADAPTER_ONLY")
+        self.assertFalse(sct["is_continuityos_source_authority"])
+        self.assertNotEqual(modern["head_sha"], sct["head_sha"])
+
+    def test_sct_adapter_cannot_be_laundered_as_modern_source(self):
+        bad = dict(self.continuity_source_ref)
+        bad["head_sha"] = self.sct_adapter_ref["head_sha"]
+        with self.assertRaisesRegex(ShadowIntegrationError, "continuityos_source_ref_head_mismatch"):
+            self.build_receipt(continuityos_source_ref=bad)
 
     def test_fresh_conflict_free_evidence_can_pass_shadow_without_effect(self):
         receipt = self.build_receipt(
@@ -143,7 +168,8 @@ class UnifiedShadowControlPlaneTests(unittest.TestCase):
                 self.case,
                 packet,
                 control_center_ref=self.control_ref,
-                continuityos_ref=self.continuity_ref,
+                continuityos_source_ref=self.continuity_source_ref,
+                sct_adapter_ref=self.sct_adapter_ref,
                 provider_capture_at="2026-08-12T04:59:00+07:00",
                 lease_expires_at="2026-08-12T10:59:00+07:00",
                 evaluated_at="2026-08-19T23:50:00+07:00",
@@ -151,10 +177,10 @@ class UnifiedShadowControlPlaneTests(unittest.TestCase):
                 anti_amnesia_context_sha256="c" * 64,
             )
 
-    def test_merged_source_is_forbidden_in_p0_fixture(self):
+    def test_merged_control_source_is_forbidden_in_p0_fixture(self):
         ref = dict(self.control_ref)
         ref["merged"] = True
-        with self.assertRaisesRegex(ShadowIntegrationError, "merged_source_not_allowed"):
+        with self.assertRaisesRegex(ShadowIntegrationError, "control_center_ref_must_remain_open_draft_unmerged"):
             self.build_receipt(control_center_ref=ref)
 
 
