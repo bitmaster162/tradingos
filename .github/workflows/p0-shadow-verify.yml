@@ -1,0 +1,28 @@
+name: P0 Shadow Verify
+
+on:
+  push:
+    branches:
+      - agent/p0-shadow-integration-r1
+  pull_request:
+    branches:
+      - codex02/m2b-forward-edge-evidence
+
+permissions:
+  contents: read
+
+jobs:
+  offline-shadow-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile shadow modules
+        run: |
+          python -m py_compile tools/tradingos_shadow_integration.py tools/unified_shadow_federation.py
+      - name: Run P0 shadow integration and full-system federation tests
+        run: |
+          python -m unittest tests.test_tradingos_shadow_integration tests.test_unified_shadow_federation -v
