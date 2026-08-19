@@ -7,6 +7,7 @@ from tools.tradingos_shadow_integration import (
     build_trade_decision_packet,
     build_trade_outcome_receipt,
     build_trade_thesis,
+    build_triaxis_trade_audit_request,
     normalize_triaxis_adjudication,
 )
 
@@ -53,6 +54,20 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
                 },
                 options=("LONG", "SHORT"),
             )
+
+    def test_triaxis_request_is_evidence_bound_and_non_executing(self):
+        thesis = build_trade_thesis(
+            self.case,
+            {"schema": "tradingos.decision_brief.v2", "status": "READY", "stance": "WATCH_LONG"},
+        )
+        request = build_triaxis_trade_audit_request(self.case, thesis)
+        self.assertEqual(request["schema"], "triaxis.trade_audit_request.v1")
+        self.assertEqual(request["candidate_action"], "LONG")
+        self.assertEqual(len(request["evidence_refs"]), 2)
+        self.assertTrue(request["constraints"]["independent_audit"])
+        self.assertTrue(request["constraints"]["no_execution"])
+        self.assertEqual(request["execution_authority"], "NONE")
+        self.assertFalse(request["can_execute"])
 
     def test_packet_forces_wait_when_triaxis_rejects(self):
         thesis = build_trade_thesis(
