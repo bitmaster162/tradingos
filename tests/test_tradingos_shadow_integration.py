@@ -9,7 +9,11 @@ from tools.tradingos_shadow_integration import (
     build_trade_thesis,
     build_triaxis_trade_audit_request,
     normalize_triaxis_adjudication,
+    sha256_obj,
 )
+
+CASE_FREEZE_EPOCH = 1_787_151_600.0
+PREDICTION_COMMIT_EPOCH = CASE_FREEZE_EPOCH + 100.0
 
 
 class TradingOSShadowIntegrationTests(unittest.TestCase):
@@ -34,19 +38,35 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         )
 
     @staticmethod
-    def twin(probs, *, prediction_id="pred", authority="NONE", can_execute=False):
+    def twin(
+        probs,
+        *,
+        prediction_id=None,
+        case_id="trade-001",
+        authority="NONE",
+        can_execute=False,
+        committed_at=PREDICTION_COMMIT_EPOCH,
+    ):
         max_p = max(probs.values())
         leaders = [option for option, p in probs.items() if abs(p - max_p) <= 1e-15]
         predicted = leaders[0] if len(leaders) == 1 else None
-        return {
+        body = {
             "schema": "sct.prediction/v3",
-            "prediction_id": prediction_id,
+            "case_id": case_id,
+            "arm": "sct",
+            "options": ("LONG", "SHORT", "WAIT"),
+            "option_probabilities": probs,
             "predicted_choice": predicted,
             "confidence": max_p,
-            "option_probabilities": probs,
+            "reasons": (),
+            "change_conditions": (),
+            "would_escalate": False,
+            "committed_at": committed_at,
             "execution_authority": authority,
             "can_execute": can_execute,
         }
+        body["prediction_id"] = sha256_obj(body) if prediction_id is None else prediction_id
+        return body
 
     def adjudication(self, verdict="PASS"):
         return normalize_triaxis_adjudication(
@@ -62,6 +82,22 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         self.assertEqual(self.case["safety"], SHADOW_SAFETY)
         self.assertEqual(self.case["human_decision_status"], "UNREVEALED")
         self.assertEqual(tuple(self.case["options"]), ("LONG", "SHORT", "WAIT"))
+
+    def test_trade_case_requires_timezone_aware_freeze_timestamp(self):
+        with self.assertRaisesRegex(ShadowIntegrationError, "frozen_at_timezone_required"):
+            build_trade_case(
+                case_id="trade-naive-time",
+                frozen_at="2026-08-19T15:00:00",
+                symbol="BTCUSDT",
+                venue="Binance",
+                timeframe="1h",
+                scenario="Naive timestamp is not a frozen evidence boundary.",
+                snapshot_ref={
+                    "source_id": "snapshot:naive",
+                    "sha256": "c" * 64,
+                    "schema": "tradingos.market_snapshot.v1",
+                },
+            )
 
     def test_wait_option_is_mandatory(self):
         with self.assertRaisesRegex(ShadowIntegrationError, "wait_option_required"):
@@ -103,7 +139,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         packet = build_trade_decision_packet(
             self.case,
             thesis,
-            self.twin({"LONG": 0.7, "SHORT": 0.1, "WAIT": 0.2}, prediction_id="pred-001"),
+            self.twin({"LONG": 0.7, "SHORT": 0.1, "WAIT": 0.2}),
             self.adjudication("REJECT"),
             {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
         )
@@ -119,7 +155,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         packet = build_trade_decision_packet(
             self.case,
             thesis,
-            self.twin({"LONG": 0.4, "SHORT": 0.2, "WAIT": 0.4}, prediction_id="pred-002"),
+            self.twin({"LONG": 0.4, "SHORT": 0.2, "WAIT": 0.4}),
             self.adjudication("PASS"),
             {"veto": True, "reasons": ["daily loss limit"], "can_trade": False, "capital_permission": "DENY"},
         )
@@ -134,7 +170,6 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         thesis = build_trade_thesis(self.case, {"stance": "WAIT"})
         twin = self.twin(
             {"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6},
-            prediction_id="pred-003",
             authority="TRADE",
             can_execute=True,
         )
@@ -147,9 +182,51 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
                 {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
             )
 
+    def test_cross_case_twin_is_rejected_even_with_valid_content_hash(self):
+        thesis = build_trade_thesis(self.case, {"stance": "WAIT"})
+        twin = self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6}, case_id="trade-OTHER")
+        with self.assertRaisesRegex(ShadowIntegrationError, "twin_case_mismatch"):
+            build_trade_decision_packet(
+                self.case,
+                thesis,
+                twin,
+                self.adjudication("HOLD"),
+                {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
+            )
+
+    def test_pre_freeze_twin_commit_is_rejected(self):
+        thesis = build_trade_thesis(self.case, {"stance": "WAIT"})
+        twin = self.twin(
+            {"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6},
+            committed_at=CASE_FREEZE_EPOCH - 1.0,
+        )
+        with self.assertRaisesRegex(ShadowIntegrationError, "twin_prediction_precedes_case_freeze"):
+            build_trade_decision_packet(
+                self.case,
+                thesis,
+                twin,
+                self.adjudication("HOLD"),
+                {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
+            )
+
+    def test_tampered_twin_projection_with_stale_prediction_id_is_rejected(self):
+        thesis = build_trade_thesis(self.case, {"stance": "WAIT"})
+        twin = self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6})
+        twin["option_probabilities"] = {"LONG": 0.7, "SHORT": 0.1, "WAIT": 0.2}
+        twin["predicted_choice"] = "LONG"
+        twin["confidence"] = 0.7
+        with self.assertRaisesRegex(ShadowIntegrationError, "twin_prediction_hash_mismatch"):
+            build_trade_decision_packet(
+                self.case,
+                thesis,
+                twin,
+                self.adjudication("HOLD"),
+                {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
+            )
+
     def test_stale_sct_v2_schema_is_rejected(self):
         thesis = build_trade_thesis(self.case, {"stance": "WAIT"})
-        twin = self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6}, prediction_id="pred-v2")
+        twin = self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6})
         twin["schema"] = "sct.prediction/v2"
         with self.assertRaisesRegex(ShadowIntegrationError, "unsupported_twin_prediction_schema"):
             build_trade_decision_packet(
@@ -178,7 +255,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         packet = build_trade_decision_packet(
             self.case,
             thesis,
-            self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6}, prediction_id="pred-outside"),
+            self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6}),
             self.adjudication("PASS"),
             {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
         )
@@ -195,7 +272,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         packet = build_trade_decision_packet(
             self.case,
             thesis,
-            self.twin({"LONG": 0.8, "SHORT": 0.1, "WAIT": 0.1}, prediction_id="pred-004"),
+            self.twin({"LONG": 0.8, "SHORT": 0.1, "WAIT": 0.1}),
             self.adjudication("PASS"),
             {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
         )
@@ -215,7 +292,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         packet = build_trade_decision_packet(
             self.case,
             thesis,
-            self.twin({"LONG": 0.4, "SHORT": 0.2, "WAIT": 0.4}, prediction_id="pred-tie"),
+            self.twin({"LONG": 0.4, "SHORT": 0.2, "WAIT": 0.4}),
             self.adjudication("HOLD"),
             {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
         )
@@ -233,7 +310,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         packet = build_trade_decision_packet(
             self.case,
             thesis,
-            self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6}, prediction_id="pred-tamper"),
+            self.twin({"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6}),
             self.adjudication("PASS"),
             {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
         )

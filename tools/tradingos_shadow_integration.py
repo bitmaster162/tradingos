@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from datetime import datetime
 import hashlib
 import json
 import math
@@ -95,6 +96,17 @@ def _verify_hash_bound(record: Mapping[str, Any], hash_field: str, error_code: s
         raise ShadowIntegrationError(error_code)
 
 
+def _iso_epoch(value: Any, field: str) -> float:
+    text = _text(value, field)
+    try:
+        parsed = datetime.fromisoformat(text[:-1] + "+00:00" if text.endswith("Z") else text)
+    except ValueError as exc:
+        raise ShadowIntegrationError(f"{field}_must_be_iso8601") from exc
+    if parsed.tzinfo is None:
+        raise ShadowIntegrationError(f"{field}_timezone_required")
+    return parsed.timestamp()
+
+
 def validate_trade_case(case: Mapping[str, Any]) -> dict[str, Any]:
     if not isinstance(case, Mapping) or case.get("schema") != TRADE_CASE_SCHEMA:
         raise ShadowIntegrationError("wrong_trade_case_schema")
@@ -109,7 +121,7 @@ def validate_trade_case(case: Mapping[str, Any]) -> dict[str, Any]:
     if case.get("human_decision_status") != "UNREVEALED":
         raise ShadowIntegrationError("human_decision_must_be_unrevealed")
     _text(case.get("case_id"), "case_id")
-    _text(case.get("frozen_at"), "frozen_at")
+    _iso_epoch(case.get("frozen_at"), "frozen_at")
     _text(case.get("symbol"), "symbol")
     _text(case.get("venue"), "venue")
     _text(case.get("timeframe"), "timeframe")
@@ -130,10 +142,12 @@ def build_trade_case(
     vision_ref: Mapping[str, Any] | None = None,
     options: Sequence[str] = ("LONG", "SHORT", "WAIT"),
 ) -> dict[str, Any]:
+    frozen_text = _text(frozen_at, "frozen_at")
+    _iso_epoch(frozen_text, "frozen_at")
     payload = {
         "schema": TRADE_CASE_SCHEMA,
         "case_id": _text(case_id, "case_id"),
-        "frozen_at": _text(frozen_at, "frozen_at"),
+        "frozen_at": frozen_text,
         "symbol": _text(symbol, "symbol"),
         "venue": _text(venue, "venue"),
         "timeframe": _text(timeframe, "timeframe"),
@@ -278,8 +292,16 @@ def _validate_twin(case: Mapping[str, Any], twin: Mapping[str, Any]) -> dict[str
         raise ShadowIntegrationError("twin_prediction_must_be_object")
     if twin.get("schema") != SCT_PREDICTION_SCHEMA:
         raise ShadowIntegrationError("unsupported_twin_prediction_schema")
+    if twin.get("case_id") != case["case_id"]:
+        raise ShadowIntegrationError("twin_case_mismatch")
+    if twin.get("arm") != "sct":
+        raise ShadowIntegrationError("twin_arm_must_be_sct")
+    supplied_options = twin.get("options")
+    if not isinstance(supplied_options, (list, tuple)) or tuple(supplied_options) != tuple(case["options"]):
+        raise ShadowIntegrationError("twin_options_mismatch")
     if twin.get("execution_authority") != "NONE" or twin.get("can_execute") is not False:
         raise ShadowIntegrationError("unsafe_twin_authority")
+
     probs = twin.get("option_probabilities")
     if not isinstance(probs, Mapping) or set(probs) != set(case["options"]):
         raise ShadowIntegrationError("twin_probability_keys_mismatch")
@@ -304,21 +326,48 @@ def _validate_twin(case: Mapping[str, Any], twin: Mapping[str, Any]) -> dict[str
     if supplied_predicted != predicted:
         raise ShadowIntegrationError("twin_predicted_choice_mismatch")
     supplied_confidence = twin.get("confidence")
-    if supplied_confidence is not None:
-        if isinstance(supplied_confidence, bool) or not isinstance(supplied_confidence, (int, float)):
-            raise ShadowIntegrationError("twin_confidence_not_numeric")
-        if abs(float(supplied_confidence) - max_p) > 1e-12:
-            raise ShadowIntegrationError("twin_confidence_mismatch")
+    if isinstance(supplied_confidence, bool) or not isinstance(supplied_confidence, (int, float)):
+        raise ShadowIntegrationError("twin_confidence_not_numeric")
+    if abs(float(supplied_confidence) - max_p) > 1e-12:
+        raise ShadowIntegrationError("twin_confidence_mismatch")
 
-    return {
+    reasons = tuple(str(x).strip() for x in twin.get("reasons", ()) if str(x).strip())
+    change_conditions = tuple(str(x).strip() for x in twin.get("change_conditions", ()) if str(x).strip())
+    would_escalate = twin.get("would_escalate", False)
+    if not isinstance(would_escalate, bool):
+        raise ShadowIntegrationError("twin_would_escalate_not_bool")
+    committed_at = twin.get("committed_at")
+    if isinstance(committed_at, bool) or not isinstance(committed_at, (int, float)):
+        raise ShadowIntegrationError("twin_committed_at_not_numeric")
+    committed_at = float(committed_at)
+    if not math.isfinite(committed_at):
+        raise ShadowIntegrationError("twin_committed_at_not_finite")
+    if committed_at + 1e-6 < _iso_epoch(case["frozen_at"], "frozen_at"):
+        raise ShadowIntegrationError("twin_prediction_precedes_case_freeze")
+
+    body = {
         "schema": SCT_PREDICTION_SCHEMA,
-        "prediction_id": _text(twin.get("prediction_id"), "twin.prediction_id"),
-        "predicted_choice": predicted,
-        "prediction_status": "UNIQUE" if predicted is not None else "TIE",
-        "confidence": max_p,
+        "case_id": case["case_id"],
+        "arm": "sct",
+        "options": tuple(case["options"]),
         "option_probabilities": clean,
+        "predicted_choice": predicted,
+        "confidence": max_p,
+        "reasons": reasons,
+        "change_conditions": change_conditions,
+        "would_escalate": would_escalate,
+        "committed_at": committed_at,
         "execution_authority": "NONE",
         "can_execute": False,
+    }
+    expected_prediction_id = sha256_obj(body)
+    if twin.get("prediction_id") != expected_prediction_id:
+        raise ShadowIntegrationError("twin_prediction_hash_mismatch")
+
+    return {
+        **body,
+        "prediction_id": expected_prediction_id,
+        "prediction_status": "UNIQUE" if predicted is not None else "TIE",
     }
 
 
