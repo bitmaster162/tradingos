@@ -17,7 +17,7 @@ R4 human reveal
   -> R6 asymmetric reveal closure
 ```
 
-TradingOS independently checks same case/packet/Twin/reveal choice/time, subject/provider policy, credential/public-key digests, algorithm/key epoch, verifier policy, origin/RP id, external asymmetric-verifier assertion, authenticator user-present/user-verified flags, credential/epoch guards, nonce/challenge unused guards and no-write next registry candidates. It independently recomputes the reveal-intent digest.
+TradingOS independently checks the same case/packet/Twin/reveal choice/time, subject/provider policy, credential/public-key digests, algorithm/key epoch, verifier policy, origin/RP id, external asymmetric-verifier assertion, authenticator user-present/user-verified flags, credential/epoch guards, nonce/challenge unused guards and no-write next registry candidates. It independently recomputes the reveal-intent digest.
 
 R6 torture attacks reveal-choice transplant, old key epoch, public-key transplant, wrong origin/RP, substituted nonce-registry digest, locally rehashed approval replacing an independently retained digest, local signature-verification overclaim, physical-presence overclaim, missing nonce/challenge guard and registry-candidate effect smuggling. Control Center separately attacks nonce/challenge reuse, revoked credentials, sign-counter rollback/reuse, epoch mismatch and missing authenticator user verification.
 
