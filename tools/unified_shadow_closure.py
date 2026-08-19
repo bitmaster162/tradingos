@@ -7,8 +7,9 @@ from tools.tradingos_shadow_integration import SHADOW_SAFETY, ShadowIntegrationE
 from tools.unified_shadow_transaction import TRANSACTION_SCHEMA
 
 CONTINUITY_RECEIPT_SCHEMA = "continuityos.shadow_continuity_receipt.v1"
+RETURN_INTAKE_SCHEMA = "control_return_broker.shadow_intake_receipt.v1"
 CONTROL_PROJECTION_SCHEMA = "control_center.unified_shadow_projection.v1"
-CLOSURE_SCHEMA = "bitevo.unified_shadow_closure.v1"
+CLOSURE_SCHEMA = "bitevo.unified_shadow_closure.v2"
 
 _EXPECTED_NODE_COUNT = 63
 _EXPECTED_CONTINUITY_HEAD = "9dfb9e5b847a27113ca7c709a0adee900e3ff63f"
@@ -68,12 +69,41 @@ def _verify_continuity(receipt: Mapping[str, Any], tx_sha: str, control_gate: st
     authority = receipt.get("authority", {})
     if authority.get("execution_authority") != "NONE" or authority.get("apply_authorized") is not False:
         raise ShadowIntegrationError("closure_continuity_authority_breached")
-    if receipt.get("return_candidate", {}).get("semantic_acceptance") != "NOT_PERFORMED":
+    return_candidate = receipt.get("return_candidate", {})
+    if return_candidate.get("semantic_acceptance") != "NOT_PERFORMED":
         raise ShadowIntegrationError("closure_return_semantic_acceptance_overclaim")
+    if return_candidate.get("write_allowed") is not False:
+        raise ShadowIntegrationError("closure_return_candidate_write_breached")
     expected_disposition = "HOLD_SHADOW_NO_WRITE" if control_gate == "HOLD" else "READY_FOR_READ_ONLY_REVIEW"
     if receipt.get("disposition") != expected_disposition:
         raise ShadowIntegrationError("closure_continuity_disposition_mismatch")
     return _verify_hash(receipt, "continuity_receipt_sha256", "closure_continuity_hash_mismatch")
+
+
+def _verify_return_intake(receipt: Mapping[str, Any], tx_sha: str, continuity_sha: str) -> str:
+    if not isinstance(receipt, Mapping) or receipt.get("schema") != RETURN_INTAKE_SCHEMA:
+        raise ShadowIntegrationError("closure_wrong_return_intake_schema")
+    if receipt.get("source_transaction_sha256") != tx_sha:
+        raise ShadowIntegrationError("closure_return_intake_transaction_mismatch")
+    if receipt.get("continuity_receipt_sha256") != continuity_sha:
+        raise ShadowIntegrationError("closure_return_intake_continuity_mismatch")
+    _verify_safety(receipt, "return_intake")
+    if receipt.get("physical_status") != "VERIFIED_READ_ONLY":
+        raise ShadowIntegrationError("closure_return_intake_not_physically_verified")
+    physical = receipt.get("physical_verification")
+    if not isinstance(physical, Mapping) or physical.get("passed") is not True:
+        raise ShadowIntegrationError("closure_return_intake_physical_pass_missing")
+    transport = receipt.get("transport")
+    if not isinstance(transport, Mapping) or any(value is not False for value in transport.values()):
+        raise ShadowIntegrationError("closure_return_transport_mutation_breached")
+    if receipt.get("semantic_acceptance") != "NOT_PERFORMED" or receipt.get("content_acceptance_claimed") is not False:
+        raise ShadowIntegrationError("closure_return_semantic_acceptance_overclaim")
+    if receipt.get("source_bytes_unchanged") is not True:
+        raise ShadowIntegrationError("closure_return_source_bytes_not_proven_unchanged")
+    authority = receipt.get("authority", {})
+    if authority.get("execution_authority") != "NONE" or authority.get("apply_authorized") is not False:
+        raise ShadowIntegrationError("closure_return_authority_breached")
+    return _verify_hash(receipt, "shadow_intake_sha256", "closure_return_intake_hash_mismatch")
 
 
 def _verify_control_projection(
@@ -109,15 +139,17 @@ def _verify_control_projection(
 def build_unified_shadow_closure(
     transaction: Mapping[str, Any],
     continuity_receipt: Mapping[str, Any],
+    return_intake_receipt: Mapping[str, Any],
     control_projection: Mapping[str, Any],
     *,
     closed_at: str,
 ) -> dict[str, Any]:
-    """Close one P0 shadow decision across composition, continuity and authority planes with no effect."""
+    """Close one P0 shadow decision across composition, continuity, transport and authority planes."""
     tx_sha = _verify_transaction(transaction)
     gate = str(transaction.get("control_gate"))
     action = str(transaction.get("control_plane_action"))
     continuity_sha = _verify_continuity(continuity_receipt, tx_sha, gate)
+    return_sha = _verify_return_intake(return_intake_receipt, tx_sha, continuity_sha)
     projection_sha = _verify_control_projection(
         control_projection,
         tx_sha,
@@ -131,6 +163,7 @@ def build_unified_shadow_closure(
         "case_id": transaction.get("case_id"),
         "transaction_sha256": tx_sha,
         "continuity_receipt_sha256": continuity_sha,
+        "return_intake_sha256": return_sha,
         "control_projection_sha256": projection_sha,
         "registered_node_count": transaction["registered_node_count"],
         "control_gate": gate,
@@ -139,6 +172,7 @@ def build_unified_shadow_closure(
         "planes": {
             "composition": "BOUND",
             "continuity": "BOUND_READ_ONLY",
+            "return_transport": "BOUND_READ_ONLY_PHYSICAL",
             "authority_projection": "BOUND_NON_AUTHORITY",
             "executor": "DISABLED",
         },
@@ -157,8 +191,9 @@ def build_unified_shadow_closure(
         },
         "semantics": {
             "closure_is_evidence_not_authority": True,
-            "all_three_planes_bind_same_transaction": True,
+            "all_bound_planes_reference_same_transaction": True,
             "continuity_candidate_is_not_canonical_state": True,
+            "return_physical_pass_is_not_semantic_acceptance": True,
             "control_projection_is_not_current_truth": True,
             "registered_system_is_not_invoked_runtime": True,
             "executor_remains_separate_and_disabled": True,
