@@ -80,7 +80,12 @@ class UnifiedShadowTransactionTests(unittest.TestCase):
                 "draft": True,
                 "merged": False,
             },
-            continuityos_ref={
+            continuityos_source_ref={
+                "repo": "bitmaster162/continuityos",
+                "branch": "master",
+                "head_sha": "9dfb9e5b847a27113ca7c709a0adee900e3ff63f",
+            },
+            sct_adapter_ref={
                 "repo": "bitmaster162/continuityos",
                 "pr_number": 91,
                 "head_sha": "a0a244d40f0a2aa500df45b1f846f0d863a77749",
@@ -124,6 +129,14 @@ class UnifiedShadowTransactionTests(unittest.TestCase):
         self.assertFalse(tx["effect_boundary"]["order"])
         self.assertEqual(tx["safety"]["execution_authority"], "NONE")
         self.assertEqual(tx["safety"]["capital_permission"], "DENY")
+
+    def test_control_plane_preserves_source_separation_inside_transaction_binding(self):
+        modern = self.control["source_refs"]["continuityos_modern_source"]
+        sct = self.control["source_refs"]["sct_trader_twin_adapter"]
+        self.assertEqual(modern["claim_ceiling"], "MODERN_GITHUB_SOURCE_ONLY")
+        self.assertFalse(modern["proves_live_runtime"])
+        self.assertFalse(sct["is_continuityos_source_authority"])
+        self.assertNotEqual(modern["head_sha"], sct["head_sha"])
 
     def test_tampered_packet_is_rejected_at_transaction_boundary(self):
         packet = dict(self.packet)
