@@ -21,7 +21,9 @@ SCT
   -> sct.prediction/v2 (arm=sct, execution_authority=NONE)
 TradingOS thesis
   -> tradingos.trade_thesis.v1
-TRIAXIS independent audit
+TRIAXIS audit request compiler
+  -> triaxis.trade_audit_request.v1
+Independent TRIAXIS audit
   -> triaxis.trade_adjudication.v1
 Risk veto
   -> fail-closed shadow risk vector
@@ -31,13 +33,26 @@ Human reveal + later market outcome
   -> tradingos.trade_outcome_receipt.v1
 ```
 
+## TRIAXIS request
+
+The P0 compiler binds the exact `TradeCase`, exact thesis hash and exact market evidence refs into one independent audit request. The request carries the operational TRIAXIS method:
+
+- ANGEL: strongest evidence-bound case for the thesis;
+- DEVIL: attack hidden assumptions, stale evidence, regime mismatch, liquidity traps, contradictory flow, invalidation, sizing logic and operator-bias risk;
+- TRIALECTIC: preserve only what survives both attacks;
+- EVIDENCE AUDIT: bind every surviving material claim to supplied evidence or mark it unsupported.
+
+The compiler performs no model call, tool call, order, signal or runtime effect.
+
 ## Invariants
 
 - `prediction != permission`.
+- Every valid trade-action option set contains `WAIT`; fail-closed vetoes therefore always have a legal terminal action.
 - Vision evidence never creates a signal or order permission.
-- TRIAXIS adjudication is evidence/advice only and has `execution_authority=NONE`.
+- TRIAXIS request and adjudication are evidence/advice only and have `execution_authority=NONE`.
 - Any risk veto forces `WAIT` in the shadow packet.
 - `HOLD`, `REJECT`, or `REVISE` from TRIAXIS forces `WAIT` in the shadow packet.
+- Human reveal must belong to the exact frozen case option set.
 - Twin fidelity and trade quality remain separate outcome dimensions.
 - Every object carries a deterministic SHA-256 identity over canonical JSON.
 
