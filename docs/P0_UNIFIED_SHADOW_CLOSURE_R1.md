@@ -1,76 +1,38 @@
 # P0 Unified Shadow Closure R1
 
-Status: DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT
+Status: `DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT`
 
-## What is now closed
+## Current closure chain
 
-The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation, unadmitted knowledge/memory, the 63-node influence partition, all trading-advisory boundaries, all cognition-side boundaries, and the human-facing interface plane.
+The P0 candidate now composes the main decision spine and bounded side planes through `bitevo.unified_shadow_closure.v13`:
 
 ```text
-63-node BitEvo federation + route
-        ↓
-bitevo.unified_shadow_transaction.v2
-        ↓
-ContinuityOS modern source / historical-lineage separation
-        ↓
-continuityos.shadow_continuity_receipt.v1
-        ↓
-Control Return Broker strict physical read-only verification
-        ↓
-control_return_broker.shadow_intake_receipt.v1
-        ↓
-Control Center non-authority projection
-        ↓
-control_center.unified_shadow_projection.v1
-        ↓
-HANRI bounded evidence governor
-        ↓
-hanri.shadow-evidence-governor.receipt/v1
-        ↓
-bitevo.unified_shadow_closure.v3
-        ↓
-MAWorld / Pandora / Sovereign Arena bounded research side plane
-        ↓
-bitevo.shadow_research_simulation_receipt.v1
-        ↓
-bitevo.unified_shadow_closure.v4
-        ↓
-Knowledge Foundry / Durable Memory unadmitted candidate plane
-        ↓
-bitevo.shadow_knowledge_memory_candidate.v1
-        ↓
-bitevo.unified_shadow_closure.v5
-        ↓
-63-node capability influence ledger
-        ↓
-bitevo.shadow_capability_influence_ledger.v1
-        ↓
-bitevo.unified_shadow_closure.v6
-        ↓
-9/9 trading-advisory typed receipts
-        ↓
-bitevo.shadow_trading_advisory_ledger.v2
-        ↓
-bitevo.unified_shadow_closure.v8
-        ↓
-11/11 cognition-side proposal receipts
-        ↓
-bitevo.shadow_cognition_proposal_ledger.v1
-        ↓
-bitevo.unified_shadow_closure.v9
-        ↓
-Unified Dashboard + Work Cockpit + Universe Hub
-        ↓
-bitevo.shadow_human_interface_ledger.v1
-        ↓
-bitevo.unified_shadow_closure.v10
+VisionAssist
+ -> frozen TradingOS TradeCase
+ -> SCT R13
+ -> TradingOS thesis
+ -> TRIAXIS
+ -> risk / CORE
+ -> DecisionPacket
+ -> 63-node federation / transaction
+ -> ContinuityOS / Return Broker / Control Center / HANRI
+ -> research + knowledge/memory + capability accounting
+ -> 9/9 trading advisory
+ -> 11/11 cognition proposal
+ -> 3/3 human interface
+ -> 8/8 product/service
+ -> 5/5 parked/non-trading
+ -> 1/1 Executor Network disabled membrane
+ -> bitevo.unified_shadow_closure.v13
 ```
 
-Every receipt is hash-bound to the same transaction or the immediately preceding closure. Side planes cannot vote or widen the effective decision.
+The system preserves:
+
+`accounted != invoked != authority`.
 
 ## 63-node influence partition
 
-Every registered node is assigned exactly once to one of nine influence classes:
+Every registered node is assigned exactly once to one influence class:
 
 ```text
 DECISION_BOUND_NON_EXECUTING
@@ -84,61 +46,40 @@ NONTRADING_OR_PARKED
 EXECUTOR_DISABLED
 ```
 
-`all systems accounted for != all systems vote`
+The global capability ledger remains non-voting and non-effectful. Registry presence or class membership is not source identity, runtime proof, typed case influence, permission, or effect.
 
-The global ledger keeps `trading_vote=false`, `may_widen_gate=false`, `effect_authority=NONE`, `external_runtime_invoked=false`. A P0 contract boundary is weaker than source/runtime/deployment proof.
+## Trading advisory — 9/9
 
-## Trading advisory plane — 9/9 typed
-
-Every `TRADING_ADVISORY_ACCOUNTED` node has a typed boundary:
+All nine trading-advisory nodes have typed boundaries. Market-case influence requires both project-specific proof and:
 
 ```text
-Edge Research
-Arb Radar
-Grid OS
-Delist DRS
-Sovereign API / Core Bot
-Claude Bitunix Evidence Lane
-BTCUSDT Binance Futures Bot
-Confluence Trading Bot
-MAX+BitEvo Trading Tools
+case_relevance_verified=true
+pre_freeze_evidence_verified=true
 ```
 
-Any market-case influence additionally requires `case_relevance_verified=true` and `pre_freeze_evidence_verified=true`. Missing proof means no influence. A fully admitted relevant risk may only narrow `PASS_SHADOW -> HOLD`; `HOLD -> PASS_SHADOW` is forbidden.
+Missing proof produces no influence. A fully admitted relevant risk may only narrow `PASS_SHADOW -> HOLD`; `HOLD -> PASS_SHADOW` is forbidden.
 
-## Cognition proposal plane — 11/11 typed
+No advisory node has a trading vote or execution authority.
 
-Every `COGNITION_SIDE_ACCOUNTED` node has a proposal-only boundary:
+## Cognition proposal — 11/11
+
+The cognition-side plane is fixed to:
 
 ```text
-BitEvo Runtime
-Reflex Layer
-OpenClaw
-Arbiter Content Engine
-DTaaP
-Sovereign Agent Core
-GPT-S:CORE SDK
-LifeOS
-MIND
-PFI / Brain / Fabric
-Human Coevolution Layer
+proposal_only=true
+case_influence_enabled=false
+decision_vote=false
+gate_effect=NONE
+current_truth_authority=NONE
+memory_authority=NONE
+execution_authority=NONE
 ```
 
-The plane is fixed to `proposal_only=true`, `case_influence_enabled=false`, `decision_vote=false`, `gate_effect=NONE`, `current_truth_authority=NONE`, `memory_authority=NONE`, `execution_authority=NONE`.
+A running model/tool harness is not governance. A cognitive proposal is not truth or permission. Proof completion does not promote cognition into decision authority in P0.
 
-Even future proof completion does not enable case influence in P0. Human Coevolution remains an update-proposal protocol requiring external evaluation and human approval, not autonomous self-development.
+## Human interface — 3/3
 
-## Human interface plane — 3/3 typed
-
-The human-facing interfaces are now one explicit presentation boundary:
-
-```text
-HANRI / Control Center Unified Dashboard
-Work Cockpit / Operator CRM
-BitEvo Universe Hub
-```
-
-All three are fixed to:
+Unified Dashboard, Work Cockpit and Universe Hub are typed presentation surfaces.
 
 ```text
 presentation_only=true
@@ -151,48 +92,100 @@ may_execute_action=false
 execution_authority=NONE
 ```
 
-The Universe Hub is the federated navigation/observation environment, not a truth owner. It routes grounded system identities to real cockpits and must render missing/stale adapter state as `UNKNOWN` or `DEGRADED`, never fake `OPERATIONAL`.
+Rendered status, navigation, cards, buttons and drafts cannot create authority. Unknown/stale adapter state must not be rendered as operational.
 
-The Unified Dashboard renders Control Center/HANRI snapshots with freshness; rendering does not promote stale state. Work Cockpit remains a decision/draft surface; a draft is not an external send, and human review remains required.
+## Product / Service — 8/8
 
-The interface plane preserves the incoming decision exactly:
-
-```text
-incoming HOLD / WAIT
-→ dashboard / cockpit / hub
-→ outgoing HOLD / WAIT
-```
-
-A button, route, rendered card or draft cannot create authority.
-
-## Source identities remain separate
-
-- modern ContinuityOS source: `master@9dfb9e5b847a27113ca7c709a0adee900e3ff63f`;
-- SCT R13 Trader Twin adapter: PR #91 head `a0a244d40f0a2aa500df45b1f846f0d863a77749`;
-- accepted HANRI integration trunk: `hanri/r37-product-pilot-accepted@ef5c504179de8ae8c16bd70c168b14b79bd2f466`;
-- Sovereign Arena source: `bitmaster162/sovereign-arena-site/main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`;
-- unbound-role systems remain unproven for current source/runtime unless separately bound by exact evidence;
-- current live ContinuityOS host state remains `UNVERIFIED`;
-- Control Center R64 remains the authority reference.
-
-Git source identity is not deployment proof. Architectural role is not current implementation proof.
-
-## Current control result
-
-The frozen P0 path remains fail-closed:
+Product/service surfaces are typed but commercially separate from decision authority.
 
 ```text
-upstream Control Center gate = HOLD
-ArchiveOS = BLOCKED_REVERIFY / STALE
-HANRI effective gate = HOLD
-HANRI effective action = WAIT
-research side plane = non-voting
-knowledge/memory candidate = non-voting / unadmitted
-capability bus = preserves HOLD/WAIT
-trading advisory plane = preserves HOLD/WAIT
-cognition proposal plane = preserves HOLD/WAIT
-human interface plane = preserves HOLD/WAIT
+case_influence_enabled=false
+decision_vote=false
+gate_effect=NONE
+current_truth_authority=NONE
+payment_authority=NONE
+entitlement_authority=NONE
+external_message_authority=NONE
+execution_authority=NONE
 ```
+
+Important evidence separations:
+
+```text
+public URL != live backend
+offer != customer
+customer != payment
+payment != authority
+deployment != product validation
+```
+
+AI Client Hunter remains human-reviewed and channel-safe; Blockchain Forensics remains case-scoped/confidential; Physical AI / Cosmos remains a future integration candidate with no current runtime claim.
+
+## Parked / Non-trading — 5/5
+
+Parasite-Killer, Parasite Hunter, Amora, $AMORA and RTF/StarCoin have explicit containment/park/archive boundaries.
+
+```text
+revival_authority=false
+case_influence_enabled=false
+decision_vote=false
+gate_effect=NONE
+scope_mixing_allowed=false
+execution_authority=NONE
+```
+
+Parasite-Killer and Parasite Hunter remain separate projects. Wallet/signing/order/token-launch effects are disabled. Proof completion cannot reactivate a parked project.
+
+## Executor Network — 1/1
+
+Executor Network is the future typed effect membrane and is disabled in P0.
+
+```text
+executor_enabled=false
+dispatch_enabled=false
+arbitrary_command_allowed=false
+caller_chosen_effect_class_allowed=false
+trusted_effect_class_derivation_required=true
+operation_specific_handler_required=true
+trusted_approval_registry_required=true
+active_writer_lease_required=true
+may_self_accept=false
+may_self_merge=false
+may_self_deploy=false
+may_change_authority=false
+execution_authority=NONE
+```
+
+A caller cannot obtain effect authority by labeling an arbitrary command as a benign effect class. Typed operation precedes trusted effect derivation. Acceptance and approval remain external to the executor.
+
+## End-to-end result
+
+The frozen candidate remains fail-closed:
+
+```text
+Control Center  HOLD / WAIT
+HANRI           HOLD / WAIT
+Trading advisory HOLD / WAIT
+Cognition        HOLD / WAIT
+Human interface  HOLD / WAIT
+Product/service  HOLD / WAIT
+Parked plane     HOLD / WAIT
+Executor         DISABLED, preserves HOLD / WAIT
+```
+
+ArchiveOS remains separately subject to its own current verification state; this closure does not invent freshness or source/runtime proof for unbound systems.
+
+## Evidence ceiling
+
+`v13` is a structural/shadow composition claim, not production qualification.
+
+It does not mean:
+- every 63-node system has current source/runtime proof;
+- all proof fields are complete;
+- every research/evidence family has a bespoke runtime adapter;
+- any deployment, payment, external message, trade, order or capital effect occurred.
+
+The branch only demonstrates typed fail-closed composition and semantic separation.
 
 ## Closure invariant
 
@@ -205,24 +198,23 @@ model output
 != temporal admissibility
 != source identity
 != registry membership
-!= typed influence
+!= product presence
+!= customer
+!= payment
 != rendered status
 != navigation
 != draft
 != archive custody
 != claim admission
 != memory write
-!= physical verification
-!= semantic acceptance
-!= hypothesis state
-!= human approval
+!= acceptance
+!= approval
 != current truth
 != authority
 != permission
+!= executor dispatch
 != effect
 ```
-
-The closure is evidence that the planes compose safely. It is not authority to cross the effect boundary.
 
 ## Fixed P0 ceiling
 
@@ -231,13 +223,15 @@ merge=false
 deploy=false
 runtime_activation=false
 runtime_registration=false
+external_message=false
+payment_mutation=false
+entitlement_mutation=false
+wallet_access=false
+signing=false
+token_launch=false
+executor_dispatch=false
 current_truth_apply=false
 memory_write=false
-external_message=false
-human_approval=false
-model_call=false
-tool_call=false
-canary=false
 signal=false
 order=false
 capital_effect=false
