@@ -108,6 +108,7 @@ class UnifiedShadowClosureTests(unittest.TestCase):
             frozen_at="2026-08-19T17:02:00Z",
         )
         self.continuity = self._continuity_fixture()
+        self.return_intake = self._return_intake_fixture()
         self.projection = self._projection_fixture()
 
     def _continuity_fixture(self):
@@ -154,6 +155,44 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         body["continuity_receipt_sha256"] = sha256_obj(body)
         return body
 
+    def _return_intake_fixture(self):
+        body = {
+            "schema": "control_return_broker.shadow_intake_receipt.v1",
+            "source_transaction_sha256": self.transaction["transaction_sha256"],
+            "continuity_receipt_sha256": self.continuity["continuity_receipt_sha256"],
+            "slot": "WORK",
+            "work_order_id": "P0-SHADOW-CLOSURE-001",
+            "zip_sha256": "f" * 64,
+            "zip_bytes": 128,
+            "physical_verification": {
+                "passed": True,
+                "sidecar_match": True,
+                "crc_status": "PASS",
+                "duplicate_members": [],
+                "unsafe_members": [],
+                "ready_json_valid": True,
+                "ready_last_mtime": True,
+            },
+            "physical_status": "VERIFIED_READ_ONLY",
+            "transport": {
+                "publish_performed": False,
+                "collect_performed": False,
+                "incoming_write": False,
+                "slot_pointer_write": False,
+                "registry_write": False,
+                "generation_promotion": False,
+                "controller_bundle_sealed": False,
+                "drive_write": False,
+            },
+            "semantic_acceptance": "NOT_PERFORMED",
+            "content_acceptance_claimed": False,
+            "source_bytes_unchanged": True,
+            "authority": {"execution_authority": "NONE", "apply_authorized": False},
+            "safety": dict(SHADOW_SAFETY),
+        }
+        body["shadow_intake_sha256"] = sha256_obj(body)
+        return body
+
     def _projection_fixture(self):
         body = {
             "schema": "control_center.unified_shadow_projection.v1",
@@ -193,23 +232,27 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         body["projection_sha256"] = sha256_obj(body)
         return body
 
-    def build_closure(self, continuity=None, projection=None):
+    def build_closure(self, continuity=None, return_intake=None, projection=None):
         return build_unified_shadow_closure(
             self.transaction,
             self.continuity if continuity is None else continuity,
+            self.return_intake if return_intake is None else return_intake,
             self.projection if projection is None else projection,
             closed_at="2026-08-19T17:03:00Z",
         )
 
-    def test_closure_binds_composition_continuity_and_control_without_effect(self):
+    def test_closure_binds_composition_continuity_return_and_control_without_effect(self):
         closure = self.build_closure()
+        self.assertEqual(closure["schema"], "bitevo.unified_shadow_closure.v2")
         self.assertEqual(closure["status"], "P0_SHADOW_CLOSED_NO_EFFECT")
         self.assertEqual(closure["registered_node_count"], 63)
         self.assertEqual(closure["control_gate"], "HOLD")
         self.assertEqual(closure["control_plane_action"], "WAIT")
         self.assertEqual(closure["planes"]["continuity"], "BOUND_READ_ONLY")
+        self.assertEqual(closure["planes"]["return_transport"], "BOUND_READ_ONLY_PHYSICAL")
         self.assertEqual(closure["planes"]["authority_projection"], "BOUND_NON_AUTHORITY")
         self.assertEqual(closure["planes"]["executor"], "DISABLED")
+        self.assertEqual(closure["return_intake_sha256"], self.return_intake["shadow_intake_sha256"])
         self.assertTrue(all(value is False for value in closure["effect_summary"].values()))
         self.assertEqual(closure["safety"]["execution_authority"], "NONE")
         self.assertEqual(closure["safety"]["capital_permission"], "DENY")
@@ -227,6 +270,28 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         receipt["continuity_receipt_sha256"] = sha256_obj({k: v for k, v in receipt.items() if k != "continuity_receipt_sha256"})
         with self.assertRaisesRegex(ShadowIntegrationError, "closure_continuity_write_breached"):
             self.build_closure(continuity=receipt)
+
+    def test_return_transport_cannot_mutate(self):
+        intake = copy.deepcopy(self.return_intake)
+        intake["transport"]["registry_write"] = True
+        intake["shadow_intake_sha256"] = sha256_obj({k: v for k, v in intake.items() if k != "shadow_intake_sha256"})
+        with self.assertRaisesRegex(ShadowIntegrationError, "closure_return_transport_mutation_breached"):
+            self.build_closure(return_intake=intake)
+
+    def test_return_physical_pass_cannot_be_semantic_acceptance(self):
+        intake = copy.deepcopy(self.return_intake)
+        intake["semantic_acceptance"] = "PASS"
+        intake["content_acceptance_claimed"] = True
+        intake["shadow_intake_sha256"] = sha256_obj({k: v for k, v in intake.items() if k != "shadow_intake_sha256"})
+        with self.assertRaisesRegex(ShadowIntegrationError, "closure_return_semantic_acceptance_overclaim"):
+            self.build_closure(return_intake=intake)
+
+    def test_return_intake_must_bind_same_continuity_receipt(self):
+        intake = copy.deepcopy(self.return_intake)
+        intake["continuity_receipt_sha256"] = "0" * 64
+        intake["shadow_intake_sha256"] = sha256_obj({k: v for k, v in intake.items() if k != "shadow_intake_sha256"})
+        with self.assertRaisesRegex(ShadowIntegrationError, "closure_return_intake_continuity_mismatch"):
+            self.build_closure(return_intake=intake)
 
     def test_control_projection_cannot_apply_current_truth(self):
         projection = copy.deepcopy(self.projection)
