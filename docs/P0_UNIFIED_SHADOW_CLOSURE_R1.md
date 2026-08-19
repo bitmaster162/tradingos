@@ -4,7 +4,7 @@ Status: DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT
 
 ## What is now closed
 
-The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance and a bounded research/simulation side plane:
+The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation and unadmitted knowledge/memory proposal planes:
 
 ```text
 63-node BitEvo federation + route
@@ -34,13 +34,19 @@ MAWorld / Pandora / Sovereign Arena bounded research side plane
 bitevo.shadow_research_simulation_receipt.v1
         ↓
 bitevo.unified_shadow_closure.v4
+        ↓
+Knowledge Foundry / Durable Memory unadmitted candidate plane
+        ↓
+bitevo.shadow_knowledge_memory_candidate.v1
+        ↓
+bitevo.unified_shadow_closure.v5
 ```
 
-Every receipt is hash-bound to the same transaction or to the immediately preceding closure. The research side plane cannot vote or alter the effective decision.
+Every receipt is hash-bound to the same transaction or the immediately preceding closure. Neither the research plane nor the knowledge/memory candidate plane can vote or alter the effective decision.
 
 ## Source identities remain separate
 
-The closure preserves these different facts instead of flattening them:
+The closure preserves different evidence dimensions instead of flattening them:
 
 - modern ContinuityOS source: `master@9dfb9e5b847a27113ca7c709a0adee900e3ff63f`;
 - SCT R13 Trader Twin adapter: PR #91 head `a0a244d40f0a2aa500df45b1f846f0d863a77749`;
@@ -48,12 +54,14 @@ The closure preserves these different facts instead of flattening them:
 - Sovereign Arena source: `bitmaster162/sovereign-arena-site/main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`;
 - MAWorld current source/runtime identity: `UNBOUND` in this P0 proof;
 - Pandora current source/runtime identity: `UNBOUND` in this P0 proof;
+- Knowledge Foundry current source/runtime identity: `UNBOUND` in this P0 proof;
+- Durable Memory current source/runtime identity: `UNBOUND` in this P0 proof;
 - historical R52 local adoption: local HEAD `b5436f373dcb19873a3b0908b26f8d0e22cb8125`;
 - historical R57 runtime preflight: terminal `REVISE`;
 - current live ContinuityOS host state: `UNVERIFIED`;
 - Control Center R64 remains the authority reference.
 
-A Git repository source identity is not deployment proof. An architectural role from research or ontology is not current code/runtime proof.
+A Git repository source identity is not deployment proof. An architectural role from ontology/research is not current code/runtime proof.
 
 ## HANRI / ArchiveOS result
 
@@ -88,23 +96,36 @@ HANRI effective action = WAIT
 
 ## Knowledge / Memory result
 
-The evidence-governor receipt explicitly keeps admission and memory separate from custody:
+The evidence-governor and knowledge-candidate contracts keep custody, reasoning, admission and memory as separate operations:
 
 ```text
 archive custody != claim admission
+source-bound derivative != admitted claim
 reasoning derivative != evidence by itself
+memory proposal != memory write
 durable memory != current truth
 memory != permission
 ```
 
-P0 therefore requires:
+The knowledge/memory candidate plane creates only hash-bound candidate claims and a memory proposal. Every claim remains `UNADMITTED`; admitted and rejected counts remain zero. Knowledge Foundry and Durable Memory roles are bound, while their current source/runtime identities remain unbound.
+
+Required P0 state:
 
 ```text
 claim_admission=NOT_PERFORMED
-durable_memory_write=false
+admitted_claim_count=0
+knowledge_foundry.source_identity_bound=false
+knowledge_foundry.runtime_bound=false
+durable_memory.source_identity_bound=false
+durable_memory.runtime_bound=false
+memory_proposal.write_allowed=false
+private_memory_write=false
+shared_memory_write=false
 project_canon_write=false
 current_truth_write=false
 ```
+
+The candidate is `NON_VOTING_EVIDENCE_DERIVATIVE` and cannot change the decision.
 
 ## Research / simulation result
 
@@ -175,8 +196,10 @@ model output
 != evidence
 != source identity
 != archive custody
+!= claim candidate
 != claim admission
-!= memory candidate
+!= memory proposal
+!= durable memory
 != physical transport verification
 != semantic acceptance
 != research publication
@@ -199,9 +222,11 @@ runtime_registration=false
 experiment_launch=false
 research_publication=false
 simulation_runtime=false
-current_truth_apply=false
+claim_admission=false
 knowledge_write=false
 memory_write=false
+project_canon_write=false
+current_truth_apply=false
 checkpoint_write=false
 return_write=false
 archive_write=false
