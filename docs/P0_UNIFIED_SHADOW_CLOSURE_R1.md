@@ -4,7 +4,7 @@ Status: DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT
 
 ## What is now closed
 
-The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation, unadmitted knowledge/memory, a 63-node capability-influence partition, and typed admission boundaries for every trading-advisory node.
+The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation, unadmitted knowledge/memory, a 63-node capability-influence partition, every trading-advisory boundary, and every cognition-side boundary.
 
 ```text
 63-node BitEvo federation + route
@@ -52,6 +52,12 @@ bitevo.unified_shadow_closure.v6
 bitevo.shadow_trading_advisory_ledger.v2
         ↓
 bitevo.unified_shadow_closure.v8
+        ↓
+11/11 cognition-side proposal receipts
+        ↓
+bitevo.shadow_cognition_proposal_ledger.v1
+        ↓
+bitevo.unified_shadow_closure.v9
 ```
 
 Every receipt is hash-bound to the same transaction or immediately preceding closure. Side planes cannot vote or widen the effective decision.
@@ -87,11 +93,11 @@ source_identity_proven_by_ledger=false
 runtime_proven_by_ledger=false
 ```
 
-A subset has a P0 contract boundary, but `contract_bound` is deliberately weaker than source/runtime/deployment proof.
+A P0 contract boundary is deliberately weaker than source/runtime/deployment proof.
 
 ## Trading advisory plane — complete 9/9 boundary coverage
 
-Every `TRADING_ADVISORY_ACCOUNTED` node now has a typed admission contract:
+Every `TRADING_ADVISORY_ACCOUNTED` node has a typed admission contract:
 
 ```text
 Edge Research
@@ -121,7 +127,7 @@ post-freeze evidence != admissible evidence
 registry presence != influence
 ```
 
-The current bounded defaults satisfy neither the complete proof sets nor these universal influence conditions, so all nine remain non-influential in P0.
+Current bounded defaults satisfy neither complete proof sets nor universal influence conditions, so all nine remain non-influential in P0.
 
 A fully admitted market-relevant risk may only narrow:
 
@@ -129,13 +135,53 @@ A fully admitted market-relevant risk may only narrow:
 PASS_SHADOW -> HOLD
 ```
 
-No advisory can perform:
+No advisory can perform `HOLD -> PASS_SHADOW`. MAX+BitEvo toolkit archaeology is architecture-only and cannot change a frozen market gate by itself.
+
+## Cognition proposal plane — complete 11/11 boundary coverage
+
+Every `COGNITION_SIDE_ACCOUNTED` node now has a typed proposal-only boundary:
 
 ```text
-HOLD -> PASS_SHADOW
+BitEvo Runtime
+Reflex Layer
+OpenClaw
+Arbiter Content Engine
+DTaaP
+Sovereign Agent Core
+GPT-S:CORE SDK
+LifeOS
+MIND
+PFI / Brain / Fabric
+Human Coevolution Layer
 ```
 
-MAX+BitEvo legacy toolkit archaeology is explicitly architecture-only; even a future fully adjudicated toolkit disposition cannot change a frozen market gate by itself.
+The entire plane is fixed to:
+
+```text
+proposal_only=true
+case_influence_enabled=false
+decision_vote=false
+gate_effect=NONE
+current_truth_authority=NONE
+memory_authority=NONE
+execution_authority=NONE
+```
+
+Even `proof_complete=true` does not enable case influence in P0. A later influence path would require a separate explicit contract and owner gate.
+
+Critical role separations:
+
+- BitEvo Runtime is a thin orchestration-adapter candidate, not current truth or durable-memory owner.
+- Reflex Layer proposes bounded responses; historical scheduler evidence is not current runtime or effect authority.
+- OpenClaw is a harness/tool-adapter candidate; a running harness is not governance.
+- Arbiter Content Engine may produce synthesis/challenge proposals, not fake independent-agent majority truth.
+- DTaaP is a product wrapper candidate and does not own SCT person identity.
+- Sovereign Agent Core is `MERGE_CONCEPTS_ONLY`, not a second authority root or separate control product.
+- historical GPT-S:CORE v5.9 is not active CORE v6.3.x normative authority.
+- LifeOS is identity/personal-memory policy candidate, not current truth or write authority.
+- MIND holds hypothesis/cognitive-state candidates, not accepted truth or commitment authority.
+- PFI / Brain / Fabric separates evidence-linked intelligence, probabilistic computation and optional transport; none owns source bytes, truth, semantic acceptance or effects.
+- Human Coevolution is a typed update-proposal protocol requiring external evaluation and human approval; it is not autonomous self-development.
 
 ## Source identities remain separate
 
@@ -145,16 +191,13 @@ The closure preserves different evidence dimensions instead of flattening them:
 - SCT R13 Trader Twin adapter: PR #91 head `a0a244d40f0a2aa500df45b1f846f0d863a77749`;
 - accepted HANRI integration trunk: `hanri/r37-product-pilot-accepted@ef5c504179de8ae8c16bd70c168b14b79bd2f466`;
 - Sovereign Arena source: `bitmaster162/sovereign-arena-site/main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`;
-- MAWorld current source/runtime identity: `UNBOUND` in this P0 proof;
-- Pandora current source/runtime identity: `UNBOUND` in this P0 proof;
-- Knowledge Foundry current source/runtime identity: `UNBOUND` in this P0 proof;
-- Durable Memory current source/runtime identity: `UNBOUND` in this P0 proof;
-- historical R52 local adoption: local HEAD `b5436f373dcb19873a3b0908b26f8d0e22cb8125`;
-- historical R57 runtime preflight: terminal `REVISE`;
-- current live ContinuityOS host state: `UNVERIFIED`;
+- MAWorld, Pandora, Knowledge Foundry, Durable Memory, LifeOS, MIND and PFI-family current source/runtime identities remain unproven unless separately bound by exact evidence;
+- historical R52 local adoption remains historical local evidence;
+- historical R57 runtime preflight remains `REVISE` evidence;
+- current live ContinuityOS host state remains `UNVERIFIED`;
 - Control Center R64 remains the authority reference.
 
-A Git repository source identity is not deployment proof. An architectural role from ontology/research is not current code/runtime proof.
+A Git source identity is not deployment proof. A role from ontology/research is not current code/runtime proof.
 
 ## Current control result
 
@@ -169,15 +212,7 @@ research side plane = non-voting
 knowledge/memory candidate = non-voting / unadmitted
 capability bus = preserves HOLD/WAIT
 trading advisory plane = preserves HOLD/WAIT
-```
-
-ArchiveOS Core, Drive mirror and Archive Tooling remain distinct:
-
-```text
-ArchiveOS Core = non-authoritative evidence vault
-C:\PROJECTS\archiveos_api = authoritative ArchiveOS root
-Drive = mirror evidence only
-Archive Tooling = artifact compiler, not archive engine
+cognition proposal plane = preserves HOLD/WAIT exactly
 ```
 
 ## Knowledge / Memory result
@@ -191,22 +226,7 @@ durable memory != current truth
 memory != permission
 ```
 
-All candidate claims remain `UNADMITTED`; admitted/rejected counts stay zero. Knowledge Foundry and Durable Memory roles are bound while their current source/runtime identities remain unbound. No private/shared memory, project canon or current-truth write occurs.
-
-## Research / simulation result
-
-MAWorld is role-bound as an isolated reproducible experiment-chamber candidate, Pandora as a visual programmable runtime/simulation candidate, and both remain source/runtime unbound. Sovereign Arena has exact source identity `main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`; deployment/runtime remain unproven.
-
-The research plane is always:
-
-```text
-decision_dependency=NON_BLOCKING_SIDE_PLANE
-trading_voter=false
-can_change_decision=false
-runtime_invocation=false
-experiment_launch=false
-artifact_publication=false
-```
+All candidate claims remain `UNADMITTED`; no private/shared memory, project canon or current-truth write occurs.
 
 ## Continuity, Return and Control Center
 
@@ -216,6 +236,7 @@ ContinuityOS derives checkpoint/replay/return candidates only; all writes remain
 
 ```text
 model output
+!= cognitive proposal
 != prediction
 != evidence
 != case relevance
@@ -232,6 +253,8 @@ model output
 != semantic acceptance
 != research publication
 != simulation result
+!= hypothesis state
+!= human approval
 != current truth
 != authority
 != permission
@@ -255,6 +278,15 @@ advisory_vote=false
 advisory_signal=false
 advisory_order=false
 advisory_capital_effect=false
+cognition_runtime=false
+cognition_model_call=false
+cognition_tool_call=false
+cognition_memory_write=false
+cognition_current_truth_write=false
+cognition_human_approval=false
+cognition_canary=false
+cognition_deploy=false
+cognition_vote=false
 experiment_launch=false
 research_publication=false
 simulation_runtime=false
