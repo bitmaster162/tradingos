@@ -37,6 +37,23 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         self.assertEqual(self.case["human_decision_status"], "UNREVEALED")
         self.assertEqual(tuple(self.case["options"]), ("LONG", "SHORT", "WAIT"))
 
+    def test_wait_option_is_mandatory(self):
+        with self.assertRaisesRegex(ShadowIntegrationError, "wait_option_required"):
+            build_trade_case(
+                case_id="trade-no-wait",
+                frozen_at="2026-08-19T15:00:00Z",
+                symbol="BTCUSDT",
+                venue="Binance",
+                timeframe="1h",
+                scenario="Unsafe option set.",
+                snapshot_ref={
+                    "source_id": "snapshot:no-wait",
+                    "sha256": "c" * 64,
+                    "schema": "tradingos.market_snapshot.v1",
+                },
+                options=("LONG", "SHORT"),
+            )
+
     def test_packet_forces_wait_when_triaxis_rejects(self):
         thesis = build_trade_thesis(
             self.case,
@@ -67,6 +84,7 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
         self.assertEqual(packet["system_recommendation"], "WAIT")
         self.assertEqual(packet["recommendation_reason"], "TRIAXIS_REJECT")
         self.assertTrue(packet["divergence"])
+        self.assertEqual(tuple(packet["options"]), ("LONG", "SHORT", "WAIT"))
         self.assertFalse(packet["safety"]["can_trade"])
 
     def test_risk_veto_beats_pass(self):
@@ -118,6 +136,37 @@ class TradingOSShadowIntegrationTests(unittest.TestCase):
                 twin,
                 adjudication,
                 {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
+            )
+
+    def test_outcome_rejects_choice_outside_case_options(self):
+        thesis = build_trade_thesis(self.case, {"stance": "WAIT"})
+        adjudication = normalize_triaxis_adjudication(
+            case_id="trade-001",
+            verdict="PASS",
+            strongest_case=[],
+            falsifiers=[],
+            surviving_claims=[],
+            evidence_refs=[],
+        )
+        twin = {
+            "prediction_id": "pred-outside",
+            "option_probabilities": {"LONG": 0.2, "SHORT": 0.2, "WAIT": 0.6},
+            "execution_authority": "NONE",
+            "can_execute": False,
+        }
+        packet = build_trade_decision_packet(
+            self.case,
+            thesis,
+            twin,
+            adjudication,
+            {"veto": False, "reasons": [], "can_trade": False, "capital_permission": "DENY"},
+        )
+        with self.assertRaisesRegex(ShadowIntegrationError, "actual_choice_outside_case_options"):
+            build_trade_outcome_receipt(
+                packet,
+                actual_choice="HEDGE",
+                decided_at="2026-08-19T15:05:00Z",
+                market_outcome={"quality_label": "N/A"},
             )
 
     def test_outcome_keeps_prediction_and_quality_separate(self):
