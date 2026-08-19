@@ -4,7 +4,7 @@ Status: DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT
 
 ## What is now closed
 
-The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation, unadmitted knowledge/memory and a final 63-node capability-influence partition:
+The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation, unadmitted knowledge/memory, a 63-node capability-influence partition, and typed admission boundaries for every trading-advisory node.
 
 ```text
 63-node BitEvo federation + route
@@ -46,9 +46,15 @@ bitevo.unified_shadow_closure.v5
 bitevo.shadow_capability_influence_ledger.v1
         ↓
 bitevo.unified_shadow_closure.v6
+        ↓
+9/9 trading-advisory typed receipts
+        ↓
+bitevo.shadow_trading_advisory_ledger.v2
+        ↓
+bitevo.unified_shadow_closure.v8
 ```
 
-Every receipt is hash-bound to the same transaction or immediately preceding closure. Side planes cannot vote or alter the effective decision.
+Every receipt is hash-bound to the same transaction or immediately preceding closure. Side planes cannot vote or widen the effective decision.
 
 ## 63-node influence partition
 
@@ -83,7 +89,53 @@ runtime_proven_by_ledger=false
 
 A subset has a P0 contract boundary, but `contract_bound` is deliberately weaker than source/runtime/deployment proof.
 
-Trading capability projects such as Arb Radar, Grid OS, Delist DRS, Edge Research and legacy bot lines remain `TRADING_ADVISORY_ACCOUNTED` unless a future typed evidence contract explicitly admits them into a decision path. Commercial/service surfaces remain non-voting. The Executor Network is a separate disabled boundary, never a voting agent.
+## Trading advisory plane — complete 9/9 boundary coverage
+
+Every `TRADING_ADVISORY_ACCOUNTED` node now has a typed admission contract:
+
+```text
+Edge Research
+Arb Radar
+Grid OS
+Delist DRS
+Sovereign API / Core Bot
+Claude Bitunix Evidence Lane
+BTCUSDT Binance Futures Bot
+Confluence Trading Bot
+MAX+BitEvo Trading Tools
+```
+
+Project-specific proof is never enough to influence a frozen case. Every advisory must also satisfy:
+
+```text
+case_relevance_verified=true
+pre_freeze_evidence_verified=true
+```
+
+Therefore:
+
+```text
+historical proof != current-case evidence
+strong evidence about another venue != relevant evidence
+post-freeze evidence != admissible evidence
+registry presence != influence
+```
+
+The current bounded defaults satisfy neither the complete proof sets nor these universal influence conditions, so all nine remain non-influential in P0.
+
+A fully admitted market-relevant risk may only narrow:
+
+```text
+PASS_SHADOW -> HOLD
+```
+
+No advisory can perform:
+
+```text
+HOLD -> PASS_SHADOW
+```
+
+MAX+BitEvo legacy toolkit archaeology is explicitly architecture-only; even a future fully adjudicated toolkit disposition cannot change a frozen market gate by itself.
 
 ## Source identities remain separate
 
@@ -116,6 +168,7 @@ HANRI effective action = WAIT
 research side plane = non-voting
 knowledge/memory candidate = non-voting / unadmitted
 capability bus = preserves HOLD/WAIT
+trading advisory plane = preserves HOLD/WAIT
 ```
 
 ArchiveOS Core, Drive mirror and Archive Tooling remain distinct:
@@ -165,6 +218,8 @@ ContinuityOS derives checkpoint/replay/return candidates only; all writes remain
 model output
 != prediction
 != evidence
+!= case relevance
+!= temporal admissibility
 != source identity
 != registry membership
 != typed influence
@@ -195,6 +250,11 @@ runtime_registration=false
 capability_bus_runtime=false
 capability_vote=false
 capability_effect_authorization=false
+advisory_runtime=false
+advisory_vote=false
+advisory_signal=false
+advisory_order=false
+advisory_capital_effect=false
 experiment_launch=false
 research_publication=false
 simulation_runtime=false
