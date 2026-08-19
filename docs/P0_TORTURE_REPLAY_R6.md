@@ -23,52 +23,22 @@ R4 human reveal
 
 ## TradingOS independent checks
 
-TradingOS independently requires:
-
-- same case id/SHA;
-- same DecisionPacket SHA;
-- same SCT prediction id;
-- same reveal choice and time;
-- same human subject and custody provider policy;
-- exact credential id and public-key digest;
-- exact algorithm and key epoch;
-- exact verifier id/key id;
-- exact origin and RP id;
-- external asymmetric signature-verifier assertion present;
-- `local_signature_math_verified=false`;
-- authenticator user-present and user-verified flags present;
-- credential active/epoch guards present;
-- nonce and challenge unused guards present;
-- exact no-write next credential/nonce registry candidates;
-- no execution authority.
-
-The reveal-intent digest is independently recomputed by TradingOS.
+TradingOS independently requires the same case/packet/Twin/reveal choice/time, human/custody policy, credential/public-key digests, algorithm/key epoch, verifier policy, origin/RP id, external asymmetric-verifier assertion, authenticator user-present/user-verified flags, credential/epoch guards, nonce/challenge unused guards and no-write next credential/nonce registry candidates. The reveal-intent digest is independently recomputed.
 
 ## Adversarial matrix
 
-R6 includes attacks against:
+R6 attacks reveal-choice transplant, old key epoch, public-key transplant, wrong origin/RP, substituted nonce-registry digest, locally rehashed approval replacing an independently retained digest, local signature-verification overclaim, physical-presence overclaim, missing nonce/challenge guard and effect smuggling through next registry candidates.
 
-- reveal choice transplant;
-- old key epoch;
-- public-key transplant;
-- wrong origin / RP id;
-- substituted nonce-registry digest;
-- locally rehashed approval replacing an independently retained approval digest;
-- local signature-verification overclaim;
-- physical-presence overclaim;
-- missing nonce/challenge replay guard;
-- effect smuggling through next registry candidates.
-
-Control Center separately tests nonce reuse, used challenge ids, revoked credentials, sign-counter rollback/reuse, epoch mismatch, user-verification absence and assertion effect smuggling.
+Control Center separately attacks nonce reuse, used challenge ids, revoked credentials, sign-counter rollback/reuse, epoch mismatch, missing authenticator user verification and assertion effect smuggling.
 
 ## Evidence ceiling
 
 R6 does not claim local asymmetric signature mathematics. The trusted external verifier remains part of the trust root. A future production path may replace that assertion with independently verified WebAuthn/public-key proof without changing the surrounding case/nonce/key-epoch contracts.
 
-Even a valid asymmetric custody closure remains evidence only:
+Even valid asymmetric custody remains evidence only:
 
-`authenticated reveal != current truth != approval to execute != trade permission`.
+`authenticated reveal != current truth != execution approval != trade permission`.
 
-Fixed ceiling:
+Fresh exact R6 code/workflow head `0bbdf1c8c7dbdca2bd16c11ec173247f9112c808` produced P0 Shadow Verify run `32301131751`, which completed before executable steps were exposed (`steps=null`, no job logs). Classification: `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`. No R6 TradingOS CI PASS is claimed and no manual rerun was requested.
 
-`merge=false`, `deploy=false`, `runtime=false`, `human_gate_write=false`, `credential_registry_write=false`, `nonce_registry_write=false`, `current_truth_apply=false`, `executor=false`, `signal=false`, `order=false`, `can_trade=false`, `capital_permission=DENY`.
+Fixed ceiling: `merge=false`, `deploy=false`, `runtime=false`, `human_gate_write=false`, `credential_registry_write=false`, `nonce_registry_write=false`, `current_truth_apply=false`, `executor=false`, `signal=false`, `order=false`, `can_trade=false`, `capital_permission=DENY`.
