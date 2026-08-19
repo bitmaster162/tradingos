@@ -15,23 +15,28 @@ HANRI freshness + contradiction
         ↓
 ANTI_AMNESIA exact context binding
         ↓
-ContinuityOS / Return / Archive dry-run boundary
+modern ContinuityOS source identity + SCT adapter identity
+        ↓
+Continuity / Return / Archive dry-run boundary
         ↓
 Executor Network hard deny
         ↓
-bitevo.shadow_control_plane_receipt.v1
+bitevo.shadow_control_plane_receipt.v2
         ↓
 bitevo.unified_shadow_transaction.v2
 ```
 
 ## Fresh source bindings used by this P0 fixture
 
-The control-plane fixture is pinned to the fresh GitHub reads performed before this write wave:
+Three identities are deliberately separate:
 
-- Control Center PR #30 head: `9c3f3642211501867b8f089decb3b9b6166de350`;
-- ContinuityOS SCT P0 PR #91 head: `a0a244d40f0a2aa500df45b1f846f0d863a77749`.
+1. Control Center review/control source: PR #30 head `9c3f3642211501867b8f089decb3b9b6166de350`, OPEN / DRAFT / UNMERGED.
+2. Modern ContinuityOS source identity: protected `master@9dfb9e5b847a27113ca7c709a0adee900e3ff63f`, claim ceiling `MODERN_GITHUB_SOURCE_ONLY`.
+3. SCT R13 Trader Twin P0 adapter: PR #91 head `a0a244d40f0a2aa500df45b1f846f0d863a77749`, OPEN / DRAFT / UNMERGED.
 
-Both are required to remain `OPEN / DRAFT / UNMERGED` for this P0 fixture. The receipt rejects a merged or non-draft source because that would silently change the authority meaning of the evidence used by the offline composition proof.
+The SCT adapter is **not** ContinuityOS source authority. Sharing the same repository does not collapse the identities. The control receipt fails closed if the SCT adapter SHA is supplied as the modern ContinuityOS source SHA.
+
+Likewise, modern ContinuityOS repository identity proves neither current host state nor live runtime activation. Historical R52/R57 adoption/preflight evidence is handled by the dedicated ContinuityOS no-write receipt and is not laundered through this source reference.
 
 ## Freshness result
 
@@ -68,6 +73,8 @@ The system can still produce and inspect the offline transaction. It cannot prom
 - Stale authority evidence forces `HOLD`.
 - Any explicit control conflict forces `HOLD` even if freshness is otherwise valid.
 - `ANTI_AMNESIA` binds the exact TradeCase hash, DecisionPacket hash and context hash.
+- Modern ContinuityOS source identity is distinct from the SCT adapter identity.
+- Repository identity does not prove live host state.
 - Control Center projection apply is always `false` in P0.
 - Command Queue, Decision Ledger and Human Gate are not mutated.
 - Continuity event append, checkpoint write, replay write, Return write and Archive write are all `false`.
@@ -84,13 +91,14 @@ The P0 system now demonstrates a stronger separation:
 model output
 != prediction
 != evidence
+!= source identity
 != current truth
 != authority
 != permission
 != effect
 ```
 
-A capable model can participate in a decision transaction while stale authority, unresolved conflict or a failed continuity binding still prevents the transaction from crossing the control boundary.
+A capable model can participate in a decision transaction while stale authority, unresolved conflict, source-identity confusion or a failed continuity binding still prevents the transaction from crossing the control boundary.
 
 ## No-effect ceiling
 
