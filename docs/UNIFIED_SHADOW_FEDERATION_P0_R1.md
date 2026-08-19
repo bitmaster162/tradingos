@@ -4,15 +4,40 @@ Status: DRAFT CANDIDATE / OFFLINE E2E / SHADOW ONLY / NO ACTION
 
 ## Thesis
 
-The portfolio is one federated system, not one monolith.
+The BitEvo portfolio is one federated system, not one monolith.
 
-A single decision transaction may cross shared governance, evidence, cognition, simulation and domain-intelligence planes while each subsystem retains its own identity, provenance, authority and release lifecycle.
+A decision transaction may cross governance, evidence, continuity, cognition, simulation and domain-intelligence planes while each subsystem retains its own identity, provenance, authority and release lifecycle.
 
 `registered in the federation != live runtime invoked`
 
 `active shadow contribution != execution permission`
 
 `one federation != one authority root`
+
+`portfolio line != logical entity`
+
+`alias != entity identity`
+
+## Two registry views are mandatory
+
+P0 no longer uses a hand-picked project list.
+
+The federation preserves two distinct views:
+
+1. **exact 44-line project-management candidate** — all action-order rows `1..44` from the current evidence-bounded project gate registry;
+2. **extended System Universe** — important entities/families/components that cannot safely be flattened into those 44 lines.
+
+The 44-line source is explicitly a `NON_AUTHORITY_PLANNING_CANDIDATE`. P0 preserves it for coverage and identity; it does not promote its historical status claims to current truth.
+
+Extended entities are namespaced separately. For example:
+
+```text
+portfolio:return-plane-v2
+!=
+entity:return_broker
+```
+
+until an exact relation is independently proven. This prevents alias laundering and silent architectural merges.
 
 ## Global planes
 
@@ -21,92 +46,104 @@ ROBERT / HUMAN SOVEREIGN
   ↓
 BitEvo Universe Hub / Work Cockpit / Unified Dashboard
   ↓
-Control Center
+Control Center / State Authority Plane
   ↓
 CORE v6.3 + ANTI_AMNESIA_GATE
   ↓
-HANRI freshness/conflict/attention
+HANRI freshness / contradiction / attention
   ↓
-ContinuityOS event/replay layer
-  ↔ ArchiveOS / Archive Tooling / Knowledge Lab
-  ↔ Return Broker
+ContinuityOS event / checkpoint / replay layer
+  ↔ ArchiveOS Core / Archive Tooling / Knowledge Lab
+  ↔ Return Plane V2 / Return Broker
+  ↔ Typed Operational Memory / Archive-to-Core
   ↓
 LifeOS / BitEvo Runtime / MIND / PFI-Brain-Fabric
   ↓
-MAWorld / Pandora / Fable Observer
+MAWorld / Pandora / Fable / Sovereign Arena
   ↓
-Domain capability router
+System Universe capability router
   ├─ TradingOS
   ├─ VisionAssist
   ├─ SCT
   ├─ TRIAXIS
-  ├─ Sovereign Arena
-  ├─ Edge Research Lab
-  ├─ Grid OS
+  ├─ Edge Research / BTC Pressure Lab
+  ├─ Grid OS / Grid Mirror
   ├─ Arb Radar
-  ├─ Delist DRS
-  └─ Sovereign API
+  ├─ Delist EWS / DRS
+  ├─ Sovereign API / Sovereign-Core
+  ├─ historical BTC / Confluence / MAX trading lines
+  └─ bounded research/commercial/legacy capabilities
   ↓
 Executor Network boundary (DISABLED FOR P0 EFFECTS)
   ↓
 Outcome / evidence / replay back into federation
 ```
 
-Commercial, historical and unrelated product lines remain registered in the same Universe registry but are capability-routed as `REGISTERED_ONLY`, `NOT_APPLICABLE`, `UNRESOLVED_FAMILY` or `PARKED` for an individual trading case. This is intentional: forcing AI Skill Lab, Amora or OKX NFT Bot to vote on a BTC trade would be architecture theatre rather than integration.
+## Capability routing, not architecture theatre
+
+Every known node is accounted for, but not every node should reason about every case.
+
+For a BTC trading case the registry uses:
+
+- `ACTIVE_SHADOW` — participates in the offline composition contract;
+- `REGISTERED_ONLY` — part of the one-system universe but not invoked for this case;
+- `NOT_APPLICABLE` — valid system/product, wrong capability for this case;
+- `UNRESOLVED_FAMILY` — identity/boundary not sufficiently resolved;
+- `PARKED` — explicitly inactive/historical.
+
+Thus OpenClaw, Crypto Guides, AI-Agent Reliability Audit, DTaaP, old BTC/Confluence/MAX bots, AXIOM, NFT systems, commercial services and parked projects do not disappear from the system map. They are explicitly accounted for without being falsely presented as live trading voters.
 
 ## Trading shadow transaction
 
 ```text
-ArchiveOS / Knowledge Lab / ContinuityOS
-       evidence + history
-             ↓
-VisionAssist → visual evidence ─────┐
-TradingOS → frozen market case ─────┼─→ SCT predicts HUMAN decision
-Grid/Arb/Delist/Edge/Arena context ─┤
-MIND/PFI/LifeOS operator context ───┘
-             ↓
-TradingOS thesis
-             ↓
+ArchiveOS / Knowledge Lab / ContinuityOS / Memory
+       evidence + history + provenance
+                    ↓
+VisionAssist → visual evidence ───────────┐
+TradingOS → frozen market case ───────────┼─→ SCT predicts HUMAN decision
+Grid / Arb / Delist / Edge / Arena ───────┤
+MIND / PFI / LifeOS operator context ─────┘
+                    ↓
+              TradingOS thesis
+                    ↓
 TRIAXIS ANGEL / DEVIL / TRIALECTIC / EVIDENCE AUDIT
-             ↓
-HANRI freshness/conflict check
-             ↓
+                    ↓
+HANRI freshness / contradiction view
+                    ↓
 CORE + ANTI_AMNESIA + Risk fail-closed gates
-             ↓
-TradeDecisionPacket
-             ↓
+                    ↓
+             TradeDecisionPacket
+                    ↓
 Control Center shadow current-truth projection
-             ↓
-Universe / Work Cockpit
-             ↓
-Human reveal
-             ↓
-Outcome receipt
-             ↓
-ContinuityOS / Return Broker / ArchiveOS replayable evidence
+                    ↓
+Universe Hub / Dashboard / Work Cockpit
+                    ↓
+                Human reveal
+                    ↓
+               Outcome receipt
+                    ↓
+ContinuityOS / Return plane / ArchiveOS replayable evidence
 ```
 
 No component above obtains execution authority in P0.
 
-## Registry coverage
+## Exact portfolio coverage
 
-`tools/unified_shadow_federation.py` contains an evidence-bounded registry spanning:
+The 44-line view includes all of the following families rather than only the current trading stack:
 
-- authority/governance;
-- continuity/evidence/transport;
-- functional continuity and cognitive habitat;
-- visual/simulation/review systems;
-- SCT and TRIAXIS;
-- live trading/research product systems;
-- commercial surfaces;
-- parked/historical lines;
-- future Physical AI / Cosmos line.
+- Control Center, ANTI_AMNESIA, Return Plane, ContinuityOS, ArchiveOS, Archive Tooling, State Authority, Dashboard, Knowledge Lab, Work Cockpit, HANRI, BitEvo Runtime, Reflex;
+- TradingOS, Parasite-Killer/OKX NFT, Sovereign API/Core, Arb Radar, Sovereign Arena, Grid OS, Delist DRS, MAWorld, BitEvo Portal, Crypto Guides, Inner Circle;
+- OpenClaw, Arbiter Content Engine, DTaaP, Sovereign Agent Core, GPT-S:CORE SDK;
+- Edge Research, VisionAssist, Claude Bitunix evidence lane, AXIOM/Parasite Hunter;
+- Operator Decision Sprint, AI-Agent Reliability Audit, AI Client Hunter, Blockchain Forensics;
+- BTCUSDT Binance Bot, Confluence Trading Bot, MAX+BitEvo Trading Tools, Fable Observer;
+- Amora, $AMORA and RTF/StarCoin.
 
-The federation receipt fails closed if any registered node disappears from the transaction accounting. It separately records which systems are active for the trade case and which are merely registered, not applicable, unresolved or parked.
+The extended view additionally carries Universe Hub, CORE v6.3, Return Broker, LifeOS, Pandora, Sim-OS predecessor, Forge/Foundry, MIND, PFI/Brain/Fabric, Knowledge Foundry, Executor Network, Physical AI/Cosmos, Durable Memory Kernel, System Universe Registry, SCT, TRIAXIS, Typed Operational Memory, Archive-to-Core and Human Coevolution.
 
 ## Offline E2E proof target
 
-The P0 E2E is intentionally a protocol-composition proof, not a claim that every external runtime has been invoked.
+The P0 E2E is a **protocol-composition proof**, not a claim that every external runtime has been invoked.
 
 A valid fixture must prove:
 
@@ -116,10 +153,13 @@ A valid fixture must prove:
 4. TradingOS thesis;
 5. TRIAXIS audit request and adjudication;
 6. risk/CORE fail-closed decision packet;
-7. full federation registry accounting;
-8. human reveal;
-9. Twin fidelity separated from trade PnL/advisor agreement;
-10. global safety remains `SHADOW / NONE / false / DENY`.
+7. exact 44/44 portfolio accounting;
+8. extended-universe accounting without alias flattening;
+9. human reveal;
+10. Twin fidelity separated from trade PnL/advisor agreement;
+11. global safety remains `SHADOW / NONE / false / DENY`.
+
+The receipt fails closed if any registry node disappears or if an `ACTIVE_SHADOW` core node is silently downgraded.
 
 ## P0 effect ceiling
 
@@ -137,4 +177,4 @@ capital_permission=DENY
 execution_authority=NONE
 ```
 
-Any future transition from protocol composition to actual cross-runtime orchestration requires separate repository-specific baselines, CI, interface receipts and a new explicit owner gate.
+Any transition from protocol composition to actual cross-runtime orchestration requires repository-specific fresh baselines, interface receipts, CI and a new explicit owner gate.
