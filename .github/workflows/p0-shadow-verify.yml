@@ -22,7 +22,7 @@ jobs:
           python-version: '3.11'
       - name: Compile shadow modules
         run: |
-          python -m py_compile tools/tradingos_shadow_integration.py tools/unified_shadow_federation.py tools/unified_shadow_router.py tools/unified_shadow_control_plane.py tools/unified_shadow_transaction.py
-      - name: Run P0 shadow integration and full-system federation tests
+          python -m py_compile tools/tradingos_shadow_integration.py tools/unified_shadow_federation.py tools/unified_shadow_router.py tools/unified_shadow_control_plane.py tools/unified_shadow_transaction.py tools/unified_shadow_closure.py
+      - name: Run P0 shadow integration and full-system closure tests
         run: |
-          python -m unittest tests.test_tradingos_shadow_integration tests.test_unified_shadow_federation tests.test_unified_shadow_router tests.test_unified_shadow_control_plane tests.test_unified_shadow_transaction -v
+          python -m unittest tests.test_tradingos_shadow_integration tests.test_unified_shadow_federation tests.test_unified_shadow_router tests.test_unified_shadow_control_plane tests.test_unified_shadow_transaction tests.test_unified_shadow_closure -v
