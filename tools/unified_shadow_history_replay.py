@@ -213,6 +213,20 @@ def build_history_replay_verification(
             raise ShadowIntegrationError("history_next_ledger_event_count_mismatch")
         if events[-1].get("event_sha256") != event_sha:
             raise ShadowIntegrationError("history_next_ledger_last_event_mismatch")
+        if final_ledger is None:
+            if tuple(events[:-1]) != ():
+                raise ShadowIntegrationError("history_initial_ledger_prefix_not_empty")
+        elif tuple(events[:-1]) != tuple(final_ledger.get("events") or ()):
+            raise ShadowIntegrationError("history_ledger_prefix_rewrite_detected")
+        expected_reveals = sum(1 for item in [*seen_types, event_type] if item == "HUMAN_REVEAL")
+        expected_outcomes = sum(1 for item in [*seen_types, event_type] if item == "OUTCOME_RECEIPT")
+        expected_returns = sum(1 for item in [*seen_types, event_type] if item == "RETURN_INTAKE")
+        if next_ledger.get("human_reveal_count") != expected_reveals:
+            raise ShadowIntegrationError("history_next_ledger_reveal_count_mismatch")
+        if next_ledger.get("outcome_count") != expected_outcomes:
+            raise ShadowIntegrationError("history_next_ledger_outcome_count_mismatch")
+        if next_ledger.get("return_intake_count") != expected_returns:
+            raise ShadowIntegrationError("history_next_ledger_return_count_mismatch")
         if next_ledger.get("write_allowed") is not False or next_ledger.get("apply_allowed") is not False:
             raise ShadowIntegrationError("history_next_ledger_effect_boundary_breached")
 
