@@ -9,10 +9,12 @@ from tools.unified_shadow_transaction import TRANSACTION_SCHEMA
 CONTINUITY_RECEIPT_SCHEMA = "continuityos.shadow_continuity_receipt.v1"
 RETURN_INTAKE_SCHEMA = "control_return_broker.shadow_intake_receipt.v1"
 CONTROL_PROJECTION_SCHEMA = "control_center.unified_shadow_projection.v1"
-CLOSURE_SCHEMA = "bitevo.unified_shadow_closure.v2"
+HANRI_RECEIPT_SCHEMA = "hanri.shadow-evidence-governor.receipt/v1"
+CLOSURE_SCHEMA = "bitevo.unified_shadow_closure.v3"
 
 _EXPECTED_NODE_COUNT = 63
 _EXPECTED_CONTINUITY_HEAD = "9dfb9e5b847a27113ca7c709a0adee900e3ff63f"
+_EXPECTED_HANRI_HEAD = "ef5c504179de8ae8c16bd70c168b14b79bd2f466"
 
 
 def _verify_hash(record: Mapping[str, Any], field: str, code: str) -> str:
@@ -136,25 +138,85 @@ def _verify_control_projection(
     return _verify_hash(projection, "projection_sha256", "closure_control_projection_hash_mismatch")
 
 
+def _verify_hanri_receipt(receipt: Mapping[str, Any], tx_sha: str, upstream_gate: str) -> tuple[str, str, str]:
+    if not isinstance(receipt, Mapping) or receipt.get("schema") != HANRI_RECEIPT_SCHEMA:
+        raise ShadowIntegrationError("closure_wrong_hanri_schema")
+    if receipt.get("source_transaction_sha256") != tx_sha:
+        raise ShadowIntegrationError("closure_hanri_transaction_mismatch")
+    _verify_safety(receipt, "hanri")
+
+    source = receipt.get("hanri_source", {})
+    if source.get("head_sha") != _EXPECTED_HANRI_HEAD:
+        raise ShadowIntegrationError("closure_hanri_source_head_mismatch")
+    if source.get("authority_root") is not False or source.get("can_promote_self") is not False:
+        raise ShadowIntegrationError("closure_hanri_authority_overclaim")
+
+    archive = receipt.get("archiveos", {})
+    if archive.get("status") not in {"PASS", "BLOCKED_REVERIFY"}:
+        raise ShadowIntegrationError("closure_archiveos_status_invalid")
+    if archive.get("drive_role") != "MIRROR_EVIDENCE_ONLY":
+        raise ShadowIntegrationError("closure_archiveos_drive_role_widened")
+
+    tooling = receipt.get("archive_tooling", {})
+    if tooling.get("authoritative_archive_engine") is not False:
+        raise ShadowIntegrationError("closure_archive_tooling_engine_overclaim")
+    if tooling.get("semantic_acceptance_authority") is not False:
+        raise ShadowIntegrationError("closure_archive_tooling_acceptance_overclaim")
+
+    knowledge = receipt.get("knowledge_memory", {})
+    for key in ("durable_memory_write", "project_canon_write", "current_truth_write"):
+        if knowledge.get(key) is not False:
+            raise ShadowIntegrationError(f"closure_knowledge_memory_write_breached:{key}")
+    if knowledge.get("claim_admission") != "NOT_PERFORMED":
+        raise ShadowIntegrationError("closure_knowledge_claim_admission_overclaim")
+    if knowledge.get("memory_is_permission") is not False:
+        raise ShadowIntegrationError("closure_memory_permission_overclaim")
+
+    effects = receipt.get("effects")
+    if not isinstance(effects, Mapping) or any(value is not False for value in effects.values()):
+        raise ShadowIntegrationError("closure_hanri_effect_boundary_breached")
+
+    governor = receipt.get("governor", {})
+    gate = governor.get("gate")
+    action = governor.get("action")
+    if gate not in {"PASS_SHADOW", "HOLD"}:
+        raise ShadowIntegrationError("closure_hanri_gate_invalid")
+    if gate == "HOLD" and action != "WAIT":
+        raise ShadowIntegrationError("closure_hanri_hold_must_wait")
+    if upstream_gate == "HOLD" and gate != "HOLD":
+        raise ShadowIntegrationError("closure_hanri_cannot_widen_upstream_hold")
+    if governor.get("promotion_eligible") is not False or governor.get("auto_promotion") is not False:
+        raise ShadowIntegrationError("closure_hanri_promotion_overclaim")
+
+    receipt_sha = _verify_hash(receipt, "hanri_receipt_sha256", "closure_hanri_hash_mismatch")
+    return receipt_sha, str(gate), str(action)
+
+
 def build_unified_shadow_closure(
     transaction: Mapping[str, Any],
     continuity_receipt: Mapping[str, Any],
     return_intake_receipt: Mapping[str, Any],
     control_projection: Mapping[str, Any],
+    hanri_receipt: Mapping[str, Any],
     *,
     closed_at: str,
 ) -> dict[str, Any]:
-    """Close one P0 shadow decision across composition, continuity, transport and authority planes."""
+    """Close one P0 shadow decision across composition, continuity, transport, authority and evidence-governor planes."""
     tx_sha = _verify_transaction(transaction)
-    gate = str(transaction.get("control_gate"))
-    action = str(transaction.get("control_plane_action"))
-    continuity_sha = _verify_continuity(continuity_receipt, tx_sha, gate)
+    upstream_gate = str(transaction.get("control_gate"))
+    upstream_action = str(transaction.get("control_plane_action"))
+    continuity_sha = _verify_continuity(continuity_receipt, tx_sha, upstream_gate)
     return_sha = _verify_return_intake(return_intake_receipt, tx_sha, continuity_sha)
     projection_sha = _verify_control_projection(
         control_projection,
         tx_sha,
-        control_gate=gate,
-        control_action=action,
+        control_gate=upstream_gate,
+        control_action=upstream_action,
+    )
+    hanri_sha, effective_gate, effective_action = _verify_hanri_receipt(
+        hanri_receipt,
+        tx_sha,
+        upstream_gate,
     )
 
     body = {
@@ -165,15 +227,21 @@ def build_unified_shadow_closure(
         "continuity_receipt_sha256": continuity_sha,
         "return_intake_sha256": return_sha,
         "control_projection_sha256": projection_sha,
+        "hanri_receipt_sha256": hanri_sha,
         "registered_node_count": transaction["registered_node_count"],
-        "control_gate": gate,
-        "control_plane_action": action,
+        "upstream_control_gate": upstream_gate,
+        "upstream_control_action": upstream_action,
+        "effective_gate": effective_gate,
+        "effective_action": effective_action,
         "status": "P0_SHADOW_CLOSED_NO_EFFECT",
         "planes": {
             "composition": "BOUND",
             "continuity": "BOUND_READ_ONLY",
             "return_transport": "BOUND_READ_ONLY_PHYSICAL",
             "authority_projection": "BOUND_NON_AUTHORITY",
+            "hanri_evidence_governor": "BOUND_NON_AUTHORITY_FAIL_CLOSED",
+            "archiveos": "BOUND_EVIDENCE_STATUS_ONLY",
+            "knowledge_memory": "BOUND_NO_ADMISSION_NO_WRITE",
             "executor": "DISABLED",
         },
         "effect_summary": {
@@ -181,6 +249,7 @@ def build_unified_shadow_closure(
             "deploy": False,
             "runtime_activation": False,
             "current_truth_apply": False,
+            "knowledge_or_memory_write": False,
             "memory_or_checkpoint_write": False,
             "return_or_archive_write": False,
             "external_model_call": False,
@@ -195,6 +264,9 @@ def build_unified_shadow_closure(
             "continuity_candidate_is_not_canonical_state": True,
             "return_physical_pass_is_not_semantic_acceptance": True,
             "control_projection_is_not_current_truth": True,
+            "hanri_can_narrow_but_not_widen_upstream_gate": True,
+            "archive_custody_is_not_claim_admission": True,
+            "durable_memory_is_not_current_truth": True,
             "registered_system_is_not_invoked_runtime": True,
             "executor_remains_separate_and_disabled": True,
         },
