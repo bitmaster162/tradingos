@@ -63,8 +63,10 @@ class UnifiedShadowFederationTests(unittest.TestCase):
             evidence_refs=["snapshot:unified-001", "market:shadow-req-001"],
         )
         self.twin = {
-            "schema": "sct.prediction/v2",
+            "schema": "sct.prediction/v3",
             "prediction_id": "pred-unified-001",
+            "predicted_choice": "LONG",
+            "confidence": 0.68,
             "option_probabilities": {"LONG": 0.68, "SHORT": 0.07, "WAIT": 0.25},
             "execution_authority": "NONE",
             "can_execute": False,
@@ -93,7 +95,7 @@ class UnifiedShadowFederationTests(unittest.TestCase):
         return build_unified_shadow_receipt(
             self.case,
             self.packet,
-            contributions or self._contributions(),
+            contributions if contributions is not None else self._contributions(),
             generated_at="2026-08-19T16:05:00Z",
         )
 
@@ -112,11 +114,13 @@ class UnifiedShadowFederationTests(unittest.TestCase):
         self.assertTrue(receipt["semantic_boundaries"]["one_federation_does_not_collapse_subsystem_ownership"])
         self.assertTrue(receipt["semantic_boundaries"]["portfolio_44_is_planning_candidate_not_authority"])
 
-        # SCT predicts Robert's action while TRIAXIS independently blocks the thesis.
+        # SCT predicts the human action while TRIAXIS independently blocks the thesis.
         self.assertEqual(self.packet["twin"]["predicted_choice"], "LONG")
+        self.assertEqual(self.packet["twin"]["schema"], "sct.prediction/v3")
         self.assertEqual(self.packet["system_recommendation"], "WAIT")
         self.assertTrue(self.packet["divergence"])
         self.assertEqual(self.audit_request["execution_authority"], "NONE")
+        self.assertFalse(self.audit_request["constraints"]["countermodel_default"])
 
         outcome = build_trade_outcome_receipt(
             self.packet,
@@ -181,6 +185,10 @@ class UnifiedShadowFederationTests(unittest.TestCase):
         contributions.pop()
         with self.assertRaisesRegex(ShadowIntegrationError, "federation_registry_coverage_mismatch"):
             self._receipt(contributions)
+
+    def test_empty_registry_does_not_silently_fall_back_to_defaults(self):
+        with self.assertRaisesRegex(ShadowIntegrationError, "federation_registry_coverage_mismatch"):
+            self._receipt([])
 
     def test_active_core_node_cannot_be_silently_downgraded(self):
         contributions = list(self._contributions())
