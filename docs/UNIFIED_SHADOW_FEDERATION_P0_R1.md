@@ -24,8 +24,10 @@ P0 no longer uses a hand-picked project list.
 
 The federation preserves two distinct views:
 
-1. **exact 44-line project-management candidate** — all action-order rows `1..44` from the current evidence-bounded project gate registry;
-2. **extended System Universe** — important entities/families/components that cannot safely be flattened into those 44 lines.
+1. **exact 44-line project-management candidate** — all action-order rows `1..44` from the evidence-bounded project gate registry;
+2. **extended System Universe** — 19 important entities/families/components that cannot safely be flattened into those 44 lines.
+
+The P0 registry therefore accounts for **63 namespaced nodes** in total. This is coverage, not a claim that 63 runtimes were invoked.
 
 The 44-line source is explicitly a `NON_AUTHORITY_PLANNING_CANDIDATE`. P0 preserves it for coverage and identity; it does not promote its historical status claims to current truth.
 
@@ -100,13 +102,17 @@ ArchiveOS / Knowledge Lab / ContinuityOS / Memory
        evidence + history + provenance
                     ↓
 VisionAssist → visual evidence ───────────┐
-TradingOS → frozen market case ───────────┼─→ SCT predicts HUMAN decision
+TradingOS → frozen market case ───────────┼─→ SCT R13 predicts HUMAN decision
 Grid / Arb / Delist / Edge / Arena ───────┤
 MIND / PFI / LifeOS operator context ─────┘
                     ↓
               TradingOS thesis
                     ↓
-TRIAXIS ANGEL / DEVIL / TRIALECTIC / EVIDENCE AUDIT
+TRIAXIS strongest support → direct falsification
+                    ↓
+optional countermodel ONLY if direct evidence leaves competing explanations
+                    ↓
+TRIALECTIC SURVIVORS + EVIDENCE AUDIT
                     ↓
 HANRI freshness / contradiction view
                     ↓
@@ -126,6 +132,10 @@ ContinuityOS / Return plane / ArchiveOS replayable evidence
 ```
 
 No component above obtains execution authority in P0.
+
+TRIAXIS remains an independent contestant/auditor, not an oracle. Persona-style ANGEL/DEVIL debate is not treated as mandatory implementation; direct evidence falsification is the default adversarial mechanism and the countermodel remains default-off.
+
+SCT is bound to current R13 `sct.prediction/v3`. A top-probability tie remains a tie (`predicted_choice=None`); TradingOS does not invent a lexicographic winner, and Twin fidelity is then unscorable for that case.
 
 ## Exact portfolio coverage
 
@@ -149,14 +159,14 @@ A valid fixture must prove:
 
 1. exact frozen TradeCase;
 2. VisionAssist-compatible hash-bound evidence reference;
-3. SCT prediction with `execution_authority=NONE`;
+3. current SCT R13 v3 prediction with `execution_authority=NONE`;
 4. TradingOS thesis;
-5. TRIAXIS audit request and adjudication;
+5. TRIAXIS evidence-first audit request and adjudication;
 6. risk/CORE fail-closed decision packet;
 7. exact 44/44 portfolio accounting;
-8. extended-universe accounting without alias flattening;
+8. 19-node extended-universe accounting without alias flattening;
 9. human reveal;
-10. Twin fidelity separated from trade PnL/advisor agreement;
+10. Twin fidelity separated from human/advisor divergence and trade PnL;
 11. global safety remains `SHADOW / NONE / false / DENY`.
 
 The receipt fails closed if any registry node disappears or if an `ACTIVE_SHADOW` core node is silently downgraded.
