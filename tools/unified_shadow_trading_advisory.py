@@ -6,15 +6,27 @@ from typing import Any, Mapping
 from tools.tradingos_shadow_integration import SHADOW_SAFETY, ShadowIntegrationError, sha256_obj
 
 BASE_CLOSURE_SCHEMA = "bitevo.unified_shadow_closure.v6"
-ADVISORY_LEDGER_SCHEMA = "bitevo.shadow_trading_advisory_ledger.v1"
-ADVISORY_RECEIPT_SCHEMA = "bitevo.shadow_trading_advisory_receipt.v1"
+ADVISORY_LEDGER_SCHEMA = "bitevo.shadow_trading_advisory_ledger.v2"
+ADVISORY_RECEIPT_SCHEMA = "bitevo.shadow_trading_advisory_receipt.v2"
 
+# Every trading-advisory node in the 63-node federation now has one typed admission boundary.
 ADVISORY_NODES = (
     "portfolio:edge-research-lab",
     "portfolio:arb-radar",
     "portfolio:grid-os",
     "portfolio:delist-drs",
     "portfolio:sovereign-api-core-bot",
+    "portfolio:claude-bitunix",
+    "portfolio:btcusdt-binance-bot",
+    "portfolio:confluence-trading-bot",
+    "portfolio:max-bitevo-pack",
+)
+
+# These are required for *influence*, regardless of how strong a project's own evidence is.
+# This blocks an unrelated or post-freeze advisory artifact from affecting a frozen TradeCase.
+GLOBAL_INFLUENCE_FIELDS = (
+    "case_relevance_verified",
+    "pre_freeze_evidence_verified",
 )
 
 ADVISORY_SPECS: dict[str, dict[str, Any]] = {
@@ -29,6 +41,8 @@ ADVISORY_SPECS: dict[str, dict[str, Any]] = {
         ),
         "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
         "allowed_outcomes": {"KEEP", "KILL", "INSUFFICIENT_DATA", "UNRESOLVED"},
+        "outcome_narrows": {"KILL", "INSUFFICIENT_DATA"},
+        "risk_flag_can_narrow": True,
     },
     "portfolio:arb-radar": {
         "role": "READ_ONLY_ARBITRAGE_FUNDING_CARRY_EVIDENCE",
@@ -43,6 +57,8 @@ ADVISORY_SPECS: dict[str, dict[str, Any]] = {
         ),
         "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
         "allowed_outcomes": {"KEEP", "REPAIR", "HOLD", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        "risk_flag_can_narrow": True,
     },
     "portfolio:grid-os": {
         "role": "PAPER_ONLY_GRID_POLICY_AND_EVIDENCE",
@@ -57,6 +73,8 @@ ADVISORY_SPECS: dict[str, dict[str, Any]] = {
         ),
         "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
         "allowed_outcomes": {"KEEP", "REVISE_POLICY", "HOLD", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        "risk_flag_can_narrow": True,
     },
     "portfolio:delist-drs": {
         "role": "EXPLAINABLE_CONTINUITY_RISK_MONITORING",
@@ -71,6 +89,8 @@ ADVISORY_SPECS: dict[str, dict[str, Any]] = {
         ),
         "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
         "allowed_outcomes": {"KEEP_EXISTING", "REPAIR", "MERGE", "KILL", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        "risk_flag_can_narrow": True,
     },
     "portfolio:sovereign-api-core-bot": {
         "role": "READ_ONLY_API_FACADE_STATUS_PROVENANCE_EXPORT",
@@ -85,6 +105,74 @@ ADVISORY_SPECS: dict[str, dict[str, Any]] = {
         ),
         "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
         "allowed_outcomes": {"KEEP_INTERNAL_API", "MERGE", "REPLACE", "HOLD", "ARCHIVE", "KILL", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        "risk_flag_can_narrow": True,
+    },
+    "portfolio:claude-bitunix": {
+        "role": "PUBLIC_READ_ONLY_VENUE_OPERATIONAL_EVIDENCE",
+        "current_posture": "BOUNDED_PUBLIC_OBSERVATION_NOT_COMPLETED",
+        "required_bool_fields": (
+            "explicit_user_dispatch_verified",
+            "frozen_observation_protocol_verified",
+            "bounded_observation_completed",
+            "public_endpoint_semantics_verified",
+            "freshness_completeness_verified",
+            "sealed_observation_receipt_verified",
+        ),
+        "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
+        "allowed_outcomes": {"PASS_SHADOW", "HOLD", "FAIL", "UNRESOLVED"},
+        "outcome_narrows": {"HOLD", "FAIL"},
+        "risk_flag_can_narrow": True,
+    },
+    "portfolio:btcusdt-binance-bot": {
+        "role": "HISTORICAL_BTCUSDT_RESEARCH_COMPONENT_CANDIDATE",
+        "current_posture": "HISTORICAL_CANDIDATE_RECAPTURE_REQUIRED",
+        "required_bool_fields": (
+            "source_identity_verified",
+            "market_data_semantics_versioned",
+            "fill_realism_validated",
+            "strategy_execution_risk_separated",
+            "forward_paper_protocol_verified",
+            "independent_replay_verified",
+        ),
+        "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
+        "allowed_outcomes": {"PRESERVE_RESEARCH_COMPONENTS", "RECAPTURE_AND_TEST", "ARCHIVE", "KILL", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        "risk_flag_can_narrow": True,
+    },
+    "portfolio:confluence-trading-bot": {
+        "role": "HISTORICAL_CONFLUENCE_HYPOTHESIS_FALSIFICATION_CANDIDATE",
+        "current_posture": "HISTORICAL_CANDIDATE_UNADJUDICATED",
+        "required_bool_fields": (
+            "source_identity_verified",
+            "hypothesis_layers_explicit",
+            "correlation_double_count_controls_verified",
+            "preregistered_ablation_verified",
+            "explicit_invalidation_verified",
+            "cost_fill_timestamp_controls_verified",
+            "true_forward_evidence_verified",
+        ),
+        "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
+        "allowed_outcomes": {"KEEP_AS_RESEARCH_HYPOTHESIS", "MERGE_INTO_EDGE_LAB", "REVISE", "ARCHIVE", "KILL", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        "risk_flag_can_narrow": True,
+    },
+    "portfolio:max-bitevo-pack": {
+        "role": "LEGACY_TOOLKIT_COMPONENT_ARCHAEOLOGY",
+        "current_posture": "SOURCE_RECAPTURE_REQUIRED",
+        "required_bool_fields": (
+            "source_recapture_manifest_verified",
+            "component_inventory_verified",
+            "dependency_security_audit_verified",
+            "overlap_map_verified",
+            "reproducibility_evidence_verified",
+            "component_level_adjudication_verified",
+        ),
+        "allowed_findings": {"NO_OBJECTION", "RISK_FLAG", "STALE_OR_UNKNOWN"},
+        "allowed_outcomes": {"CONSOLIDATE", "PRESERVE_COMPONENTS", "HOLD", "ARCHIVE", "KILL", "UNRESOLVED"},
+        "outcome_narrows": set(),
+        # Toolkit archaeology can influence architecture disposition, not a frozen market decision.
+        "risk_flag_can_narrow": False,
     },
 }
 
@@ -121,8 +209,12 @@ def _verify_base_closure(closure: Mapping[str, Any]) -> tuple[str, str, str, str
     return str(closure["closure_sha256"]), str(closure.get("transaction_sha256")), gate, action
 
 
+def _all_required_fields(spec: Mapping[str, Any]) -> tuple[str, ...]:
+    return tuple(GLOBAL_INFLUENCE_FIELDS) + tuple(spec["required_bool_fields"])
+
+
 def build_default_trading_advisory_evidence() -> dict[str, dict[str, Any]]:
-    """Return the bounded current P0 posture without pretending current source/runtime proof exists."""
+    """Return bounded P0 postures without pretending current source/runtime/case-relevance proof exists."""
     defaults: dict[str, dict[str, Any]] = {}
     for node_id, spec in ADVISORY_SPECS.items():
         row = {
@@ -133,12 +225,14 @@ def build_default_trading_advisory_evidence() -> dict[str, dict[str, Any]]:
             "outcome": "UNRESOLVED",
             "source_identity_verified": False,
             "runtime_verified": False,
+            "case_relevance_verified": False,
+            "pre_freeze_evidence_verified": False,
             "effectful_surface_enabled": False,
             "trade_signal_emitted": False,
             "order_emitted": False,
             "capital_effect": False,
         }
-        for field in spec["required_bool_fields"]:
+        for field in _all_required_fields(spec):
             row.setdefault(field, False)
         defaults[node_id] = row
     return defaults
@@ -178,13 +272,14 @@ def _build_receipt(
 ) -> dict[str, Any]:
     spec = ADVISORY_SPECS[node_id]
     normalized = _normalize_evidence(node_id, evidence)
-    missing = tuple(field for field in spec["required_bool_fields"] if normalized.get(field) is not True)
+    required_fields = _all_required_fields(spec)
+    missing = tuple(field for field in required_fields if normalized.get(field) is not True)
     admitted = not missing
 
     gate_effect = "NONE"
-    if admitted and normalized["finding"] == "RISK_FLAG":
+    if admitted and spec["risk_flag_can_narrow"] and normalized["finding"] == "RISK_FLAG":
         gate_effect = "NARROW_TO_HOLD"
-    if admitted and node_id == "portfolio:edge-research-lab" and normalized["outcome"] in {"KILL", "INSUFFICIENT_DATA"}:
+    if admitted and normalized["outcome"] in spec["outcome_narrows"]:
         gate_effect = "NARROW_TO_HOLD"
 
     body = {
@@ -197,9 +292,11 @@ def _build_receipt(
         "current_posture": str(normalized.get("current_posture", spec["current_posture"])),
         "finding": normalized["finding"],
         "outcome": normalized["outcome"],
-        "required_proof_fields": tuple(spec["required_bool_fields"]),
+        "required_proof_fields": required_fields,
         "missing_proof_fields": missing,
         "typed_contract_bound": True,
+        "case_relevance_verified": normalized.get("case_relevance_verified") is True,
+        "pre_freeze_evidence_verified": normalized.get("pre_freeze_evidence_verified") is True,
         "admitted_for_narrowing": admitted,
         "gate_effect": gate_effect,
         "may_widen_gate": False,
@@ -220,6 +317,8 @@ def _build_receipt(
             "typed_contract_is_not_execution_permission": True,
             "admission_can_only_narrow": True,
             "missing_proof_means_no_influence": True,
+            "case_relevance_is_required_for_influence": True,
+            "post_freeze_evidence_cannot_influence_case": True,
             "no_objection_does_not_authorize_trade": True,
             "advisory_output_is_not_majority_vote": True,
         },
@@ -267,18 +366,22 @@ def build_shadow_trading_advisory_ledger(
         "base_gate": base_gate,
         "base_action": base_action,
         "advisory_node_count": len(receipts),
-        "all_advisory_nodes_typed": True,
+        "all_trading_advisory_nodes_typed": True,
+        "global_influence_fields": GLOBAL_INFLUENCE_FIELDS,
         "admitted_nodes": admitted,
         "not_admitted_nodes": not_admitted,
         "narrowing_nodes": narrowing,
         "receipts": receipts,
         "bus_rules": {
             "typed_receipt_required_for_admission": True,
+            "case_relevance_required_for_influence": True,
+            "pre_freeze_evidence_required_for_influence": True,
             "missing_proof_fails_closed_to_no_influence": True,
             "advisory_may_only_narrow": True,
             "advisory_cannot_turn_hold_into_pass": True,
             "advisory_cannot_emit_signal_or_order": True,
             "source_identity_and_runtime_are_separate": True,
+            "legacy_presence_is_not_current_case_relevance": True,
         },
         "effects": {
             "runtime_invocation": False,
