@@ -80,6 +80,8 @@ def _validate_options(options: Sequence[str]) -> tuple[str, ...]:
     unknown = sorted(set(clean) - set(ALLOWED_OPTIONS))
     if unknown:
         raise ShadowIntegrationError("unsupported_options:" + ",".join(unknown))
+    if "WAIT" not in clean:
+        raise ShadowIntegrationError("wait_option_required")
     return clean
 
 
@@ -274,12 +276,13 @@ def build_trade_decision_packet(
     elif verdict in {"HOLD", "REJECT", "REVISE"}:
         system_recommendation, reason = "WAIT", f"TRIAXIS_{verdict}"
     if system_recommendation not in validated["options"]:
-        system_recommendation, reason = "WAIT", "OPTION_NOT_AVAILABLE"
+        raise ShadowIntegrationError("system_recommendation_outside_case_options")
 
     payload = {
         "schema": DECISION_PACKET_SCHEMA,
         "case_id": validated["case_id"],
         "case_sha256": validated["case_sha256"],
+        "options": tuple(validated["options"]),
         "thesis_sha256": thesis.get("thesis_sha256"),
         "twin": twin,
         "triaxis": {
@@ -312,9 +315,10 @@ def build_trade_outcome_receipt(
     if not isinstance(packet, Mapping) or packet.get("schema") != DECISION_PACKET_SCHEMA:
         raise ShadowIntegrationError("wrong_decision_packet_schema")
     _safe_vector(packet.get("safety", {}), "packet_safety")
+    options = _validate_options(packet.get("options", ()))
     choice = _text(actual_choice, "actual_choice").upper()
-    if choice not in ALLOWED_OPTIONS:
-        raise ShadowIntegrationError("unsupported_actual_choice")
+    if choice not in options:
+        raise ShadowIntegrationError("actual_choice_outside_case_options")
     if not isinstance(market_outcome, Mapping):
         raise ShadowIntegrationError("market_outcome_must_be_object")
     payload = {
