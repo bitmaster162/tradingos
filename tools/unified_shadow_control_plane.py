@@ -12,10 +12,13 @@ from tools.tradingos_shadow_integration import (
     validate_trade_case,
 )
 
-CONTROL_PLANE_SCHEMA = "bitevo.shadow_control_plane_receipt.v1"
+CONTROL_PLANE_SCHEMA = "bitevo.shadow_control_plane_receipt.v2"
 
 _EXPECTED_CONTROL_REPO = "bitmaster162/control-center"
 _EXPECTED_CONTINUITY_REPO = "bitmaster162/continuityos"
+_EXPECTED_CONTINUITY_BRANCH = "master"
+_EXPECTED_CONTINUITY_HEAD = "9dfb9e5b847a27113ca7c709a0adee900e3ff63f"
+_EXPECTED_SCT_ADAPTER_HEAD = "a0a244d40f0a2aa500df45b1f846f0d863a77749"
 
 _ZERO_EFFECT_COUNTERS = {
     "human_now": 0,
@@ -70,7 +73,7 @@ def _verify_packet(case: Mapping[str, Any], packet: Mapping[str, Any]) -> str:
     return str(packet["packet_sha256"])
 
 
-def _source_ref(value: Mapping[str, Any], *, expected_repo: str, field: str) -> dict[str, Any]:
+def _draft_pr_ref(value: Mapping[str, Any], *, expected_repo: str, field: str) -> dict[str, Any]:
     if not isinstance(value, Mapping):
         raise ShadowIntegrationError(f"control_plane_{field}_must_be_object")
     repo = _text(value.get("repo"), f"{field}.repo")
@@ -79,7 +82,7 @@ def _source_ref(value: Mapping[str, Any], *, expected_repo: str, field: str) -> 
     pr_number = value.get("pr_number")
     if isinstance(pr_number, bool) or not isinstance(pr_number, int) or pr_number <= 0:
         raise ShadowIntegrationError(f"control_plane_{field}_pr_number_invalid")
-    return {
+    result = {
         "repo": repo,
         "pr_number": pr_number,
         "head_sha": _hex(value.get("head_sha"), 40, f"{field}.head_sha"),
@@ -87,6 +90,41 @@ def _source_ref(value: Mapping[str, Any], *, expected_repo: str, field: str) -> 
         "draft": value.get("draft") is True,
         "merged": value.get("merged") is True,
     }
+    if result["merged"] or not result["draft"]:
+        raise ShadowIntegrationError(f"control_plane_{field}_must_remain_open_draft_unmerged")
+    return result
+
+
+def _continuity_source_ref(value: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        raise ShadowIntegrationError("control_plane_continuityos_source_ref_must_be_object")
+    repo = _text(value.get("repo"), "continuityos_source_ref.repo")
+    branch = _text(value.get("branch"), "continuityos_source_ref.branch")
+    head = _hex(value.get("head_sha"), 40, "continuityos_source_ref.head_sha")
+    if repo != _EXPECTED_CONTINUITY_REPO:
+        raise ShadowIntegrationError("control_plane_continuityos_source_ref_repo_mismatch")
+    if branch != _EXPECTED_CONTINUITY_BRANCH:
+        raise ShadowIntegrationError("control_plane_continuityos_source_ref_branch_mismatch")
+    if head != _EXPECTED_CONTINUITY_HEAD:
+        raise ShadowIntegrationError("control_plane_continuityos_source_ref_head_mismatch")
+    return {
+        "repo": repo,
+        "branch": branch,
+        "head_sha": head,
+        "claim_dimension": "SOURCE_IDENTITY",
+        "claim_ceiling": "MODERN_GITHUB_SOURCE_ONLY",
+        "proves_live_runtime": False,
+        "proves_current_host_state": False,
+    }
+
+
+def _sct_adapter_ref(value: Mapping[str, Any]) -> dict[str, Any]:
+    result = _draft_pr_ref(value, expected_repo=_EXPECTED_CONTINUITY_REPO, field="sct_adapter_ref")
+    if result["head_sha"] != _EXPECTED_SCT_ADAPTER_HEAD:
+        raise ShadowIntegrationError("control_plane_sct_adapter_ref_head_mismatch")
+    result["role"] = "SCT_R13_TRADER_TWIN_ADAPTER_ONLY"
+    result["is_continuityos_source_authority"] = False
+    return result
 
 
 def _effect_counters(value: Mapping[str, Any] | None) -> dict[str, int]:
@@ -107,7 +145,8 @@ def build_shadow_control_plane_receipt(
     decision_packet: Mapping[str, Any],
     *,
     control_center_ref: Mapping[str, Any],
-    continuityos_ref: Mapping[str, Any],
+    continuityos_source_ref: Mapping[str, Any],
+    sct_adapter_ref: Mapping[str, Any],
     provider_capture_at: str,
     lease_expires_at: str,
     evaluated_at: str,
@@ -116,29 +155,17 @@ def build_shadow_control_plane_receipt(
     conflicts: Sequence[str] = (),
     effect_counters: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Build a deterministic P0 control-plane receipt without mutating any control/runtime surface.
-
-    This composes Control Center, HANRI freshness/conflict logic, Anti-Amnesia binding,
-    Continuity/Return dry-run semantics and the executor deny boundary. It never applies a
-    current-truth projection and never writes a checkpoint, return, runtime or effect.
-    """
+    """Build a deterministic P0 control receipt without mutating control, continuity or runtime state."""
     case = validate_trade_case(trade_case)
     packet_sha = _verify_packet(case, decision_packet)
 
-    control_ref = _source_ref(
+    control_ref = _draft_pr_ref(
         control_center_ref,
         expected_repo=_EXPECTED_CONTROL_REPO,
         field="control_center_ref",
     )
-    continuity_ref = _source_ref(
-        continuityos_ref,
-        expected_repo=_EXPECTED_CONTINUITY_REPO,
-        field="continuityos_ref",
-    )
-    if control_ref["merged"] or continuity_ref["merged"]:
-        raise ShadowIntegrationError("control_plane_merged_source_not_allowed_in_p0_fixture")
-    if not control_ref["draft"] or not continuity_ref["draft"]:
-        raise ShadowIntegrationError("control_plane_source_must_remain_draft")
+    continuity_ref = _continuity_source_ref(continuityos_source_ref)
+    sct_ref = _sct_adapter_ref(sct_adapter_ref)
 
     capture_dt = _dt(provider_capture_at, "provider_capture_at")
     lease_dt = _dt(lease_expires_at, "lease_expires_at")
@@ -166,7 +193,8 @@ def build_shadow_control_plane_receipt(
         "human_sovereign": True,
         "source_refs": {
             "control_center": control_ref,
-            "continuityos": continuity_ref,
+            "continuityos_modern_source": continuity_ref,
+            "sct_trader_twin_adapter": sct_ref,
         },
         "hanri": {
             "provider_capture_at": _text(provider_capture_at, "provider_capture_at"),
@@ -217,6 +245,9 @@ def build_shadow_control_plane_receipt(
             "memory_or_prediction_does_not_create_permission": True,
             "continuity_dry_run_does_not_write_state": True,
             "human_sovereign_remains_authority_root": True,
+            "sct_adapter_is_not_continuityos_source_authority": True,
+            "modern_continuity_source_is_not_live_runtime": True,
+            "repo_identity_does_not_prove_host_state": True,
         },
         "safety": dict(SHADOW_SAFETY),
     }
