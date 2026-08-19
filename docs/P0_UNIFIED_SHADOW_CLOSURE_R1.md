@@ -4,7 +4,7 @@ Status: DRAFT CANDIDATE / OFFLINE COMPOSITION / NO EFFECT
 
 ## What is now closed
 
-The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation and unadmitted knowledge/memory proposal planes:
+The P0 proof closes one decision across composition, continuity, transport, authority projection, HANRI evidence governance, research/simulation, unadmitted knowledge/memory and a final 63-node capability-influence partition:
 
 ```text
 63-node BitEvo federation + route
@@ -40,9 +40,50 @@ Knowledge Foundry / Durable Memory unadmitted candidate plane
 bitevo.shadow_knowledge_memory_candidate.v1
         ↓
 bitevo.unified_shadow_closure.v5
+        ↓
+63-node capability influence ledger
+        ↓
+bitevo.shadow_capability_influence_ledger.v1
+        ↓
+bitevo.unified_shadow_closure.v6
 ```
 
-Every receipt is hash-bound to the same transaction or the immediately preceding closure. Neither the research plane nor the knowledge/memory candidate plane can vote or alter the effective decision.
+Every receipt is hash-bound to the same transaction or immediately preceding closure. Side planes cannot vote or alter the effective decision.
+
+## 63-node influence partition
+
+Every registered node is assigned exactly once to one of nine influence classes:
+
+```text
+DECISION_BOUND_NON_EXECUTING
+EVIDENCE_GATE_NON_VOTING
+INTERFACE_READ_ONLY
+COGNITION_SIDE_ACCOUNTED
+RESEARCH_SIDE_NON_VOTING
+TRADING_ADVISORY_ACCOUNTED
+PRODUCT_SERVICE_ACCOUNTED
+NONTRADING_OR_PARKED
+EXECUTOR_DISABLED
+```
+
+This resolves a major ambiguity in a large system universe:
+
+`all systems accounted for != all systems vote`
+
+The ledger explicitly records for all 63 nodes:
+
+```text
+trading_vote=false
+may_widen_gate=false
+effect_authority=NONE
+external_runtime_invoked=false
+source_identity_proven_by_ledger=false
+runtime_proven_by_ledger=false
+```
+
+A subset has a P0 contract boundary, but `contract_bound` is deliberately weaker than source/runtime/deployment proof.
+
+Trading capability projects such as Arb Radar, Grid OS, Delist DRS, Edge Research and legacy bot lines remain `TRADING_ADVISORY_ACCOUNTED` unless a future typed evidence contract explicitly admits them into a decision path. Commercial/service surfaces remain non-voting. The Executor Network is a separate disabled boundary, never a voting agent.
 
 ## Source identities remain separate
 
@@ -63,17 +104,18 @@ The closure preserves different evidence dimensions instead of flattening them:
 
 A Git repository source identity is not deployment proof. An architectural role from ontology/research is not current code/runtime proof.
 
-## HANRI / ArchiveOS result
+## Current control result
 
-HANRI remains a subordinate evidence/attention/governor plane. It can make the effective shadow gate stricter but can never widen an upstream Control Center `HOLD`.
-
-Current accepted ArchiveOS qualification remains:
+The frozen P0 path remains fail-closed:
 
 ```text
-status=BLOCKED_REVERIFY
-freshness=STALE
-current_claim_allowed=false
-promotion_eligible=false
+upstream Control Center gate = HOLD
+ArchiveOS = BLOCKED_REVERIFY / STALE
+HANRI effective gate = HOLD
+HANRI effective action = WAIT
+research side plane = non-voting
+knowledge/memory candidate = non-voting / unadmitted
+capability bus = preserves HOLD/WAIT
 ```
 
 ArchiveOS Core, Drive mirror and Archive Tooling remain distinct:
@@ -85,18 +127,7 @@ Drive = mirror evidence only
 Archive Tooling = artifact compiler, not archive engine
 ```
 
-Therefore the current frozen P0 path remains:
-
-```text
-upstream Control Center gate = HOLD
-ArchiveOS gate = BLOCKED_REVERIFY
-HANRI effective gate = HOLD
-HANRI effective action = WAIT
-```
-
 ## Knowledge / Memory result
-
-The evidence-governor and knowledge-candidate contracts keep custody, reasoning, admission and memory as separate operations:
 
 ```text
 archive custody != claim admission
@@ -107,86 +138,26 @@ durable memory != current truth
 memory != permission
 ```
 
-The knowledge/memory candidate plane creates only hash-bound candidate claims and a memory proposal. Every claim remains `UNADMITTED`; admitted and rejected counts remain zero. Knowledge Foundry and Durable Memory roles are bound, while their current source/runtime identities remain unbound.
-
-Required P0 state:
-
-```text
-claim_admission=NOT_PERFORMED
-admitted_claim_count=0
-knowledge_foundry.source_identity_bound=false
-knowledge_foundry.runtime_bound=false
-durable_memory.source_identity_bound=false
-durable_memory.runtime_bound=false
-memory_proposal.write_allowed=false
-private_memory_write=false
-shared_memory_write=false
-project_canon_write=false
-current_truth_write=false
-```
-
-The candidate is `NON_VOTING_EVIDENCE_DERIVATIVE` and cannot change the decision.
+All candidate claims remain `UNADMITTED`; admitted/rejected counts stay zero. Knowledge Foundry and Durable Memory roles are bound while their current source/runtime identities remain unbound. No private/shared memory, project canon or current-truth write occurs.
 
 ## Research / simulation result
 
-The side plane binds only what current evidence supports.
+MAWorld is role-bound as an isolated reproducible experiment-chamber candidate, Pandora as a visual programmable runtime/simulation candidate, and both remain source/runtime unbound. Sovereign Arena has exact source identity `main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`; deployment/runtime remain unproven.
 
-### MAWorld
-
-Role bound from internal architecture/research only:
-
-`ISOLATED_REPRODUCIBLE_EXPERIMENT_CHAMBER_CANDIDATE`
-
-Current source and runtime identity are not bound. The adapter rejects any silent upgrade to `source_bound=true` or `runtime_bound=true`.
-
-### Pandora
-
-Role bound from internal architecture only:
-
-`VISUAL_PROGRAMMABLE_RUNTIME_AND_SIMULATION_CANDIDATE`
-
-Current source and runtime identity are not bound. The same fail-closed rule applies.
-
-### Sovereign Arena
-
-Exact GitHub source identity is bound:
-
-`bitmaster162/sovereign-arena-site/main@f070fe0587a4222b993b7e8fc9b8f2726ca414d9`
-
-But:
-
-```text
-deployment_proven=false
-runtime_proven=false
-runtime_invoked=false
-trading_execution_surface=false
-```
-
-The P0 research contract requires provenance, replay status, an all-trial denominator and explicit preservation of failed/stopped/degraded experiments as a design requirement. It forbids signal-service and live-trading semantics.
-
-The entire research plane is:
+The research plane is always:
 
 ```text
 decision_dependency=NON_BLOCKING_SIDE_PLANE
 trading_voter=false
 can_change_decision=false
+runtime_invocation=false
+experiment_launch=false
+artifact_publication=false
 ```
 
-An optional research surface being unbound does not block the core BTC decision; it also does not make that surface trusted.
+## Continuity, Return and Control Center
 
-## Continuity result
-
-ContinuityOS can derive deterministic checkpoint/replay/return candidates only. All writes remain false. Historical R52/R57 evidence cannot be promoted into modern source identity or live-runtime authority.
-
-## Return Broker result
-
-The real Return Broker strict triplet verifier is reused in a read-only P0 adapter. A valid ZIP/SHA/READY envelope may produce `physical_status=VERIFIED_READ_ONLY` while all transport mutations remain false.
-
-`physical verification PASS != semantic acceptance`
-
-## Control Center projection result
-
-The Control Center adapter renders the unified transaction only as `NON_AUTHORITY_SHADOW_PROJECTION`. It cannot apply current truth, mutate Command Queue / Decision Ledger / Return Registry / Human Gate, activate runtime, trade or authorize capital.
+ContinuityOS derives checkpoint/replay/return candidates only; all writes remain false. Return Broker reuses the real strict ZIP/SHA/READY verifier in read-only mode, and `physical verification PASS != semantic acceptance`. Control Center renders only a `NON_AUTHORITY_SHADOW_PROJECTION` and cannot apply current truth or effects.
 
 ## Closure invariant
 
@@ -195,6 +166,8 @@ model output
 != prediction
 != evidence
 != source identity
+!= registry membership
+!= typed influence
 != archive custody
 != claim candidate
 != claim admission
@@ -210,7 +183,7 @@ model output
 != effect
 ```
 
-The closure is evidence that the planes compose safely. It is not itself authority to cross the effect boundary.
+The closure is evidence that the planes compose safely. It is not authority to cross the effect boundary.
 
 ## Fixed P0 ceiling
 
@@ -219,6 +192,9 @@ merge=false
 deploy=false
 runtime_activation=false
 runtime_registration=false
+capability_bus_runtime=false
+capability_vote=false
+capability_effect_authorization=false
 experiment_launch=false
 research_publication=false
 simulation_runtime=false
