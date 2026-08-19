@@ -25,6 +25,6 @@ Evidence ceiling: R6 does not claim local asymmetric signature mathematics. The 
 
 `authenticated reveal != current truth != execution approval != trade permission`.
 
-Observed R6 code/workflow head `0bbdf1c8c7dbdca2bd16c11ec173247f9112c808` produced run `32301131751` with `steps=null` and no job logs. Classification: `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`. Later documentation-only commits preserve the same R6 code semantics. No R6 TradingOS CI PASS is claimed and no manual rerun was requested.
+Observed R6 code/workflow head `0bbdf1c8c7dbdca2bd16c11ec173247f9112c808` produced run `32301131751` with `steps=null` and no job logs. Classification: `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`. Subsequent documentation-only commits preserve identical R6 code semantics. No R6 TradingOS CI PASS is claimed and no manual rerun was requested.
 
 Fixed ceiling: `merge=false`, `deploy=false`, `runtime=false`, `human_gate_write=false`, `credential_registry_write=false`, `nonce_registry_write=false`, `current_truth_apply=false`, `executor=false`, `signal=false`, `order=false`, `can_trade=false`, `capital_permission=DENY`.
