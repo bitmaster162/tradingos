@@ -42,7 +42,7 @@ R8 attacks wrong independently retained recovery digest, cross-case recovery aft
 
 ## Exact-head CI state
 
-Current R8 TradingOS head is `e0bf7c65e9ecb7d3508008b1975b8c81d62805cd`. P0 Shadow Verify run `32306292176` completed FAILURE before executable steps were exposed; job `offline-shadow-e2e` returned `steps=null` and no logs. Classification: `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`. No R8 TradingOS CI PASS is claimed and no manual rerun was requested.
+The R8 TradingOS code/workflow head immediately before the documentation-only evidence pin was `e0bf7c65e9ecb7d3508008b1975b8c81d62805cd`. P0 Shadow Verify run `32306292176` completed FAILURE before executable steps were exposed; job `offline-shadow-e2e` returned `steps=null` and no logs. Classification: `CI_BLOCKED_PRE_JOB / NOT_A_CODE_TEST_FAILURE`. No R8 TradingOS CI PASS is claimed and no manual rerun was requested.
 
 ## Evidence ceiling
 
