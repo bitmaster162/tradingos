@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
-"""TradingOS R77.2 — verified provenance seal for Decision Brief snapshots.
+"""TradingOS R77.3 — full-chain verified provenance seal.
 
-The seal does not trust a supplied R77 result. It reconstructs the exact canonical
-R77 Market Decision Bridge result from raw capture + Watchtower + Market Radar,
-requires exact equality with the supplied result, and only then emits a provenance-
-sealed Decision Brief snapshot.
+Verification chain:
+  raw Watchtower capture
+    -> exact canonical Watchtower build_watchtower()
+  raw Liquidity capture
+    -> exact canonical Liquidity Lens build_lens()
+  verified Watchtower + verified Liquidity
+    -> exact canonical Market Radar build_radar()
+  raw Watchtower capture + verified Watchtower + verified Radar
+    -> exact R77 Market Decision Bridge build_bridge()
+  exact supplied artifacts
+    -> provenance-sealed Decision Brief snapshot
+
+The canonical source modules are pinned by exact Git blob SHA-1 before use.
 
 No network, credentials, AI inference, signals, orders, execution, or capital effects.
 """
@@ -16,21 +25,38 @@ import json
 import re
 from copy import deepcopy
 from pathlib import Path
+from types import ModuleType
 from typing import Any
 
-SCHEMA = "tradingos.market_decision_snapshot_seal.v2"
-VERSION = "2.0.0"
+SCHEMA = "tradingos.market_decision_snapshot_seal.v3"
+VERSION = "3.0.0"
 PRODUCER = "tools/tradingos_market_decision_snapshot_seal.py"
+
+TOOLS_DIR = Path(__file__).resolve().parent
+WATCHTOWER_PATH = TOOLS_DIR / "tradingos_watchtower.py"
+LIQUIDITY_PATH = TOOLS_DIR / "tradingos_liquidity_lens_core.py"
+RADAR_PATH = TOOLS_DIR / "tradingos_market_radar.py"
+BRIDGE_PATH = TOOLS_DIR / "tradingos_market_decision_bridge.py"
+
+EXPECTED_WATCHTOWER_GIT_BLOB_SHA1 = "96f00327e5bd8a77612d7b26718d4c9951f2be73"
+EXPECTED_LIQUIDITY_GIT_BLOB_SHA1 = "193ac1c869dd479dac47c35cede777cc34bce687"
+EXPECTED_RADAR_GIT_BLOB_SHA1 = "3e4df1d56648483254667b39d16b1879434ca858"
+EXPECTED_BRIDGE_GIT_BLOB_SHA1 = "e6e0f6ecad22068acd82ca0588ad2dfb5fdd89b4"
+
+EXPECTED_WATCHTOWER_PRODUCER_SHA256 = (
+    "92fd705634e33d098907a72199314f01fb73318c733f302abeb1cb6d6e9be4a1"
+)
+EXPECTED_LIQUIDITY_PRODUCER_SHA256 = (
+    "870f2734de73af0974433a0dccd7750fc932117ace1ab2819ca952840780e699"
+)
+
+WATCHTOWER_PRODUCER = "tools/tradingos_watchtower.py"
+LIQUIDITY_PRODUCER = "tools/tradingos_liquidity_lens_core.py"
+RADAR_PRODUCER = "tools/tradingos_market_radar.py"
 BRIDGE_PRODUCER = "tools/tradingos_market_decision_bridge.py"
 
-BRIDGE_PATH = Path(__file__).with_name("tradingos_market_decision_bridge.py")
-_SPEC = importlib.util.spec_from_file_location("_tradingos_r77_bridge_for_verified_seal", BRIDGE_PATH)
-if _SPEC is None or _SPEC.loader is None:
-    raise RuntimeError(f"cannot load R77 bridge: {BRIDGE_PATH}")
-bridge = importlib.util.module_from_spec(_SPEC)
-_SPEC.loader.exec_module(bridge)
-
 _SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+_GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 EXPECTED_BINDING_KEYS = {
     "watchtower_capture_sha256",
     "watchtower_report_sha256",
@@ -76,10 +102,155 @@ def file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def git_blob_sha1(path: Path) -> str:
+    raw = path.read_bytes()
+    return hashlib.sha1(f"blob {len(raw)}\0".encode() + raw).hexdigest()
+
+
 def require_sha256(value: Any, field: str) -> str:
     if not isinstance(value, str) or _SHA_RE.fullmatch(value) is None:
         raise ValueError(f"{field}: invalid sha256")
     return value
+
+
+def require_git_sha1(value: Any, field: str) -> str:
+    if not isinstance(value, str) or _GIT_SHA_RE.fullmatch(value) is None:
+        raise ValueError(f"{field}: invalid git blob sha1")
+    return value
+
+
+def _load_verified_module(path: Path, expected_blob_sha1: str, label: str) -> ModuleType:
+    require_git_sha1(expected_blob_sha1, f"{label}.expected_blob_sha1")
+    if not path.is_file():
+        raise ValueError(f"{label}: canonical source file missing")
+    actual_blob = git_blob_sha1(path)
+    if actual_blob != expected_blob_sha1:
+        raise ValueError(f"{label}: canonical source Git blob mismatch")
+    spec = importlib.util.spec_from_file_location(f"_tradingos_r77_3_{label}", path)
+    if spec is None or spec.loader is None:
+        raise ValueError(f"{label}: cannot load canonical source")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _modules() -> tuple[ModuleType, ModuleType, ModuleType, ModuleType]:
+    watchtower = _load_verified_module(
+        WATCHTOWER_PATH, EXPECTED_WATCHTOWER_GIT_BLOB_SHA1, "watchtower"
+    )
+    liquidity = _load_verified_module(
+        LIQUIDITY_PATH, EXPECTED_LIQUIDITY_GIT_BLOB_SHA1, "liquidity"
+    )
+    radar = _load_verified_module(
+        RADAR_PATH, EXPECTED_RADAR_GIT_BLOB_SHA1, "radar"
+    )
+    bridge = _load_verified_module(
+        BRIDGE_PATH, EXPECTED_BRIDGE_GIT_BLOB_SHA1, "bridge"
+    )
+    for module, function_name, label in (
+        (watchtower, "build_watchtower", "watchtower"),
+        (liquidity, "build_lens", "liquidity"),
+        (radar, "build_radar", "radar"),
+        (bridge, "build_bridge", "bridge"),
+    ):
+        if not callable(getattr(module, function_name, None)):
+            raise ValueError(f"{label}: canonical builder missing")
+    return watchtower, liquidity, radar, bridge
+
+
+def _verify_producer(
+    report: dict[str, Any],
+    *,
+    producer: str,
+    producer_sha256: str,
+    label: str,
+) -> None:
+    provenance = report.get("provenance")
+    if not isinstance(provenance, dict):
+        raise ValueError(f"{label}: provenance missing")
+    if provenance.get("producer") != producer:
+        raise ValueError(f"{label}: producer path mismatch")
+    if require_sha256(
+        provenance.get("producer_sha256"), f"{label}.producer_sha256"
+    ) != producer_sha256:
+        raise ValueError(f"{label}: producer sha256 mismatch")
+
+
+def _verify_watchtower(
+    watchtower_module: ModuleType,
+    capture: dict[str, Any],
+    supplied_watchtower: dict[str, Any],
+) -> dict[str, Any]:
+    canonical = watchtower_module.build_watchtower(capture)
+    if supplied_watchtower != canonical:
+        raise ValueError("supplied Watchtower does not match deterministic reconstruction")
+    _verify_producer(
+        canonical,
+        producer=WATCHTOWER_PRODUCER,
+        producer_sha256=EXPECTED_WATCHTOWER_PRODUCER_SHA256,
+        label="watchtower",
+    )
+    provenance = canonical["provenance"]
+    if require_sha256(
+        provenance.get("capture_sha256"), "watchtower.capture_sha256"
+    ) != stable_sha256(capture):
+        raise ValueError("Watchtower capture binding mismatch")
+    if canonical.get("safety", {}).get("can_trade") is not False:
+        raise ValueError("unsafe Watchtower report")
+    return canonical
+
+
+def _verify_liquidity(
+    liquidity_module: ModuleType,
+    liquidity_capture: dict[str, Any],
+    supplied_liquidity: dict[str, Any],
+) -> dict[str, Any]:
+    canonical = liquidity_module.build_lens(liquidity_capture)
+    if supplied_liquidity != canonical:
+        raise ValueError("supplied Liquidity report does not match deterministic reconstruction")
+    _verify_producer(
+        canonical,
+        producer=LIQUIDITY_PRODUCER,
+        producer_sha256=EXPECTED_LIQUIDITY_PRODUCER_SHA256,
+        label="liquidity",
+    )
+    provenance = canonical["provenance"]
+    if require_sha256(
+        provenance.get("capture_sha256"), "liquidity.capture_sha256"
+    ) != stable_sha256(liquidity_capture):
+        raise ValueError("Liquidity capture binding mismatch")
+    if canonical.get("safety", {}).get("can_trade") is not False:
+        raise ValueError("unsafe Liquidity report")
+    return canonical
+
+
+def _verify_radar(
+    radar_module: ModuleType,
+    watchtower: dict[str, Any],
+    liquidity_capture: dict[str, Any],
+    liquidity: dict[str, Any],
+    supplied_radar: dict[str, Any],
+) -> dict[str, Any]:
+    canonical = radar_module.build_radar(watchtower, liquidity)
+    if supplied_radar != canonical:
+        raise ValueError("supplied Market Radar does not match deterministic reconstruction")
+    provenance = canonical.get("provenance")
+    if not isinstance(provenance, dict):
+        raise ValueError("radar provenance missing")
+    expected = {
+        "watchtower_report_sha256": stable_sha256(watchtower),
+        "watchtower_capture_sha256": watchtower["provenance"]["capture_sha256"],
+        "watchtower_producer_sha256": EXPECTED_WATCHTOWER_PRODUCER_SHA256,
+        "liquidity_report_sha256": stable_sha256(liquidity),
+        "liquidity_capture_sha256": stable_sha256(liquidity_capture),
+        "liquidity_producer_sha256": EXPECTED_LIQUIDITY_PRODUCER_SHA256,
+    }
+    for key, value in expected.items():
+        if provenance.get(key) != value:
+            raise ValueError(f"radar {key} binding mismatch")
+    if canonical.get("safety", {}).get("can_trade") is not False:
+        raise ValueError("unsafe Radar report")
+    return canonical
 
 
 def _require_exact_source_rows(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
@@ -106,88 +277,155 @@ def _require_exact_source_rows(snapshot: dict[str, Any]) -> list[dict[str, Any]]
     return sources
 
 
-def reconstruct_verified_r77(
-    capture: dict[str, Any],
-    watchtower: dict[str, Any],
-    radar: dict[str, Any],
+def reconstruct_verified_chain(
+    watchtower_capture: dict[str, Any],
+    supplied_watchtower: dict[str, Any],
+    liquidity_capture: dict[str, Any],
+    supplied_liquidity: dict[str, Any],
+    supplied_radar: dict[str, Any],
     supplied_result: dict[str, Any],
 ) -> dict[str, Any]:
-    """Reconstruct R77 from primary upstream artifacts and require exact supplied equality."""
-    if not isinstance(supplied_result, dict):
-        raise ValueError("supplied R77 result must be object")
+    watchtower_module, liquidity_module, radar_module, bridge_module = _modules()
 
-    canonical = bridge.build_bridge(capture, watchtower, radar)
-    bridge.validate_bridge(canonical)
-    bridge.validate_bridge(supplied_result)
+    canonical_watchtower = _verify_watchtower(
+        watchtower_module, watchtower_capture, supplied_watchtower
+    )
+    canonical_liquidity = _verify_liquidity(
+        liquidity_module, liquidity_capture, supplied_liquidity
+    )
+    canonical_radar = _verify_radar(
+        radar_module,
+        canonical_watchtower,
+        liquidity_capture,
+        canonical_liquidity,
+        supplied_radar,
+    )
 
-    if supplied_result != canonical:
-        raise ValueError("supplied R77 result does not match deterministic reconstruction")
-    if stable_sha256(supplied_result) != stable_sha256(canonical):
-        raise ValueError("supplied R77 result digest mismatch")
+    canonical_result = bridge_module.build_bridge(
+        watchtower_capture, canonical_watchtower, canonical_radar
+    )
+    bridge_module.validate_bridge(canonical_result)
+    bridge_module.validate_bridge(supplied_result)
+    if supplied_result != canonical_result:
+        raise ValueError("supplied R77 result does not match deterministic full-chain reconstruction")
 
-    snapshot = canonical.get("snapshot")
+    snapshot = canonical_result.get("snapshot")
     if not isinstance(snapshot, dict) or snapshot.get("can_trade") is not False:
         raise ValueError("unsafe/missing R77 snapshot")
     _require_exact_source_rows(snapshot)
 
-    binding = canonical.get("input_binding")
+    binding = canonical_result.get("input_binding")
     if not isinstance(binding, dict) or set(binding) != EXPECTED_BINDING_KEYS:
         raise ValueError("R77 input_binding key set mismatch")
     for key in sorted(EXPECTED_BINDING_KEYS):
         require_sha256(binding.get(key), f"R77.input_binding.{key}")
 
-    digest = require_sha256(canonical.get("snapshot_sha256"), "R77.snapshot_sha256")
+    expected_binding = {
+        "watchtower_capture_sha256": stable_sha256(watchtower_capture),
+        "watchtower_report_sha256": stable_sha256(canonical_watchtower),
+        "watchtower_producer_sha256": EXPECTED_WATCHTOWER_PRODUCER_SHA256,
+        "radar_report_sha256": stable_sha256(canonical_radar),
+        "liquidity_report_sha256": stable_sha256(canonical_liquidity),
+        "liquidity_capture_sha256": stable_sha256(liquidity_capture),
+        "liquidity_producer_sha256": EXPECTED_LIQUIDITY_PRODUCER_SHA256,
+    }
+    if binding != expected_binding:
+        raise ValueError("R77 input_binding does not match verified full chain")
+
+    digest = require_sha256(
+        canonical_result.get("snapshot_sha256"), "R77.snapshot_sha256"
+    )
     if digest != stable_sha256(snapshot):
         raise ValueError("R77 snapshot digest mismatch")
-    return canonical
+    return {
+        "watchtower": canonical_watchtower,
+        "liquidity": canonical_liquidity,
+        "radar": canonical_radar,
+        "result": canonical_result,
+    }
 
 
 def seal_snapshot(
-    capture: dict[str, Any],
-    watchtower: dict[str, Any],
-    radar: dict[str, Any],
+    watchtower_capture: dict[str, Any],
+    supplied_watchtower: dict[str, Any],
+    liquidity_capture: dict[str, Any],
+    supplied_liquidity: dict[str, Any],
+    supplied_radar: dict[str, Any],
     supplied_result: dict[str, Any],
 ) -> dict[str, Any]:
-    canonical = reconstruct_verified_r77(capture, watchtower, radar, supplied_result)
-    source_snapshot = canonical["snapshot"]
-
+    chain = reconstruct_verified_chain(
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
+    source_snapshot = chain["result"]["snapshot"]
     sealed = deepcopy(source_snapshot)
     sealed["provenance"] = {
         "producer": PRODUCER,
         "producer_sha256": file_sha256(Path(__file__)),
         "verification": {
-            "method": "RECONSTRUCT_R77_FROM_CAPTURE_WATCHTOWER_RADAR_AND_REQUIRE_EXACT_EQUALITY",
+            "method": (
+                "REBUILD_WATCHTOWER_FROM_CAPTURE__REBUILD_LIQUIDITY_FROM_CAPTURE__"
+                "REBUILD_RADAR_FROM_VERIFIED_REPORTS__REBUILD_R77__REQUIRE_EXACT_EQUALITY"
+            ),
             "verified": True,
+            "canonical_git_blobs": {
+                "watchtower": EXPECTED_WATCHTOWER_GIT_BLOB_SHA1,
+                "liquidity": EXPECTED_LIQUIDITY_GIT_BLOB_SHA1,
+                "radar": EXPECTED_RADAR_GIT_BLOB_SHA1,
+                "bridge": EXPECTED_BRIDGE_GIT_BLOB_SHA1,
+            },
         },
-        "source_bridge": {
-            "producer": BRIDGE_PRODUCER,
-            "producer_sha256": file_sha256(BRIDGE_PATH),
-            "source_snapshot_sha256": stable_sha256(source_snapshot),
-            "source_bridge_result_sha256": stable_sha256(canonical),
+        "source_chain": {
+            "watchtower_capture_sha256": stable_sha256(watchtower_capture),
+            "watchtower_report_sha256": stable_sha256(chain["watchtower"]),
+            "liquidity_capture_sha256": stable_sha256(liquidity_capture),
+            "liquidity_report_sha256": stable_sha256(chain["liquidity"]),
+            "radar_report_sha256": stable_sha256(chain["radar"]),
+            "r77_result_sha256": stable_sha256(chain["result"]),
+            "r77_snapshot_sha256": stable_sha256(source_snapshot),
         },
-        "upstream_binding": deepcopy(canonical["input_binding"]),
+        "upstream_binding": deepcopy(chain["result"]["input_binding"]),
         "sources": deepcopy(source_snapshot["provenance"]["sources"]),
     }
     sealed["can_trade"] = False
-    validate_sealed_snapshot(sealed, capture, watchtower, radar, supplied_result)
+    validate_sealed_snapshot(
+        sealed,
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
     return sealed
 
 
 def validate_sealed_snapshot(
     sealed: Any,
-    capture: dict[str, Any],
-    watchtower: dict[str, Any],
-    radar: dict[str, Any],
+    watchtower_capture: dict[str, Any],
+    supplied_watchtower: dict[str, Any],
+    liquidity_capture: dict[str, Any],
+    supplied_liquidity: dict[str, Any],
+    supplied_radar: dict[str, Any],
     supplied_result: dict[str, Any],
 ) -> None:
-    canonical = reconstruct_verified_r77(capture, watchtower, radar, supplied_result)
-    source_snapshot = canonical["snapshot"]
-
+    chain = reconstruct_verified_chain(
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
+    source_snapshot = chain["result"]["snapshot"]
     if not isinstance(sealed, dict):
         raise ValueError("sealed snapshot must be object")
     if sealed.get("can_trade") is not False:
         raise ValueError("sealed snapshot can_trade drift")
-
     provenance = sealed.get("provenance")
     if not isinstance(provenance, dict) or provenance.get("producer") != PRODUCER:
         raise ValueError("sealed snapshot producer mismatch")
@@ -196,31 +434,35 @@ def validate_sealed_snapshot(
     ) != file_sha256(Path(__file__)):
         raise ValueError("sealed producer sha256 mismatch")
 
-    verification = provenance.get("verification")
-    if verification != {
-        "method": "RECONSTRUCT_R77_FROM_CAPTURE_WATCHTOWER_RADAR_AND_REQUIRE_EXACT_EQUALITY",
+    expected_verification = {
+        "method": (
+            "REBUILD_WATCHTOWER_FROM_CAPTURE__REBUILD_LIQUIDITY_FROM_CAPTURE__"
+            "REBUILD_RADAR_FROM_VERIFIED_REPORTS__REBUILD_R77__REQUIRE_EXACT_EQUALITY"
+        ),
         "verified": True,
-    }:
+        "canonical_git_blobs": {
+            "watchtower": EXPECTED_WATCHTOWER_GIT_BLOB_SHA1,
+            "liquidity": EXPECTED_LIQUIDITY_GIT_BLOB_SHA1,
+            "radar": EXPECTED_RADAR_GIT_BLOB_SHA1,
+            "bridge": EXPECTED_BRIDGE_GIT_BLOB_SHA1,
+        },
+    }
+    if provenance.get("verification") != expected_verification:
         raise ValueError("sealed verification contract mismatch")
 
-    source_bridge = provenance.get("source_bridge")
-    expected_source_bridge = {
-        "producer": BRIDGE_PRODUCER,
-        "producer_sha256": file_sha256(BRIDGE_PATH),
-        "source_snapshot_sha256": stable_sha256(source_snapshot),
-        "source_bridge_result_sha256": stable_sha256(canonical),
+    expected_chain = {
+        "watchtower_capture_sha256": stable_sha256(watchtower_capture),
+        "watchtower_report_sha256": stable_sha256(chain["watchtower"]),
+        "liquidity_capture_sha256": stable_sha256(liquidity_capture),
+        "liquidity_report_sha256": stable_sha256(chain["liquidity"]),
+        "radar_report_sha256": stable_sha256(chain["radar"]),
+        "r77_result_sha256": stable_sha256(chain["result"]),
+        "r77_snapshot_sha256": stable_sha256(source_snapshot),
     }
-    if source_bridge != expected_source_bridge:
-        raise ValueError("sealed source_bridge binding mismatch")
-
-    binding = provenance.get("upstream_binding")
-    if binding != canonical["input_binding"]:
+    if provenance.get("source_chain") != expected_chain:
+        raise ValueError("sealed source-chain binding mismatch")
+    if provenance.get("upstream_binding") != chain["result"]["input_binding"]:
         raise ValueError("sealed upstream binding mismatch")
-    if set(binding) != EXPECTED_BINDING_KEYS:
-        raise ValueError("sealed upstream binding key set mismatch")
-    for key in sorted(EXPECTED_BINDING_KEYS):
-        require_sha256(binding.get(key), f"sealed.upstream_binding.{key}")
-
     if provenance.get("sources") != source_snapshot["provenance"]["sources"]:
         raise ValueError("sealed sources drift")
 
@@ -231,62 +473,100 @@ def validate_sealed_snapshot(
 
 
 def build_envelope(
-    capture: dict[str, Any],
-    watchtower: dict[str, Any],
-    radar: dict[str, Any],
+    watchtower_capture: dict[str, Any],
+    supplied_watchtower: dict[str, Any],
+    liquidity_capture: dict[str, Any],
+    supplied_liquidity: dict[str, Any],
+    supplied_radar: dict[str, Any],
     supplied_result: dict[str, Any],
 ) -> dict[str, Any]:
-    canonical = reconstruct_verified_r77(capture, watchtower, radar, supplied_result)
-    sealed = seal_snapshot(capture, watchtower, radar, supplied_result)
+    chain = reconstruct_verified_chain(
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
+    sealed = seal_snapshot(
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
     envelope = {
         "schema": SCHEMA,
         "version": VERSION,
         "sealed_snapshot": sealed,
         "sealed_snapshot_sha256": stable_sha256(sealed),
-        "verified_source_bridge_result_sha256": stable_sha256(canonical),
-        "verification_inputs": {
-            "capture_sha256": stable_sha256(capture),
-            "watchtower_sha256": stable_sha256(watchtower),
-            "radar_sha256": stable_sha256(radar),
+        "verified_artifact_sha256": {
+            "watchtower_capture": stable_sha256(watchtower_capture),
+            "watchtower": stable_sha256(chain["watchtower"]),
+            "liquidity_capture": stable_sha256(liquidity_capture),
+            "liquidity": stable_sha256(chain["liquidity"]),
+            "radar": stable_sha256(chain["radar"]),
+            "r77_result": stable_sha256(chain["result"]),
         },
         "safety": dict(SEAL_SAFETY),
     }
-    validate_envelope(envelope, capture, watchtower, radar, supplied_result)
+    validate_envelope(
+        envelope,
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
     return envelope
 
 
 def validate_envelope(
     envelope: Any,
-    capture: dict[str, Any],
-    watchtower: dict[str, Any],
-    radar: dict[str, Any],
+    watchtower_capture: dict[str, Any],
+    supplied_watchtower: dict[str, Any],
+    liquidity_capture: dict[str, Any],
+    supplied_liquidity: dict[str, Any],
+    supplied_radar: dict[str, Any],
     supplied_result: dict[str, Any],
 ) -> None:
-    canonical = reconstruct_verified_r77(capture, watchtower, radar, supplied_result)
+    chain = reconstruct_verified_chain(
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
     if not isinstance(envelope, dict):
         raise ValueError("seal envelope must be object")
     if envelope.get("schema") != SCHEMA or envelope.get("version") != VERSION:
         raise ValueError("unsupported seal envelope contract")
     if envelope.get("safety") != SEAL_SAFETY:
         raise ValueError("unsafe seal envelope")
-
     sealed = envelope.get("sealed_snapshot")
-    validate_sealed_snapshot(sealed, capture, watchtower, radar, supplied_result)
-
+    validate_sealed_snapshot(
+        sealed,
+        watchtower_capture,
+        supplied_watchtower,
+        liquidity_capture,
+        supplied_liquidity,
+        supplied_radar,
+        supplied_result,
+    )
     if require_sha256(
         envelope.get("sealed_snapshot_sha256"), "sealed_snapshot_sha256"
     ) != stable_sha256(sealed):
         raise ValueError("sealed snapshot envelope digest mismatch")
-    if require_sha256(
-        envelope.get("verified_source_bridge_result_sha256"),
-        "verified_source_bridge_result_sha256",
-    ) != stable_sha256(canonical):
-        raise ValueError("verified R77 result envelope digest mismatch")
-
-    expected_inputs = {
-        "capture_sha256": stable_sha256(capture),
-        "watchtower_sha256": stable_sha256(watchtower),
-        "radar_sha256": stable_sha256(radar),
+    expected = {
+        "watchtower_capture": stable_sha256(watchtower_capture),
+        "watchtower": stable_sha256(chain["watchtower"]),
+        "liquidity_capture": stable_sha256(liquidity_capture),
+        "liquidity": stable_sha256(chain["liquidity"]),
+        "radar": stable_sha256(chain["radar"]),
+        "r77_result": stable_sha256(chain["result"]),
     }
-    if envelope.get("verification_inputs") != expected_inputs:
-        raise ValueError("verification input digest mismatch")
+    if envelope.get("verified_artifact_sha256") != expected:
+        raise ValueError("verified artifact digest mismatch")
