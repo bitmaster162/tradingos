@@ -6,6 +6,7 @@ import math
 import re
 import statistics
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 CAPTURE_SCHEMA = "tradingos.binance_liquidity_capture.v1"
@@ -302,6 +303,8 @@ def build_lens(capture: dict[str, Any]) -> dict[str, Any]:
         "matrix": rows,
         "top_attention": rows[0]["symbol"],
         "provenance": {
+            "producer": "tools/tradingos_liquidity_lens_core.py",
+            "producer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "capture_schema": CAPTURE_SCHEMA,
             "capture_source": CAPTURE_SOURCE,
             "capture_limit": limit,

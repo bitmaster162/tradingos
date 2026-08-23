@@ -87,7 +87,7 @@ def liq(rows=None, at=None):
         "captured_at": at.isoformat().replace("+00:00", "Z"),
         "matrix": rows,
         "top_attention": rows[0]["symbol"],
-        "provenance": {"capture_sha256": HEX_C, "books_exactly_bound_to_symbols": True, "timestamp_timezone_required": True},
+        "provenance": {"producer": "tools/tradingos_liquidity_lens_core.py", "producer_sha256": m.EXPECTED_LIQUIDITY_PRODUCER_SHA256, "capture_sha256": HEX_C, "books_exactly_bound_to_symbols": True, "timestamp_timezone_required": True},
         "contract": {},
         "safety": dict(m.LIQUIDITY_SAFETY),
     }
@@ -220,6 +220,21 @@ def test_watchtower_producer_sha256_is_bound_to_canonical_source_bytes() -> None
     try: m.build_radar(bad, liq())
     except ValueError as exc: assert "producer sha256 mismatch" in str(exc)
     else: raise AssertionError("well-formed non-canonical producer sha accepted")
+
+
+def test_liquidity_producer_sha256_is_bound_to_canonical_source_bytes() -> None:
+    expected = hashlib.sha256((TOOLS / "tradingos_liquidity_lens_core.py").read_bytes()).hexdigest()
+    assert m.EXPECTED_LIQUIDITY_PRODUCER_SHA256 == expected
+
+    bad = liq(); bad["provenance"].pop("producer")
+    try: m.build_radar(watch(), bad)
+    except ValueError as exc: assert "liquidity producer mismatch" in str(exc)
+    else: raise AssertionError("missing liquidity producer accepted")
+
+    bad = liq(); bad["provenance"]["producer_sha256"] = HEX_A
+    try: m.build_radar(watch(), bad)
+    except ValueError as exc: assert "liquidity producer sha256 mismatch" in str(exc)
+    else: raise AssertionError("well-formed non-canonical liquidity producer sha accepted")
 
 
 def test_provenance_fingerprints_are_required_and_input_sensitive() -> None:
