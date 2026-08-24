@@ -8,6 +8,7 @@ from tools.tradingos_shadow_integration import (
     build_trade_thesis,
     build_triaxis_trade_audit_request,
     normalize_triaxis_adjudication,
+    sha256_obj,
 )
 from tools.unified_shadow_federation import (
     ACTIVE_TRADING_SPINE,
@@ -64,13 +65,20 @@ class UnifiedShadowFederationTests(unittest.TestCase):
         )
         self.twin = {
             "schema": "sct.prediction/v3",
-            "prediction_id": "pred-unified-001",
+            "case_id": self.case["case_id"],
+            "arm": "sct",
+            "options": tuple(self.case["options"]),
+            "option_probabilities": {"LONG": 0.68, "SHORT": 0.07, "WAIT": 0.25},
             "predicted_choice": "LONG",
             "confidence": 0.68,
-            "option_probabilities": {"LONG": 0.68, "SHORT": 0.07, "WAIT": 0.25},
+            "reasons": (),
+            "change_conditions": (),
+            "would_escalate": False,
+            "committed_at": 1_787_155_300.0,
             "execution_authority": "NONE",
             "can_execute": False,
         }
+        self.twin["prediction_id"] = sha256_obj(self.twin)
         self.packet = build_trade_decision_packet(
             self.case,
             self.thesis,
