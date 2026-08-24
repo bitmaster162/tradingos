@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "policy_id": "TRADINGOS_AI_ANALYST_POLICY_V1",
+  "input_contract": "tradingos.decision_brief.v1-compatible",
+  "model_transport_in_core": false,
+  "external_sources_allowed": false,
+  "new_market_facts_allowed": false,
+  "new_numeric_literals_allowed": false,
+  "probability_claims_allowed": false,
+  "max_claims": 12,
+  "max_questions": 8,
+  "max_text_chars": 600,
+  "allowed_claim_kinds": [
+    "THESIS",
+    "COUNTERTHESIS",
+    "BLIND_SPOT",
+    "PREMORTEM",
+    "SCENARIO_READ",
+    "INVALIDATION_READ",
+    "OPERATOR_QUESTION"
+  ],
+  "blocked_brief_allowed_claim_kinds": [
+    "BLIND_SPOT",
+    "PREMORTEM",
+    "INVALIDATION_READ",
+    "OPERATOR_QUESTION"
+  ],
+  "allowed_operator_dispositions": [
+    "REVIEW_BRIEF",
+    "WAIT_FOR_CONFIRMATION",
+    "REFRESH_DATA",
+    "NO_ACTION"
+  ],
+  "blocked_brief_allowed_dispositions": [
+    "REFRESH_DATA",
+    "NO_ACTION"
+  ],
+  "output_permissions": {
+    "interpretation_only": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "execution_authority": "NONE",
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "confers_authority": false
+  }
+}
