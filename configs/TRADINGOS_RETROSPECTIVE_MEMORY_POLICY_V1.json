@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "policy_id": "TRADINGOS_RETROSPECTIVE_MEMORY_POLICY_V1",
+  "mode": "OFFLINE_RETROSPECTIVE_ONLY",
+  "allowed_outcomes": [
+    "SUPPORTED",
+    "CONTRADICTED",
+    "UNRESOLVED",
+    "NOT_EVALUABLE"
+  ],
+  "require_all_response_claims": true,
+  "allow_extra_claim_ids": false,
+  "external_sources_allowed": false,
+  "persistence_in_core_allowed": false,
+  "pnl_fields_allowed": false,
+  "trading_performance_use_allowed": false,
+  "probability_outputs_allowed": false,
+  "rate_outputs_allowed": false,
+  "auto_learning_allowed": false,
+  "weight_update_allowed": false,
+  "prompt_update_allowed": false,
+  "model_selection_update_allowed": false,
+  "policy_update_allowed": false,
+  "live_decision_feedback_allowed": false,
+  "calibration_mode": "COUNT_ONLY",
+  "memory_write_authority": "NONE",
+  "output_permissions": {
+    "execution_authority": "NONE",
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "confers_authority": false
+  }
+}

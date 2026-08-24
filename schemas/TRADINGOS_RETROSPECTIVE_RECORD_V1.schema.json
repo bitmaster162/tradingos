@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_RETROSPECTIVE_RECORD_V1.schema.json",
+  "title": "TradingOS R80 Retrospective Record V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "record_id",
+    "request_id",
+    "brief_sha256",
+    "request_sha256",
+    "envelope_sha256",
+    "transport_receipt_sha256",
+    "response_sha256",
+    "memory_policy_sha256",
+    "annotation_sha256",
+    "claim_outcomes",
+    "memory_write_authority",
+    "auto_learning_allowed",
+    "live_decision_feedback_allowed",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tradingos.retrospective_record.v1"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "brief_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "envelope_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "transport_receipt_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "response_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "memory_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "annotation_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "claim_outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "claim_kind",
+          "outcome",
+          "rationale_code"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_kind": {
+            "enum": [
+              "THESIS",
+              "COUNTERTHESIS",
+              "BLIND_SPOT",
+              "PREMORTEM",
+              "SCENARIO_READ",
+              "INVALIDATION_READ",
+              "OPERATOR_QUESTION"
+            ]
+          },
+          "outcome": {
+            "enum": [
+              "SUPPORTED",
+              "CONTRADICTED",
+              "UNRESOLVED",
+              "NOT_EVALUABLE"
+            ]
+          },
+          "rationale_code": {
+            "enum": [
+              "EVIDENCE_MATCH",
+              "EVIDENCE_CONFLICT",
+              "INSUFFICIENT_EVIDENCE",
+              "NOT_APPLICABLE"
+            ]
+          }
+        }
+      }
+    },
+    "memory_write_authority": {
+      "const": "NONE"
+    },
+    "auto_learning_allowed": {
+      "const": false
+    },
+    "live_decision_feedback_allowed": {
+      "const": false
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "confers_authority": {
+      "const": false
+    }
+  }
+}
