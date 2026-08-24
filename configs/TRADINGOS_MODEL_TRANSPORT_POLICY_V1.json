@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "policy_id": "TRADINGOS_MODEL_TRANSPORT_POLICY_V1",
+  "transport_boundary_enabled": true,
+  "live_provider_calls_allowed": false,
+  "mock_local_allowed": true,
+  "allowed_adapter_modes": [
+    "MOCK_LOCAL"
+  ],
+  "credentials_allowed": false,
+  "environment_secret_reads_allowed": false,
+  "external_sources_allowed": false,
+  "provider_tools_allowed": false,
+  "streaming_allowed": false,
+  "async_dispatch_allowed": false,
+  "retries": 0,
+  "timeout_seconds": 0,
+  "max_prompt_chars": 50000,
+  "request_binding_required": true,
+  "prompt_binding_required": true,
+  "post_model_validation_required": true,
+  "output_permissions": {
+    "interpretation_only": true,
+    "signals_allowed": false,
+    "orders_allowed": false,
+    "execution_authority": "NONE",
+    "can_trade": false,
+    "capital_permission": "DENY",
+    "confers_authority": false
+  }
+}

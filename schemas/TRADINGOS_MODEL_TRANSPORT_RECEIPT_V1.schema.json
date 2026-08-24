@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_MODEL_TRANSPORT_RECEIPT_V1.schema.json",
+  "title": "TradingOS R79 Model Transport Receipt V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "envelope_id",
+    "request_id",
+    "brief_sha256",
+    "request_sha256",
+    "prompt_sha256",
+    "transport_policy_sha256",
+    "provider_id",
+    "model_id",
+    "transport_mode",
+    "adapter_invoked",
+    "network_call_performed",
+    "credentials_used",
+    "response_sha256",
+    "r78_response_validated",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tradingos.model_transport_receipt.v1"
+    },
+    "envelope_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "brief_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "prompt_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "transport_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "provider_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "transport_mode": {
+      "const": "MOCK_LOCAL"
+    },
+    "adapter_invoked": {
+      "const": true
+    },
+    "network_call_performed": {
+      "const": false
+    },
+    "credentials_used": {
+      "const": false
+    },
+    "response_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "r78_response_validated": {
+      "const": true
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "confers_authority": {
+      "const": false
+    }
+  }
+}
