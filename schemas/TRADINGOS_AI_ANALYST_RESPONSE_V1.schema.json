@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_AI_ANALYST_RESPONSE_V1.schema.json",
+  "title": "TradingOS R78 AI Analyst Response V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "request_id",
+    "brief_sha256",
+    "analysis_mode",
+    "claims",
+    "operator_disposition",
+    "questions",
+    "external_sources_used",
+    "probability_claimed",
+    "signals_allowed",
+    "orders_allowed",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tradingos.ai_analyst_response.v1"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "brief_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "analysis_mode": {
+      "enum": [
+        "INTERPRETATION_ONLY",
+        "DIAGNOSTIC_ONLY"
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "kind",
+          "text",
+          "evidence_refs",
+          "claim_scope",
+          "novel_market_fact"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "THESIS",
+              "COUNTERTHESIS",
+              "BLIND_SPOT",
+              "PREMORTEM",
+              "SCENARIO_READ",
+              "INVALIDATION_READ",
+              "OPERATOR_QUESTION"
+            ]
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "claim_scope": {
+            "const": "INTERPRETATION_OF_REFERENCED_EVIDENCE"
+          },
+          "novel_market_fact": {
+            "const": false
+          }
+        }
+      }
+    },
+    "operator_disposition": {
+      "enum": [
+        "REVIEW_BRIEF",
+        "WAIT_FOR_CONFIRMATION",
+        "REFRESH_DATA",
+        "NO_ACTION"
+      ]
+    },
+    "questions": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question_id",
+          "text",
+          "evidence_refs"
+        ],
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          },
+          "evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "external_sources_used": {
+      "const": false
+    },
+    "probability_claimed": {
+      "const": false
+    },
+    "signals_allowed": {
+      "const": false
+    },
+    "orders_allowed": {
+      "const": false
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "confers_authority": {
+      "const": false
+    }
+  }
+}
