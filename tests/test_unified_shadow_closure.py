@@ -43,13 +43,20 @@ class UnifiedShadowClosureTests(unittest.TestCase):
         )
         twin = {
             "schema": "sct.prediction/v3",
-            "prediction_id": "pred-closure",
+            "case_id": self.case["case_id"],
+            "arm": "sct",
+            "options": tuple(self.case["options"]),
+            "option_probabilities": {"LONG": 0.7, "SHORT": 0.1, "WAIT": 0.2},
             "predicted_choice": "LONG",
             "confidence": 0.7,
-            "option_probabilities": {"LONG": 0.7, "SHORT": 0.1, "WAIT": 0.2},
+            "reasons": (),
+            "change_conditions": (),
+            "would_escalate": False,
+            "committed_at": 1_787_158_900.0,
             "execution_authority": "NONE",
             "can_execute": False,
         }
+        twin["prediction_id"] = sha256_obj(twin)
         self.packet = build_trade_decision_packet(
             self.case,
             thesis,
