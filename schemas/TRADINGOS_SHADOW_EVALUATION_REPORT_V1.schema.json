@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_SHADOW_EVALUATION_REPORT_V1.schema.json",
+  "title": "TradingOS R81 Shadow Evaluation Report V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "report_id",
+    "frozen_set_declaration_id",
+    "frozen_set_declaration_sha256",
+    "memory_policy_sha256",
+    "shadow_policy_sha256",
+    "record_count",
+    "claim_count",
+    "counts_by_outcome",
+    "counts_by_claim_kind",
+    "integrity",
+    "report_mode",
+    "shadow_only",
+    "memory_write_authority",
+    "auto_learning_allowed",
+    "live_decision_feedback_allowed",
+    "live_decision_use_allowed",
+    "model_selection_use_allowed",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {"const": "tradingos.shadow_evaluation_report.v1"},
+    "report_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "frozen_set_declaration_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "frozen_set_declaration_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "memory_policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "shadow_policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "record_count": {"type": "integer", "minimum": 0},
+    "claim_count": {"type": "integer", "minimum": 0},
+    "counts_by_outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SUPPORTED", "CONTRADICTED", "UNRESOLVED", "NOT_EVALUABLE"],
+      "properties": {
+        "SUPPORTED": {"type": "integer", "minimum": 0},
+        "CONTRADICTED": {"type": "integer", "minimum": 0},
+        "UNRESOLVED": {"type": "integer", "minimum": 0},
+        "NOT_EVALUABLE": {"type": "integer", "minimum": 0}
+      }
+    },
+    "counts_by_claim_kind": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["THESIS", "COUNTERTHESIS", "BLIND_SPOT", "PREMORTEM", "SCENARIO_READ", "INVALIDATION_READ", "OPERATOR_QUESTION"],
+      "properties": {
+        "THESIS": {"type": "integer", "minimum": 0},
+        "COUNTERTHESIS": {"type": "integer", "minimum": 0},
+        "BLIND_SPOT": {"type": "integer", "minimum": 0},
+        "PREMORTEM": {"type": "integer", "minimum": 0},
+        "SCENARIO_READ": {"type": "integer", "minimum": 0},
+        "INVALIDATION_READ": {"type": "integer", "minimum": 0},
+        "OPERATOR_QUESTION": {"type": "integer", "minimum": 0}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["all_records_valid", "duplicate_record_ids_absent", "frozen_set_exact", "mixed_memory_policy_absent", "record_payloads_bound"],
+      "properties": {
+        "all_records_valid": {"const": true},
+        "duplicate_record_ids_absent": {"const": true},
+        "frozen_set_exact": {"const": true},
+        "mixed_memory_policy_absent": {"const": true},
+        "record_payloads_bound": {"const": true}
+      }
+    },
+    "report_mode": {"const": "COUNT_AND_INTEGRITY_ONLY"},
+    "shadow_only": {"const": true},
+    "memory_write_authority": {"const": "NONE"},
+    "auto_learning_allowed": {"const": false},
+    "live_decision_feedback_allowed": {"const": false},
+    "live_decision_use_allowed": {"const": false},
+    "model_selection_use_allowed": {"const": false},
+    "execution_authority": {"const": "NONE"},
+    "can_trade": {"const": false},
+    "capital_permission": {"const": "DENY"},
+    "confers_authority": {"const": false}
+  }
+}
