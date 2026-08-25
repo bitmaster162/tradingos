@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_ATTESTATION_EVIDENCE_SET_V1.schema.json",
+  "title": "TradingOS R83 Frozen Attestation Evidence Set V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "evidence_set_id",
+    "review_policy_sha256",
+    "item_count",
+    "bindings",
+    "integrity",
+    "shadow_only",
+    "human_review_only",
+    "review_identity_verified",
+    "consensus_inference_allowed",
+    "approval_state_allowed",
+    "attestation_set_consumption_authority",
+    "memory_write_authority",
+    "policy_update_allowed",
+    "live_decision_feedback_allowed",
+    "live_decision_use_allowed",
+    "model_selection_use_allowed",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tradingos.attestation_evidence_set.v1"
+    },
+    "evidence_set_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "review_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "item_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 64
+    },
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "attestation_id",
+          "attestation_sha256",
+          "shadow_report_id",
+          "shadow_report_sha256",
+          "review_policy_sha256"
+        ],
+        "properties": {
+          "attestation_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$"
+          },
+          "attestation_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "shadow_report_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{24}$"
+          },
+          "shadow_report_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "review_policy_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "all_attestations_valid",
+        "duplicate_attestation_ids_absent",
+        "duplicate_attestation_payloads_absent",
+        "review_policy_homogeneous",
+        "bindings_exact"
+      ],
+      "properties": {
+        "all_attestations_valid": {
+          "const": true
+        },
+        "duplicate_attestation_ids_absent": {
+          "const": true
+        },
+        "duplicate_attestation_payloads_absent": {
+          "const": true
+        },
+        "review_policy_homogeneous": {
+          "const": true
+        },
+        "bindings_exact": {
+          "const": true
+        }
+      }
+    },
+    "shadow_only": {
+      "const": true
+    },
+    "human_review_only": {
+      "const": true
+    },
+    "review_identity_verified": {
+      "const": false
+    },
+    "consensus_inference_allowed": {
+      "const": false
+    },
+    "approval_state_allowed": {
+      "const": false
+    },
+    "attestation_set_consumption_authority": {
+      "const": "NONE"
+    },
+    "memory_write_authority": {
+      "const": "NONE"
+    },
+    "policy_update_allowed": {
+      "const": false
+    },
+    "live_decision_feedback_allowed": {
+      "const": false
+    },
+    "live_decision_use_allowed": {
+      "const": false
+    },
+    "model_selection_use_allowed": {
+      "const": false
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "confers_authority": {
+      "const": false
+    }
+  }
+}
