@@ -197,6 +197,26 @@ def test_numeric_canonicalization_supported_and_unsupported_boundaries():
     deny(lambda: rehash(nonfinite), "unsupported_numeric_nonfinite")
 
 
+
+def test_json_container_enum_values_fail_with_typed_contract_error():
+    cases = [
+        (lambda e, v: e["quality"].__setitem__("status", v), "quality_status_invalid"),
+        (lambda e, v: e["detector_summary"][0].__setitem__("detector_type", v), "detector_summary_0_type_invalid"),
+        (lambda e, v: e["detector_summary"][0].__setitem__("status", v), "detector_summary_0_status_invalid"),
+        (lambda e, v: e["detector_summary"][0].__setitem__("orientation", v), "detector_summary_0_orientation_invalid"),
+    ]
+    for mutate, code in cases:
+        for invalid in (["UNKNOWN"], {"value": "UNKNOWN"}):
+            evidence = golden_evidence()
+            mutate(evidence, invalid)
+            deny(lambda evidence=evidence: validate(evidence), code)
+
+
+def test_oversized_integer_confidence_fails_with_typed_contract_error():
+    evidence = golden_evidence()
+    evidence["detector_summary"][0]["confidence"] = 10**1000
+    deny(lambda: validate(evidence), "detector_summary_0_confidence_invalid")
+
 def test_counterevidence_uncertainty_alternatives_and_invalidation_are_preserved():
     evidence = golden_evidence()
     evidence["counterevidence"] = ["visible rejection at resistance"]

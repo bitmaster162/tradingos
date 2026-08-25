@@ -160,7 +160,7 @@ def _timestamp_ns(value: Any, path: str) -> int:
 
 def _validate_quality(value: Any) -> None:
     quality = _exact_dict(value, QUALITY_KEYS, "quality")
-    _deny(quality["status"] in QUALITY_STATUSES, "quality_status_invalid")
+    _deny(type(quality["status"]) is str and quality["status"] in QUALITY_STATUSES, "quality_status_invalid")
     _string_array(quality["reasons"], "quality_reasons")
     _deny(quality["abstention_reason"] is None or (type(quality["abstention_reason"]) is str and bool(quality["abstention_reason"].strip())), "quality_abstention_reason_invalid")
 
@@ -180,14 +180,17 @@ def _validate_detectors(value: Any) -> None:
     for index, item in enumerate(value):
         item = _exact_dict(item, DETECTOR_KEYS, f"detector_summary_{index}")
         detector_type = item["detector_type"]
-        _deny(detector_type in DETECTOR_TYPE_SET and detector_type not in seen, f"detector_summary_{index}_type_invalid")
+        _deny(type(detector_type) is str and detector_type in DETECTOR_TYPE_SET and detector_type not in seen, f"detector_summary_{index}_type_invalid")
         seen.add(detector_type)
-        _deny(item["status"] in DETECTOR_STATUSES, f"detector_summary_{index}_status_invalid")
-        _deny(item["orientation"] in DETECTOR_ORIENTATIONS, f"detector_summary_{index}_orientation_invalid")
+        _deny(type(item["status"]) is str and item["status"] in DETECTOR_STATUSES, f"detector_summary_{index}_status_invalid")
+        _deny(type(item["orientation"]) is str and item["orientation"] in DETECTOR_ORIENTATIONS, f"detector_summary_{index}_orientation_invalid")
         confidence = item["confidence"]
         if confidence is not None:
-            _deny(type(confidence) in (int, float) and type(confidence) is not bool, f"detector_summary_{index}_confidence_invalid")
-            _deny(math.isfinite(float(confidence)) and 0 <= confidence <= 1, f"detector_summary_{index}_confidence_invalid")
+            valid_confidence = (
+                (type(confidence) is int and 0 <= confidence <= 1)
+                or (type(confidence) is float and math.isfinite(confidence) and 0 <= confidence <= 1)
+            )
+            _deny(valid_confidence, f"detector_summary_{index}_confidence_invalid")
         _string_array(item["evidence_refs"], f"detector_summary_{index}_evidence_refs")
         _string_array(item["counterevidence_refs"], f"detector_summary_{index}_counterevidence_refs")
         _string_array(item["invalidation_conditions"], f"detector_summary_{index}_invalidation_conditions")
