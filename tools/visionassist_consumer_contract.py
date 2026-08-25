@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime
 import hashlib
 import json
 import math
@@ -141,14 +141,19 @@ def _timestamp_ns(value: Any, path: str) -> int:
     except ValueError as exc:
         raise VisionAssistConsumerContractError(f"{path}_calendar_invalid") from exc
     if zone == "Z":
-        offset = timedelta(0)
+        offset_seconds = 0
     else:
         direction = 1 if sign == "+" else -1
-        offset = direction * timedelta(hours=offset_hour, minutes=offset_minute)
-    utc_naive = local - offset
-    epoch = datetime(1970, 1, 1)
-    delta = utc_naive - epoch
-    whole_seconds = delta.days * 86400 + delta.seconds
+        offset_seconds = direction * (offset_hour * 3600 + offset_minute * 60)
+
+    # Compute the UTC instant arithmetically instead of shifting ``datetime``.
+    # A valid RFC3339 local timestamp at year 0001/9999 with an explicit offset
+    # can map just outside Python datetime's representable UTC year range while
+    # remaining a valid ECMAScript Date instant. Integer epoch arithmetic keeps
+    # that producer-valid boundary deterministic and avoids raw OverflowError.
+    epoch_ordinal = datetime(1970, 1, 1).toordinal()
+    local_seconds = hour * 3600 + minute * 60 + second
+    whole_seconds = (local.toordinal() - epoch_ordinal) * 86400 + local_seconds - offset_seconds
     fraction_ns = int(fraction.ljust(9, "0")) if fraction else 0
     return whole_seconds * 1_000_000_000 + fraction_ns
 

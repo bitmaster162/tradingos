@@ -147,6 +147,24 @@ def test_freshness_policy_future_stale_and_exact_boundary():
     deny(lambda: validate(golden_evidence(), freshness_policy_id="VISIONASSIST_SHADOW_CAPTURE_AGE_600S_V1"), "freshness_policy_mismatch")
 
 
+def test_rfc3339_offset_arithmetic_handles_python_datetime_year_boundaries():
+    for captured_at, as_of in [
+        ("0001-01-01T00:00:00+23:59", "0001-01-01T00:00:01+23:59"),
+        ("9999-12-31T23:59:58-23:59", "9999-12-31T23:59:59-23:59"),
+    ]:
+        evidence = golden_evidence()
+        evidence["captured_at"] = captured_at
+        receipt = validate(rehash(evidence), as_of=as_of)
+        assert receipt["observed_at"] == captured_at
+        assert receipt["freshness_status"] == "FRESH"
+
+
+def test_rfc3339_offsets_compare_by_absolute_instant():
+    evidence = golden_evidence()
+    evidence["captured_at"] = "2026-08-25T22:00:00+07:00"
+    validate(rehash(evidence), as_of="2026-08-25T15:05:00Z")
+
+
 def test_authority_widening_attempts_fail_even_after_rehash():
     mutations = [
         lambda x: x["safety"].__setitem__("can_trade", True),
