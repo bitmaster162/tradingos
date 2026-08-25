@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_HUMAN_REVIEW_ATTESTATION_V1.schema.json",
+  "title": "TradingOS R82 Human Review Attestation V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "attestation_id",
+    "shadow_report_id",
+    "shadow_report_sha256",
+    "shadow_policy_sha256",
+    "frozen_set_declaration_id",
+    "review_policy_sha256",
+    "review_origin",
+    "disposition",
+    "reason_codes",
+    "shadow_only",
+    "human_review_only",
+    "report_consumption_authority",
+    "memory_write_authority",
+    "policy_update_allowed",
+    "live_decision_feedback_allowed",
+    "live_decision_use_allowed",
+    "model_selection_use_allowed",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {"const": "tradingos.human_review_attestation.v1"},
+    "attestation_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "shadow_report_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "shadow_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "shadow_policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "frozen_set_declaration_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
+    "review_policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "review_origin": {"const": "UNVERIFIED_HUMAN_INPUT"},
+    "disposition": {"enum": ["ACKNOWLEDGED", "DISPUTED", "FOLLOWUP_REQUIRED"]},
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "INTEGRITY_CONFIRMED",
+          "COUNT_REVIEWED",
+          "SOURCE_BINDING_CONCERN",
+          "POLICY_BINDING_CONCERN",
+          "INSUFFICIENT_CONTEXT"
+        ]
+      }
+    },
+    "shadow_only": {"const": true},
+    "human_review_only": {"const": true},
+    "report_consumption_authority": {"const": "NONE"},
+    "memory_write_authority": {"const": "NONE"},
+    "policy_update_allowed": {"const": false},
+    "live_decision_feedback_allowed": {"const": false},
+    "live_decision_use_allowed": {"const": false},
+    "model_selection_use_allowed": {"const": false},
+    "execution_authority": {"const": "NONE"},
+    "can_trade": {"const": false},
+    "capital_permission": {"const": "DENY"},
+    "confers_authority": {"const": false}
+  }
+}
