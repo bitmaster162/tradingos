@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TRADINGOS_EXTERNAL_ASSERTION_REPLAY_DUAL_STATE_ATOMICITY_BINDING_V1.schema.json",
+  "title": "TradingOS R90 External Assertion Replay Dual State Atomicity Binding V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "binding_id",
+    "r89_binding_id",
+    "r89_binding_sha256",
+    "r88_binding_id",
+    "r87_binding_id",
+    "r86_binding_id",
+    "r85_binding_id",
+    "r84_binding_id",
+    "atomicity_policy_sha256",
+    "atomicity_verification_sha256",
+    "atomicity_verification_digest_consumed",
+    "verifier_authority_root_sha256",
+    "verifier_authority_root_digest_consumed",
+    "writer_authority_root_sha256",
+    "writer_authority_root_digest_consumed",
+    "authority_anchor_sha256",
+    "writer_lease_sha256",
+    "prior_receipt_index_sha256",
+    "next_receipt_index_candidate_sha256",
+    "lease_lineage_sha256",
+    "commit_id",
+    "idempotency_key_sha256",
+    "observed_pair_state",
+    "dual_state_atomicity_model",
+    "split_state_rejected",
+    "lease_epoch_lineage_verified",
+    "aba_guard_verified",
+    "dual_state_atomicity_evidence_bound",
+    "write_performed",
+    "live_backend_observed",
+    "durable_dual_state_atomicity_proven",
+    "durable_commit_proven",
+    "durable_single_use_enforced",
+    "global_current_state_verified",
+    "concurrent_writer_exclusion_proven",
+    "registry_write_performed",
+    "lease_registry_write_performed",
+    "receipt_index_write_performed",
+    "backend_write_performed",
+    "assertion_freshness_verified",
+    "liveness_verified",
+    "writer_authority_root_verified",
+    "verifier_trust_root_verified",
+    "review_identity_verified",
+    "physical_human_presence_proven",
+    "distinct_reviewer_count_allowed",
+    "consensus_inference_allowed",
+    "approval_state_allowed",
+    "shadow_only",
+    "human_review_only",
+    "attestation_set_consumption_authority",
+    "memory_write_authority",
+    "policy_update_allowed",
+    "live_decision_feedback_allowed",
+    "live_decision_use_allowed",
+    "model_selection_use_allowed",
+    "execution_authority",
+    "can_trade",
+    "capital_permission",
+    "confers_authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "tradingos.external_assertion_replay_dual_state_atomicity_binding.v1"
+    },
+    "binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "r89_binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "r89_binding_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "r88_binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "r87_binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "r86_binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "r85_binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "r84_binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "atomicity_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "atomicity_verification_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "atomicity_verification_digest_consumed": {
+      "const": true
+    },
+    "verifier_authority_root_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verifier_authority_root_digest_consumed": {
+      "const": true
+    },
+    "writer_authority_root_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "writer_authority_root_digest_consumed": {
+      "const": true
+    },
+    "authority_anchor_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "writer_lease_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "prior_receipt_index_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "next_receipt_index_candidate_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "lease_lineage_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "commit_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "idempotency_key_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "observed_pair_state": {
+      "const": "PROTOCOL_CANDIDATE_ONLY_NO_DURABLE_BACKEND"
+    },
+    "dual_state_atomicity_model": {
+      "const": "ONE_TRANSACTION_TWO_LOGICAL_RECORDS"
+    },
+    "split_state_rejected": {
+      "const": true
+    },
+    "lease_epoch_lineage_verified": {
+      "const": true
+    },
+    "aba_guard_verified": {
+      "const": true
+    },
+    "dual_state_atomicity_evidence_bound": {
+      "const": true
+    },
+    "write_performed": {
+      "const": false
+    },
+    "live_backend_observed": {
+      "const": false
+    },
+    "durable_dual_state_atomicity_proven": {
+      "const": false
+    },
+    "durable_commit_proven": {
+      "const": false
+    },
+    "durable_single_use_enforced": {
+      "const": false
+    },
+    "global_current_state_verified": {
+      "const": false
+    },
+    "concurrent_writer_exclusion_proven": {
+      "const": false
+    },
+    "registry_write_performed": {
+      "const": false
+    },
+    "lease_registry_write_performed": {
+      "const": false
+    },
+    "receipt_index_write_performed": {
+      "const": false
+    },
+    "backend_write_performed": {
+      "const": false
+    },
+    "assertion_freshness_verified": {
+      "const": false
+    },
+    "liveness_verified": {
+      "const": false
+    },
+    "writer_authority_root_verified": {
+      "const": false
+    },
+    "verifier_trust_root_verified": {
+      "const": false
+    },
+    "review_identity_verified": {
+      "const": false
+    },
+    "physical_human_presence_proven": {
+      "const": false
+    },
+    "distinct_reviewer_count_allowed": {
+      "const": false
+    },
+    "consensus_inference_allowed": {
+      "const": false
+    },
+    "approval_state_allowed": {
+      "const": false
+    },
+    "policy_update_allowed": {
+      "const": false
+    },
+    "live_decision_feedback_allowed": {
+      "const": false
+    },
+    "live_decision_use_allowed": {
+      "const": false
+    },
+    "model_selection_use_allowed": {
+      "const": false
+    },
+    "can_trade": {
+      "const": false
+    },
+    "confers_authority": {
+      "const": false
+    },
+    "shadow_only": {
+      "const": true
+    },
+    "human_review_only": {
+      "const": true
+    },
+    "attestation_set_consumption_authority": {
+      "const": "NONE"
+    },
+    "memory_write_authority": {
+      "const": "NONE"
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "capital_permission": {
+      "const": "DENY"
+    }
+  }
+}
