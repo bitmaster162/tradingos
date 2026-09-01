@@ -11,6 +11,7 @@ from tools.tradingos_reviewer_key_possession_common import _ID24_RE, _SHA64_RE
 CHALLENGE_KEYS = {
     "schema", "purpose", "evidence_set_id", "evidence_set_sha256", "attestation_id",
     "attestation_sha256", "shadow_report_id", "shadow_report_sha256", "review_policy_sha256",
+    "key_possession_policy_sha256",
 }
 EXTERNAL_ASSERTION_KEYS = {
     "schema", "challenge_sha256", "public_key_sha256", "key_id", "algorithm",
@@ -21,9 +22,10 @@ EXTERNAL_ASSERTION_KEYS = {
 BINDING_KEYS = {
     "schema", "binding_id", "evidence_set_id", "evidence_set_sha256", "attestation_id",
     "attestation_sha256", "shadow_report_id", "shadow_report_sha256", "review_policy_sha256",
-    "challenge_sha256", "external_assertion_sha256", "external_assertion_digest_consumed",
-    "public_key_sha256", "key_id", "algorithm", "verifier_id", "verifier_key_id",
-    "key_possession_evidence", "local_signature_math_verified", "review_identity_verified",
+    "key_possession_policy_sha256", "challenge_sha256", "external_assertion_sha256",
+    "external_assertion_digest_consumed", "public_key_sha256", "key_id", "algorithm",
+    "verifier_id", "verifier_key_id", "key_possession_evidence", "local_signature_math_verified",
+    "shadow_only", "human_review_only", "review_identity_verified",
     "distinct_reviewer_count_allowed", "same_key_same_human_inference_allowed",
     "different_keys_different_humans_inference_allowed", "physical_human_presence_proven",
     "assertion_freshness_verified", "consensus_inference_allowed", "approval_state_allowed",
@@ -81,6 +83,7 @@ def build_reviewer_key_possession_challenge(
         "shadow_report_id": binding["shadow_report_id"],
         "shadow_report_sha256": binding["shadow_report_sha256"],
         "review_policy_sha256": binding["review_policy_sha256"],
+        "key_possession_policy_sha256": stable_sha256(key_possession_policy),
     }
 
 
@@ -159,6 +162,7 @@ def build_reviewer_key_possession_binding(
         "shadow_report_id": challenge["shadow_report_id"],
         "shadow_report_sha256": challenge["shadow_report_sha256"],
         "review_policy_sha256": challenge["review_policy_sha256"],
+        "key_possession_policy_sha256": challenge["key_possession_policy_sha256"],
         "challenge_sha256": stable_sha256(challenge),
         "external_assertion_sha256": assertion_sha,
         "external_assertion_digest_consumed": True,
@@ -169,6 +173,8 @@ def build_reviewer_key_possession_binding(
         "verifier_key_id": external_assertion["verifier_key_id"],
         "key_possession_evidence": "EXTERNAL_ASYMMETRIC_VERIFIER_ASSERTION_DIGEST_BOUND",
         "local_signature_math_verified": False,
+        "shadow_only": True,
+        "human_review_only": True,
         "review_identity_verified": False,
         "distinct_reviewer_count_allowed": False,
         "same_key_same_human_inference_allowed": False,
@@ -233,6 +239,7 @@ def validate_reviewer_key_possession_binding(
         "shadow_report_id": challenge["shadow_report_id"],
         "shadow_report_sha256": challenge["shadow_report_sha256"],
         "review_policy_sha256": challenge["review_policy_sha256"],
+        "key_possession_policy_sha256": challenge["key_possession_policy_sha256"],
         "challenge_sha256": stable_sha256(challenge),
         "external_assertion_sha256": assertion_sha,
         "external_assertion_digest_consumed": True,
@@ -243,6 +250,8 @@ def validate_reviewer_key_possession_binding(
         "verifier_key_id": external_assertion["verifier_key_id"],
         "key_possession_evidence": "EXTERNAL_ASYMMETRIC_VERIFIER_ASSERTION_DIGEST_BOUND",
         "local_signature_math_verified": False,
+        "shadow_only": True,
+        "human_review_only": True,
         "review_identity_verified": False,
         "distinct_reviewer_count_allowed": False,
         "same_key_same_human_inference_allowed": False,

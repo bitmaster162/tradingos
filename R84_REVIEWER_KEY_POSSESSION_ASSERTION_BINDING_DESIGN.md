@@ -1,4 +1,4 @@
-# TradingOS R84 — Reviewer Key-Possession Assertion Binding R1
+# TradingOS R84 — Reviewer Key-Possession Assertion Binding R2
 
 ## Objective
 
@@ -22,6 +22,7 @@ The challenge is deterministic and binds:
 - exact `shadow_report_id`;
 - exact `shadow_report_sha256`;
 - exact `review_policy_sha256`;
+- SHA-256 of the exact R84 key-possession policy;
 - the fixed purpose `R84_REVIEWER_KEY_POSSESSION_BINDING_ONLY`.
 
 The challenge contains no nonce and therefore R84 makes **no freshness claim**.
@@ -56,7 +57,7 @@ R84 does not aggregate dispositions/reasons and does not create votes, quorum, m
 
 ## Authority ceiling
 
-R84 remains offline evidence only:
+The R84 artifact carries the exact `key_possession_policy_sha256` plus the explicit offline-only ceiling. It remains:
 - `shadow_only=true`
 - `human_review_only=true`
 - `review_identity_verified=false`

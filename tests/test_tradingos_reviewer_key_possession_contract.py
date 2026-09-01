@@ -44,6 +44,15 @@ def test_challenge_binds_exact_r83_attestation_row():
     assert c["review_policy_sha256"] == row["review_policy_sha256"]
 
 
+def test_challenge_and_binding_bind_exact_r84_policy():
+    p = policy()
+    c = challenge()
+    x = binding()
+    expected = m.stable_sha256(p)
+    assert c["key_possession_policy_sha256"] == expected
+    assert x["key_possession_policy_sha256"] == expected
+
+
 def test_external_assertion_digest_is_exactly_bound():
     items, evidence_set = upstream()
     aid = evidence_set["bindings"][0]["attestation_id"]
@@ -95,6 +104,8 @@ def test_schema_required_keys_match_contract():
 def test_policy_validates_and_authority_ceiling_is_exact():
     m.validate_key_possession_policy(policy())
     x = binding()
+    assert x["shadow_only"] is True
+    assert x["human_review_only"] is True
     assert x["attestation_set_consumption_authority"] == "NONE"
     assert x["memory_write_authority"] == "NONE"
     assert x["policy_update_allowed"] is False

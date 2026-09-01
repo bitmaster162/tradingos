@@ -1,23 +1,25 @@
-# TradingOS R84 — Reviewer Key-Possession Assertion Binding Threat Model R1
+# TradingOS R84 — Reviewer Key-Possession Assertion Binding Threat Model R2
 
 ## Trust boundaries
 
 1. Canonical R81 shadow report bytes.
 2. Canonical R82 review-policy and human-review attestation bytes.
 3. Canonical R83 evidence-set manifest plus exact R82 evidence triples and R83 set policy.
-4. R84 deterministic challenge builder.
-5. Externally produced asymmetric-verifier assertion.
-6. Independently supplied expected SHA-256 of that complete external assertion.
-7. R84 deterministic assertion-binding builder/validator.
-8. Human/archive consumer.
+4. Exact R84 key-possession policy bytes.
+5. R84 deterministic challenge builder.
+6. Externally produced asymmetric-verifier assertion.
+7. Independently supplied expected SHA-256 of that complete external assertion.
+8. R84 deterministic assertion-binding builder/validator.
+9. Human/archive consumer.
 
-## Threats and R1 controls
+## Threats and R2 controls
 
-| Threat | R1 control |
+| Threat | R2 control |
 | --- | --- |
 | Invalid/substituted R83 evidence admitted | full canonical R83 validation before challenge construction |
 | Assertion attached to wrong attestation | canonical challenge binds exact R83 attestation binding |
 | Assertion attached to substituted evidence set | challenge binds full R83 manifest SHA-256 and `evidence_set_id` |
+| Assertion produced under substituted R84 policy | challenge and final binding both carry exact `key_possession_policy_sha256` |
 | External assertion changed after retention | complete canonical assertion SHA-256 must equal independently supplied expected digest |
 | Assertion contains unbounded/hidden fields | exact assertion key set |
 | Unsupported algorithm metadata | bounded allowlist (`ED25519`, `ES256`) |
@@ -28,6 +30,7 @@
 | Different keys are treated as different humans | explicit inference prohibition |
 | Key assertion is treated as proof of physical human presence | `physical_human_presence_proven=false` |
 | Deterministic challenge is treated as fresh liveness proof | `assertion_freshness_verified=false`; no nonce/freshness claim |
+| Offline/shadow ceiling disappears in downstream serialization | final binding and schema require `shadow_only=true` and `human_review_only=true` |
 | Distinct reviewer count backdoor | `distinct_reviewer_count_allowed=false` |
 | Consensus/majority backdoor | no vote/count/quorum/consensus fields; hard-denied |
 | Approval/recommendation backdoor | no approval/recommendation fields; hard-denied |

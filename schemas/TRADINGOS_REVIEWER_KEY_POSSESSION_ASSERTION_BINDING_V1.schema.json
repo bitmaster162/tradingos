@@ -14,6 +14,7 @@
     "shadow_report_id",
     "shadow_report_sha256",
     "review_policy_sha256",
+    "key_possession_policy_sha256",
     "challenge_sha256",
     "external_assertion_sha256",
     "external_assertion_digest_consumed",
@@ -24,6 +25,8 @@
     "verifier_key_id",
     "key_possession_evidence",
     "local_signature_math_verified",
+    "shadow_only",
+    "human_review_only",
     "review_identity_verified",
     "distinct_reviewer_count_allowed",
     "same_key_same_human_inference_allowed",
@@ -44,42 +47,146 @@
     "confers_authority"
   ],
   "properties": {
-    "schema": {"const": "tradingos.reviewer_key_possession_binding.v1"},
-    "binding_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
-    "evidence_set_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
-    "evidence_set_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "attestation_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
-    "attestation_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "shadow_report_id": {"type": "string", "pattern": "^[0-9a-f]{24}$"},
-    "shadow_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "review_policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "challenge_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "external_assertion_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "external_assertion_digest_consumed": {"const": true},
-    "public_key_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "key_id": {"type": "string", "minLength": 1, "maxLength": 128},
-    "algorithm": {"enum": ["ED25519", "ES256"]},
-    "verifier_id": {"type": "string", "minLength": 1, "maxLength": 128},
-    "verifier_key_id": {"type": "string", "minLength": 1, "maxLength": 128},
-    "key_possession_evidence": {"const": "EXTERNAL_ASYMMETRIC_VERIFIER_ASSERTION_DIGEST_BOUND"},
-    "local_signature_math_verified": {"const": false},
-    "review_identity_verified": {"const": false},
-    "distinct_reviewer_count_allowed": {"const": false},
-    "same_key_same_human_inference_allowed": {"const": false},
-    "different_keys_different_humans_inference_allowed": {"const": false},
-    "physical_human_presence_proven": {"const": false},
-    "assertion_freshness_verified": {"const": false},
-    "consensus_inference_allowed": {"const": false},
-    "approval_state_allowed": {"const": false},
-    "attestation_set_consumption_authority": {"const": "NONE"},
-    "memory_write_authority": {"const": "NONE"},
-    "policy_update_allowed": {"const": false},
-    "live_decision_feedback_allowed": {"const": false},
-    "live_decision_use_allowed": {"const": false},
-    "model_selection_use_allowed": {"const": false},
-    "execution_authority": {"const": "NONE"},
-    "can_trade": {"const": false},
-    "capital_permission": {"const": "DENY"},
-    "confers_authority": {"const": false}
+    "schema": {
+      "const": "tradingos.reviewer_key_possession_binding.v1"
+    },
+    "binding_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "evidence_set_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "evidence_set_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "attestation_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "attestation_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "shadow_report_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$"
+    },
+    "shadow_report_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "review_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "key_possession_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "challenge_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "external_assertion_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "external_assertion_digest_consumed": {
+      "const": true
+    },
+    "public_key_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "key_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "algorithm": {
+      "enum": [
+        "ED25519",
+        "ES256"
+      ]
+    },
+    "verifier_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "verifier_key_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "key_possession_evidence": {
+      "const": "EXTERNAL_ASYMMETRIC_VERIFIER_ASSERTION_DIGEST_BOUND"
+    },
+    "local_signature_math_verified": {
+      "const": false
+    },
+    "shadow_only": {
+      "const": true
+    },
+    "human_review_only": {
+      "const": true
+    },
+    "review_identity_verified": {
+      "const": false
+    },
+    "distinct_reviewer_count_allowed": {
+      "const": false
+    },
+    "same_key_same_human_inference_allowed": {
+      "const": false
+    },
+    "different_keys_different_humans_inference_allowed": {
+      "const": false
+    },
+    "physical_human_presence_proven": {
+      "const": false
+    },
+    "assertion_freshness_verified": {
+      "const": false
+    },
+    "consensus_inference_allowed": {
+      "const": false
+    },
+    "approval_state_allowed": {
+      "const": false
+    },
+    "attestation_set_consumption_authority": {
+      "const": "NONE"
+    },
+    "memory_write_authority": {
+      "const": "NONE"
+    },
+    "policy_update_allowed": {
+      "const": false
+    },
+    "live_decision_feedback_allowed": {
+      "const": false
+    },
+    "live_decision_use_allowed": {
+      "const": false
+    },
+    "model_selection_use_allowed": {
+      "const": false
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "confers_authority": {
+      "const": false
+    }
   }
 }

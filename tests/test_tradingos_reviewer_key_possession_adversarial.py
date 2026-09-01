@@ -58,6 +58,14 @@ def test_assertion_challenge_substitution_rejected():
         build_with(a)
 
 
+def test_substituted_r84_policy_rejected_before_binding():
+    a = external_assertion()
+    p = policy()
+    p["allowed_algorithms"] = ["ES256", "ED25519"]
+    with pytest.raises(ValueError, match="algorithm allowlist drift"):
+        build_with(a, p=p)
+
+
 def test_external_assertion_extra_key_rejected():
     a = external_assertion()
     a["reviewer_id"] = "someone"
@@ -128,11 +136,14 @@ def test_algorithm_allowlist_drift_rejected():
 @pytest.mark.parametrize("field,bad", [
     ("evidence_set_sha256", "f" * 64),
     ("attestation_sha256", "f" * 64),
+    ("key_possession_policy_sha256", "f" * 64),
     ("challenge_sha256", "f" * 64),
     ("external_assertion_sha256", "f" * 64),
     ("external_assertion_digest_consumed", False),
     ("key_possession_evidence", "IDENTITY_VERIFIED"),
     ("local_signature_math_verified", True),
+    ("shadow_only", False),
+    ("human_review_only", False),
     ("review_identity_verified", True),
     ("distinct_reviewer_count_allowed", True),
     ("same_key_same_human_inference_allowed", True),
