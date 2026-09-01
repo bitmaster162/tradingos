@@ -5,10 +5,17 @@ import pytest
 
 from r83_attestation_set_fixtures import set_policy as r83_set_policy
 from r84_reviewer_key_possession_fixtures import m as r84m, policy as r84_policy
-from r85_external_verifier_provenance_fixtures import AUTHORITY_ROOT_SHA256, m as r85m, provenance_policy
+from r85_external_verifier_provenance_fixtures import (
+    AUTHORITY_ROOT_SHA256,
+    m as r85m,
+    provenance_policy,
+)
 from r86_external_assertion_replay_guard_fixtures import m as r86m, replay_policy
 from r87_external_assertion_replay_atomic_cas_fixtures import m as r87m, atomic_cas_policy
-from r88_external_assertion_replay_writer_fencing_recovery_fixtures import m as r88m, writer_fencing_recovery_policy
+from r88_external_assertion_replay_writer_fencing_recovery_fixtures import (
+    m as r88m,
+    writer_fencing_recovery_policy,
+)
 from r89_external_assertion_replay_writer_authority_anchor_fixtures import (
     ROOT,
     WRITER_AUTHORITY_ROOT_SHA256,
@@ -21,8 +28,15 @@ from r89_external_assertion_replay_writer_authority_anchor_fixtures import (
 )
 
 
-def build_with(*, r88_binding_override=None, anchor_override=None, expected_anchor_sha=None,
-               expected_root=WRITER_AUTHORITY_ROOT_SHA256, policy_override=None):
+def build_with(
+    *,
+    r88_binding_override=None,
+    anchor_override=None,
+    expected_anchor_sha=None,
+    expected_verifier_root=AUTHORITY_ROOT_SHA256,
+    expected_writer_root=WRITER_AUTHORITY_ROOT_SHA256,
+    policy_override=None,
+):
     (
         items, manifest, aid, assertion, r84_binding, verifier_reg,
         r85_binding, replay_reg, r86_binding, atomic_receipt, r87_binding,
@@ -32,13 +46,26 @@ def build_with(*, r88_binding_override=None, anchor_override=None, expected_anch
     anchor = authority_anchor(r88_binding) if anchor_override is None else anchor_override
     expected_anchor_sha = m.stable_sha256(anchor) if expected_anchor_sha is None else expected_anchor_sha
     return m.build_external_assertion_replay_writer_authority_anchor_binding(
-        r88_binding, r87_binding, r86_binding, r85_binding, r84_binding, manifest, items,
-        r83_set_policy(), aid, assertion, verifier_reg, replay_reg, atomic_receipt,
-        recovery_receipt, anchor,
+        r88_binding,
+        r87_binding,
+        r86_binding,
+        r85_binding,
+        r84_binding,
+        manifest,
+        items,
+        r83_set_policy(),
+        aid,
+        assertion,
+        verifier_reg,
+        replay_reg,
+        atomic_receipt,
+        recovery_receipt,
+        anchor,
         expected_external_assertion_sha256=r84m.stable_sha256(assertion),
         key_possession_policy=r84_policy(),
         expected_verifier_registry_sha256=r85m.stable_sha256(verifier_reg),
-        expected_authority_root_sha256=expected_root,
+        expected_verifier_authority_root_sha256=expected_verifier_root,
+        expected_writer_authority_root_sha256=expected_writer_root,
         provenance_policy=provenance_policy(),
         expected_replay_registry_sha256=r86m.stable_sha256(replay_reg),
         replay_guard_policy=replay_policy(),
@@ -47,7 +74,9 @@ def build_with(*, r88_binding_override=None, anchor_override=None, expected_anch
         expected_recovery_verification_sha256=r88m.stable_sha256(recovery_receipt),
         writer_fencing_recovery_policy=writer_fencing_recovery_policy(),
         expected_authority_anchor_sha256=expected_anchor_sha,
-        writer_authority_anchor_policy=(writer_authority_anchor_policy() if policy_override is None else policy_override),
+        writer_authority_anchor_policy=(
+            writer_authority_anchor_policy() if policy_override is None else policy_override
+        ),
     )
 
 
@@ -81,18 +110,52 @@ def test_substituted_anchor_rejected_against_retained_digest():
     changed = clone(original)
     changed["writer_lease_sha256"] = "f" * 64
     with pytest.raises(ValueError, match="anchor digest mismatch"):
-        build_with(r88_binding_override=r88_binding, anchor_override=changed, expected_anchor_sha=retained)
+        build_with(
+            r88_binding_override=r88_binding,
+            anchor_override=changed,
+            expected_anchor_sha=retained,
+        )
 
 
-def test_substituted_authority_root_rejected():
-    with pytest.raises(ValueError, match="root digest mismatch"):
-        build_with(expected_root="f" * 64)
+def test_distinct_root_domains_are_accepted_in_their_own_slots():
+    assert AUTHORITY_ROOT_SHA256 != WRITER_AUTHORITY_ROOT_SHA256
+    x = build_with(
+        expected_verifier_root=AUTHORITY_ROOT_SHA256,
+        expected_writer_root=WRITER_AUTHORITY_ROOT_SHA256,
+    )
+    assert x["authority_root_sha256"] == WRITER_AUTHORITY_ROOT_SHA256
 
 
-@pytest.mark.parametrize("field", [
-    "recovery_verification_sha256", "writer_lease_sha256",
-    "current_receipt_index_sha256", "receipt_candidate_sha256",
-])
+def test_writer_root_cannot_substitute_for_verifier_root():
+    with pytest.raises(ValueError, match="authority root digest mismatch"):
+        build_with(
+            expected_verifier_root=WRITER_AUTHORITY_ROOT_SHA256,
+            expected_writer_root=WRITER_AUTHORITY_ROOT_SHA256,
+        )
+
+
+def test_verifier_root_cannot_substitute_for_writer_root():
+    with pytest.raises(ValueError, match="writer-authority root digest mismatch"):
+        build_with(
+            expected_verifier_root=AUTHORITY_ROOT_SHA256,
+            expected_writer_root=AUTHORITY_ROOT_SHA256,
+        )
+
+
+def test_substituted_writer_authority_root_rejected():
+    with pytest.raises(ValueError, match="writer-authority root digest mismatch"):
+        build_with(expected_writer_root="f" * 64)
+
+
+@pytest.mark.parametrize(
+    "field",
+    [
+        "recovery_verification_sha256",
+        "writer_lease_sha256",
+        "current_receipt_index_sha256",
+        "receipt_candidate_sha256",
+    ],
+)
 def test_r88_anchor_transplant_rejected(field):
     *_, r88_binding = r88_context()
     anchor = authority_anchor(r88_binding)
@@ -117,12 +180,24 @@ def test_retained_reference_guard_is_mandatory():
         build_with(r88_binding_override=r88_binding, anchor_override=anchor)
 
 
-@pytest.mark.parametrize("field", [
-    "root_trust_verified", "anchor_operator_identity_verified", "live_writer_backend_proven",
-    "durable_commit_proven", "global_current_state_verified", "concurrent_writer_exclusion_proven",
-    "registry_write_performed", "lease_registry_write_performed", "receipt_index_write_performed",
-    "backend_write_performed", "can_execute", "apply_allowed", "confers_authority",
-])
+@pytest.mark.parametrize(
+    "field",
+    [
+        "root_trust_verified",
+        "anchor_operator_identity_verified",
+        "live_writer_backend_proven",
+        "durable_commit_proven",
+        "global_current_state_verified",
+        "concurrent_writer_exclusion_proven",
+        "registry_write_performed",
+        "lease_registry_write_performed",
+        "receipt_index_write_performed",
+        "backend_write_performed",
+        "can_execute",
+        "apply_allowed",
+        "confers_authority",
+    ],
+)
 def test_anchor_overclaims_rejected(field):
     *_, r88_binding = r88_context()
     anchor = authority_anchor(r88_binding)
@@ -171,7 +246,10 @@ def test_tampered_r88_binding_rejected_by_full_r88_validation():
 
 
 def test_schema_required_keys_match_contract():
-    schema = json.loads((ROOT / "schemas" / "TRADINGOS_EXTERNAL_ASSERTION_REPLAY_WRITER_AUTHORITY_ANCHOR_BINDING_V1.schema.json").read_text(encoding="utf-8"))
+    schema = json.loads(
+        (ROOT / "schemas" / "TRADINGOS_EXTERNAL_ASSERTION_REPLAY_WRITER_AUTHORITY_ANCHOR_BINDING_V1.schema.json")
+        .read_text(encoding="utf-8")
+    )
     assert set(schema["required"]) == m.BINDING_KEYS
 
 

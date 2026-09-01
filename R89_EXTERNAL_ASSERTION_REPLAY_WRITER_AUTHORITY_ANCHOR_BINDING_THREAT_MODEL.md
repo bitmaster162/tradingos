@@ -1,4 +1,4 @@
-# TradingOS R89 — External Assertion Replay Writer Authority Anchor Binding Threat Model R1
+# TradingOS R89 — External Assertion Replay Writer Authority Anchor Binding Threat Model R2
 
 ## Trust boundaries
 
@@ -7,13 +7,13 @@
 3. Exact R89 authority-anchor policy.
 4. Externally retained writer-authority-anchor record.
 5. Independently supplied expected SHA-256 of that complete anchor.
-6. Independently supplied expected authority-root SHA-256.
+6. Independently supplied expected writer-authority-root SHA-256; upstream verifier-provenance root remains a separate R88 validation input.
 7. R89 deterministic authority-anchor verifier/builder.
 8. Human/archive consumer.
 
-## Threats and R1 controls
+## Threats and R2 controls
 
-| Threat | R1 control |
+| Threat | R2 control |
 | --- | --- |
 | Invalid/substituted R88 evidence admitted | full canonical R88 validation before anchor binding |
 | R88 binding changed | complete exact R88 SHA-256 carried in R89 |
@@ -24,6 +24,7 @@
 | Anchor scope widened | fixed `WRITER_LEASE_AND_RECEIPT_INDEX_ONLY` |
 | Retained-reference guard removed | `retained_reference_required=true` |
 | Root digest silently upgraded to trust | input `root_trust_verified=false`; output `writer_authority_root_verified=false` |
+| Cross-domain root substitution | verifier-provenance and writer-authority roots are separate parameters; each is validated only against its own retained evidence |
 | Anchor operator silently authenticated | `authority_anchor_operator_identity_verified=false` |
 | Anchor silently treated as live backend proof | `live_writer_backend_proven=false` |
 | Anchor silently treated as durable/current state | durable/current-state/write flags remain false |

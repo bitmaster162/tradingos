@@ -1,4 +1,4 @@
-# TradingOS R89 — External Assertion Replay Writer Authority Anchor Binding R1
+# TradingOS R89 — External Assertion Replay Writer Authority Anchor Binding R2
 
 ## Objective
 
@@ -20,11 +20,20 @@ The external anchor must bind exactly:
 - exact `current_receipt_index_sha256`;
 - exact `receipt_candidate_sha256`;
 - exact `current_fencing_token`;
-- exact independently supplied `authority_root_sha256`;
+- exact independently supplied writer `authority_root_sha256`;
 - `anchor_scope=WRITER_LEASE_AND_RECEIPT_INDEX_ONLY`;
 - `retained_reference_required=true`.
 
 The complete external anchor must hash to an independently supplied expected SHA-256.
+
+## Root-domain separation
+
+R89 consumes two independent root-domain inputs and never aliases them:
+
+- `expected_verifier_authority_root_sha256` is used only while fully validating the upstream R88/R85 verifier-provenance chain;
+- `expected_writer_authority_root_sha256` is used only for the R89 writer-authority anchor.
+
+The two digests may differ. R89 does not require equality and does not infer any relationship between the verifier-provenance root and the writer-authority root. Supplying either domain's digest in the other domain's slot fails closed against that domain's retained evidence.
 
 ## Precise claim
 
