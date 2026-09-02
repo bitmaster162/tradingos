@@ -1,0 +1,179 @@
+{
+  "$id": "TRADINGOS_EXTERNAL_ASSERTION_REPLAY_COMMITTED_READBACK_EQUALITY_BINDING_V1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "backend_commit_authenticity_verified": {
+      "const": false
+    },
+    "binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "canonicalization_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "canonicalization_version": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "commit_receipt_substitution_rejected": {
+      "const": true
+    },
+    "committed_derivation_record_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "committed_derivation_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "committed_projected_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "committed_readback_projected_state_equality_bound": {
+      "const": true
+    },
+    "committed_source_artifact_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "concurrent_writer_exclusion_proven": {
+      "const": false
+    },
+    "confers_authority": {
+      "const": false
+    },
+    "derivation_tool_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "durable_commit_proven": {
+      "const": false
+    },
+    "durable_dual_state_atomicity_proven": {
+      "const": false
+    },
+    "durable_single_use_enforced": {
+      "const": false
+    },
+    "equality_policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "equality_record_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "equality_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "full_r98_validation_consumed": {
+      "const": true
+    },
+    "global_current_state_verified": {
+      "const": false
+    },
+    "independently_supplied_record_digests_consumed": {
+      "const": true
+    },
+    "known_fixture_material_rejected": {
+      "const": true
+    },
+    "projection_schema_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "projection_schema_version": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "r98_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r98_binding_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "readback_authenticity_verified": {
+      "const": false
+    },
+    "readback_derivation_record_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "readback_derivation_record_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "readback_projected_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "readback_source_artifact_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema": {
+      "const": "tradingos.external_assertion_replay_committed_readback_equality_binding.v1"
+    }
+  },
+  "required": [
+    "backend_commit_authenticity_verified",
+    "binding_id",
+    "can_trade",
+    "canonicalization_id",
+    "canonicalization_version",
+    "capital_permission",
+    "commit_receipt_substitution_rejected",
+    "committed_derivation_record_id",
+    "committed_derivation_record_sha256",
+    "committed_projected_state_sha256",
+    "committed_readback_projected_state_equality_bound",
+    "committed_source_artifact_sha256",
+    "concurrent_writer_exclusion_proven",
+    "confers_authority",
+    "derivation_tool_sha256",
+    "durable_commit_proven",
+    "durable_dual_state_atomicity_proven",
+    "durable_single_use_enforced",
+    "equality_policy_sha256",
+    "equality_record_id",
+    "equality_record_sha256",
+    "execution_authority",
+    "full_r98_validation_consumed",
+    "global_current_state_verified",
+    "independently_supplied_record_digests_consumed",
+    "known_fixture_material_rejected",
+    "projection_schema_id",
+    "projection_schema_version",
+    "r98_binding_id",
+    "r98_binding_sha256",
+    "readback_authenticity_verified",
+    "readback_derivation_record_id",
+    "readback_derivation_record_sha256",
+    "readback_projected_state_sha256",
+    "readback_source_artifact_sha256",
+    "schema"
+  ],
+  "type": "object"
+}
