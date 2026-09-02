@@ -1,0 +1,450 @@
+{
+  "$id": "TRADINGOS_EXTERNAL_ASSERTION_REPLAY_BACKEND_AUTHENTICITY_VERIFIER_PROVENANCE_BINDING_V1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "enum": [
+        "ED25519"
+      ]
+    },
+    "approval_state_allowed": {
+      "const": false
+    },
+    "assertion_freshness_verified": {
+      "const": false
+    },
+    "attestation_set_consumption_authority": {
+      "const": "NONE"
+    },
+    "backend_authenticity_assertion_bound": {
+      "const": true
+    },
+    "backend_authenticity_assertion_digest_consumed": {
+      "const": true
+    },
+    "backend_authenticity_assertion_policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_authenticity_assertion_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_authority_root_digest_consumed": {
+      "const": true
+    },
+    "backend_authenticity_verifier_authority_root_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_identity_verified": {
+      "const": false
+    },
+    "backend_authenticity_verifier_key_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_provenance_bound": {
+      "const": true
+    },
+    "backend_authenticity_verifier_provenance_policy_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_registry_digest_consumed": {
+      "const": true
+    },
+    "backend_authenticity_verifier_registry_entry_exact_match": {
+      "const": true
+    },
+    "backend_authenticity_verifier_registry_entry_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_registry_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_registry_operator_identity_verified": {
+      "const": false
+    },
+    "backend_authenticity_verifier_registry_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_authenticity_verifier_trust_root_verified": {
+      "const": false
+    },
+    "backend_authority_root_digest_consumed": {
+      "const": true
+    },
+    "backend_authority_root_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_commit_authenticity_verified": {
+      "const": false
+    },
+    "backend_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "backend_identity_verified": {
+      "const": false
+    },
+    "backend_key_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "backend_key_possession_assertion_bound": {
+      "const": true
+    },
+    "backend_key_possession_proven": {
+      "const": false
+    },
+    "backend_kind": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "backend_metadata_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "backend_registry_operator_identity_verified": {
+      "const": false
+    },
+    "backend_trust_root_verified": {
+      "const": false
+    },
+    "backend_write_performed": {
+      "const": false
+    },
+    "binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "can_trade": {
+      "const": false
+    },
+    "capital_permission": {
+      "const": "DENY"
+    },
+    "challenge_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "commit_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "commit_signature_assertion_bound": {
+      "const": true
+    },
+    "concurrent_writer_exclusion_proven": {
+      "const": false
+    },
+    "confers_authority": {
+      "const": false
+    },
+    "consensus_inference_allowed": {
+      "const": false
+    },
+    "distinct_reviewer_count_allowed": {
+      "const": false
+    },
+    "durable_commit_proven": {
+      "const": false
+    },
+    "durable_dual_state_atomicity_proven": {
+      "const": false
+    },
+    "durable_single_use_enforced": {
+      "const": false
+    },
+    "execution_authority": {
+      "const": "NONE"
+    },
+    "external_commit_receipt_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "global_current_state_verified": {
+      "const": false
+    },
+    "human_review_only": {
+      "const": true
+    },
+    "idempotency_key_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "lease_registry_write_performed": {
+      "const": false
+    },
+    "live_backend_observed": {
+      "const": false
+    },
+    "live_decision_feedback_allowed": {
+      "const": false
+    },
+    "live_decision_use_allowed": {
+      "const": false
+    },
+    "liveness_verified": {
+      "const": false
+    },
+    "local_signature_math_verified": {
+      "const": false
+    },
+    "memory_write_authority": {
+      "const": "NONE"
+    },
+    "model_selection_use_allowed": {
+      "const": false
+    },
+    "policy_update_allowed": {
+      "const": false
+    },
+    "public_key_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r84_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r85_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r86_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r87_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r88_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r89_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r90_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r91_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r92_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r92_binding_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "r93_binding_id": {
+      "pattern": "^[0-9a-f]{24}$",
+      "type": "string"
+    },
+    "r93_binding_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "readback_authenticity_verified": {
+      "const": false
+    },
+    "readback_evidence_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "readback_format": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "readback_signature_assertion_bound": {
+      "const": true
+    },
+    "readback_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "receipt_format": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$",
+      "type": "string"
+    },
+    "receipt_index_write_performed": {
+      "const": false
+    },
+    "registry_write_performed": {
+      "const": false
+    },
+    "review_identity_verified": {
+      "const": false
+    },
+    "same_backend_key_claim_bound": {
+      "const": true
+    },
+    "schema": {
+      "const": "tradingos.external_assertion_replay_backend_authenticity_verifier_provenance_binding.v1"
+    },
+    "selected_backend_entry_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "shadow_only": {
+      "const": true
+    },
+    "verifier_authority_root_digest_consumed": {
+      "const": true
+    },
+    "verifier_authority_root_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "verifier_trust_root_verified": {
+      "const": false
+    },
+    "write_performed": {
+      "const": false
+    },
+    "writer_authority_root_digest_consumed": {
+      "const": true
+    },
+    "writer_authority_root_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "writer_authority_root_verified": {
+      "const": false
+    }
+  },
+  "required": [
+    "algorithm",
+    "approval_state_allowed",
+    "assertion_freshness_verified",
+    "attestation_set_consumption_authority",
+    "backend_authenticity_assertion_bound",
+    "backend_authenticity_assertion_digest_consumed",
+    "backend_authenticity_assertion_policy_sha256",
+    "backend_authenticity_assertion_sha256",
+    "backend_authenticity_verifier_authority_root_digest_consumed",
+    "backend_authenticity_verifier_authority_root_sha256",
+    "backend_authenticity_verifier_id",
+    "backend_authenticity_verifier_identity_verified",
+    "backend_authenticity_verifier_key_id",
+    "backend_authenticity_verifier_provenance_bound",
+    "backend_authenticity_verifier_provenance_policy_sha256",
+    "backend_authenticity_verifier_registry_digest_consumed",
+    "backend_authenticity_verifier_registry_entry_exact_match",
+    "backend_authenticity_verifier_registry_entry_sha256",
+    "backend_authenticity_verifier_registry_id",
+    "backend_authenticity_verifier_registry_operator_identity_verified",
+    "backend_authenticity_verifier_registry_sha256",
+    "backend_authenticity_verifier_trust_root_verified",
+    "backend_authority_root_digest_consumed",
+    "backend_authority_root_sha256",
+    "backend_commit_authenticity_verified",
+    "backend_id",
+    "backend_identity_verified",
+    "backend_key_id",
+    "backend_key_possession_assertion_bound",
+    "backend_key_possession_proven",
+    "backend_kind",
+    "backend_metadata_sha256",
+    "backend_registry_operator_identity_verified",
+    "backend_trust_root_verified",
+    "backend_write_performed",
+    "binding_id",
+    "can_trade",
+    "capital_permission",
+    "challenge_sha256",
+    "commit_id",
+    "commit_signature_assertion_bound",
+    "concurrent_writer_exclusion_proven",
+    "confers_authority",
+    "consensus_inference_allowed",
+    "distinct_reviewer_count_allowed",
+    "durable_commit_proven",
+    "durable_dual_state_atomicity_proven",
+    "durable_single_use_enforced",
+    "execution_authority",
+    "external_commit_receipt_sha256",
+    "global_current_state_verified",
+    "human_review_only",
+    "idempotency_key_sha256",
+    "lease_registry_write_performed",
+    "live_backend_observed",
+    "live_decision_feedback_allowed",
+    "live_decision_use_allowed",
+    "liveness_verified",
+    "local_signature_math_verified",
+    "memory_write_authority",
+    "model_selection_use_allowed",
+    "policy_update_allowed",
+    "public_key_sha256",
+    "r84_binding_id",
+    "r85_binding_id",
+    "r86_binding_id",
+    "r87_binding_id",
+    "r88_binding_id",
+    "r89_binding_id",
+    "r90_binding_id",
+    "r91_binding_id",
+    "r92_binding_id",
+    "r92_binding_sha256",
+    "r93_binding_id",
+    "r93_binding_sha256",
+    "readback_authenticity_verified",
+    "readback_evidence_sha256",
+    "readback_format",
+    "readback_signature_assertion_bound",
+    "readback_state_sha256",
+    "receipt_format",
+    "receipt_index_write_performed",
+    "registry_write_performed",
+    "review_identity_verified",
+    "same_backend_key_claim_bound",
+    "schema",
+    "selected_backend_entry_sha256",
+    "shadow_only",
+    "verifier_authority_root_digest_consumed",
+    "verifier_authority_root_sha256",
+    "verifier_trust_root_verified",
+    "write_performed",
+    "writer_authority_root_digest_consumed",
+    "writer_authority_root_sha256",
+    "writer_authority_root_verified"
+  ],
+  "title": "TradingOS R94 External Assertion Replay Backend Authenticity Verifier Provenance Binding V1",
+  "type": "object"
+}
