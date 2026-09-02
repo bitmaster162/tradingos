@@ -9,11 +9,22 @@ POLICY=ROOT/"configs"/"TRADINGOS_EXTERNAL_ASSERTION_REPLAY_COMMITTED_READBACK_EQ
 SCHEMA=ROOT/"schemas"/"TRADINGOS_EXTERNAL_ASSERTION_REPLAY_COMMITTED_READBACK_EQUALITY_BINDING_V1.schema.json"
 
 def load_with_stub():
-    pkg=types.ModuleType("tools"); pkg.__path__=[]; sys.modules["tools"]=pkg
-    stub=types.ModuleType("tools.tradingos_external_assertion_replay_cryptographic_artifact_identity_contract")
-    stub.KW=set(); stub.validate_external_assertion_replay_cryptographic_artifact_identity_binding=lambda *a,**kw: None
-    sys.modules[stub.__name__]=stub
-    spec=importlib.util.spec_from_file_location("r99r2c",CONTRACT); m=importlib.util.module_from_spec(spec); assert spec and spec.loader; spec.loader.exec_module(m); return m
+    missing=object()
+    old_tools=sys.modules.get("tools",missing)
+    stub_name="tools.tradingos_external_assertion_replay_cryptographic_artifact_identity_contract"
+    old_stub=sys.modules.get(stub_name,missing)
+    try:
+        pkg=types.ModuleType("tools"); pkg.__path__=[]; sys.modules["tools"]=pkg
+        stub=types.ModuleType(stub_name)
+        stub.KW=set(); stub.validate_external_assertion_replay_cryptographic_artifact_identity_binding=lambda *a,**kw: None
+        sys.modules[stub_name]=stub
+        spec=importlib.util.spec_from_file_location("r99r2c",CONTRACT); m=importlib.util.module_from_spec(spec); assert spec and spec.loader; spec.loader.exec_module(m)
+        return m
+    finally:
+        if old_stub is missing: sys.modules.pop(stub_name,None)
+        else: sys.modules[stub_name]=old_stub
+        if old_tools is missing: sys.modules.pop("tools",None)
+        else: sys.modules["tools"]=old_tools
 
 def policy(): return json.loads(POLICY.read_text())
 
@@ -24,6 +35,14 @@ def isolated_vector(m):
     a=(GOOD_R98,*([None]*34),c,r,e)
     kw={"expected_committed_derivation_record_sha256":stable(c),"expected_readback_derivation_record_sha256":stable(r),"expected_equality_record_sha256":stable(e),"committed_readback_equality_policy":policy()}
     return a,kw,c,r,e
+
+def test_stub_loader_restores_tools_import_state():
+    before_tools=sys.modules.get("tools")
+    before_stub=sys.modules.get("tools.tradingos_external_assertion_replay_cryptographic_artifact_identity_contract")
+    m=load_with_stub()
+    assert m.r98.KW==set()
+    assert sys.modules.get("tools") is before_tools
+    assert sys.modules.get("tools.tradingos_external_assertion_replay_cryptographic_artifact_identity_contract") is before_stub
 
 def test_ast_json_schema_and_policy_hash():
     ast.parse(CONTRACT.read_text()); p=policy(); s=json.loads(SCHEMA.read_text()); m=load_with_stub()
