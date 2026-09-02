@@ -28,7 +28,7 @@ require_backend_key_id_match_r92 require_commit_signature_assertion require_read
 human_review_only shadow_only""".split())
 P_FALSE=POLICY_KEYS-P_TRUE-{"schema_version","policy_id","mode","input_r92_binding_schema","challenge_schema","backend_authenticity_assertion_schema","allowed_algorithms","attestation_set_consumption_authority","memory_write_authority","output_permissions"}
 
-CHALLENGE_KEYS=set("""schema purpose r92_binding_id r92_binding_sha256 selected_backend_entry_sha256 backend_authority_root_sha256 backend_id backend_key_id
+CHALLENGE_KEYS=set("""schema purpose r92_binding_id r92_binding_sha256 backend_registry_sha256 selected_backend_entry_sha256 backend_authority_root_sha256 backend_id backend_key_id
 backend_metadata_sha256 backend_kind receipt_format readback_format external_commit_receipt_sha256 readback_evidence_sha256 readback_state_sha256
 commit_id idempotency_key_sha256 backend_authenticity_assertion_policy_sha256""".split())
 ASSERTION_KEYS=set("""schema challenge_sha256 backend_id backend_key_id backend_metadata_sha256 public_key_sha256 algorithm verifier_id verifier_key_id
@@ -99,9 +99,10 @@ def build_backend_authenticity_challenge(r92_binding,policy):
         raise ValueError("invalid R92 binding for challenge")
     return {
         "schema":CHALLENGE_SCHEMA,
-        "purpose":"R93_BACKEND_AUTHENTICITY_ASSERTION_BINDING_ONLY",
+        "purpose":"R93_BACKEND_ARTIFACT_AUTHENTICITY_ASSERTION_BINDING_ONLY",
         "r92_binding_id":r92_binding["binding_id"],
         "r92_binding_sha256":stable_sha256(r92_binding),
+        "backend_registry_sha256":r92_binding["backend_registry_sha256"],
         "selected_backend_entry_sha256":r92_binding["selected_backend_entry_sha256"],
         "backend_authority_root_sha256":r92_binding["backend_authority_root_sha256"],
         "backend_id":r92_binding["backend_id"],"backend_key_id":r92_binding["backend_key_id"],

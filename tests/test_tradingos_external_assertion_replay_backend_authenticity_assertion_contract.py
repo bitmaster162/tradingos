@@ -8,8 +8,10 @@ def test_build_validate_and_determinism():
 
 def test_challenge_is_deterministic_and_exactly_binds_r92():
     *_,r92b=r92_context(); p=backend_authenticity_assertion_policy(); c1=m.build_backend_authenticity_challenge(r92b,p); c2=m.build_backend_authenticity_challenge(r92b,p)
-    assert c1==c2; assert set(c1)==m.CHALLENGE_KEYS; assert c1["r92_binding_id"]==r92b["binding_id"]
-    assert c1["r92_binding_sha256"]==m.stable_sha256(r92b); assert c1["selected_backend_entry_sha256"]==r92b["selected_backend_entry_sha256"]
+    assert c1==c2; assert set(c1)==m.CHALLENGE_KEYS; assert len(m.CHALLENGE_KEYS)==19; assert c1["r92_binding_id"]==r92b["binding_id"]
+    assert c1["purpose"]=="R93_BACKEND_ARTIFACT_AUTHENTICITY_ASSERTION_BINDING_ONLY"
+    assert c1["r92_binding_sha256"]==m.stable_sha256(r92b); assert c1["backend_registry_sha256"]==r92b["backend_registry_sha256"]
+    assert c1["selected_backend_entry_sha256"]==r92b["selected_backend_entry_sha256"]
     assert c1["external_commit_receipt_sha256"]==r92b["external_commit_receipt_sha256"]
     assert c1["readback_evidence_sha256"]==r92b["readback_evidence_sha256"]; assert c1["readback_state_sha256"]==r92b["readback_state_sha256"]
     assert "nonce" not in c1; assert "timestamp" not in c1

@@ -15,6 +15,7 @@ Pipeline:
 The challenge deterministically binds:
 
 - exact R92 binding ID and complete SHA-256;
+- exact backend-registry snapshot SHA-256;
 - exact selected backend-registry entry SHA-256;
 - exact backend-authority-root SHA-256;
 - exact backend ID, backend key ID, backend metadata SHA-256 and backend kind;
@@ -24,7 +25,7 @@ The challenge deterministically binds:
 - exact readback-state SHA-256;
 - exact commit ID and idempotency-key SHA-256;
 - exact R93 policy SHA-256;
-- fixed purpose `R93_BACKEND_AUTHENTICITY_ASSERTION_BINDING_ONLY`.
+- fixed purpose `R93_BACKEND_ARTIFACT_AUTHENTICITY_ASSERTION_BINDING_ONLY`.
 
 The challenge contains no nonce or time source. R93 therefore makes no freshness or liveness claim.
 

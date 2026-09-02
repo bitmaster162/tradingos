@@ -14,7 +14,7 @@
 | Threat | R93 control |
 | --- | --- |
 | Tampered R92 admitted | full canonical R92 validation before challenge/assertion binding |
-| Challenge transplanted | challenge binds exact R92 SHA/ID, selected entry, backend metadata and exact artifact digests |
+| Challenge transplanted | challenge binds exact R92 SHA/ID, backend-registry snapshot SHA, selected entry, backend metadata and exact artifact digests |
 | Assertion substituted | complete assertion must match independently supplied SHA-256 |
 | Assertion for another challenge replayed | exact `challenge_sha256` required |
 | Different backend/key metadata claimed | backend ID/key ID/metadata SHA must equal exact R92 fields |
