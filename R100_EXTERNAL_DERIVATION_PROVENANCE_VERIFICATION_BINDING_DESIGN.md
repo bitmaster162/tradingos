@@ -28,13 +28,18 @@ The complete provenance record must match one supplied expected SHA-256.
 
 Binding a record that claims out-of-process recomputation is stronger provenance structure than R99 alone, but it does not prove who produced the record, whether the verifier is trusted, whether the record was durably retained by an independent party, or whether the supplied expected digest itself has independent provenance.
 
+R100 must also materialize immediate upstream validation continuity:
+
+- `full_r99_validation_consumed=true`;
+- `full_r99_safety_ceiling_preserved=true`;
+
 Therefore R100 must keep:
 
 - `expected_digest_independence_verified=false`;
 - `external_provenance_digest_independence_verified=false`;
 - `external_provenance_record_retention_verified=false`;
-- `independent_derivation_verifier_identity_verified=false`;
-- `independent_derivation_verifier_trust_root_verified=false`;
+- `external_derivation_verifier_identity_verified=false`;
+- `external_derivation_verifier_trust_root_verified=false`;
 - `provider_honesty_verified=false`;
 - `durable_commit_proven=false`;
 - `global_current_state_verified=false`;

@@ -19,7 +19,7 @@ P_FALSE=set("""expected_digest_independence_inference_allowed external_provenanc
 
 RECORD_KEYS=set("""schema record_id r99_binding_id r99_binding_sha256 committed_derivation_record_sha256 readback_derivation_record_sha256 equality_record_sha256 committed_source_artifact_sha256 readback_source_artifact_sha256 projection_schema_id projection_schema_version canonicalization_id canonicalization_version derivation_tool_sha256 recomputation_method verifier_id verifier_key_id committed_derivation_digest_recomputed readback_derivation_digest_recomputed equality_record_digest_recomputed projected_state_equality_recomputed out_of_process_recomputation_claimed verification_scope confers_authority""".split())
 
-R100_FIELDS=set("""binding_id canonicalization_id canonicalization_version committed_derivation_digest_recomputation_claim_bound committed_derivation_record_sha256 committed_projected_state_sha256 committed_readback_projected_state_equality_bound committed_source_artifact_sha256 derivation_tool_sha256 equality_record_digest_recomputation_claim_bound equality_record_sha256 expected_digest_independence_verified expected_provenance_digest_bound expected_record_digests_bound external_derivation_provenance_verification_policy_sha256 external_derivation_provenance_verification_record_digest_consumed external_derivation_provenance_verification_record_id external_derivation_provenance_verification_record_sha256 external_provenance_digest_independence_verified external_provenance_record_retention_verified full_r98_safety_ceiling_preserved full_r98_validation_consumed independent_derivation_provenance_record_bound independent_derivation_verifier_id independent_derivation_verifier_identity_verified independent_derivation_verifier_key_id independent_derivation_verifier_trust_root_verified out_of_process_recomputation_claim_bound projected_state_equality_recomputation_claim_bound projection_schema_id projection_schema_version provider_honesty_verified r99_binding_id r99_binding_sha256 r99_equality_policy_sha256 readback_derivation_digest_recomputation_claim_bound readback_derivation_record_sha256 readback_projected_state_sha256 readback_source_artifact_sha256 recomputation_method schema""".split())
+R100_FIELDS=set("""binding_id canonicalization_id canonicalization_version committed_derivation_digest_recomputation_claim_bound committed_derivation_record_sha256 committed_projected_state_sha256 committed_readback_projected_state_equality_bound committed_source_artifact_sha256 derivation_tool_sha256 equality_record_digest_recomputation_claim_bound equality_record_sha256 expected_digest_independence_verified expected_provenance_digest_bound expected_record_digests_bound external_derivation_provenance_verification_policy_sha256 external_derivation_provenance_verification_record_digest_consumed external_derivation_provenance_verification_record_id external_derivation_provenance_verification_record_sha256 external_provenance_digest_independence_verified external_provenance_record_retention_verified full_r98_safety_ceiling_preserved full_r98_validation_consumed full_r99_safety_ceiling_preserved full_r99_validation_consumed external_derivation_provenance_record_bound external_derivation_verifier_id external_derivation_verifier_identity_verified external_derivation_verifier_key_id external_derivation_verifier_trust_root_verified out_of_process_recomputation_claim_bound projected_state_equality_recomputation_claim_bound projection_schema_id projection_schema_version provider_honesty_verified r99_binding_id r99_binding_sha256 r99_equality_policy_sha256 readback_derivation_digest_recomputation_claim_bound readback_derivation_record_sha256 readback_projected_state_sha256 readback_source_artifact_sha256 recomputation_method schema""".split())
 BINDING_KEYS=set(SAFETY_EXPECTED)|R100_FIELDS
 UPSTREAM_KW=set(r99.KW)
 KW=UPSTREAM_KW|{"expected_external_derivation_provenance_verification_record_sha256","external_derivation_provenance_verification_policy"}
@@ -150,11 +150,13 @@ def _payload(args,kw):
         "committed_readback_projected_state_equality_bound":True,
         "full_r98_validation_consumed":True,
         "full_r98_safety_ceiling_preserved":True,
+        "full_r99_validation_consumed":True,
+        "full_r99_safety_ceiling_preserved":True,
         "external_derivation_provenance_verification_policy_sha256":stable_sha256(p),
         "external_derivation_provenance_verification_record_sha256":digest,
         "external_derivation_provenance_verification_record_digest_consumed":True,
         "external_derivation_provenance_verification_record_id":record["record_id"],
-        "independent_derivation_provenance_record_bound":True,
+        "external_derivation_provenance_record_bound":True,
         "expected_provenance_digest_bound":True,
         "external_provenance_digest_independence_verified":False,
         "external_provenance_record_retention_verified":False,
@@ -164,10 +166,10 @@ def _payload(args,kw):
         "equality_record_digest_recomputation_claim_bound":True,
         "projected_state_equality_recomputation_claim_bound":True,
         "recomputation_method":record["recomputation_method"],
-        "independent_derivation_verifier_id":record["verifier_id"],
-        "independent_derivation_verifier_key_id":record["verifier_key_id"],
-        "independent_derivation_verifier_identity_verified":False,
-        "independent_derivation_verifier_trust_root_verified":False,
+        "external_derivation_verifier_id":record["verifier_id"],
+        "external_derivation_verifier_key_id":record["verifier_key_id"],
+        "external_derivation_verifier_identity_verified":False,
+        "external_derivation_verifier_trust_root_verified":False,
         "provider_honesty_verified":False,
     })
     return x

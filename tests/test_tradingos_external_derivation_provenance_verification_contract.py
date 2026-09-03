@@ -17,7 +17,7 @@ def test_ast_json_schema_and_policy(monkeypatch):
     p=policy(); m.validate_external_derivation_provenance_verification_policy(p)
     s=json.loads(SCHEMA.read_text(encoding="utf-8"))
     assert set(s["required"])==m.BINDING_KEYS==set(s["properties"])
-    assert len(m.BINDING_KEYS)==93
+    assert len(m.BINDING_KEYS)==95
     x=isolated_build(monkeypatch)
     assert x["schema"]==m.BINDING_SCHEMA
 
@@ -97,13 +97,15 @@ def test_real_r99_validator_is_consumed_before_r100_record(monkeypatch):
 
 def test_no_independence_trust_provider_durability_or_authority_upgrade(monkeypatch):
     x=isolated_build(monkeypatch)
-    assert x["independent_derivation_provenance_record_bound"] is True
+    assert x["external_derivation_provenance_record_bound"] is True
     assert x["out_of_process_recomputation_claim_bound"] is True
     assert x["expected_provenance_digest_bound"] is True
+    assert x["full_r99_validation_consumed"] is True
+    assert x["full_r99_safety_ceiling_preserved"] is True
     for field in (
         "expected_digest_independence_verified","external_provenance_digest_independence_verified",
-        "external_provenance_record_retention_verified","independent_derivation_verifier_identity_verified",
-        "independent_derivation_verifier_trust_root_verified","provider_honesty_verified",
+        "external_provenance_record_retention_verified","external_derivation_verifier_identity_verified",
+        "external_derivation_verifier_trust_root_verified","provider_honesty_verified",
         "durable_commit_proven","global_current_state_verified","concurrent_writer_exclusion_proven"):
         assert x[field] is False
     assert x["execution_authority"]=="NONE"
