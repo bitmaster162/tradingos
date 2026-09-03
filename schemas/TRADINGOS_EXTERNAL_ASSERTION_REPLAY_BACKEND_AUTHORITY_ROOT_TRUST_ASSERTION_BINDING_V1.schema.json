@@ -285,6 +285,10 @@
     "backend_public_key_digest_bound": {
       "const": true
     },
+    "backend_registry_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
     "backend_registry_operator_identity_verified": {
       "const": false
     },
@@ -609,6 +613,7 @@
     "backend_kind",
     "backend_metadata_sha256",
     "backend_public_key_digest_bound",
+    "backend_registry_sha256",
     "backend_registry_operator_identity_verified",
     "backend_trust_root_verified",
     "backend_write_performed",

@@ -20,7 +20,8 @@ def test_exact_r95_policy_assertion_and_challenge_are_bound():
     assert x["challenge_sha256"]==r95b["challenge_sha256"]
 
 def test_replay_snapshot_and_candidate_are_bound():
-    *_,r95b=r95_context(); reg=replay_registry(r95b); x=build_with(r95_override=r95b,registry=reg)
+    ctx=r95_context(); *_,r95b=ctx; reg=replay_registry(r95b); x=build_with(r95_override=r95b,registry=reg)
+    assert x["backend_registry_sha256"]==_kw(ctx,reg)["expected_backend_registry_sha256"]
     assert x["backend_authenticity_replay_registry_sha256"]==m.stable_sha256(reg)
     assert x["backend_authenticity_replay_prior_generation"]==11
     assert x["backend_authenticity_replay_next_generation"]==12
@@ -77,7 +78,7 @@ def test_all_inherited_r95_fields_are_preserved_exactly():
 
 def test_schema_required_and_properties_match_contract():
     schema=json.loads((ROOT/"schemas"/"TRADINGOS_EXTERNAL_ASSERTION_REPLAY_BACKEND_AUTHENTICITY_REPLAY_GUARD_BINDING_V1.schema.json").read_text())
-    assert set(schema["required"])==m.BINDING_KEYS; assert set(schema["properties"])==m.BINDING_KEYS; assert len(m.BINDING_KEYS)==127
+    assert set(schema["required"])==m.BINDING_KEYS; assert set(schema["properties"])==m.BINDING_KEYS; assert len(m.BINDING_KEYS)==128
 
 def test_no_freshness_single_use_authenticity_trust_durability_or_authority_upgrade():
     x=build()
