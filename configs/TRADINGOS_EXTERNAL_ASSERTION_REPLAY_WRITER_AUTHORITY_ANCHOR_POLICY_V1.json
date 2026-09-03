@@ -6,6 +6,7 @@
   "authority_root_trust_inference_allowed": false,
   "backend_write_allowed": false,
   "concurrent_writer_exclusion_inference_allowed": false,
+  "consensus_inference_allowed": false,
   "credential_access_in_core_allowed": false,
   "distinct_reviewer_count_allowed": false,
   "durable_commit_inference_allowed": false,
