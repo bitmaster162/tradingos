@@ -168,6 +168,28 @@ def test_kline_order_interval_and_ohlc_are_strict() -> None:
     else: raise AssertionError("invalid OHLC accepted")
 
 
+def test_premium_index_accepts_signed_ohlc() -> None:
+    payload = capture()
+    row = payload["assets"]["BTCUSDT"]["premium_index_4h"][0]
+    row[1], row[2], row[3], row[4] = "-0.00024299", "-0.00007301", "-0.00076035", "-0.00043524"
+    report = m.build_watchtower(payload)
+    assert math.isfinite(by_symbol(report, "BTCUSDT")["derivatives"]["basis_z"])
+
+
+def test_ordinary_futures_and_spot_ohlc_remain_positive_only() -> None:
+    payload = capture(); row = payload["assets"]["BTCUSDT"]["futures_klines"]["1h"][0]
+    row[1] = row[2] = row[3] = row[4] = "-1"
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "non-positive" in str(exc)
+    else: raise AssertionError("negative futures OHLC accepted")
+
+    payload = capture(); row = payload["assets"]["BTCUSDT"]["spot_klines_4h"][0]
+    row[1] = row[2] = row[3] = row[4] = "-1"
+    try: m.build_watchtower(payload)
+    except ValueError as exc: assert "non-positive" in str(exc)
+    else: raise AssertionError("negative spot OHLC accepted")
+
+
 def test_taker_buy_and_volume_bounds_fail_closed() -> None:
     payload = capture(); row = payload["assets"]["BTCUSDT"]["futures_klines"]["4h"][-1]; row[9] = str(float(row[5]) + 1)
     try: m.build_watchtower(payload)

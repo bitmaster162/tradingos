@@ -270,10 +270,10 @@ def test_git_blob_loader_accepts_exact_and_rejects_mismatch(tmp_path):
 
 
 def test_default_canonical_blob_pins_are_exact():
-    assert m.EXPECTED_WATCHTOWER_GIT_BLOB_SHA1 == "96f00327e5bd8a77612d7b26718d4c9951f2be73"
+    assert m.EXPECTED_WATCHTOWER_GIT_BLOB_SHA1 == "628140300801a4631e1b45c6f7b3a9953629ae63"
     assert m.EXPECTED_LIQUIDITY_GIT_BLOB_SHA1 == "193ac1c869dd479dac47c35cede777cc34bce687"
-    assert m.EXPECTED_RADAR_GIT_BLOB_SHA1 == "3e4df1d56648483254667b39d16b1879434ca858"
-    assert m.EXPECTED_BRIDGE_GIT_BLOB_SHA1 == "e6e0f6ecad22068acd82ca0588ad2dfb5fdd89b4"
+    assert m.EXPECTED_RADAR_GIT_BLOB_SHA1 == "db00fe10b499a6e7f35f96081ba76afa3f09ca9f"
+    assert m.EXPECTED_BRIDGE_GIT_BLOB_SHA1 == "3ec351af707fc84f7d549c3f3eb5bac359ce4da4"
 
 
 def test_seal_has_no_network_model_or_process_transport_imports():

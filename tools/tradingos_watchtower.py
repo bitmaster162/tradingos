@@ -104,7 +104,14 @@ def taker_direction(volume: float, buy: float) -> str:
     return "up" if net > 0 else "down" if net < 0 else "flat"
 
 
-def _validate_kline_row(row: Any, field: str, index: int, interval_ms: int) -> list[Any]:
+def _validate_kline_row(
+    row: Any,
+    field: str,
+    index: int,
+    interval_ms: int,
+    *,
+    signed_ohlc: bool = False,
+) -> list[Any]:
     if not isinstance(row, (list, tuple)) or len(row) != 12:
         raise ValueError(f"{field}[{index}]: malformed kline; expected exactly 12 fields")
     open_ms = _int(row[0], f"{field}[{index}].open_time")
@@ -114,10 +121,11 @@ def _validate_kline_row(row: Any, field: str, index: int, interval_ms: int) -> l
     if close_ms - open_ms + 1 != interval_ms:
         raise ValueError(f"{field}[{index}]: interval mismatch")
 
-    open_px = positive(row[1], f"{field}[{index}].open")
-    high = positive(row[2], f"{field}[{index}].high")
-    low = positive(row[3], f"{field}[{index}].low")
-    close = positive(row[4], f"{field}[{index}].close")
+    ohlc_number = finite if signed_ohlc else positive
+    open_px = ohlc_number(row[1], f"{field}[{index}].open")
+    high = ohlc_number(row[2], f"{field}[{index}].high")
+    low = ohlc_number(row[3], f"{field}[{index}].low")
+    close = ohlc_number(row[4], f"{field}[{index}].close")
     if high < max(open_px, close) or low > min(open_px, close) or high < low:
         raise ValueError(f"{field}[{index}]: invalid OHLC envelope")
 
@@ -135,10 +143,20 @@ def closed_rows(
     field: str,
     interval_ms: int,
     minimum: int = 22,
+    signed_ohlc: bool = False,
 ) -> list[list[Any]]:
     if not isinstance(rows, list):
         raise ValueError(f"{field}: rows must be a list")
-    validated = [_validate_kline_row(row, field, i, interval_ms) for i, row in enumerate(rows)]
+    validated = [
+        _validate_kline_row(
+            row,
+            field,
+            i,
+            interval_ms,
+            signed_ohlc=signed_ohlc,
+        )
+        for i, row in enumerate(rows)
+    ]
     opens = [_int(row[0], f"{field}.open_time") for row in validated]
     closes = [_int(row[6], f"{field}.close_time") for row in validated]
     if any(opens[i] >= opens[i + 1] for i in range(len(opens) - 1)):
@@ -338,6 +356,7 @@ def asset_context(symbol: str, asset: Any, captured_ms: int) -> dict[str, Any]:
         captured_ms,
         field=f"{symbol}.premium_index_4h",
         interval_ms=TF_INTERVAL_MS["4h"],
+        signed_ohlc=True,
     )
     premium_hist = [finite(row[4], f"{symbol}.premium_index_4h.close") for row in premium_rows]
     basis_z = zscore(basis, premium_hist)

@@ -29,7 +29,7 @@ WATCHTOWER_SCHEMA = "tradingos.watchtower.v1"
 WATCHTOWER_VERSION = "1.1.0"
 WATCHTOWER_PRODUCER = "tools/tradingos_watchtower.py"
 EXPECTED_WATCHTOWER_PRODUCER_SHA256 = (
-    "92fd705634e33d098907a72199314f01fb73318c733f302abeb1cb6d6e9be4a1"
+    "278a9fe4b5fd4c6f909375f26780409bc56a9bc44a59c57c7e4ebc5ab9493e57"
 )
 
 RADAR_SCHEMA = "tradingos.market_radar.v1"
