@@ -12,6 +12,10 @@ from websockets.exceptions import ConnectionClosed
 
 from btcusdt_bot.bootstrap.reconcile import BootstrapSynchronizer
 from btcusdt_bot.collector.book_ticker import BookTickerCollector
+from btcusdt_bot.collector.futures_book_ticker_gate import (
+    FuturesBookTickerGateReject,
+    validate_gated_book_ticker,
+)
 from btcusdt_bot.collector.depth_book import DepthBookCollector, RPIDepthBookCollector
 from btcusdt_bot.collector.crowding import CrowdingCollector
 from btcusdt_bot.config import BotConfig
@@ -1446,47 +1450,86 @@ class LiveBreakoutRunner:
             return "contract_not_trading"
         return ""
 
-    def _apply_book_status(self, *, event_time_ms: int) -> None:
+    def _validated_book_ticker_payload(
+        self,
+        *,
+        reference_time_ms: int | None = None,
+    ) -> tuple[dict[str, object] | None, int, str]:
         book = self.store.state.latest_book_ticker
         if not book:
+            return None, 0, ""
+
+        marker = book.get("_quote_gate")
+        if reference_time_ms is None:
+            if not isinstance(marker, dict) or type(marker.get("received_at_ms")) is not int:
+                return None, 0, "unadmitted_book_ticker"
+            validation_time_ms = marker["received_at_ms"]
+        else:
+            validation_time_ms = reference_time_ms
+
+        max_age_ms = (
+            self.live_config.max_book_ticker_staleness_ms
+            if self.live_config.max_book_ticker_staleness_ms is not None
+            else self.config.stale_data_limit_ms
+        )
+        try:
+            age_ms = validate_gated_book_ticker(
+                book,
+                expected_symbol=self.config.symbol,
+                decision_time_ms=validation_time_ms,
+                max_age_ms=max_age_ms,
+            )
+        except FuturesBookTickerGateReject as exc:
+            reason = str(exc)
+            if reason in {
+                "book_ticker_gate_marker_missing",
+                "book_ticker_gate_marker_shape_mismatch",
+                "book_ticker_gate_marker_contract_drift",
+                "book_ticker_freshness_source_drift",
+            }:
+                return None, 0, "unadmitted_book_ticker"
+            event_time = book.get("E")
+            age_ms = (
+                validation_time_ms - event_time
+                if type(validation_time_ms) is int and type(event_time) is int
+                else 0
+            )
+            if reason == "future_event_time_E_at_decision":
+                return book, age_ms, "future_book_ticker"
+            if reason == "stale_event_time_E_at_decision":
+                return book, age_ms, "stale_book_ticker"
+            return None, age_ms, "invalid_book_ticker"
+        return book, age_ms, ""
+
+    def _apply_book_status(self, *, event_time_ms: int) -> None:
+        book, age_ms, reason = self._validated_book_ticker_payload(reference_time_ms=event_time_ms)
+        self.status.last_book_age_ms = age_ms
+        if book is None or reason in {"unadmitted_book_ticker", "invalid_book_ticker", "invalid_book_reference_time"}:
             self.status.last_book_bid = ""
             self.status.last_book_ask = ""
             self.status.last_book_spread_bps = ""
-            self.status.last_book_age_ms = 0
             return
-        bid = Decimal(str(book.get("b", "0")))
-        ask = Decimal(str(book.get("a", "0")))
+        bid = Decimal(str(book["b"]))
+        ask = Decimal(str(book["a"]))
         self.status.last_book_bid = str(bid)
         self.status.last_book_ask = str(ask)
-        self.status.last_book_age_ms = max(0, event_time_ms - int(book.get("E", book.get("T", event_time_ms)) or event_time_ms))
-        if bid > 0 and ask > 0:
-            mid = (bid + ask) / Decimal("2")
-            spread_bps = Decimal("0") if mid <= 0 else (ask - bid) / mid * Decimal("10000")
-            self.status.last_book_spread_bps = str(spread_bps)
-        else:
-            self.status.last_book_spread_bps = ""
+        mid = (bid + ask) / Decimal("2")
+        spread_bps = Decimal("0") if mid <= 0 else (ask - bid) / mid * Decimal("10000")
+        self.status.last_book_spread_bps = str(spread_bps)
 
     def _book_gate_reason(self, *, event_time_ms: int) -> str:
-        book = self.store.state.latest_book_ticker
-        if not book:
+        book, _, reason = self._validated_book_ticker_payload(reference_time_ms=event_time_ms)
+        if reason:
+            return reason
+        if book is None:
             return ""
-        event_book_time_ms = int(book.get("E", book.get("T", event_time_ms)) or event_time_ms)
-        if (
-            self.live_config.max_book_ticker_staleness_ms is not None
-            and event_time_ms - event_book_time_ms > self.live_config.max_book_ticker_staleness_ms
-        ):
-            return "stale_book_ticker"
         if self.live_config.max_book_spread_bps is not None:
-            try:
-                bid = Decimal(str(book.get("b", "0")))
-                ask = Decimal(str(book.get("a", "0")))
-                if bid > 0 and ask > 0:
-                    mid = (bid + ask) / Decimal("2")
-                    spread_bps = Decimal("0") if mid <= 0 else (ask - bid) / mid * Decimal("10000")
-                    if spread_bps > self.live_config.max_book_spread_bps:
-                        return "book_spread_too_wide"
-            except Exception:  # noqa: BLE001
-                return "invalid_book_ticker"
+            bid = Decimal(str(book["b"]))
+            ask = Decimal(str(book["a"]))
+            mid = (bid + ask) / Decimal("2")
+            spread_bps = Decimal("0") if mid <= 0 else (ask - bid) / mid * Decimal("10000")
+            if spread_bps > self.live_config.max_book_spread_bps:
+                return "book_spread_too_wide"
         return ""
 
     def _apply_depth_status(self, *, event_time_ms: int) -> None:
@@ -1840,22 +1883,15 @@ class LiveBreakoutRunner:
         return normalized, validation, ""
 
     def _current_book_snapshot(self) -> TopOfBookSnapshot | None:
-        payload = self.store.state.latest_book_ticker
-        if not payload:
-            return None
-        try:
-            bid_price = Decimal(str(payload.get("b", payload.get("bidPrice", "0"))))
-            ask_price = Decimal(str(payload.get("a", payload.get("askPrice", "0"))))
-            bid_qty = Decimal(str(payload.get("B", payload.get("bidQty", "0"))))
-            ask_qty = Decimal(str(payload.get("A", payload.get("askQty", "0"))))
-        except Exception:  # noqa: BLE001
+        payload, _, reason = self._validated_book_ticker_payload(reference_time_ms=None)
+        if payload is None or reason:
             return None
         return TopOfBookSnapshot(
-            event_time_ms=int(payload.get("E", payload.get("eventTime", 0)) or 0),
-            bid_price=bid_price,
-            bid_qty=bid_qty,
-            ask_price=ask_price,
-            ask_qty=ask_qty,
+            event_time_ms=int(payload["E"]),
+            bid_price=Decimal(str(payload["b"])),
+            bid_qty=Decimal(str(payload["B"])),
+            ask_price=Decimal(str(payload["a"])),
+            ask_qty=Decimal(str(payload["A"])),
         )
 
     def _current_standard_depth_snapshot(self) -> DepthBookSnapshot | None:
