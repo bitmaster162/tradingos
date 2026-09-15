@@ -1,0 +1,20 @@
+{
+  "schema": "tradingos.r82.spot_event_time_quote_receipt.v1",
+  "branch": "agent/r82-spot-event-time-quote-r1",
+  "base_commit": "014d90d7fd9465d18ecaec0719964c43572ea118",
+  "scope": "Binance Spot synchronized diff-depth top-of-book quote with exchange event time",
+  "official_contract": {
+    "bookTicker": "u,s,b,B,a,A only; no exchange event-time E",
+    "diffDepth": "depthUpdate carries E,U,u,b,a and is suitable for local order-book synchronization",
+    "docs": "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/ws-streams/~"
+  },
+  "focused_tests": {"result": "PASS", "count": 57},
+  "smoke_1": {"result": "PASS", "event_time_ms": 1789497389814, "age_ms": 189, "snapshot_update_id": 100165828426, "first_update_id": 100165828427, "bid": "76568.00000000", "ask": "76568.01000000", "provenance_sha256": "2757d4dd25563c6885f7ca8b2242e1819ae4bb99a74829a1d8df82a238b66d2d"},
+  "smoke_2": {"result": "PASS", "event_time_ms": 1789497725214, "age_ms": 207, "snapshot_update_id": 100167099890, "first_update_id": 100167099891, "bid": "76135.08000000", "ask": "76135.09000000", "provenance_sha256": "5366c85cfbd39356fcca1cb80480211cb1b74a7d4d931bd1a31d799b670cccf0"},
+  "source_sha256": "ee1fd72859d332556b1af284ea9bde01c0f972ee7cffef6d04fd63ed69656a63",
+  "test_sha256": "5e72c9f192f4359d254fae29b44c67f6352117633587528478d7f608739cc61c",
+  "admission": "PASS_FOR_R6_SHADOW_QUOTE_SOURCE",
+  "limitations": "Focused tests and live public-market-data smoke only; not merged, not deployed, not live trading authority.",
+  "can_trade": false,
+  "capital_permission": "DENY"
+}
