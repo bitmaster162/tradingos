@@ -1,0 +1,149 @@
+{
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "ctha": "1M_BULL__1W_MIXED__1D_BULL__4H_MIXED_BEAR_BOS__1H_BEAR__M15_BEAR",
+  "ctha_metrics": {
+    "15m": {
+      "ao5_34": -82.75605882353557,
+      "bos_down_vs_prior5": false,
+      "bos_up_vs_prior5": false,
+      "close": 76000.0,
+      "ema25": 76527.51195174282,
+      "ema99": 77113.64476107611,
+      "ema_state": "BEAR",
+      "rsi14": 39.879655633119256,
+      "swept_bsl_rejected": false,
+      "swept_ssl_reclaimed": true
+    },
+    "1M": {
+      "ao5_34": -7843.441588235291,
+      "bos_down_vs_prior5": false,
+      "bos_up_vs_prior5": false,
+      "close": 78581.29,
+      "ema25": 77075.72754071304,
+      "ema99": 42007.46070379606,
+      "ema_state": "BULL",
+      "rsi14": 51.04321100799739,
+      "swept_bsl_rejected": false,
+      "swept_ssl_reclaimed": false
+    },
+    "1d": {
+      "ao5_34": 2778.258941176464,
+      "bos_down_vs_prior5": false,
+      "bos_up_vs_prior5": false,
+      "close": 78189.21,
+      "ema25": 76462.57925279462,
+      "ema99": 71340.22968497613,
+      "ema_state": "BULL",
+      "rsi14": 57.82398908818893,
+      "swept_bsl_rejected": false,
+      "swept_ssl_reclaimed": false
+    },
+    "1h": {
+      "ao5_34": -1378.6809411764698,
+      "bos_down_vs_prior5": false,
+      "bos_up_vs_prior5": false,
+      "close": 76000.0,
+      "ema25": 77140.34516896769,
+      "ema99": 77540.02948839725,
+      "ema_state": "BEAR",
+      "rsi14": 34.88224702415046,
+      "swept_bsl_rejected": false,
+      "swept_ssl_reclaimed": true
+    },
+    "1w": {
+      "ao5_34": 3403.909764705895,
+      "bos_down_vs_prior5": false,
+      "bos_up_vs_prior5": false,
+      "close": 76842.01,
+      "ema25": 72428.24766694343,
+      "ema99": 79637.90799568465,
+      "ema_state": "MIXED",
+      "rsi14": 54.61058898700848,
+      "swept_bsl_rejected": false,
+      "swept_ssl_reclaimed": false
+    },
+    "4h": {
+      "ao5_34": 53.51926470587205,
+      "bos_down_vs_prior5": true,
+      "bos_up_vs_prior5": false,
+      "close": 76512.0,
+      "ema25": 77534.30671650884,
+      "ema99": 77529.07463925256,
+      "ema_state": "MIXED",
+      "rsi14": 39.071190474383386,
+      "swept_bsl_rejected": false,
+      "swept_ssl_reclaimed": true
+    }
+  },
+  "decision": "NOT_ELIGIBLE_FAIL_CLOSED",
+  "derivatives": {
+    "funding_rate": "0.00007783",
+    "index_price": "76007.29913043",
+    "latest_1h_taker_buy_sell_ratio": "0.8819",
+    "mark_price": "75966.58771739",
+    "oi_1h_first_of_12_btc": "104593.650",
+    "oi_1h_latest_btc": "108353.006",
+    "open_interest_btc": "108093.422",
+    "top_trader_long_share": "0.7109",
+    "top_trader_ls_ratio": "2.4592"
+  },
+  "eth_comparator": {
+    "15m": {
+      "btc_bar_return_pct": 0.29953929518193867,
+      "eth_bar_return_pct": 0.6622461075762365,
+      "eth_minus_btc_pct": 0.3627068123942978
+    },
+    "1M": {
+      "btc_bar_return_pct": 24.95458584388597,
+      "eth_bar_return_pct": 32.48416192419201,
+      "eth_minus_btc_pct": 7.52957608030604
+    },
+    "1d": {
+      "btc_bar_return_pct": 1.753207652949218,
+      "eth_bar_return_pct": 1.5602922772597116,
+      "eth_minus_btc_pct": -0.19291537568950634
+    },
+    "1h": {
+      "btc_bar_return_pct": -1.2499675164366786,
+      "eth_bar_return_pct": -1.5590693101753206,
+      "eth_minus_btc_pct": -0.309101793738642
+    },
+    "1w": {
+      "btc_bar_return_pct": -4.3561616657225795,
+      "eth_bar_return_pct": -1.486589672616212,
+      "eth_minus_btc_pct": 2.8695719931063675
+    },
+    "4h": {
+      "btc_bar_return_pct": -0.5562905437625942,
+      "eth_bar_return_pct": -2.0977947916540396,
+      "eth_minus_btc_pct": -1.5415042478914454
+    }
+  },
+  "event_id": "R83_BTC_ADMISSION_ATTEMPT_20260916T021356_BKK",
+  "evidence_times_bkk": {
+    "mark_funding": "2026-09-16T02:12:48+07:00",
+    "open_interest": "2026-09-16T02:14:16.066+07:00",
+    "quote": "2026-09-16T02:13:56.014+07:00",
+    "taker_bucket": "2026-09-16T01:00:00+07:00",
+    "top_trader_bucket": "2026-09-16T02:00:00+07:00"
+  },
+  "liquidity_reaction": "4H_H1_M15_SSL_SWEEP_RECLAIM_PRESENT",
+  "local_short_gate": "FAIL_MATERIAL_D1_VS_LTF_CONFLICT_AND_NO_PREDECLARED_HEDGE_TRIGGER",
+  "quote_age_ms": 360,
+  "quote_ask": "75987.38000000",
+  "quote_bid": "75987.37000000",
+  "quote_event_time_bkk": "2026-09-16T02:13:56.014+07:00",
+  "quote_first_update_id": 100172403499,
+  "quote_gate": "PASS_R82",
+  "quote_provenance_sha256": "62618ce664462c742652ad450a2b8da7aa354daaef5e8ccb10b84ef15452b480",
+  "quote_snapshot_update_id": 100172403498,
+  "quote_source_commit": "8e2fec0843b357cbe37c926f5c26749969bb968b",
+  "reaction_confirmation": "PARTIAL_ONLY_NO_CLOSED_M15_OR_H1_BOS_UP",
+  "risk_economics": "NOT_CALCULATED_NO_ELIGIBLE_SETUP",
+  "same_thesis_confluence": "FAIL_FOR_LONG_DERIVATIVES_NOT_CONFIRMING",
+  "sample_phase_effect": "NONE_CALIBRATION_REMAINS_0",
+  "schema": "tradingos.r6_admission_receipt.v1",
+  "symbol": "BTCUSDT",
+  "trial_eligibility": "NOT_R6_SHADOW_TRIAL_ELIGIBLE"
+}
