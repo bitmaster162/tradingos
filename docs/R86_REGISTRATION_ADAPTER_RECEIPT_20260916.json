@@ -1,0 +1,25 @@
+{
+  "adapter": "tools/r6_registration_adapter.py",
+  "adapter_sha256": "689e39d02ef0b00fef62b405dfb7abff3a9639adde6e4e02ec6007ac51db879a",
+  "adapter_specific": "16/16 PASS",
+  "branch": "agent/r86-registration-adapter-r1",
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "combined_regression": "101/101 PASS",
+  "ledger_write_authority": false,
+  "live_r85_fail_replay": {
+    "reason": "R85_NOT_TRIAL_ELIGIBLE",
+    "result": "NOT_REGISTERABLE_FAIL_CLOSED"
+  },
+  "parent_commit": "aeeb379f5930a685f489ab77f467426b015178e3",
+  "schema": "tradingos.r86_registration_adapter_receipt.v1",
+  "sheet_mutation_performed": false,
+  "synthetic_pass": {
+    "event_id": "R6_BTC_B77976718C0B2CC9",
+    "result": "REGISTRATION_CANDIDATE_READY",
+    "row_sha256": "fc3cec01b8590d7cdb7305f1bde9f63e663e1f07704bba9a42fe56a34600e05a",
+    "sample_phase": "CALIBRATION"
+  },
+  "tests": "tests/test_r6_registration_adapter.py",
+  "tests_sha256": "db6b75b4d7ea793083b5ae83fffe9dfbea827a45479febbc55030fc1cd4a1782"
+}
