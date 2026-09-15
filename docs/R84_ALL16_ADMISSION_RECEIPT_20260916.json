@@ -1,0 +1,94 @@
+{
+  "admission_authority": "EVIDENCE_ONLY_FROZEN_CURRENT_RULES_APPLY",
+  "branch": "agent/r84-all16-admission-r1",
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "exact_snapshot_bridge_count": 16,
+  "focused_tests": "67/67 PASS",
+  "live_count": 16,
+  "live_smoke_file": "docs/R84_ALL16_LIVE_SMOKE_20260916.json",
+  "live_smoke_sha256": "da66268fad0d523fdad2ff9c6040a1ea100a5c8ab112f07eb55c909e3c03f396",
+  "live_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "SOLUSDT",
+    "TRXUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "LINKUSDT",
+    "AVAXUSDT",
+    "SUIUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "AAVEUSDT",
+    "NEARUSDT",
+    "UNIUSDT"
+  ],
+  "nonfull_required_lower_tfs": [],
+  "parent_commit": "1900b68fcdfbb115c22928d04299f16646d82b97",
+  "partial_1m": [
+    {
+      "history_bars": 73,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "SOLUSDT"
+    },
+    {
+      "history_bars": 86,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "DOGEUSDT"
+    },
+    {
+      "history_bars": 92,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "LINKUSDT"
+    },
+    {
+      "history_bars": 72,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "AVAXUSDT"
+    },
+    {
+      "history_bars": 40,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "SUIUSDT"
+    },
+    {
+      "history_bars": 82,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "BCHUSDT"
+    },
+    {
+      "history_bars": 71,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "AAVEUSDT"
+    },
+    {
+      "history_bars": 71,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "NEARUSDT"
+    },
+    {
+      "history_bars": 72,
+      "indicator_completeness": "PARTIAL_INSUFFICIENT_EMA99",
+      "symbol": "UNIUSDT"
+    }
+  ],
+  "quote_age_ms_max": 299,
+  "quote_age_ms_min": 46,
+  "quote_schema_set": [
+    "tradingos.binance_spot_event_time_quote.v1"
+  ],
+  "restart_count_total": 0,
+  "schema": "tradingos.r84_all16_admission_receipt.v1",
+  "scored_admission_decision": "NOT_COMPUTED_BY_PROBE",
+  "source_file": "tools/r6_all16_admission_probe.py",
+  "source_sha256": "638bcdb1128aaa1b4c1357e800d98119f2c2212dc1915cd977b99c1800ff1ae2",
+  "symbol_schema_set": [
+    "tradingos.r6_symbol_admission_evidence.v1"
+  ],
+  "test_file": "tests/test_r6_all16_admission_probe.py",
+  "test_sha256": "9d6deb99f9b05af61e67b751bc6abbaaf01a47b60cffef76f4d03fd955aeadd1",
+  "unique_count": 16
+}
