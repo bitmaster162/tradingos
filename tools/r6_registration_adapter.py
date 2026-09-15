@@ -20,9 +20,17 @@ r85 = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = r85
 SPEC.loader.exec_module(r85)
 
-INPUT_SCHEMA = "tradingos.r86_registration_input.v1"
-OUTPUT_SCHEMA = "tradingos.r86_registration_candidate.v1"
-ADAPTER_VERSION = "R86_REGISTRATION_ADAPTER_V1_20260916"
+R87_PATH = ROOT / "tools" / "r6_frozen_setup_contract.py"
+R87_SPEC = importlib.util.spec_from_file_location("r87_contract", R87_PATH)
+if R87_SPEC is None or R87_SPEC.loader is None:
+    raise RuntimeError("cannot load R87 setup contract")
+r87 = importlib.util.module_from_spec(R87_SPEC)
+sys.modules[R87_SPEC.name] = r87
+R87_SPEC.loader.exec_module(r87)
+
+INPUT_SCHEMA = "tradingos.r87_registration_input.v1"
+OUTPUT_SCHEMA = "tradingos.r87_registration_candidate.v1"
+ADAPTER_VERSION = "R87_FROZEN_SETUP_REGISTRATION_V1_20260916"
 RESOLVER_VERSION = "R6_SHADOW_RESOLVER_V1_20260916"
 TRIAL = "R6_SHADOW_TRIAL_ELIGIBLE"
 BKK = timezone(timedelta(hours=7))
@@ -166,15 +174,17 @@ def build_candidate(payload: dict[str, Any]) -> dict[str, Any]:
     decision_ms = supplied.get("decision_time_ms")
     if type(decision_ms) is not int or decision_ms <= 0:
         return fail("DECISION_TIME_INVALID")
-    horizon_ms = reg.get("horizon_end_ms")
-    if type(horizon_ms) is not int or horizon_ms <= decision_ms:
-        return fail("HORIZON_NOT_PREDECLARED_AFTER_DECISION")
-    timeframe = reg.get("timeframe")
-    regime = reg.get("regime_shadow")
-    if not isinstance(timeframe, str) or not timeframe:
-        return fail("TIMEFRAME_MISSING")
-    if not isinstance(regime, str) or not regime:
-        return fail("REGIME_SHADOW_MISSING")
+    try:
+        canonical_contract = r87.validate_contract(reg, decision_ms)
+    except ValueError as exc:
+        return fail("R87_CONTRACT_INVALID", error=str(exc))
+    if supplied.get("setup_family") != canonical_contract["setup_family"]:
+        return fail("R87_SETUP_FAMILY_MISMATCH")
+    if supplied.get("direction") != canonical_contract["direction"]:
+        return fail("R87_DIRECTION_MISMATCH")
+    horizon_ms = canonical_contract["horizon_end_ms"]
+    timeframe = canonical_contract["timeframe"]
+    regime = canonical_contract["regime_shadow"]
     semantic = _semantic_identity(r85_input, supplied)
     event_id, semantic_sha = _event_id(semantic)
     existing_ids = ledger.get("existing_event_ids")
@@ -182,21 +192,26 @@ def build_candidate(payload: dict[str, Any]) -> dict[str, Any]:
         return fail("EXISTING_EVENT_IDS_INVALID")
     if event_id in set(existing_ids):
         return fail("DUPLICATE_EVENT_ID_NO_WRITE", event_id=event_id)
-    trigger = _current_trigger_spec(r85_input, supplied)
-    r5_trigger = _r5_trigger_spec()
     econ = supplied["gates"]["economics"]["evidence"]
+    trigger = r87.augment_trigger(
+        _current_trigger_spec(r85_input, supplied), canonical_contract,
+        r85_input["decision_bundle"]["cost_model"], econ["risk"],
+    )
+    r5_trigger = _r5_trigger_spec()
     inv = supplied["gates"]["invalidation"]["evidence"]["price"]
     target = supplied["gates"]["target"]["evidence"]["price"]
     quote = r85_input["r84_evidence"]["quote"]
     current_grade = "A_CANDIDATE" if supplied.get("a_grade_candidate") else "RESEARCH_CALIBRATION"
     provenance = (
         f"R84+R85_VERIFIED; quote_provenance_sha256={quote['provenance_sha256']}; "
-        f"r85_evaluation_sha256={sha256_json(supplied)}; r86_semantic_sha256={semantic_sha}"
+        f"r85_evaluation_sha256={sha256_json(supplied)}; r86_semantic_sha256={semantic_sha}; "
+        f"r87_contract={r87.CONTRACT_ID}"
     )
     notes = (
         f"adapter={ADAPTER_VERSION}; semantic_sha256={semantic_sha}; "
-        "entry_mode=ENTRY_AT_R85_DECISION_QUOTE; R5 evaluated independently; "
-        "candidate only until sole resolver sheet write + exact readback"
+        f"entry_mode=ENTRY_AT_R85_DECISION_QUOTE; setup_contract={r87.CONTRACT_ID}; "
+        f"horizon=96_full_M15_bars; terminal={r87.TIME_EXIT_STATE}; "
+        "R5 evaluated independently; candidate only until sole resolver sheet write + exact readback"
     )
     row = {
         "Observed_at_BKK": observed_bkk(decision_ms),
@@ -272,6 +287,8 @@ def build_candidate(payload: dict[str, Any]) -> dict[str, Any]:
             "same_semantic_setup_absent": True,
             "sole_resolver_writer_required": True,
             "exact_post_write_readback_required": True,
+            "r87_contract_exact_match_required": True,
+            "terminal_time_exit_contract_frozen": True,
         },
         "ledger_write_authority": False,
         "can_trade": False,
@@ -280,7 +297,7 @@ def build_candidate(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build one frozen R6 registration candidate")
+    parser = argparse.ArgumentParser(description="Build one R87-frozen R6 registration candidate")
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

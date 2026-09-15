@@ -35,11 +35,7 @@ def input_payload() -> dict:
             "resolved_holdout_n": 0,
             "holdout_freeze": "NOT_STARTED",
         },
-        "registration_contract": {
-            "timeframe": "15m",
-            "regime_shadow": "BALANCE",
-            "horizon_end_ms": helpers.NOW + 3_600_000,
-        },
+        "registration_contract": r86.r87.build_contract(helpers.NOW, "BALANCE"),
     }
 
 
@@ -89,13 +85,11 @@ def test_supplied_evaluation_must_match_recomputation():
     out = r86.build_candidate(p)
     assert out["reason"] == "R85_EVALUATION_MISMATCH"
 
-def test_missing_or_past_horizon_fails_closed():
+def test_horizon_tamper_fails_closed():
     p = input_payload()
-    p["registration_contract"].pop("horizon_end_ms")
-    assert r86.build_candidate(p)["reason"] == "HORIZON_NOT_PREDECLARED_AFTER_DECISION"
-    p = input_payload()
-    p["registration_contract"]["horizon_end_ms"] = helpers.NOW
-    assert r86.build_candidate(p)["reason"] == "HORIZON_NOT_PREDECLARED_AFTER_DECISION"
+    p["registration_contract"]["horizon_end_ms"] += r86.r87.INTERVAL_MS
+    out = r86.build_candidate(p)
+    assert out["reason"] == "R87_CONTRACT_INVALID"
 
 
 def test_calibration_stops_at_30_until_freeze():
@@ -121,13 +115,13 @@ def test_no_new_registration_after_holdout_30():
     p["ledger_state"]["holdout_freeze"] = "PASS"
     assert r86.build_candidate(p)["reason"] == "R6_SAMPLE_COMPLETE_NO_NEW_REGISTRATION"
 
-def test_registration_requires_explicit_timeframe_and_regime():
+def test_contract_timeframe_or_regime_mutation_fails_closed():
     p = input_payload()
-    p["registration_contract"]["timeframe"] = ""
-    assert r86.build_candidate(p)["reason"] == "TIMEFRAME_MISSING"
+    p["registration_contract"]["timeframe"] = "1h"
+    assert r86.build_candidate(p)["reason"] == "R87_CONTRACT_INVALID"
     p = input_payload()
     p["registration_contract"]["regime_shadow"] = ""
-    assert r86.build_candidate(p)["reason"] == "REGIME_SHADOW_MISSING"
+    assert r86.build_candidate(p)["reason"] == "R87_CONTRACT_INVALID"
 
 
 def test_r5_is_never_inferred_from_current():
@@ -147,6 +141,9 @@ def test_current_trigger_is_bound_to_r85_quote_and_reaction():
     assert trigger["reaction_id"] == "RX1"
     assert trigger["quote_provenance_sha256"] == quote["provenance_sha256"]
     assert trigger["quote_decision_time_ms"] == p["r85_evaluation"]["decision_time_ms"]
+    assert trigger["r87_setup_contract"] == p["registration_contract"]
+    assert trigger["resolution_policy"]["horizon_terminal"] == "TERMINAL_TIME_EXIT"
+    assert trigger["settlement_spec"]["initial_planned_risk_per_unit"]
 
 
 def test_candidate_has_no_terminal_or_outcome_claim():
@@ -154,14 +151,13 @@ def test_candidate_has_no_terminal_or_outcome_claim():
     for key in ("Outcome_R", "R5_Outcome_R", "CURRENT_Outcome_R", "Terminal_Event", "Resolved_At_UTC"):
         assert row[key] == ""
 
-def test_event_id_does_not_change_when_only_horizon_changes():
-    p1 = input_payload()
-    p2 = copy.deepcopy(p1)
-    p2["registration_contract"]["horizon_end_ms"] += 7_200_000
-    a = r86.build_candidate(p1)
-    b = r86.build_candidate(p2)
-    assert a["event_id"] == b["event_id"]
-    assert a["registration_row_sha256"] != b["registration_row_sha256"]
+def test_same_reaction_cannot_be_rearmed_by_horizon_change():
+    p = input_payload()
+    first = r86.build_candidate(copy.deepcopy(p))
+    p["registration_contract"]["horizon_end_ms"] += r86.r87.INTERVAL_MS
+    tampered = r86.build_candidate(p)
+    assert first["registration_candidate"] is True
+    assert tampered["reason"] == "R87_CONTRACT_INVALID"
 
 
 def test_reaction_change_changes_event_id():
