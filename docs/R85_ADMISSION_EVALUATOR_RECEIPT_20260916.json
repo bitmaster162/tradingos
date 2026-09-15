@@ -1,0 +1,21 @@
+{
+  "branch": "agent/r85-admission-evaluator-r1",
+  "calibration_registration_candidate": false,
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "ctha_gate": "UNKNOWN",
+  "decision_time_binding": "quote.decision_time_ms must equal evaluator decision_time_ms; fresh quote required again at any later entry",
+  "focused_full_suite": "85/85 PASS",
+  "ledger_write_authority": false,
+  "live_quote_age_ms": 277,
+  "live_quote_provenance_sha256": "2ef53a0a98568f5935f15e4592a9e3ed1a3cb17babde8571779b45677a7ee168",
+  "live_result": "NOT_ELIGIBLE_FAIL_CLOSED",
+  "live_symbol": "BTCUSDT",
+  "parent_commit": "61b148643905400b6ac4645d1960dcd40f9b2857",
+  "r84_gate": "PASS",
+  "schema": "tradingos.r85_admission_evaluator_receipt.v1",
+  "source_file": "tools/r6_admission_evaluator.py",
+  "source_sha256": "4f2ddf3c9529ecb5c48534e2eafaf5f002138e50f5d0b735ea978bfbc0e920a9",
+  "test_file": "tests/test_r6_admission_evaluator.py",
+  "test_sha256": "595167590ad402d2262628d606df25e90c5047d901dd52992dd5dee6e23a48c0"
+}
