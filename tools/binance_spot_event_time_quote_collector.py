@@ -390,6 +390,39 @@ async def capture_one_quote(
             return quote
     raise SpotQuoteReject("no_synchronized_quote_within_event_budget")
 
+RESTARTABLE_SYNC_ERRORS = {
+    "snapshot_event_bridge_gap",
+    "depth_sequence_gap",
+    "stale_event_time_E",
+    "no_synchronized_quote_within_event_budget",
+}
+
+
+async def capture_quote_with_restarts(*, max_restarts: int = 2, capture_fn=None, **kwargs) -> dict[str, Any]:
+    if type(max_restarts) is not int or max_restarts < 0 or max_restarts > 5:
+        raise ValueError("max_restarts out of bounds")
+    fn = capture_fn or capture_one_quote
+    last_error: Exception | None = None
+    for attempt in range(max_restarts + 1):
+        try:
+            quote = await fn(**kwargs)
+            quote = dict(quote)
+            quote["restart_count"] = attempt
+            quote["provenance_sha256"] = stable_sha256(
+                {key: value for key, value in quote.items() if key != "provenance_sha256"}
+            )
+            return quote
+        except SpotQuoteReject as exc:
+            last_error = exc
+            if str(exc) not in RESTARTABLE_SYNC_ERRORS or attempt >= max_restarts:
+                raise
+        except (asyncio.TimeoutError, OSError) as exc:
+            last_error = exc
+            if attempt >= max_restarts:
+                raise
+    raise SpotQuoteReject(f"restart_budget_exhausted:{last_error}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Capture one synchronized Binance Spot event-time top-of-book quote")
     parser.add_argument("--symbol", default="BTCUSDT")
@@ -397,16 +430,18 @@ def main() -> int:
     parser.add_argument("--snapshot-limit", type=int, default=DEFAULT_LIMIT)
     parser.add_argument("--timeout-s", type=float, default=DEFAULT_TIMEOUT_S)
     parser.add_argument("--max-events", type=int, default=500)
+    parser.add_argument("--max-restarts", type=int, default=2)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     try:
         quote = asyncio.run(
-            capture_one_quote(
+            capture_quote_with_restarts(
                 symbol=args.symbol,
                 max_age_ms=args.max_age_ms,
                 snapshot_limit=args.snapshot_limit,
                 timeout_s=args.timeout_s,
                 max_events=args.max_events,
+                max_restarts=args.max_restarts,
             )
         )
         if args.output is not None:

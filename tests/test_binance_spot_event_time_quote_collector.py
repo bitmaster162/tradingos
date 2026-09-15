@@ -127,3 +127,30 @@ def test_source_has_no_trading_or_credentials_capability() -> None:
     assert "x-mbx-apikey" not in text and "api_secret" not in text
     assert 'quote["can_trade"] = false' in text
     assert 'quote["capital_permission"] = "deny"' in text
+
+def test_bounded_restart_recovers_from_sequence_gap() -> None:
+    calls = {"n": 0}
+    async def fake_capture(**kwargs):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise m.SpotQuoteReject("depth_sequence_gap")
+        book = m.SpotDepthBook(symbol="BTCUSDT", snapshot=snapshot())
+        return book.apply(parse(raw_event(U=101, u=101)))
+    import asyncio
+    quote = asyncio.run(m.capture_quote_with_restarts(max_restarts=1, capture_fn=fake_capture))
+    assert calls["n"] == 2
+    assert quote["restart_count"] == 1
+    assert quote["provenance_sha256"] == m.stable_sha256(
+        {k: v for k, v in quote.items() if k != "provenance_sha256"}
+    )
+
+
+def test_nonrestartable_rejection_stays_fail_closed() -> None:
+    calls = {"n": 0}
+    async def fake_capture(**kwargs):
+        calls["n"] += 1
+        raise m.SpotQuoteReject("event_identity_mismatch")
+    import asyncio
+    with pytest.raises(m.SpotQuoteReject, match="event_identity_mismatch"):
+        asyncio.run(m.capture_quote_with_restarts(max_restarts=2, capture_fn=fake_capture))
+    assert calls["n"] == 1
