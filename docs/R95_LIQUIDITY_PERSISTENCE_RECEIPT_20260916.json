@@ -1,0 +1,38 @@
+{
+  "all16_live": {
+    "capture_fail": 0,
+    "integrity_pass": 16,
+    "registrations": 0,
+    "symbols": 16
+  },
+  "base_commit": "331cdeb60d73054a777466f27526144f930f55ab",
+  "branch": "agent/r95-liquidity-persistence-gate-r1",
+  "can_trade": false,
+  "capital_permission": "DENY",
+  "contract_id": "R95_LIQUIDITY_PERSISTENCE_GATE_V1_20260916",
+  "critical_regression": "189/189 PASS",
+  "dedicated_suite": "20/20 PASS",
+  "file_sha256": {
+    "docs/R95_ALL16_FULL_EQUITY_PERSISTENCE_BENCHMARK_SEAL_20260916.json": "382c6c267a1e21b3ed73bc6bfb93cf09f908c30309d5765d24d31006aa0401dd",
+    "docs/R95_ALL16_LIVE_SEAL_20260916.json": "6f5f9d9dccc73526d16bd1ae62340335d6a350b8af29cbfbdbf05949da3e7cea",
+    "docs/R95_SEAL_RUNTIME_INPUT_20260916.json": "fd234e0defdbbd99213f65904173e77fdeab241432f4de47487a293b53c7652e",
+    "docs/R95_SEAL_RUNTIME_STATE_20260916.json": "b5d29a54a090ea165f64993d2649758d28ba5fa63b606d1e58d0d65c25048f9c",
+    "tests/test_r95_liquidity_persistence_gate.py": "563bb716f1666358f20e35ba646312c3c5b459fea43c6ced993791d759660ffd",
+    "tests/test_r95_persistent_capacity_sweep.py": "649bb3aefdb76624b9242b9aba569ff2418ab3bf2407ff0bf5409fd864caa528",
+    "tools/r6_liquidity_persistence_benchmark.py": "2bdcad468c2c9c59444ecbdcb0ce32fe90e2de8206f352f9d6e50c59f8d81c9f",
+    "tools/r6_liquidity_persistence_gate.py": "01d0eb47f7edc934ad7d87c5282bd8536432823dfd85482b230cc6e0a09675d7",
+    "tools/r6_persistent_capacity_sweep.py": "ec3c09700f28106b4033ec0e0e9478b052815174a0f4f4517f0043da5b72e058"
+  },
+  "full_equity_persistence_benchmark": {
+    "fail": 6,
+    "interpretation": "stress-only 10000-USDT persistence map; actual candidate requires fresh exact-size R94+R95 pass",
+    "pass": 10,
+    "symbols": 16
+  },
+  "max_event_gap_ms": 500,
+  "max_event_span_ms": 1000,
+  "max_impact_bps_per_side": "2",
+  "min_event_span_ms": 200,
+  "required_states": 3,
+  "schema": "tradingos.r95_seal_receipt.v1"
+}
