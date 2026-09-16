@@ -1,0 +1,30 @@
+{
+  "schema": "tradingos.r91_runtime_state_contract_receipt.v1",
+  "contract_id": "R91_R6_RUNTIME_STATE_V1_20260916",
+  "parent_commit": "e55423220232958de2a7f7b48f402728d776e5f4",
+  "intended_gate_id": "R6_GATE_V4_R91_20260916",
+  "cost_policy": {
+    "entry_fee_rate": "0.0005",
+    "exit_fee_rate": "0.0005",
+    "entry_slippage_bps": "2",
+    "exit_slippage_bps": "2",
+    "base_total_bps_per_side": "7",
+    "stress_extra_bps_per_side": "10",
+    "stress_total_bps_per_side": "17"
+  },
+  "risk_policy": {
+    "base_risk_unit_pct": "0.5",
+    "negative_completed_week_multiplier": "0.5",
+    "aggregate_risk_limit_pct": "3",
+    "drawdown_hard_stop_pct": "10",
+    "three_loss_pause_minutes": 60,
+    "daily_entry_ceiling": 20
+  },
+  "cost_source_sha256": {
+    "configs/SPOT_LED_CONTINUATION_RESEARCH_PROTOCOL.json": "134d5a2037928e411d92346125a77ba453fd86997ee3f0c500fd8ce5684e2e35",
+    "configs/BASIS_SHOCK_FUNDING_ALIGNMENT_RESEARCH_LOCK.json": "26f25019161fcfcaf8182ee9a3799e9b4f5822c0b5a1e2e364f2bca007076ed4"
+  },
+  "tests": {"r91_specific": "12/12 PASS", "targeted_r82_to_r91": "120/120 PASS"},
+  "live_btc_integration": {"quote_age_ms": 198, "restart_count": 0, "structural_candidate_count": 0, "registration_candidate_count": 0},
+  "authority": {"ledger_write_authority": false, "can_trade": false, "capital_permission": "DENY"}
+}
