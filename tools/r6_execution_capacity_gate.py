@@ -382,31 +382,33 @@ def evaluate_capacity(
     if proposed <= 0 or proposed > Decimal("1"):
         return fail("PROPOSED_RISK_OUT_OF_RANGE", proposed=str(proposed))
     if direction == "LONG":
+        entry_eff = entry * (Decimal("1") + slip_in / Decimal("10000"))
         stop_exec = _round_price(stop, tick, up=False)
         target_exec = _round_price(target, tick, up=False)
         stop_eff = stop_exec * (Decimal("1") - slip_out / Decimal("10000"))
         target_eff = target_exec * (Decimal("1") - slip_out / Decimal("10000"))
-        unit_risk = entry - stop_eff + fee_in * entry + fee_out * stop_eff
-        unit_reward = target_eff - entry - fee_in * entry - fee_out * target_eff
+        unit_risk = entry_eff - stop_eff + fee_in * entry_eff + fee_out * stop_eff
+        unit_reward = target_eff - entry_eff - fee_in * entry_eff - fee_out * target_eff
     else:
+        entry_eff = entry * (Decimal("1") - slip_in / Decimal("10000"))
         stop_exec = _round_price(stop, tick, up=True)
         target_exec = _round_price(target, tick, up=True)
         stop_eff = stop_exec * (Decimal("1") + slip_out / Decimal("10000"))
         target_eff = target_exec * (Decimal("1") + slip_out / Decimal("10000"))
-        unit_risk = stop_eff - entry + fee_in * entry + fee_out * stop_eff
-        unit_reward = entry - target_eff - fee_in * entry - fee_out * target_eff
+        unit_risk = stop_eff - entry_eff + fee_in * entry_eff + fee_out * stop_eff
+        unit_reward = entry_eff - target_eff - fee_in * entry_eff - fee_out * target_eff
     if unit_risk <= 0 or unit_reward <= 0:
         return fail("ROUNDED_NET_GEOMETRY_NONPOSITIVE", risk=str(unit_risk), reward=str(unit_reward))
     risk_budget = RESEARCH_EQUITY_USDT * proposed / Decimal("100")
     q_by_risk = risk_budget / unit_risk
-    q_by_gross = RESEARCH_EQUITY_USDT * MAX_GROSS_MULTIPLE / entry
+    q_by_gross = RESEARCH_EQUITY_USDT * MAX_GROSS_MULTIPLE / entry_eff
     q_cap = min(q_by_risk, q_by_gross, max_qty)
     if max_notional is not None:
-        q_cap = min(q_cap, max_notional / entry)
+        q_cap = min(q_cap, max_notional / entry_eff)
     q = _floor_to_step(q_cap, step)
     if q <= 0 or q < min_qty:
         return fail("QUANTITY_BELOW_VENUE_MIN", quantity=str(q), min_qty=str(min_qty))
-    notional = q * entry
+    notional = q * entry_eff
     if notional < min_notional:
         return fail("NOTIONAL_BELOW_VENUE_MIN", notional=str(notional), min_notional=str(min_notional))
     actual_risk = q * unit_risk
@@ -442,6 +444,7 @@ def evaluate_capacity(
         "research_scale_authority": "R5_BOOKKEEPING_EQUITY_10000_SCALE_ONLY_NO_SIGNAL_INHERITANCE",
         "proposed_risk_pct": str(proposed), "risk_budget_usdt": str(risk_budget),
         "quantity": str(q), "gross_notional_usdt": str(notional),
+        "modeled_entry_fill": str(entry_eff), "entry_slippage_budget_bps": str(slip_in),
         "actual_planned_risk_usdt": str(actual_risk), "actual_planned_risk_pct": str(actual_risk_pct),
         "gross_equity_multiple": str(notional / RESEARCH_EQUITY_USDT),
         "entry_depth_vwap": str(buy_vwap if direction == "LONG" else sell_vwap),

@@ -86,7 +86,8 @@ def _fixed_quantity_capacity(direction: str, quantity: Decimal, quote: dict[str,
     sell_impact = cap._impact_bps("SELL", bid, sell_vwap)
     entry_impact = buy_impact if direction == "LONG" else sell_impact
     exit_impact = sell_impact if direction == "LONG" else buy_impact
-    return {"notional_usdt": notional, "entry_impact_bps": entry_impact, "exit_impact_bps": exit_impact}
+    return {"notional_usdt": notional, "entry_impact_bps": entry_impact, "exit_impact_bps": exit_impact,
+            "best_bid": bid, "best_ask": ask, "buy_vwap": buy_vwap, "sell_vwap": sell_vwap}
 
 def _adverse_drift_bps(direction: str, old_quote: dict[str, Any], fresh_quote: dict[str, Any]) -> Decimal:
     if direction == "LONG":
@@ -153,6 +154,10 @@ def evaluate_continuity(candidate: dict[str, Any], old_quote: dict[str, Any], fr
         "frozen_quantity": str(quantity), "fresh_notional_usdt": str(fixed["notional_usdt"]),
         "fresh_entry_impact_bps": str(fixed["entry_impact_bps"]),
         "fresh_exit_impact_bps": str(fixed["exit_impact_bps"]),
+        "fresh_best_bid": str(fixed["best_bid"]), "fresh_best_ask": str(fixed["best_ask"]),
+        "fresh_entry_depth_vwap": str(fixed["buy_vwap"] if direction == "LONG" else fixed["sell_vwap"]),
+        "fresh_exit_depth_vwap_proxy": str(fixed["sell_vwap"] if direction == "LONG" else fixed["buy_vwap"]),
+        "fresh_event_time_ms": fresh_event, "fresh_decision_time_ms": fresh_decision,
         "old_quote_provenance_sha256": old_quote["provenance_sha256"],
         "fresh_quote_provenance_sha256": fresh_quote["provenance_sha256"],
         "fresh_book_provenance_sha256": fresh_book["provenance_sha256"],
