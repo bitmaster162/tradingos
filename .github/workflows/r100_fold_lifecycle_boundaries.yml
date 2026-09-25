@@ -30,6 +30,7 @@ jobs:
             'tools/relative_strength_rotation_nested_holdout.py',
             'tools/session_volatility_compression_breakout_nested_holdout.py',
             'tests/test_fold_lifecycle_boundaries.py',
+            'tests/test_time_fold_block_bootstrap.py',
             'docs/R100_FOLD_LIFECYCLE_BOUNDARIES.md',
             '.github/workflows/r100_fold_lifecycle_boundaries.yml',
           }
