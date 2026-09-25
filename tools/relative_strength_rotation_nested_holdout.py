@@ -248,15 +248,30 @@ def replay_signals(config: RotationConfig, bars: list[Any], signals: list[dict[s
     return trades
 
 
-def fold_summaries(trades: list[Trade], folds: int) -> list[dict[str, Any]]:
-    ordered = sorted(trades, key=lambda item: item.entry_ts)
-    out = []
+def fold_summaries(trades: list[Trade], bars: list[Any], folds: int) -> list[dict[str, Any]]:
+    """Equal-duration/bar-count folds, never equal-trade-count folds."""
+    if type(folds) is not int or folds <= 0:
+        raise ValueError("folds must be a positive integer")
+    if len(bars) < folds:
+        return []
+    ordered = sorted(trades, key=lambda item: parse_ts(str(item.entry_ts)))
+    out: list[dict[str, Any]] = []
     for fold in range(folds):
-        start = round(len(ordered) * fold / folds)
-        end = round(len(ordered) * (fold + 1) / folds)
-        chunk = ordered[start:end]
+        start_index = len(bars) * fold // folds
+        end_index = len(bars) * (fold + 1) // folds
+        start_ts = parse_ts(str(bars[start_index].ts))
+        end_ts = parse_ts(str(bars[end_index].ts)) if end_index < len(bars) else None
+        chunk = [
+            trade
+            for trade in ordered
+            if parse_ts(str(trade.entry_ts)) >= start_ts
+            and (end_ts is None or parse_ts(str(trade.entry_ts)) < end_ts)
+        ]
         summary = summarize_trades(chunk)
         summary["fold"] = fold + 1
+        summary["partition"] = "equal_bar_time_window"
+        summary["start_ts"] = start_ts.isoformat()
+        summary["end_exclusive_ts"] = end_ts.isoformat() if end_ts is not None else None
         summary["stable"] = bool(summary["trades"] >= 5 and (summary["expectancy_r"] or 0.0) > 0)
         out.append(summary)
     return out
@@ -267,11 +282,12 @@ def evaluate_window(config: RotationConfig, bars: list[Any], features: dict[str,
     signals = generate_signals(config, bars, features)
     trades = replay_signals(config, bars, signals, cost, args.no_overlap)
     stress_trades = replay_signals(config, bars, signals, cost + args.cost_stress_extra_bps, args.no_overlap)
-    folds_payload = fold_summaries(trades, folds)
+    folds_payload = fold_summaries(trades, bars, folds)
     return {
         "summary": summarize_trades(trades),
         "folds": folds_payload,
         "stable_folds": sum(1 for item in folds_payload if item.get("stable")),
+        "fold_partition": "equal_bar_time_window",
         "cost_stress": {"summary": summarize_trades(stress_trades)},
         "trades": trades,
     }
