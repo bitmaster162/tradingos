@@ -228,29 +228,61 @@ def replay(config: CompressionConfig, bars: list[Any], signals: list[dict[str, A
     return trades
 
 
-def fold_summaries_expectancy(trades: list[Any], folds: int) -> list[dict[str, Any]]:
-    if not trades:
+def fold_summaries_expectancy(trades: list[Any], bars: list[Any], folds: int) -> list[dict[str, Any]]:
+    """Equal-duration/bar-count folds, not equal-trade-count quartiles."""
+    if type(folds) is not int or folds <= 0:
+        raise ValueError("folds must be a positive integer")
+    if len(bars) < folds:
         return []
-    ordered = sorted(trades, key=lambda item: item.entry_ts)
+    ordered = sorted(trades, key=lambda item: parse_ts(str(item.entry_ts)))
     out: list[dict[str, Any]] = []
     for fold in range(folds):
-        start = round(len(ordered) * fold / folds)
-        end = round(len(ordered) * (fold + 1) / folds)
-        chunk = ordered[start:end]
+        start_index = len(bars) * fold // folds
+        end_index = len(bars) * (fold + 1) // folds
+        start_ts = parse_ts(str(bars[start_index].ts))
+        end_ts = parse_ts(str(bars[end_index].ts)) if end_index < len(bars) else None
+        chunk = [
+            trade
+            for trade in ordered
+            if parse_ts(str(trade.entry_ts)) >= start_ts
+            and (end_ts is None or parse_ts(str(trade.entry_ts)) < end_ts)
+        ]
         summary = summarize_trades(chunk)
         summary["fold"] = fold + 1
+        summary["partition"] = "equal_bar_time_window"
+        summary["start_ts"] = start_ts.isoformat()
+        summary["end_exclusive_ts"] = end_ts.isoformat() if end_ts is not None else None
         summary["stable"] = bool(summary["trades"] >= 10 and (summary["expectancy_r"] or 0.0) > 0)
         out.append(summary)
     return out
 
 
-def bootstrap_positive_probability(values: list[float], iterations: int = 1000, seed: int = 20260630) -> float | None:
+def bootstrap_positive_probability(
+    values: list[float],
+    iterations: int = 1000,
+    seed: int = 20260630,
+    block_size: int | None = None,
+) -> float | None:
+    """Moving-block bootstrap retaining local trade-order dependence."""
     if not values:
+        return None
+    if type(iterations) is not int or iterations <= 0:
+        raise ValueError("iterations must be positive")
+    n = len(values)
+    block = block_size if block_size is not None else max(2, int(round(math.sqrt(n))))
+    if type(block) is not int or block <= 0:
+        raise ValueError("block_size must be a positive integer")
+    block = min(block, n)
+    blocks = [values[i : i + block] for i in range(0, n - block + 1)]
+    if not blocks:
         return None
     rng = random.Random(seed)
     positive = 0
     for _ in range(iterations):
-        sample_mean = statistics.mean(rng.choice(values) for _ in values)
+        sample: list[float] = []
+        while len(sample) < n:
+            sample.extend(rng.choice(blocks))
+        sample_mean = statistics.mean(sample[:n])
         positive += int(sample_mean > 0.0)
     return round(positive / iterations, 6)
 
@@ -300,16 +332,19 @@ def evaluate_window(
     trades = replay(config, bars, signals, cost_bps_per_side)
     stress_trades = replay(config, bars, signals, cost_bps_per_side + stress_extra_bps)
     summary = summarize_trades(trades)
-    folds_payload = fold_summaries_expectancy(trades, folds)
+    folds_payload = fold_summaries_expectancy(trades, bars, folds)
     stable_folds = sum(1 for row in folds_payload if row.get("stable"))
     bootstrap_allowed = int(summary.get("trades") or 0) >= 50 and (summary.get("expectancy_r") or -999.0) > 0
     return {
         "signals": len(signals),
         "summary": summary,
         "stable_folds": stable_folds,
+        "fold_partition": "equal_bar_time_window",
         "folds": folds_payload,
         "cost_stress": {"extra_bps_per_side": stress_extra_bps, "summary": summarize_trades(stress_trades)},
-        "bootstrap_probability_expectancy_gt_0": bootstrap_positive_probability([trade.r_net for trade in trades]) if bootstrap_allowed else None,
+        "bootstrap_method": "moving_block_trade_order_v1",
+        "bootstrap_block_trades": (getattr(args, "bootstrap_block_trades", 0) or max(2, int(round(math.sqrt(len(trades)))))) if trades else None,
+        "bootstrap_probability_expectancy_gt_0": bootstrap_positive_probability(\n            [trade.r_net for trade in trades],\n            block_size=(getattr(args, "bootstrap_block_trades", 0) or None),\n        ) if bootstrap_allowed else None,
         "trades": [asdict(trade) for trade in trades],
     }
 
@@ -614,7 +649,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--validation-end", default="2025-01-01T00:00:00+00:00")
     parser.add_argument("--cost-bps-per-side", type=float, default=6.0)
     parser.add_argument("--stress-extra-bps-per-side", type=float, default=4.0)
-    parser.add_argument("--folds", type=int, default=4)
+    parser.add_argument("--folds", type=int, default=4)\n    parser.add_argument("--bootstrap-block-trades", type=int, default=0, help="0=auto sqrt(N); otherwise explicit moving-block length")
     parser.add_argument("--train-min-trades", type=int, default=80)
     parser.add_argument("--train-min-expectancy-r", type=float, default=0.08)
     parser.add_argument("--train-min-stable-folds", type=int, default=3)
