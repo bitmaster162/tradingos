@@ -157,7 +157,7 @@ def generate_signals(config: CompressionConfig, bars: list[Any], features: dict[
     volume_z = features["volume_z"]
     signals: list[dict[str, Any]] = []
     for index, bar in enumerate(bars):
-        if index + config.max_hold_bars + 1 >= len(bars):
+        if index + config.max_hold_bars >= len(bars):
             continue
         if not in_session(str(bar.ts), config.session):
             continue
