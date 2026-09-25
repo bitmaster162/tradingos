@@ -410,7 +410,25 @@ def load_interval_bars(cache_dir: Path, interval: str) -> list[Any]:
     return load_ohlcv(path)
 
 
+def _unopened_oos() -> dict[str, Any]:
+    return {
+        "status": "UNOPENED",
+        "signals": None,
+        "summary": {
+            "trades": None,
+            "winrate_pct": None,
+            "expectancy_r": None,
+            "max_drawdown_r": None,
+        },
+        "stable_folds": None,
+        "folds": [],
+        "cost_stress": {"summary": {"expectancy_r": None}},
+        "bootstrap_probability_expectancy_gt_0": None,
+    }
+
+
 def evaluate_config(config: CompressionConfig, windows: dict[str, dict[str, Any]], args: argparse.Namespace) -> dict[str, Any]:
+    """Grid stage: train + validation only. OOS must remain physically unopened."""
     train = evaluate_window(
         config,
         windows["train"]["bars"],
@@ -429,6 +447,38 @@ def evaluate_config(config: CompressionConfig, windows: dict[str, dict[str, Any]
         args.folds,
     )
     validation_gate_payload = validation_gate(validation, args)
+    decision = "reject_train_gate_failed"
+    if train_gate_payload["pass"] and not validation_gate_payload["pass"]:
+        decision = "reject_validation_gate_failed_oos_unopened"
+    elif train_gate_payload["pass"] and validation_gate_payload["pass"]:
+        decision = "validation_qualified_oos_unopened"
+    return {
+        "config": {**asdict(config), "session": asdict(config.session)},
+        "strategy_id": config.strategy_id,
+        "family": "session_volatility_compression_breakout",
+        "train": {key: value for key, value in train.items() if key != "trades"},
+        "validation": {key: value for key, value in validation.items() if key != "trades"},
+        "oos": _unopened_oos(),
+        "gates": {
+            "train": train_gate_payload,
+            "validation": validation_gate_payload,
+            "oos": {"pass": False, "status": "UNOPENED"},
+        },
+        "decision": decision,
+        "can_trade": False,
+    }
+
+
+def open_oos_once(
+    row: dict[str, Any],
+    config: CompressionConfig,
+    windows: dict[str, dict[str, Any]],
+    args: argparse.Namespace,
+) -> dict[str, Any]:
+    if not (row["gates"]["train"]["pass"] and row["gates"]["validation"]["pass"]):
+        raise ValueError("OOS may only be opened for a train+validation-qualified frozen config")
+    if row["oos"].get("status") != "UNOPENED":
+        raise ValueError("OOS already opened")
     oos = evaluate_window(
         config,
         windows["oos"]["bars"],
@@ -438,42 +488,32 @@ def evaluate_config(config: CompressionConfig, windows: dict[str, dict[str, Any]
         args.folds,
     )
     oos_gate_payload = oos_gate(oos, args)
-    decision = "reject_train_gate_failed"
-    if train_gate_payload["pass"] and not validation_gate_payload["pass"]:
-        decision = "reject_validation_gate_failed_oos_unopened"
-    elif train_gate_payload["pass"] and validation_gate_payload["pass"] and not oos_gate_payload["pass"]:
-        decision = "reject_oos_gate_failed"
-    elif train_gate_payload["pass"] and validation_gate_payload["pass"] and oos_gate_payload["pass"]:
-        decision = "candidate_needs_forward_proof"
-    return {
-        "config": {**asdict(config), "session": asdict(config.session)},
-        "strategy_id": config.strategy_id,
-        "family": "session_volatility_compression_breakout",
-        "train": {key: value for key, value in train.items() if key != "trades"},
-        "validation": {key: value for key, value in validation.items() if key != "trades"},
-        "oos": {key: value for key, value in oos.items() if key != "trades"},
-        "gates": {
-            "train": train_gate_payload,
-            "validation": validation_gate_payload,
-            "oos": oos_gate_payload,
-        },
-        "decision": decision,
-        "can_trade": False,
-    }
+    opened = dict(row)
+    opened["oos"] = {key: value for key, value in oos.items() if key != "trades"}
+    opened["oos"]["status"] = "OPENED_ONCE_FOR_FROZEN_VALIDATION_WINNER"
+    opened["gates"] = dict(row["gates"])
+    opened["gates"]["oos"] = oos_gate_payload
+    opened["decision"] = (
+        "candidate_needs_forward_proof"
+        if oos_gate_payload["pass"]
+        else "reject_oos_gate_failed"
+    )
+    return opened
 
-
-def result_sort_key(row: dict[str, Any]) -> tuple[int, float, int, float]:
-    decision_rank = {
-        "candidate_needs_forward_proof": 3,
-        "reject_oos_gate_failed": 2,
-        "reject_validation_gate_failed_oos_unopened": 1,
-        "reject_train_gate_failed": 0,
-    }.get(row.get("decision"), 0)
+def result_sort_key(row: dict[str, Any]) -> tuple[int, int, float, int, float]:
+    """Pre-OOS ranking only. No OOS field is read here."""
+    train_pass = bool(row.get("gates", {}).get("train", {}).get("pass"))
+    validation_pass = bool(row.get("gates", {}).get("validation", {}).get("pass"))
     validation_exp = float(row.get("validation", {}).get("summary", {}).get("expectancy_r") or -999.0)
     validation_trades = int(row.get("validation", {}).get("summary", {}).get("trades") or 0)
-    oos_exp = float(row.get("oos", {}).get("summary", {}).get("expectancy_r") or -999.0)
-    return (decision_rank, validation_exp, validation_trades, oos_exp)
-
+    train_exp = float(row.get("train", {}).get("summary", {}).get("expectancy_r") or -999.0)
+    return (
+        int(train_pass and validation_pass),
+        int(train_pass),
+        validation_exp,
+        validation_trades,
+        train_exp,
+    )
 
 def render_markdown(report: dict[str, Any]) -> str:
     lines = [
@@ -609,13 +649,35 @@ def main() -> int:
             "validation": {"bars": validation_bars, "features": build_features_for_bars(validation_bars)},
             "oos": {"bars": oos_bars, "features": build_features_for_bars(oos_bars)},
         }
+    config_by_id = {config.strategy_id: config for config in configs}
     results: list[dict[str, Any]] = []
     for config in configs:
         results.append(evaluate_config(config, windows_by_interval[config.interval], args))
     results.sort(key=result_sort_key, reverse=True)
     train_qualified = [row for row in results if row["gates"]["train"]["pass"]]
-    validation_qualified = [row for row in results if row["gates"]["train"]["pass"] and row["gates"]["validation"]["pass"]]
-    oos_qualified = [row for row in validation_qualified if row["gates"]["oos"]["pass"]]
+    validation_qualified = [
+        row
+        for row in results
+        if row["gates"]["train"]["pass"] and row["gates"]["validation"]["pass"]
+    ]
+    frozen_oos_strategy_id = (
+        validation_qualified[0]["strategy_id"] if validation_qualified else None
+    )
+    oos_qualified: list[dict[str, Any]] = []
+    if frozen_oos_strategy_id is not None:
+        frozen_config = config_by_id[frozen_oos_strategy_id]
+        opened = open_oos_once(
+            validation_qualified[0],
+            frozen_config,
+            windows_by_interval[frozen_config.interval],
+            args,
+        )
+        results = [
+            opened if row["strategy_id"] == frozen_oos_strategy_id else row
+            for row in results
+        ]
+        if opened["gates"]["oos"]["pass"]:
+            oos_qualified = [opened]
     decision = "reject_no_train_qualified_session_vol_comp_candidate"
     next_action = "reject this mechanism; do not retune without a materially different signal definition"
     if train_qualified and not validation_qualified:
@@ -653,6 +715,9 @@ def main() -> int:
             "train_qualified": len(train_qualified),
             "validation_qualified": len(validation_qualified),
             "oos_qualified": len(oos_qualified),
+            "oos_opened_configs": 1 if frozen_oos_strategy_id is not None else 0,
+            "frozen_oos_strategy_id": frozen_oos_strategy_id,
+            "selection_protocol": "train_validation_grid_then_single_frozen_oos_v1",
             "candidate_needs_forward_proof": len(oos_qualified),
         },
         "top_results": results[:50],
