@@ -36,6 +36,7 @@ def trades(hours, values=None):
     return [
         SimpleNamespace(
             entry_ts=f"2026-01-01T{hour:02d}:30:00+00:00",
+            exit_ts=f"2026-01-01T{hour:02d}:45:00+00:00",
             r_net=value,
         )
         for hour, value in zip(hours, values)
