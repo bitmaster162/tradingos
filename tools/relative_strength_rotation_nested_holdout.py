@@ -174,7 +174,7 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
     btc_returns = features.get("btc_returns", {})
     alt_returns_by_symbol = features.get("alt_returns", {})
     for index, _bar in enumerate(bars):
-        if index + config.max_hold_bars + 1 >= len(bars):
+        if index + config.max_hold_bars >= len(bars):
             continue
         atr = features["atr"][index]
         if atr is None or float(atr) <= 0:
@@ -188,14 +188,19 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
         if btc_ret is None:
             continue
         alt_returns = []
+        missing_alt_returns = []
         for symbol in config.alt_symbols:
             if symbol in alt_returns_by_symbol and config.lookback in alt_returns_by_symbol[symbol]:
                 alt_ret = alt_returns_by_symbol[symbol][config.lookback][index]
             else:
                 alt_ret = pct_return(features["alt_closes"][symbol], index, config.lookback)
-            if alt_ret is not None:
+            if alt_ret is None:
+                missing_alt_returns.append(symbol)
+            else:
                 alt_returns.append(alt_ret)
-        if not alt_returns:
+        # The configured basket is part of strategy identity. Do not silently
+        # shrink it when one constituent is unavailable at current/prior time.
+        if missing_alt_returns or len(alt_returns) != len(config.alt_symbols):
             continue
         basket_ret = statistics.mean(alt_returns)
         rel_strength = btc_ret - basket_ret
@@ -217,6 +222,9 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
                 "alt_basket_return_pct": round(basket_ret, 6),
                 "rel_strength_pct": round(rel_strength, 6),
                 "mode": config.mode,
+                "alt_coverage_count": len(alt_returns),
+                "alt_expected_count": len(config.alt_symbols),
+                "alt_symbols": list(config.alt_symbols),
             }
         )
     return signals
