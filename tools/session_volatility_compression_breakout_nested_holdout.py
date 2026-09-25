@@ -344,7 +344,10 @@ def evaluate_window(
         "cost_stress": {"extra_bps_per_side": stress_extra_bps, "summary": summarize_trades(stress_trades)},
         "bootstrap_method": "moving_block_trade_order_v1",
         "bootstrap_block_trades": (getattr(args, "bootstrap_block_trades", 0) or max(2, int(round(math.sqrt(len(trades)))))) if trades else None,
-        "bootstrap_probability_expectancy_gt_0": bootstrap_positive_probability(\n            [trade.r_net for trade in trades],\n            block_size=(getattr(args, "bootstrap_block_trades", 0) or None),\n        ) if bootstrap_allowed else None,
+        "bootstrap_probability_expectancy_gt_0": bootstrap_positive_probability(
+            [trade.r_net for trade in trades],
+            block_size=(getattr(args, "bootstrap_block_trades", 0) or None),
+        ) if bootstrap_allowed else None,
         "trades": [asdict(trade) for trade in trades],
     }
 
