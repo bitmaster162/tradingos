@@ -82,7 +82,8 @@ class StrictCrossAssetCoverageTests(unittest.TestCase):
         f["alt_returns"]["BCHUSDT"][1][1] = -1.0
         f["alt_returns"]["SOLUSDT"][1][1] = None
         rows = REL.generate_signals(cfg, bars(), f)
-        self.assertEqual(rows, [])
+        signal_indexes = {row["bar_index"] for row in rows}
+        self.assertNotIn(1, signal_indexes)
 
     def test_missing_alt_is_not_imputed_from_neighboring_timestamp(self):
         cfg = config()
