@@ -188,14 +188,17 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
         if btc_ret is None:
             continue
         alt_returns = []
+        missing_alt = False
         for symbol in config.alt_symbols:
             if symbol in alt_returns_by_symbol and config.lookback in alt_returns_by_symbol[symbol]:
                 alt_ret = alt_returns_by_symbol[symbol][config.lookback][index]
             else:
                 alt_ret = pct_return(features["alt_closes"][symbol], index, config.lookback)
-            if alt_ret is not None:
-                alt_returns.append(alt_ret)
-        if not alt_returns:
+            if alt_ret is None:
+                missing_alt = True
+                break
+            alt_returns.append(alt_ret)
+        if missing_alt or len(alt_returns) != len(config.alt_symbols):
             continue
         basket_ret = statistics.mean(alt_returns)
         rel_strength = btc_ret - basket_ret
