@@ -150,6 +150,7 @@ def configured_alt_returns(
     Basket membership is part of strategy identity. Missing/later-listed context
     symbols must not silently change the basket composition.
     """
+    alt_returns_by_symbol = features.get("alt_returns", {})
     rows: list[float] = []
     for symbol in config.alt_symbols:
         if symbol not in alt_returns_by_symbol:
