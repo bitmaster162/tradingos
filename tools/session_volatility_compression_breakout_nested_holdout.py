@@ -229,7 +229,7 @@ def replay(config: CompressionConfig, bars: list[Any], signals: list[dict[str, A
 
 
 def fold_summaries_expectancy(trades: list[Any], bars: list[Any], folds: int) -> list[dict[str, Any]]:
-    """Equal-duration/bar-count folds, not equal-trade-count quartiles."""
+    """Equal-time folds with full trade lifecycle contained inside each fold."""
     if type(folds) is not int or folds <= 0:
         raise ValueError("folds must be a positive integer")
     if len(bars) < folds:
@@ -241,21 +241,29 @@ def fold_summaries_expectancy(trades: list[Any], bars: list[Any], folds: int) ->
         end_index = len(bars) * (fold + 1) // folds
         start_ts = parse_ts(str(bars[start_index].ts))
         end_ts = parse_ts(str(bars[end_index].ts)) if end_index < len(bars) else None
-        chunk = [
-            trade
-            for trade in ordered
-            if parse_ts(str(trade.entry_ts)) >= start_ts
-            and (end_ts is None or parse_ts(str(trade.entry_ts)) < end_ts)
-        ]
+        chunk = []
+        excluded_cross_boundary = 0
+        for trade in ordered:
+            entry_ts = parse_ts(str(trade.entry_ts))
+            exit_ts = parse_ts(str(trade.exit_ts))
+            if exit_ts < entry_ts:
+                raise ValueError("trade exit precedes entry")
+            if entry_ts < start_ts or (end_ts is not None and entry_ts >= end_ts):
+                continue
+            if end_ts is not None and exit_ts >= end_ts:
+                excluded_cross_boundary += 1
+                continue
+            chunk.append(trade)
         summary = summarize_trades(chunk)
         summary["fold"] = fold + 1
         summary["partition"] = "equal_bar_time_window"
+        summary["lifecycle_policy"] = "entry_and_exit_inside_fold"
         summary["start_ts"] = start_ts.isoformat()
         summary["end_exclusive_ts"] = end_ts.isoformat() if end_ts is not None else None
+        summary["excluded_cross_boundary"] = excluded_cross_boundary
         summary["stable"] = bool(summary["trades"] >= 10 and (summary["expectancy_r"] or 0.0) > 0)
         out.append(summary)
     return out
-
 
 def bootstrap_positive_probability(
     values: list[float],
