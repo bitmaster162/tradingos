@@ -127,33 +127,71 @@ def simulate_trade(
     entry_index = signal_index + 1
     if entry_index >= len(bars):
         return None
+    if type(max_hold_bars) is not int or max_hold_bars <= 0:
+        return None
     entry_bar = bars[entry_index]
-    entry = entry_bar.open
+    entry = float(entry_bar.open)
     atr = float(signal["atr"])
     if atr <= 0:
         return None
     side = str(signal["side_hint"]).upper()
-    risk = atr * stop_atr
-    if risk <= 0:
+    if side not in {"LONG", "SHORT"}:
+        return None
+    risk = atr * float(stop_atr)
+    reward = atr * float(take_atr)
+    if risk <= 0 or reward <= 0:
         return None
     if side == "SHORT":
         stop = entry + risk
-        take = entry - atr * take_atr
+        take = entry - reward
     else:
         stop = entry - risk
-        take = entry + atr * take_atr
+        take = entry + reward
 
-    exit_price = bars[min(len(bars) - 1, entry_index + max_hold_bars)].close
-    exit_reason = "time_exit"
-    exit_index = min(len(bars) - 1, entry_index + max_hold_bars)
-    for index in range(entry_index, min(len(bars), entry_index + max_hold_bars + 1)):
+    # max_hold_bars means exactly the maximum number of bars from entry through
+    # the time-exit bar, inclusive. A missing full horizon is right-censored;
+    # it is not silently shortened to the last available bar.
+    required_last_index = entry_index + max_hold_bars - 1
+    scan_last_index = min(len(bars) - 1, required_last_index)
+
+    exit_price: float | None = None
+    exit_reason = ""
+    exit_index: int | None = None
+
+    for index in range(entry_index, scan_last_index + 1):
         bar = bars[index]
+        bar_open = float(bar.open)
+
+        # Gap-aware conservative ordering. Adverse stop gaps fill at the observed
+        # bar open, not the unreachable stop level. Favorable take gaps receive
+        # no price improvement beyond the take level.
         if side == "SHORT":
-            stop_hit = bar.high >= stop
-            take_hit = bar.low <= take
+            if bar_open >= stop:
+                exit_price = bar_open
+                exit_reason = "gap_stop_open"
+                exit_index = index
+                break
+            if bar_open <= take:
+                exit_price = take
+                exit_reason = "gap_take_conservative"
+                exit_index = index
+                break
+            stop_hit = float(bar.high) >= stop
+            take_hit = float(bar.low) <= take
         else:
-            stop_hit = bar.low <= stop
-            take_hit = bar.high >= take
+            if bar_open <= stop:
+                exit_price = bar_open
+                exit_reason = "gap_stop_open"
+                exit_index = index
+                break
+            if bar_open >= take:
+                exit_price = take
+                exit_reason = "gap_take_conservative"
+                exit_index = index
+                break
+            stop_hit = float(bar.low) <= stop
+            take_hit = float(bar.high) >= take
+
         if stop_hit and take_hit:
             exit_price = stop
             exit_reason = "stop_first_same_bar"
@@ -170,29 +208,35 @@ def simulate_trade(
             exit_index = index
             break
 
+    if exit_price is None:
+        if required_last_index >= len(bars):
+            return None
+        exit_index = required_last_index
+        exit_price = float(bars[exit_index].close)
+        exit_reason = "time_exit"
+
     if side == "SHORT":
         gross_r = (entry - exit_price) / risk
     else:
         gross_r = (exit_price - entry) / risk
-    round_turn_cost_quote = (entry + exit_price) * cost_bps_per_side / 10_000.0
+    round_turn_cost_quote = (entry + exit_price) * float(cost_bps_per_side) / 10_000.0
     cost_r = round_turn_cost_quote / risk
     r_net = gross_r - cost_r
     return Trade(
         dataset_id=dataset_id,
         strategy_id=strategy_id,
         entry_ts=entry_bar.ts,
-        exit_ts=bars[exit_index].ts,
+        exit_ts=bars[int(exit_index)].ts,
         side=side,
         entry=round(entry, 8),
-        exit=round(exit_price, 8),
+        exit=round(float(exit_price), 8),
         stop=round(stop, 8),
         take=round(take, 8),
         atr=round(atr, 8),
         r_net=round(r_net, 6),
         exit_reason=exit_reason,
-        bars_held=exit_index - entry_index + 1,
+        bars_held=int(exit_index) - entry_index + 1,
     )
-
 
 def simulate_strategy(
     *,

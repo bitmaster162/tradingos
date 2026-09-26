@@ -174,7 +174,7 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
     btc_returns = features.get("btc_returns", {})
     alt_returns_by_symbol = features.get("alt_returns", {})
     for index, _bar in enumerate(bars):
-        if index + config.max_hold_bars + 1 >= len(bars):
+        if index + config.max_hold_bars >= len(bars):
             continue
         atr = features["atr"][index]
         if atr is None or float(atr) <= 0:
@@ -188,14 +188,19 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
         if btc_ret is None:
             continue
         alt_returns = []
+        missing_alt_returns = []
         for symbol in config.alt_symbols:
             if symbol in alt_returns_by_symbol and config.lookback in alt_returns_by_symbol[symbol]:
                 alt_ret = alt_returns_by_symbol[symbol][config.lookback][index]
             else:
                 alt_ret = pct_return(features["alt_closes"][symbol], index, config.lookback)
-            if alt_ret is not None:
+            if alt_ret is None:
+                missing_alt_returns.append(symbol)
+            else:
                 alt_returns.append(alt_ret)
-        if not alt_returns:
+        # The configured basket is part of strategy identity. Do not silently
+        # shrink it when one constituent is unavailable at current/prior time.
+        if missing_alt_returns or len(alt_returns) != len(config.alt_symbols):
             continue
         basket_ret = statistics.mean(alt_returns)
         rel_strength = btc_ret - basket_ret
@@ -217,6 +222,9 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
                 "alt_basket_return_pct": round(basket_ret, 6),
                 "rel_strength_pct": round(rel_strength, 6),
                 "mode": config.mode,
+                "alt_coverage_count": len(alt_returns),
+                "alt_expected_count": len(config.alt_symbols),
+                "alt_symbols": list(config.alt_symbols),
             }
         )
     return signals
@@ -248,30 +256,54 @@ def replay_signals(config: RotationConfig, bars: list[Any], signals: list[dict[s
     return trades
 
 
-def fold_summaries(trades: list[Trade], folds: int) -> list[dict[str, Any]]:
-    ordered = sorted(trades, key=lambda item: item.entry_ts)
-    out = []
+def fold_summaries(trades: list[Any], bars: list[Any], folds: int) -> list[dict[str, Any]]:
+    """Equal-time folds with full trade lifecycle contained inside each fold."""
+    if type(folds) is not int or folds <= 0:
+        raise ValueError("folds must be a positive integer")
+    if len(bars) < folds:
+        return []
+    ordered = sorted(trades, key=lambda item: parse_ts(str(item.entry_ts)))
+    out: list[dict[str, Any]] = []
     for fold in range(folds):
-        start = round(len(ordered) * fold / folds)
-        end = round(len(ordered) * (fold + 1) / folds)
-        chunk = ordered[start:end]
+        start_index = len(bars) * fold // folds
+        end_index = len(bars) * (fold + 1) // folds
+        start_ts = parse_ts(str(bars[start_index].ts))
+        end_ts = parse_ts(str(bars[end_index].ts)) if end_index < len(bars) else None
+        chunk = []
+        excluded_cross_boundary = 0
+        for trade in ordered:
+            entry_ts = parse_ts(str(trade.entry_ts))
+            exit_ts = parse_ts(str(trade.exit_ts))
+            if exit_ts < entry_ts:
+                raise ValueError("trade exit precedes entry")
+            if entry_ts < start_ts or (end_ts is not None and entry_ts >= end_ts):
+                continue
+            if end_ts is not None and exit_ts >= end_ts:
+                excluded_cross_boundary += 1
+                continue
+            chunk.append(trade)
         summary = summarize_trades(chunk)
         summary["fold"] = fold + 1
+        summary["partition"] = "equal_bar_time_window"
+        summary["lifecycle_policy"] = "entry_and_exit_inside_fold"
+        summary["start_ts"] = start_ts.isoformat()
+        summary["end_exclusive_ts"] = end_ts.isoformat() if end_ts is not None else None
+        summary["excluded_cross_boundary"] = excluded_cross_boundary
         summary["stable"] = bool(summary["trades"] >= 5 and (summary["expectancy_r"] or 0.0) > 0)
         out.append(summary)
     return out
-
 
 def evaluate_window(config: RotationConfig, bars: list[Any], features: dict[str, Any], args: argparse.Namespace, folds: int) -> dict[str, Any]:
     cost = args.fee_bps + args.slippage_bps
     signals = generate_signals(config, bars, features)
     trades = replay_signals(config, bars, signals, cost, args.no_overlap)
     stress_trades = replay_signals(config, bars, signals, cost + args.cost_stress_extra_bps, args.no_overlap)
-    folds_payload = fold_summaries(trades, folds)
+    folds_payload = fold_summaries(trades, bars, folds)
     return {
         "summary": summarize_trades(trades),
         "folds": folds_payload,
         "stable_folds": sum(1 for item in folds_payload if item.get("stable")),
+        "fold_partition": "equal_bar_time_window",
         "cost_stress": {"summary": summarize_trades(stress_trades)},
         "trades": trades,
     }
@@ -291,7 +323,25 @@ def gate(window: dict[str, Any], *, min_trades: int, min_expectancy: float, min_
     return {"pass": all(checks.values()), "checks": checks}
 
 
+def _unopened_oos() -> dict[str, Any]:
+    return {
+        "status": "UNOPENED",
+        "signals": None,
+        "summary": {
+            "trades": None,
+            "winrate_pct": None,
+            "expectancy_r": None,
+            "max_drawdown_r": None,
+        },
+        "stable_folds": None,
+        "folds": [],
+        "cost_stress": {"summary": {"expectancy_r": None}},
+        "bootstrap_probability_expectancy_gt_0": None,
+    }
+
+
 def evaluate_config(config: RotationConfig, windows: dict[str, dict[str, Any]], args: argparse.Namespace) -> dict[str, Any]:
+    """Grid stage: train + validation only. OOS must remain physically unopened."""
     train = evaluate_window(config, windows["train"]["bars"], windows["train"]["features"], args, args.folds)
     train_gate = gate(
         train,
@@ -310,8 +360,40 @@ def evaluate_config(config: RotationConfig, windows: dict[str, dict[str, Any]], 
         min_winrate=args.validation_min_winrate_pct,
         max_drawdown=args.validation_max_drawdown_r,
     )
+    decision = "reject_train_gate_failed"
+    if train_gate["pass"] and not validation_gate["pass"]:
+        decision = "reject_validation_gate_failed_oos_unopened"
+    elif train_gate["pass"] and validation_gate["pass"]:
+        decision = "validation_qualified_oos_unopened"
+    return {
+        "config": {**asdict(config), "alt_symbols": list(config.alt_symbols)},
+        "strategy_id": config.strategy_id,
+        "family": "relative_strength_rotation",
+        "train": {key: value for key, value in train.items() if key != "trades"},
+        "validation": {key: value for key, value in validation.items() if key != "trades"},
+        "oos": _unopened_oos(),
+        "gates": {
+            "train": train_gate,
+            "validation": validation_gate,
+            "oos": {"pass": False, "status": "UNOPENED"},
+        },
+        "decision": decision,
+        "can_trade": False,
+    }
+
+
+def open_oos_once(
+    row: dict[str, Any],
+    config: RotationConfig,
+    windows: dict[str, dict[str, Any]],
+    args: argparse.Namespace,
+) -> dict[str, Any]:
+    if not (row["gates"]["train"]["pass"] and row["gates"]["validation"]["pass"]):
+        raise ValueError("OOS may only be opened for a train+validation-qualified frozen config")
+    if row["oos"].get("status") != "UNOPENED":
+        raise ValueError("OOS already opened")
     oos = evaluate_window(config, windows["oos"]["bars"], windows["oos"]["features"], args, args.folds)
-    oos_gate = gate(
+    oos_gate_payload = gate(
         oos,
         min_trades=args.oos_min_trades,
         min_expectancy=args.oos_min_expectancy_r,
@@ -319,25 +401,17 @@ def evaluate_config(config: RotationConfig, windows: dict[str, dict[str, Any]], 
         min_winrate=args.oos_min_winrate_pct,
         max_drawdown=args.oos_max_drawdown_r,
     )
-    decision = "reject_train_gate_failed"
-    if train_gate["pass"] and not validation_gate["pass"]:
-        decision = "reject_validation_gate_failed_oos_unopened"
-    elif train_gate["pass"] and validation_gate["pass"] and not oos_gate["pass"]:
-        decision = "reject_oos_gate_failed"
-    elif train_gate["pass"] and validation_gate["pass"] and oos_gate["pass"]:
-        decision = "candidate_needs_forward_proof"
-    return {
-        "config": {**asdict(config), "alt_symbols": list(config.alt_symbols)},
-        "strategy_id": config.strategy_id,
-        "family": "relative_strength_rotation",
-        "train": {key: value for key, value in train.items() if key != "trades"},
-        "validation": {key: value for key, value in validation.items() if key != "trades"},
-        "oos": {key: value for key, value in oos.items() if key != "trades"},
-        "gates": {"train": train_gate, "validation": validation_gate, "oos": oos_gate},
-        "decision": decision,
-        "can_trade": False,
-    }
-
+    opened = dict(row)
+    opened["oos"] = {key: value for key, value in oos.items() if key != "trades"}
+    opened["oos"]["status"] = "OPENED_ONCE_FOR_FROZEN_VALIDATION_WINNER"
+    opened["gates"] = dict(row["gates"])
+    opened["gates"]["oos"] = oos_gate_payload
+    opened["decision"] = (
+        "candidate_needs_forward_proof"
+        if oos_gate_payload["pass"]
+        else "reject_oos_gate_failed"
+    )
+    return opened
 
 def build_configs(interval: str, alt_symbols: tuple[str, ...], max_configs: int, seed: int) -> list[RotationConfig]:
     rows: list[RotationConfig] = []
@@ -380,18 +454,20 @@ def build_configs(interval: str, alt_symbols: tuple[str, ...], max_configs: int,
     return rows[:max_configs]
 
 
-def result_sort_key(row: dict[str, Any]) -> tuple[int, float, int, float]:
-    rank = {
-        "candidate_needs_forward_proof": 3,
-        "reject_oos_gate_failed": 2,
-        "reject_validation_gate_failed_oos_unopened": 1,
-        "reject_train_gate_failed": 0,
-    }.get(row.get("decision"), 0)
+def result_sort_key(row: dict[str, Any]) -> tuple[int, int, float, int, float]:
+    """Pre-OOS ranking only. No OOS field is read here."""
+    train_pass = bool(row.get("gates", {}).get("train", {}).get("pass"))
+    validation_pass = bool(row.get("gates", {}).get("validation", {}).get("pass"))
     val_exp = float(row.get("validation", {}).get("summary", {}).get("expectancy_r") or -999.0)
     val_trades = int(row.get("validation", {}).get("summary", {}).get("trades") or 0)
-    oos_exp = float(row.get("oos", {}).get("summary", {}).get("expectancy_r") or -999.0)
-    return (rank, val_exp, val_trades, oos_exp)
-
+    train_exp = float(row.get("train", {}).get("summary", {}).get("expectancy_r") or -999.0)
+    return (
+        int(train_pass and validation_pass),
+        int(train_pass),
+        val_exp,
+        val_trades,
+        train_exp,
+    )
 
 def render_markdown(report: dict[str, Any]) -> str:
     lines = [
@@ -538,11 +614,32 @@ def main() -> int:
             "features": features,
         }
     configs = build_configs(args.interval, alt_symbols, args.max_configs, args.seed)
+    config_by_id = {config.strategy_id: config for config in configs}
     results = [evaluate_config(config, windows, args) for config in configs]
     results.sort(key=result_sort_key, reverse=True)
     train_qualified = [row for row in results if row["gates"]["train"]["pass"]]
-    validation_qualified = [row for row in results if row["gates"]["train"]["pass"] and row["gates"]["validation"]["pass"]]
-    oos_qualified = [row for row in validation_qualified if row["gates"]["oos"]["pass"]]
+    validation_qualified = [
+        row
+        for row in results
+        if row["gates"]["train"]["pass"] and row["gates"]["validation"]["pass"]
+    ]
+    frozen_oos_strategy_id = (
+        validation_qualified[0]["strategy_id"] if validation_qualified else None
+    )
+    oos_qualified: list[dict[str, Any]] = []
+    if frozen_oos_strategy_id is not None:
+        opened = open_oos_once(
+            validation_qualified[0],
+            config_by_id[frozen_oos_strategy_id],
+            windows,
+            args,
+        )
+        results = [
+            opened if row["strategy_id"] == frozen_oos_strategy_id else row
+            for row in results
+        ]
+        if opened["gates"]["oos"]["pass"]:
+            oos_qualified = [opened]
     decision = "reject_no_train_qualified_relative_strength_rotation"
     next_action = "reject this mechanism; do not retune without a materially different relative-strength hypothesis"
     if train_qualified and not validation_qualified:
@@ -571,6 +668,9 @@ def main() -> int:
             "train_qualified": len(train_qualified),
             "validation_qualified": len(validation_qualified),
             "oos_qualified": len(oos_qualified),
+            "oos_opened_configs": 1 if frozen_oos_strategy_id is not None else 0,
+            "frozen_oos_strategy_id": frozen_oos_strategy_id,
+            "selection_protocol": "train_validation_grid_then_single_frozen_oos_v1",
             "interval": args.interval,
             "alt_symbols": list(alt_symbols),
         },

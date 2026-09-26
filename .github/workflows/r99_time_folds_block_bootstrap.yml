@@ -1,0 +1,46 @@
+name: R99 Time Folds and Block Bootstrap
+on:
+  push:
+    branches: [agent/r99-time-folds-block-bootstrap-r1]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify bounded stacked baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=aa1e831cfb79af805760105d69651519276a9456
+          test "$(git merge-base "$base" HEAD)" = "$base"
+          git diff --check "$base" HEAD
+          python - <<'PY'
+          import subprocess
+          allowed={
+            'tools/relative_strength_rotation_nested_holdout.py',
+            'tools/session_volatility_compression_breakout_nested_holdout.py',
+            'tests/test_time_fold_block_bootstrap.py',
+            'docs/R99_TIME_FOLDS_BLOCK_BOOTSTRAP.md',
+            '.github/workflows/r99_time_folds_block_bootstrap.yml',
+          }
+          changed=set(subprocess.check_output(['git','diff','--name-only',
+            'aa1e831cfb79af805760105d69651519276a9456','HEAD'],text=True).splitlines())
+          assert changed <= allowed, sorted(changed-allowed)
+          PY
+      - name: Compile patched tools
+        run: |
+          python -m py_compile             tools/relative_strength_rotation_nested_holdout.py             tools/session_volatility_compression_breakout_nested_holdout.py
+      - name: Time-fold and moving-block regressions
+        run: python -B -m unittest tests.test_time_fold_block_bootstrap -v
+      - name: Preserve R98 OOS-open-once regressions
+        run: python -B -m unittest tests.test_nested_oos_open_once -v

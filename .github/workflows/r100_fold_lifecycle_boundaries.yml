@@ -1,0 +1,49 @@
+name: R100 Full Lifecycle Time Folds
+on:
+  push:
+    branches: [agent/r100-fold-lifecycle-boundary-r1]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Verify bounded stacked baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=11e78012786b5d18816f4c7cde17ef734d18c53c
+          test "$(git merge-base "$base" HEAD)" = "$base"
+          git diff --check "$base" HEAD
+          python - <<'PY'
+          import subprocess
+          allowed={
+            'tools/relative_strength_rotation_nested_holdout.py',
+            'tools/session_volatility_compression_breakout_nested_holdout.py',
+            'tests/test_fold_lifecycle_boundaries.py',
+            'tests/test_time_fold_block_bootstrap.py',
+            'docs/R100_FOLD_LIFECYCLE_BOUNDARIES.md',
+            '.github/workflows/r100_fold_lifecycle_boundaries.yml',
+          }
+          changed=set(subprocess.check_output(['git','diff','--name-only',
+            '11e78012786b5d18816f4c7cde17ef734d18c53c','HEAD'],text=True).splitlines())
+          assert changed <= allowed, sorted(changed-allowed)
+          PY
+      - name: Compile patched tools
+        run: |
+          python -m py_compile             tools/relative_strength_rotation_nested_holdout.py             tools/session_volatility_compression_breakout_nested_holdout.py
+      - name: Full lifecycle boundary regressions
+        run: python -B -m unittest tests.test_fold_lifecycle_boundaries -v
+      - name: Preserve R99 and R98 regressions
+        run: |
+          python -B -m unittest tests.test_time_fold_block_bootstrap -v
+          python -B -m unittest tests.test_nested_oos_open_once -v
