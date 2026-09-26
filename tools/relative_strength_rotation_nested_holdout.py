@@ -140,6 +140,30 @@ def add_return_cache(features: dict[str, Any], lookbacks: list[int]) -> None:
     }
 
 
+def configured_alt_returns(
+    config: RotationConfig,
+    features: dict[str, Any],
+    index: int,
+) -> list[float] | None:
+    """Return the complete configured context basket or None if any member is unavailable.
+
+    Basket membership is part of strategy identity. Missing/later-listed context
+    symbols must not silently change the basket composition.
+    """
+    rows: list[float] = []
+    for symbol in config.alt_symbols:
+        if symbol not in alt_returns_by_symbol:
+            return None
+        lookback_map = alt_returns_by_symbol[symbol]
+        if config.lookback not in lookback_map:
+            return None
+        value = lookback_map[config.lookback][index]
+        if value is None:
+            return None
+        rows.append(float(value))
+    return rows
+
+
 def atr_regime_ok(config: RotationConfig, features: dict[str, Any], index: int) -> bool:
     if config.atr_regime_filter == "none":
         return True
@@ -187,15 +211,8 @@ def generate_signals(config: RotationConfig, bars: list[Any], features: dict[str
             btc_ret = pct_return(features["btc_closes"], index, config.lookback)
         if btc_ret is None:
             continue
-        alt_returns = []
-        for symbol in config.alt_symbols:
-            if symbol in alt_returns_by_symbol and config.lookback in alt_returns_by_symbol[symbol]:
-                alt_ret = alt_returns_by_symbol[symbol][config.lookback][index]
-            else:
-                alt_ret = pct_return(features["alt_closes"][symbol], index, config.lookback)
-            if alt_ret is not None:
-                alt_returns.append(alt_ret)
-        if not alt_returns:
+        alt_returns = configured_alt_returns(config, features, index)
+        if alt_returns is None:
             continue
         basket_ret = statistics.mean(alt_returns)
         rel_strength = btc_ret - basket_ret
@@ -655,6 +672,7 @@ def main() -> int:
             "oos_opened_configs": 1 if frozen_oos_strategy_id is not None else 0,
             "frozen_oos_strategy_id": frozen_oos_strategy_id,
             "selection_protocol": "train_validation_grid_then_single_frozen_oos_v1",
+            "context_basket_policy": "all_configured_alt_symbols_required_v1",
             "interval": args.interval,
             "alt_symbols": list(alt_symbols),
         },
