@@ -1,0 +1,107 @@
+name: R102 Research Integrity Stack
+
+on:
+  push:
+    branches:
+      - agent/r102-research-integrity-stack-r1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.11"
+
+      - name: Verify exact ancestry and bounded R102 delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          for sha in             f4ccbe4228dc7aa59a0d36f41bab45b5f0a1dce6             aa1e831cfb79af805760105d69651519276a9456             11e78012786b5d18816f4c7cde17ef734d18c53c             4d99edaed96cf5cfe7783c2cd00f96bee452bb45             8a02971250421a03623a919824379e187ccada94
+          do
+            git merge-base --is-ancestor "$sha" HEAD
+          done
+          git diff --check 8a02971250421a03623a919824379e187ccada94 HEAD
+          python - <<'PY'
+          import subprocess
+          allowed={
+              ".github/workflows/r100_fold_lifecycle_boundaries.yml",
+              ".github/workflows/r102_research_integrity_stack.yml",
+              "docs/R100_FOLD_LIFECYCLE_BOUNDARIES.md",
+              "docs/R102_RESEARCH_INTEGRITY_STACK.md",
+              "tests/test_fold_lifecycle_boundaries.py",
+              "tests/test_time_fold_block_bootstrap.py",
+              "tools/relative_strength_rotation_nested_holdout.py",
+              "tools/session_volatility_compression_breakout_nested_holdout.py",
+          }
+          changed=set(subprocess.check_output(
+              ["git","diff","--name-only",
+               "8a02971250421a03623a919824379e187ccada94","HEAD"],
+              text=True,
+          ).splitlines())
+          assert changed == allowed, {
+              "missing":sorted(allowed-changed),
+              "unexpected":sorted(changed-allowed),
+          }
+          print("R102_ANCESTRY_AND_SCOPE=PASS")
+          PY
+
+      - name: Compile combined replay tools
+        run: |
+          python -m py_compile             tools/liquidity_sweep_hardening.py             tools/relative_strength_rotation_nested_holdout.py             tools/session_volatility_compression_breakout_nested_holdout.py
+
+      - name: Run all stacked research-integrity regressions
+        run: |
+          python -B -m unittest -v             tests.test_nested_oos_open_once             tests.test_time_fold_block_bootstrap             tests.test_r100_gap_censor_hold             tests.test_r101_full_basket_coverage             tests.test_fold_lifecycle_boundaries
+
+      - name: Build stack receipt
+        shell: python
+        run: |
+          import datetime,json,pathlib,subprocess
+          receipt={
+              "schema":"tradingos.r102_research_integrity_stack.v1",
+              "created_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "head":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
+              "r97":"f4ccbe4228dc7aa59a0d36f41bab45b5f0a1dce6",
+              "r98":"aa1e831cfb79af805760105d69651519276a9456",
+              "r99":"11e78012786b5d18816f4c7cde17ef734d18c53c",
+              "r100_gap":"4d99edaed96cf5cfe7783c2cd00f96bee452bb45",
+              "r101_basket":"8a02971250421a03623a919824379e187ccada94",
+              "oos_open_once":True,
+              "time_folds":True,
+              "moving_block_bootstrap":True,
+              "gap_aware_stop":True,
+              "right_censoring":True,
+              "full_basket_coverage":True,
+              "full_lifecycle_fold_boundary":True,
+              "historical_oos_pristine":False,
+              "observed_fill_evidence":False,
+              "point_in_time_universe_verified":False,
+              "research_only":True,
+              "can_trade":False,
+              "capital_permission":"DENY",
+              "status":"PASS",
+          }
+          pathlib.Path("R102_RESEARCH_INTEGRITY_STACK_RECEIPT.json").write_text(
+              json.dumps(receipt,indent=2)+"\n",encoding="utf-8"
+          )
+          print(json.dumps(receipt,sort_keys=True))
+
+      - name: Upload qualification receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r102-research-integrity-stack-${{ github.run_id }}
+          retention-days: 45
+          if-no-files-found: error
+          path: R102_RESEARCH_INTEGRITY_STACK_RECEIPT.json
