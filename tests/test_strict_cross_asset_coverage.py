@@ -78,16 +78,16 @@ class StrictCrossAssetCoverageTests(unittest.TestCase):
     def test_one_missing_alt_cannot_change_majority_denominator(self):
         cfg = config()
         f = features(1.0)
-        f["alt_returns"]["ETHUSDT"][1] = 1.0
-        f["alt_returns"]["BCHUSDT"][1] = -1.0
-        f["alt_returns"]["SOLUSDT"][1] = None
+        f["alt_returns"]["ETHUSDT"][1][1] = 1.0
+        f["alt_returns"]["BCHUSDT"][1][1] = -1.0
+        f["alt_returns"]["SOLUSDT"][1][1] = None
         rows = REL.generate_signals(cfg, bars(), f)
         self.assertEqual(rows, [])
 
     def test_missing_alt_is_not_imputed_from_neighboring_timestamp(self):
         cfg = config()
         f = features(0.0)
-        f["alt_returns"]["SOLUSDT"][2] = None
+        f["alt_returns"]["SOLUSDT"][1][2] = None
         rows = REL.generate_signals(cfg, bars(), f)
         signal_indexes = {row["bar_index"] for row in rows}
         self.assertNotIn(2, signal_indexes)
